@@ -18,7 +18,7 @@
  
 </template>
   
-  <script>
+  <!-- <script>
     import firebaseConfig from "../firebaseConfig.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
     
@@ -28,7 +28,7 @@
 
 
   export default {
-    name: 'Login',
+    name: 'LoginView',
     props: {
       msg: String
     },
@@ -63,7 +63,7 @@
         }
     }
   }
-  </script>
+  </script> -->
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
