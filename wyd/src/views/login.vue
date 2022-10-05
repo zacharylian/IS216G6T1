@@ -40,6 +40,7 @@
     },
     methods: {
         handleSignInGoogle() {
+          console.log(this.signedIn)
             signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
