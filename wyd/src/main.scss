@@ -22,11 +22,9 @@ body {
 
 .content-box {
     margin: 20px auto 0 auto;
-    background-color: #99AAb5;
     color: $color-theme-light;
     border-radius: 8px;
-    padding: 30px 30px 40px 30px;
-    max-width: 800px;
+    max-width: 40px;
 
     h3 {
         line-height: 1.2;
@@ -67,7 +65,7 @@ body {
         }
     &.active {
         .switch-path {
-            background-color: #2C2F33;
+            background-color: #FFFFFF;
         }
         .switch-handle {
             transform: translateX(20px);
@@ -84,7 +82,6 @@ body {
     background-color: $bg-theme-dark;
     color: $color-theme-dark;
     .content-box {
-        background-color: #99AAb5;
         h3, h5 {
             color: #2C2F33;
         }
