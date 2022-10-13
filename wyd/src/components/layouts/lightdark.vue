@@ -1,6 +1,6 @@
 <template>
   
-  <div id="app" v-bind:class="currentTheme">
+  <div id="light-dark" v-bind:class="currentTheme">
     <!-- {{currentTheme}} -->
 
     <div class="content-box">
@@ -26,7 +26,7 @@
   // import navbar from './components/layouts/navbar.vue';
   
   export default {
-      name: 'App',
+      name: 'lightDark',
       data() {
         return {
           currentTheme: localStorage.getItem("theme-color")
@@ -67,5 +67,5 @@
     margin: 0;
     padding: 20px 0 0 0;
   }
-  @import "./assets/global.css";
+  @import "../../main.scss";
 </style>

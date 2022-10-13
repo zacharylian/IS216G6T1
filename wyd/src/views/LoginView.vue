@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">
+    <div class="login">
         <h1>{{ msg }}</h1>
         <h2 v-if="user">Signed in: {{ user }}</h2>
     </div>

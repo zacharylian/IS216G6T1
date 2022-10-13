@@ -1,12 +1,26 @@
 <template>
 
     <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/HomeView.vue">Home</router-link> |
+        <router-link to="/AboutView.vue">About</router-link> |
+        <router-link to="/LoginView.vue">Login</router-link> |
+        <router-link to="/SpendingsDashboard.vue">Spendings</router-link>
+        <light-dark></light-dark>
     </nav>
 
-
 </template>
+
+<script>
+  import lightDark from './lightdark.vue';
+
+export default {
+  name: "navBar",
+  components: {
+    'light-dark': lightDark
+  }
+}
+
+</script>
 
 
 <style>
@@ -30,5 +44,9 @@
     nav a.router-link-exact-active {
       color: #42b983;
     }
+
+
+    @import "../../main.scss";
+
     </style>
     

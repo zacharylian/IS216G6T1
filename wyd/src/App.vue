@@ -1,19 +1,17 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/login">Login</router-link>
-  </nav>
-  <router-view/>
+  <navigation-bar></navigation-bar>
 </template>
 
 <script>
   // import axios from 'axios';
   
-  // import navbar from './components/layouts/navbar.vue';
+  import navBar from './components/layouts/navbar.vue';
   
   export default {
       name: 'App',
+      components: {
+        'navigation-bar': navBar
+    },
       data() {
         return {
           currentTheme: localStorage.getItem("theme-color")
