@@ -18,13 +18,13 @@
  
 </template>
   
-  <!-- <script>
-    import firebaseConfig from "../firebaseConfig.js";
+  <script>
+    // import firebaseConfig from "../firebaseConfig.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
     
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
-    firebaseConfig
+    // firebaseConfig
 
 
   export default {
@@ -63,7 +63,7 @@
         }
     }
   }
-  </script> -->
+  </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>

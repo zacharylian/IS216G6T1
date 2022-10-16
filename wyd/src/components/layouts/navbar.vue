@@ -1,10 +1,14 @@
 <template>
 
     <nav>
-        <router-link to="/HomeView.vue">Home</router-link> |
-        <router-link to="/AboutView.vue">About</router-link> |
-        <router-link to="/LoginView.vue">Login</router-link> |
-        <router-link to="/SpendingsDashboard.vue">Spendings</router-link>
+        <!-- <router-link to="/HomeView">Home</router-link> |
+        <router-link to="/AboutView">About</router-link> |
+        <router-link to="/LoginView">Login</router-link> |
+        <router-link to="/SpendingsDashboard">Spendings</router-link> -->
+        <a class="nav-item" href="/HomeView.vue">Home</a> |
+        <a class="nav-item" href="/AboutView.vue">About</a> |
+        <a class="nav-item" href="/LoginView.vue">Login</a> |
+        <a class="nav-item" href="/SpendingsDashboard.vue">Spendings</a>
         <light-dark></light-dark>
     </nav>
 

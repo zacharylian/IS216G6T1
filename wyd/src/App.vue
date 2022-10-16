@@ -1,11 +1,14 @@
 <template>
   <navigation-bar></navigation-bar>
+  <section>
+    asdf
+  </section>
 </template>
 
 <script>
   // import axios from 'axios';
   
-  import navBar from './components/layouts/navbar.vue';
+  import navBar from '@/components/layouts/navbar.vue';
   
   export default {
       name: 'App',
