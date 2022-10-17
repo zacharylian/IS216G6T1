@@ -1,8 +1,5 @@
 <template>
-  <navigation-bar></navigation-bar>
-  <section>
-    asdf
-  </section>
+  <router-view/>
 </template>
 
 <script>

@@ -1,5 +1,7 @@
 <template>
-    <div class="login">
+  <h1>Sign in to your google account!</h1>
+  <p><button @click="GoogleSignIn">Google sign in</button></p>
+    <!-- <div class="login">
         <h1>{{ msg }}</h1>
         <h2 v-if="user">Signed in: {{ user }}</h2>
     </div>
@@ -13,7 +15,7 @@
     <div id="GoogleSignIn" v-if="signedIn">
         <h3>Google SignIn</h3>
         <button @click="handleSignInGoogle">Login</button>
-    </div>
+    </div> -->
         
  
 </template>
