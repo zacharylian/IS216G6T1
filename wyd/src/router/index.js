@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/SpendingDashboard',
     name: 'SpendingDashboard',
-    component: () => import('../views/SpendingDashboard.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/SpendingDashboard.vue')
   }
 ]
 
