@@ -4,6 +4,14 @@ import { createApp } from 'vue'
 import "./assets/global.css";
 import "./main.scss";
 
+// fontawesome
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
+
+// bookstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+
 
 import App from './App.vue'
 import router from './router'
