@@ -1,4 +1,6 @@
 <template>
+        <navigation-bar></navigation-bar>
+
   <h1>Sign in to your google account!</h1>
   <p><button @click="GoogleSignIn">Google sign in</button></p>
     <!-- <div class="login">
@@ -31,6 +33,9 @@
 
   export default {
     name: 'LoginView',
+    components: {
+    "navigation-bar": navBar
+    },
     props: {
       msg: String
     },

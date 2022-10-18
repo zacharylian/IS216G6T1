@@ -7,10 +7,11 @@
       <div class="theme-switcher-wrap ">
         <div class="theme-switcher"
           v-bind:class="{'active':currentTheme === 'theme-dark'}"
-          v-on:click="switchTheme"
-        >
+          v-on:click="switchTheme">
+
           <div class="switch-path">
-            <div class="switch-handle"></div>
+            <div class="switch-handle">
+            </div>
           </div>
         </div>
       </div>
