@@ -18,19 +18,28 @@ import router from './router'
 import firebase from 'firebase/compat/app'
 import firebaseApp from './firebaseConfig';
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-apiKey: "AIzaSyBlSbe6yTYipPAPseBDfhz1W6oejJ0CH44",
-authDomain: "wad-are-you-2-doing.firebaseapp.com",
-projectId: "wad-are-you-2-doing",
-storageBucket: "wad-are-you-2-doing.appspot.com",
-messagingSenderId: "1052372212245",
-appId: "1:1052372212245:web:73151e0ce3bdb2090a4c1c",
-measurementId: "G-Z0D3RM89YM"
+  apiKey: "AIzaSyBQIVALnpS36W4VrXUUBkOxNUrMN2NHIgk",
+  authDomain: "is216-project-365912.firebaseapp.com",
+  projectId: "is216-project-365912",
+  storageBucket: "is216-project-365912.appspot.com",
+  messagingSenderId: "578928448222",
+  appId: "1:578928448222:web:f00f1a2dde51ad927d284f",
+  measurementId: "G-BK1QG28M8Q"
 };
 createApp(App).use(router).mount('#app')
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 // const analytics = getAnalytics(app);
 
 
