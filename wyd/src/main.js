@@ -7,6 +7,9 @@ import "./main.scss";
 
 import App from './App.vue'
 import router from './router'
+import firebase from 'firebase/compat/app'
+import firebaseApp from './firebaseConfig';
+
 const firebaseConfig = {
 apiKey: "AIzaSyBlSbe6yTYipPAPseBDfhz1W6oejJ0CH44",
 authDomain: "wad-are-you-2-doing.firebaseapp.com",
@@ -19,8 +22,8 @@ measurementId: "G-Z0D3RM89YM"
 createApp(App).use(router).mount('#app')
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = firebase.initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 
 
 // //oauth
@@ -32,3 +35,4 @@ const analytics = getAnalytics(app);
 // }
 // Vue.use(GAuth, gauthOption)
 
+export default firebaseApp
