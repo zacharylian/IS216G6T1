@@ -1,10 +1,10 @@
 
-$bg-theme-light: #FFFFFF;
+$bg-theme-light: #F6F8FB;
 $color-theme-light: #2C2F33;
 
 
 $bg-theme-dark: #2C2F33;
-$color-theme-dark: #FFFFFF;
+$color-theme-dark: #F6F8FB;
 
 * {
     box-sizing: border-box;
@@ -13,7 +13,7 @@ html {
     height: 100%;
 }
 body {
-    background-color: #FFFFFF;
+    background-color: #F6F8FB;
     color: $color-theme-light;
 }
 .text-center {
@@ -66,7 +66,7 @@ body {
         }
     &.active {
         .switch-path {
-            background-color: #FFFFFF;
+            background-color: #cfcfcf;
         }
         .switch-handle {
             transform: translateX(20px);
