@@ -42,20 +42,5 @@ createApp(App).use(router).mount('#app')
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-// const analytics = getAnalytics(app);
-
-
-// //oauth
-// import GAuth from 'vue-google-oauth2'
-// const gauthOption = {
-//     clientId: 'http://1052372212245-o79mp68ok15900k15cra1203pchpa0ec.apps.googleusercontent.com',
-//     scope: 'profile email',
-//     prompt: 'select_account'
-// }
-// Vue.use(GAuth, gauthOption)
-
-// use chart.js
-
-//ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default firebaseApp
