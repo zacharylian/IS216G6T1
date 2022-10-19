@@ -29,6 +29,11 @@ const routes = [
     path: '/ToDoSample',
     name: 'ToDoSample',
     component: () => import('../views/ToDoSample.vue')
+  },
+  {
+    path: '/Calendar',
+    name: 'Calendar',
+    component: () =>import('../views/Calendar.vue')
   }
 ]
 
