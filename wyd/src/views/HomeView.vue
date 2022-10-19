@@ -12,9 +12,8 @@
         </td>
         <td rowspan="3">
           <h2 class="py-2">to-do list</h2>
-
-          <table class="table table-bordered">
-            <!--just here for Mockup purposes-->
+          <todo></todo>
+          <!-- <table class="table table-bordered">
             <thead>
               <tr>
                 <th>#</th>
@@ -63,7 +62,7 @@
                 <label for="vehicle1">I have a bike</label></td>
                 </tr>
             </tbody>
-          </table>
+          </table> -->
         </td>
       </tr>
 
@@ -103,11 +102,13 @@
 <script>
 // @ is an alias to /src
 import navBar from '@/components/layouts/navbar.vue';
+import todo from '@/components/layouts/todo.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    "navigation-bar": navBar
+    "navigation-bar": navBar,
+    "todo": todo,
 }
 }
 
