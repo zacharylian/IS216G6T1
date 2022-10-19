@@ -1,76 +1,50 @@
 <template>
-        <navigation-bar></navigation-bar>
-
-  <h1>Sign in to your google account!</h1>
-  <p><button @click="GoogleSignIn">Google sign in</button></p>
-    <!-- <div class="login">
-        <h1>{{ msg }}</h1>
-        <h2 v-if="user">Signed in: {{ user }}</h2>
-    </div>
-
-    <br>
-
-    <div id="logout" v-if="signedIn">
-        <button @click="handleSignOut">Logout</button>
-    </div>
-
-    <div id="GoogleSignIn" v-if="signedIn">
-        <h3>Google SignIn</h3>
-        <button @click="handleSignInGoogle">Login</button>
-    </div> -->
-        
- 
+        <navbar></navbar>
+  <div>
+    <button v-on:click="googleSignIn">
+      Sign In with Google
+    </button>
+  </div>
 </template>
-  
-  <script>
-    // import firebaseConfig from "../firebaseConfig.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-    
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-    // firebaseConfig
-
-
-  export default {
-    name: 'LoginView',
-    components: {
-    "navigation-bar": navBar
-    },
-    props: {
-      msg: String
-    },
-    data() {
-        return {
-            user: "",
-            signedIn: false,
-        }
-    },
-    methods: {
-        handleSignInGoogle() {
-          console.log(this.signedIn)
-            signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user;
-                this.user = user.displayName;
-                this.signedIn = true;
-                // console.log(user.displayName);
-            }).catch((error) => {
-                console.log(error);
-            });
-        },
-        handleSignOut() {
-          const auth = getAuth();
-          signOut(auth).then(() => {
-            this.user = "";
-            this.signedIn = false;
-          }).catch((error) => {
-            console.log(error);
-          });
-
-        }
-    }
-  }
-  </script>
+<script src="../../login.js"></script>
+<script>
+import Navbar from '../components/layouts/navbar.vue'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+// export default {
+//     methods: {
+//         googleSignIn() {
+//           console.log("=====hello im here=====")
+//             // We'll create functionality here
+//             const auth = getAuth();
+//             provider = new GoogleAuthProvider()
+//             provider.addscope("profile")
+//             provider.addscope("email")
+//             await signInWithPopup(auth, provider)
+//           .then((result) => {
+//             console.log("===== your moms funny =====")
+//             // This gives you a Google Access Token. You can use it to access the Google API.
+//             const credential = GoogleAuthProvider.credentialFromResult(result);
+//             const token = credential.accessToken;
+//             // The signed-in user info.
+//             const user = result.user;
+//             // ...
+//           }).catch((error) => {
+//             console.log("===== your moms funny =====")
+//             // Handle Errors here.
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//             // The email of the user's account used.
+//             const email = error.customData.email;
+//             // The AuthCredential type that was used.
+//             const credential = GoogleAuthProvider.credentialFromError(error);
+//             // ...
+//           });
+//         },
+        
+//     },
+//     components: { Navbar }
+// };
+</script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
