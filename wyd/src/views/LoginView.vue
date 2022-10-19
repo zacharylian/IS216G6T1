@@ -6,44 +6,43 @@
     </button>
   </div>
 </template>
-<script src="../../login.js"></script>
 <script>
 import Navbar from '../components/layouts/navbar.vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
-// export default {
-//     methods: {
-//         googleSignIn() {
-//           console.log("=====hello im here=====")
-//             // We'll create functionality here
-//             const auth = getAuth();
-//             provider = new GoogleAuthProvider()
-//             provider.addscope("profile")
-//             provider.addscope("email")
-//             await signInWithPopup(auth, provider)
-//           .then((result) => {
-//             console.log("===== your moms funny =====")
-//             // This gives you a Google Access Token. You can use it to access the Google API.
-//             const credential = GoogleAuthProvider.credentialFromResult(result);
-//             const token = credential.accessToken;
-//             // The signed-in user info.
-//             const user = result.user;
-//             // ...
-//           }).catch((error) => {
-//             console.log("===== your moms funny =====")
-//             // Handle Errors here.
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-//             // The email of the user's account used.
-//             const email = error.customData.email;
-//             // The AuthCredential type that was used.
-//             const credential = GoogleAuthProvider.credentialFromError(error);
-//             // ...
-//           });
-//         },
+export default {
+    methods: {
+        googleSignIn() {
+          console.log("=====hello im here=====")
+            // We'll create functionality here
+            const auth = getAuth();
+            let provider = new GoogleAuthProvider()
+            provider.addscope("profile")
+            provider.addscope("email")
+            await signInWithPopup(auth, provider)
+          .then((result) => {
+            console.log("===== your moms funny =====")
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // ...
+          }).catch((error) => {
+            console.log("===== your moms funny =====")
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+          });
+        },
         
-//     },
-//     components: { Navbar }
-// };
+    },
+    components: { Navbar }
+};
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->

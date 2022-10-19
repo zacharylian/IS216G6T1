@@ -19,7 +19,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.vue'
 import router from './router'
 import firebase from 'firebase/compat/app'
-import firebaseApp from './firebaseConfig';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
