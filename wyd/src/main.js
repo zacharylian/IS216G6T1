@@ -8,10 +8,13 @@ import "./main.scss";
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
-// bookstrap
+// bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
+//chart.js (sorry am struggling i left the code in)
+// import { Doughnut } from 'chart.js';
+// import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+// import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 
 import App from './App.vue'
 import router from './router'
@@ -51,5 +54,9 @@ const analytics = getAnalytics(app);
 //     prompt: 'select_account'
 // }
 // Vue.use(GAuth, gauthOption)
+
+// use chart.js
+
+//ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default firebaseApp

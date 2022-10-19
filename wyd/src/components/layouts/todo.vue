@@ -64,7 +64,7 @@
         name: "todo",
         props: {
             msg: String
-        }
+        },
 
     data() {
         return {
