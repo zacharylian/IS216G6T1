@@ -1,12 +1,7 @@
 <template>
-        <navbar></navbar>
   <div>
-    <button v-on:click="googleSignIn" v-show="active !== true">
+    <button v-on:click="googleSignIn">
       Sign In with Google
-    </button>
-
-    <button v-on:click="googleSignOut" v-show="active">
-      Sign out 
     </button>
   </div>
 </template>
@@ -14,12 +9,6 @@
 import Navbar from '../components/layouts/navbar.vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
 export default {
-    data(){
-      return{
-        active: false
-      }
-    }
-    ,
     methods: {
         googleSignIn() {
           console.log("=====hello im here=====")
@@ -29,14 +18,15 @@ export default {
             console.log("=====furry balls=====")
             signInWithPopup(auth, provider)
           .then((result) => {
-            console.log(auth.currentUser)
+            console.log(getAuth().currentUser)
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
             // ...
-            this.active = true
+            this.$router.push('/')
+            
           }).catch((error) => {
             console.log("===== your moms funny =====")
             // Handle Errors here.
@@ -49,21 +39,8 @@ export default {
             // ...
           });
         },
-
-        googleSignOut() {
-          const auth = getAuth();
-          signOut(auth).then(() => {
-            // Sign-out successful.
-            alert("Successful Signout")
-            console.log(auth)
-            this.active = false
-          }).catch((error) => {
-            // An error happened.
-            console.log(error)
-          });
-        },
-        
     },
+
     components: { Navbar }
 };
 </script>

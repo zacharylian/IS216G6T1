@@ -1,28 +1,40 @@
 <template>
 
     <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/AboutView">About</router-link> |
-        <router-link to="/LoginView">Login</router-link> |
-        <router-link to="/SpendingDashboard">Spendings</router-link> |
-        <router-link to="/ToDoSample">ToDo</router-link> |
-        <router-link to="/Calendar">Calendar</router-link>
-        <!-- <a class="nav-item" href="/HomeView.vue">Home</a> |
-        <a class="nav-item" href="/AboutView.vue">About</a> |
-        <a class="nav-item" href="/LoginView.vue">Login</a> |
-        <a class="nav-item" href="/SpendingsDashboard.vue">Spendings</a> -->
-        <light-dark></light-dark>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/AboutView">About</router-link> |
+      <router-link to="/SpendingDashboard">Spendings</router-link> |
+      <router-link to="/ToDoSample">ToDo</router-link> |
+      <router-link to="/Calendar">Calendar</router-link> |
+      <button v-on:click="googleSignOut">Sign Out</button>
+      <light-dark></light-dark>
     </nav>
 
 </template>
 
 <script>
   import lightDark from './lightdark.vue';
+  import { getAuth, signOut } from "firebase/auth"
 
 export default {
   name: "navBar",
   components: {
     'light-dark': lightDark
+  },
+  methods: {
+    googleSignOut() {
+          const auth = getAuth();
+          signOut(auth).then(() => {
+            // Sign-out successful.
+            alert("Successful Sign Out")
+            console.log(getAuth().currentUser)
+            location.reload()
+     
+          }).catch((error) => {
+            // An error happened.
+            console.log(error)
+          });
+        },
   }
 }
 

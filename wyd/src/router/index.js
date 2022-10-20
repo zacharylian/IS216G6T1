@@ -1,3 +1,4 @@
+import {getAuth} from 'firebase/auth'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
@@ -5,35 +6,68 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
+    
   },
   {
     path: '/AboutView',
     name: 'AboutView',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import('../views/AboutView.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
   },
   {
     path: '/LoginView',
     name: 'LoginView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+    component: () => import('../views/LoginView.vue'),
   },
   {
     path: '/SpendingDashboard',
     name: 'SpendingDashboard',
-    component: () => import('../views/SpendingDashboard.vue')
+    component: () => import('../views/SpendingDashboard.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
   },
   {
     path: '/ToDoSample',
     name: 'ToDoSample',
-    component: () => import('../views/ToDoSample.vue')
+    component: () => import('../views/ToDoSample.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
   },
   {
     path: '/Calendar',
     name: 'Calendar',
-    component: () =>import('../views/Calendar.vue')
+    component: () =>import('../views/Calendar.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
   }
 ]
 

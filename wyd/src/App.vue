@@ -6,7 +6,9 @@
   // import axios from 'axios';
   
   import navBar from '@/components/layouts/navbar.vue';
-  
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
+  import router from './router';
+
   export default {
       name: 'App',
       components: {
@@ -14,7 +16,7 @@
     },
       data() {
         return {
-          currentTheme: localStorage.getItem("theme-color")
+          currentTheme: localStorage.getItem("theme-color"),
         };
       },
       methods: {
