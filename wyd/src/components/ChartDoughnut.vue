@@ -1,66 +1,33 @@
 <template>
-    <Doughnut
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
-  </template>
-  
-  <script>
-  import { Doughnut } from 'vue-chartjs'
-  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-  
-  export default {
-    name: 'DoughnutChart',
-    components: { Doughnut },
-    props: {
-      chartId: {
-        type: String,
-        default: 'doughnut-chart'
-      },
-      datasetIdKey: {
-        type: String,
-        default: 'label'
-      },
-      width: {
-        type: Number,
-        default: 400
-      },
-      height: {
-        type: Number,
-        default: 400
-      },
-      cssClasses: {
-        default: '',
-        type: String
-      },
-      styles: {
-        type: Object,
-        default: () => {}
-      },
-      plugins: {
-        type: Object,
-        default: () => {}
-      }
-    },
-    data() {
-      return {
-        chartData: {
-          labels: [ 'January', 'February', 'March' ],
-          datasets: [ { data: [40, 20, 12] } ]
-        },
-        chartOptions: {
-          responsive: true
-        }
-      }
+  <DoughnutChart
+    :chart-data="data"
+    :options="options"
+    css-classes="chart-container"
+  />
+</template>
+
+<script setup>
+import pattern from "patternomaly"
+import { ref, computed } from "vue"
+import { DoughnutChart } from "vue-chart-3"
+import { Chart, DoughnutController, ArcElement } from "chart.js"
+Chart.register(DoughnutController, ArcElement)
+const dataValues = ref([10, 20, 40])
+const data = computed(() => ({
+  labels: ["Foo", "Bar", "Baz"],
+  datasets: [
+    {
+      data: dataValues.value,
+      backgroundColor: pattern.generate(["#859900", "#d33682", "#cb4b16"])
+    }
+  ]
+}))
+const options = ref({
+  plugins: {
+    title: {
+      text: "Doughnut"
     }
   }
-  </script>
+})
+
+</script>

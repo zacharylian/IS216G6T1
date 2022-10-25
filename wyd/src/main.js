@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // import { Doughnut } from 'chart.js';
 // import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 // import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import "./plugins/chart.js"
 
 import App from './App.vue'
 import router from './router'
