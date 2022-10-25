@@ -4,7 +4,6 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/AboutView">About</router-link> |
       <router-link to="/SpendingDashboard">Spendings</router-link> |
-      <router-link to="/ToDoSample">ToDo</router-link> |
       <router-link to="/Calendar">Calendar</router-link> |
       <button v-on:click="googleSignOut">Sign Out</button>
       <light-dark></light-dark>

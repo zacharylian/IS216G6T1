@@ -13,56 +13,6 @@
         <td rowspan="3">
           <h2 class="py-2">to-do list</h2>
           <todo></todo>
-          <!-- <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>task name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  1
-                </td>
-                <td>
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="float:right">
-                <label for="vehicle1">I have a bike</label></td>          
-              </tr>
-              <tr>
-                <td>
-                  2
-                </td>
-                <td>
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="float:right">
-                <label for="vehicle1">I have a bike</label></td>         
-              </tr>
-              <tr>
-                <td>
-                  3
-                </td>
-                <td>
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="float:right">
-                <label for="vehicle1">I have a bike</label></td>
-              </tr>
-              <tr>
-                <td>
-                  4
-                </td>
-                <td>
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="float:right">
-                <label for="vehicle1">I have a bike</label></td>      
-              </tr>
-              <tr>
-                <td>
-                  5
-                </td>
-                <td>
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="float:right">
-                <label for="vehicle1">I have a bike</label></td>
-                </tr>
-            </tbody>
-          </table> -->
         </td>
       </tr>
 

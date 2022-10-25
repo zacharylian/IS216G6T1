@@ -6,8 +6,13 @@
   // import axios from 'axios';
   
   import navBar from '@/components/layouts/navbar.vue';
+  import { ChartDoughnut } from '@/components/ChartDoughnut.vue';
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
   import router from './router';
+  import { h } from 'vue';
+  import { Doughnut } from 'vue-chartjs';
+  import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js';
+  
 
   export default {
       name: 'App',

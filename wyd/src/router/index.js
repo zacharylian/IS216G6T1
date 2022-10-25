@@ -68,6 +68,30 @@ const routes = [
         next("/LoginView")
       }
     }
+  },
+  {
+    path: '/DayChart',
+    name: 'DayChart',
+    component: () =>import('../views/DayChart.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
+  },
+  {
+    path: '/SpendingDashboard',
+    name: 'SpendingDashboard',
+    component: () =>import('../views/SpendingDashboard.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
   }
 ]
 
