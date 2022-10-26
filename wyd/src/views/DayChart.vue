@@ -1,41 +1,43 @@
 <template>
-    <navigation-bar></navigation-bar>
+    <!-- <navigation-bar></navigation-bar> -->
+<div>Got some words here</div>
 </template>
 
+
 <script>
-    import navBar from '@/components/layouts/navbar.vue';
-    import { h } from 'vue';
-    
-    
-    ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
+// import navBar from '@/components/layouts/navbar.vue';
 
-    const data = {
-  labels: [
-    'Red',
-    'Blue',
-    'Yellow'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)'
-    ],
-    hoverOffset: 4
-  }]
-};
+import { h } from 'vue';
+// import DoughnutChart from Doughnut Chart
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
-const config = {
-  type: 'Doughnut',
-  data: data,
-};
+//     const data = {
+//   labels: [
+//     'Red',
+//     'Blue',
+//     'Yellow'
+//   ],
+//   datasets: [{
+//     label: 'My First Dataset',
+//     data: [300, 50, 100],
+//     backgroundColor: [
+//       'rgb(255, 99, 132)',
+//       'rgb(54, 162, 235)',
+//       'rgb(255, 205, 86)'
+//     ],
+//     hoverOffset: 4
+//   }]
+// };
+
+// const config = {
+//   type: 'Doughnut',
+//   data: data,
+// };
     
-    export default {
+export default {
         name: 'DayChart',
         components: {
-            Doughnut
+            "DoughnutChart": 'Doughnut'
         },
         props: {
             chartId: {
@@ -92,5 +94,4 @@ const config = {
         
 
     };
-    </script>
-    
+</script>
