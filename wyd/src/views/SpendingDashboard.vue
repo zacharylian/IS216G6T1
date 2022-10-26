@@ -1,6 +1,30 @@
 <template>
     <navigation-bar></navigation-bar>
-    <!-- <div class="container-fluid base-bg">
+    <DayChart></DayChart>
+</template>
+
+<script>
+
+// IMPORTS
+import navBar from '@/components/layouts/navbar.vue';
+import DayChart from './DayChart.vue'
+
+//EXPORTS
+export default {
+    name: 'SpendingDashboard',
+    components: {
+    "navigation-bar": navBar,
+    "DayChart": DayChart
+    }
+}
+
+
+</script>
+
+<!-- 
+<template>
+    <navigation-bar></navigation-bar>
+<div class="container-fluid base-bg">
         <div class="row">
             <box-container :columnLength="3">
                 <div id="day-chart">
@@ -9,10 +33,11 @@
             </box-container>
         </div>
     </div> -->
+    <!-- <DayChart /> -->
+<!--
+</template>-->
 
-</template>
-
-
+<!--
 <script>
     import navBar from '@/components/layouts/navbar.vue';
     // import { reactive, toRefs } from '@vue/reactivity';
@@ -22,7 +47,8 @@
 
     name: 'SpendingDashboard',
     components: {
-      "navigation-bar": navBar
+      "navigation-bar": navBar,
+    //   "DayChart": DayChart
     },
         // },
         // setup() {
@@ -82,4 +108,5 @@
         //     }
         //     }
     };
-    </script>
+    </script> -->
+-->

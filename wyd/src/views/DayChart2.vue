@@ -1,27 +1,38 @@
 <template>
-    <Doughnut
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
-  </template>
+    <navigation-bar></navigation-bar>
+</template>
 
 <script>
-    import { defineComponent, h } from 'vue';
+    import navBar from '@/components/layouts/navbar.vue';
+    import { h } from 'vue';
     
-    import { Doughnut } from 'vue-chartjs';
-    
-    import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js';
     
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
+
+    const data = {
+  labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+const config = {
+  type: 'Doughnut',
+  data: data,
+};
     
-    export default defineComponent({
+    export default {
         name: 'DayChart',
         components: {
             Doughnut
@@ -31,17 +42,13 @@
                 type: String,
                 default: 'doughnut-chart'
             },
-            datasetIdKey: {
-                type: String,
-                default: 'label'
-            },
             width: {
                 type: Number,
-                default: 400,
+                default: 100
             },
             height: {
                 type: Number,
-                default: 400,
+                default: 100
             },
             cssClasses: {
                 default: '',
@@ -84,5 +91,6 @@
         }
         
 
-    });
+    };
     </script>
+    
