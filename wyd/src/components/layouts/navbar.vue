@@ -9,6 +9,10 @@
       <light-dark></light-dark>
     </nav>
 
+    <div class="navbar">
+
+    </div>
+
 </template>
 
 <script>
@@ -62,8 +66,33 @@ export default {
       color: #7289DA;
     }
 
+    :root {
+      --navbar-bg-color: #7289DA;
+      --navbar-item-hover: #6479c5;
+      --navbar-item-active: #5e71b4;
+    }
 
     @import "../../main.scss";
 
-    </style>
+</style>
+
+<style scoped>
+  .navbar {
+    color: white;
+    background-color: var(--navbar-bg-color);
+
+    float: left;
+    position: fixed;
+    z-index: 1;
+    top:0;
+    left: 0;
+    bottom: 0;
+    padding: 0.5em;
+
+    transition: 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+  }
+</style>
     

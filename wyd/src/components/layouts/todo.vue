@@ -3,42 +3,42 @@
 
         <!-- Input -->
         <div class="d-flex align-items-center justify-content-center">
-            <input v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 200px">
+            <input v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 225px">
             <button @click="submitTask()" class="btn"><span class="fa fa-check pointer"></span></button>
         </div>
 
         <!-- Task Table -->
 
-        <table class="table border-bottom-1 mt-3 center" style="width:250px">
-        <!-- <thead>
+        <table class="table border-bottom-1 mt-3 center"  >
+        <thead>
             <tr>
-            <th scope="col">Done</th>
+            <th scope="col"></th>
             <th scope="col">Task</th>
             <th scope="col" class="text-center">Status</th>
             <th scope="col" class="text-center">Edit</th>
             <th scope="col" class="text-center">Delete</th>
             </tr>
-        </thead> -->
+        </thead>
         <tbody>
-            <tr v-for="(task, index) in tasks" :key="index">
-                <td><input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer"></td>
-                <td>
+            <tr v-for="(task, index) in tasks" :key="index" :class="{fadeOut: task.completed== true}">
+                <td style="width:5px" class="align-middle"><input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer"></td>
+                <td style="width:50px">
                     <span :class="{'strikethrough':task.status=='completed'}" >
                         {{task.name}}
                     </span>
                 </td>
-                <td style="width: 100px">
+                <td class="align-middle" style="width: 10%" >
                     <span class="pointer" @click="changeStatus(index)" 
-                    :class="{'text-danger': task.status=='to-do', 'text-warning': task.status==='in progress', 'text-success':task.status==='completed'}">
+                    :class="{'text-danger': task.status=='   to-do   ', 'text-warning': task.status==='in progress', 'text-success':task.status==='completed'}">
                         {{task.status}}
                     </span>
                 </td>
-                <td>
+                <td class="align-middle" style="width: 1%">
                     <div @click="editTask(index)">
                         <span class="fa fa-pen pointer"></span>
                     </div>
                 </td>
-                <td>
+                <td class="align-middle" style="width: 1%">
                     <div @click="deleteTask(index)">
                         <span class="fa fa-trash pointer"></span>
                     </div>
@@ -64,15 +64,18 @@
         return {
             new_task: "",
             edit_task: null,
-            available_statuses: ['to-do', 'in progress'],
+            available_statuses: ['   to-do   ', 'in progress'],
+            completed: false,
             tasks: [
                 {
                     name: 'Steal bananas from the store',
-                    status: 'to-do'
+                    status: '   to-do   ',
+                    completed: false,
                 },
                 {
                     name: 'Eat 1kg chocolate in 1 hour',
-                    status: 'in-progress'
+                    status: '   to-do   ',
+                    completed: false,
                 },
             ]
         }
@@ -89,7 +92,7 @@
                 this.tasks.push(
                     {
                         name: this.new_task,
-                        status: 'to-do'
+                        status: '   to-do   ' 
                     }
                 )
             } else {
@@ -120,9 +123,11 @@
 
         completeTask(index) {
             this.tasks[index].status = 'completed'
-            // IDK WHY THE TIMEOUT DOESNT WORK FOR MY FUNCTION BUT IF I TRY USING AN ALERT IT WORKS WTP
-            // setTimeout(this.deleteTask(index), 10000)
+            setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
+            this.tasks[index].completed = true
         },
+
+
     }
     }
 </script>
@@ -141,5 +146,19 @@
     .center {
         margin-left: auto;
         margin-right:auto;
+    }
+
+    .fadeOut {
+        animation: fadeOut 2s;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        } 
+
+        to {
+            opacity: 0;
+        }
     }
 </style>
