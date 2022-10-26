@@ -11,8 +11,19 @@
 
 </template>
 
-<script src="../../src/external.js">
-    
+<!-- <script src="../../src/external.js"></script> -->
+
+<script>
+import navBar from '@/components/layouts/navbar.vue';
+
+
+//EXPORTS
+export default {
+    name: 'Calendar',
+    components: {
+    "navigation-bar": navBar,
+    }
+}
 </script>
 
 <!-- <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>

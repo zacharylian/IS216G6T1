@@ -1,7 +1,10 @@
 <template>
 
   <section>
-    <navigation-bar></navigation-bar>
+    <navigation-bar/>
+    <div :style="{'margin-left': navbarWidth}">
+      <router-view />
+    </div>
 
     <div class="px-5">
     <table class="table table-bordered" style="width:100%">
@@ -52,6 +55,8 @@
 <script>
 // @ is an alias to /src
 import navBar from '@/components/layouts/navbar.vue';
+import {navbarWidth} from '@/components/layouts/state';
+
 import todo from '@/components/layouts/todo.vue';
 
 export default {
@@ -59,7 +64,10 @@ export default {
   components: {
     "navigation-bar": navBar,
     "todo": todo,
-}
+  },
+  setup() {
+    return {navbarWidth}
+  } 
 }
 
 </script>

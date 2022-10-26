@@ -7,6 +7,7 @@
 
 // IMPORTS
 import navBar from '@/components/layouts/navbar.vue';
+
 import DayChart from './DayChart.vue'
 
 //EXPORTS

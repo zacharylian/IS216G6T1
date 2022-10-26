@@ -1,15 +1,29 @@
 <template>
 
-    <nav>
+<!-- 
       <router-link to="/">Home</router-link> |
       <router-link to="/AboutView">About</router-link> |
       <router-link to="/SpendingDashboard">Spendings</router-link> |
-      <router-link to="/Calendar">Calendar</router-link> |
+      <router-link to="/Calendar">Calendar</router-link> | -->
       <button v-on:click="googleSignOut">Sign Out</button>
-      <light-dark></light-dark>
-    </nav>
 
-    <div class="navbar">
+    <div class="navbar" :style="{width:navbarWidth}">
+      <!-- <h1>
+        <span v-if="collapsed">
+          <i class="fas fa-bars"></i>
+        </span>
+        <span v-else>
+          NavBar
+        </span>
+      </h1> -->
+
+      <navbar-link to="/" icon="fas fa-house">Home</navbar-link>
+      <navbar-link to="/Calendar" icon="fas fa-calendar-days">Calendar</navbar-link> 
+      <navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar">Spendings</navbar-link>
+
+      <span class="collapse-icon" :class="{'rotate-180': collapsed}" @click="toggleNavbar">
+        <i class ="fas fa-angle-double-left" />
+      </span>
 
     </div>
 
@@ -19,11 +33,20 @@
   import lightDark from './lightdark.vue';
   import { getAuth, signOut } from "firebase/auth"
 
+  import navbarLink from './navbarLink'
+  import {collapsed, toggleNavbar, navbarWidth} from './state'
+
 export default {
+  props: {},
+  setup() {
+    return {collapsed, toggleNavbar, navbarWidth}
+  },
   name: "navBar",
   components: {
-    'light-dark': lightDark
+    'light-dark': lightDark,
+    'navbar-link': navbarLink,
   },
+
   methods: {
     googleSignOut() {
           const auth = getAuth();
@@ -53,7 +76,7 @@ export default {
       color: #2c3e50;
     }
     
-    nav {
+    /* nav {
       padding: 30px;
     }
     
@@ -64,7 +87,7 @@ export default {
     
     nav a.router-link-exact-active {
       color: #7289DA;
-    }
+    } */
 
     :root {
       --navbar-bg-color: #7289DA;
@@ -94,5 +117,23 @@ export default {
     display: flex;
     flex-direction: column;
   }
+  .collapse-icon {
+    position: absolute;
+    bottom: 0;
+    padding: 0.75em;
+    
+    color: black;
+
+    transition: 0.2s linear;
+
+    cursor: pointer;
+  }
+
+  .rotate-180 {
+    transform: rotate(180deg);
+    transition: 0.2s linear;
+  }
+
+  
 </style>
     
