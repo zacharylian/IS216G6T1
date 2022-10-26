@@ -1,9 +1,32 @@
 <template>
-  <div>
-    <button v-on:click="googleSignIn">
-      Sign In with Google
-    </button>
-  </div>
+
+<div class="context">
+    <h1>Wad are you 2 Doing</h1>
+
+        <div>
+          <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!">
+          </button>
+        </div>
+
+
+</div>
+
+<div class="area" >
+          <ul class="circles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+          </ul>
+    </div>
+
+
 </template>
 <script>
 import Navbar from '../components/layouts/navbar.vue'
@@ -45,21 +68,5 @@ export default {
 };
 </script>
   
-  <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped>
-  h3 {
-    margin: 40px 0 0;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  a {
-    color: #42b983;
-  }
-  </style>
+
   

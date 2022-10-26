@@ -3,6 +3,8 @@ import { createApp } from 'vue'
 //css
 import "./assets/global.css";
 import "./main.scss";
+import "../src/LoginView.css";
+import "../src/LoginView.scss";
 
 // fontawesome
 import '@fortawesome/fontawesome-free/css/all.css'
