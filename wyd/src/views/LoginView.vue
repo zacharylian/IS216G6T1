@@ -11,8 +11,8 @@
         <span>
           Focus.<br/>
           Ready.<br/>
-          Free.<br/>
-          Fire.
+          Saucy.<br/>
+          Krazy.<br/>
         </span>
       </div>
     </div>
