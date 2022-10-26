@@ -11,7 +11,7 @@
     letter-spacing: 1px;
     display: inline-block;
     text-decoration: none;
-    font-family: 'Open Sans';
+    font-family: 'Inter';
     text-transform: uppercase;
     
     &:hover{
@@ -45,13 +45,13 @@
       top: 0;
       left: 0;
       opacity: 1;
-      color: #adadaf;
+      color: black;
       display: block;
       padding: 0 30px;
       line-height: 40px;
       transition: $speed;
       position: relative;
-      background: #323237;
+      background: #7289DA;
       content: attr(data-front);
       transform: translateY(0) rotateX(0);
     }

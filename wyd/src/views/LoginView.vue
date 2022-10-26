@@ -3,6 +3,34 @@
 <div class="context">
     <h1>Wad are you 2 Doing</h1>
 
+    <br/>
+
+    <div id="tagline">
+          Stay
+      <div class="scroller" style="color: #7289DA">
+        <span>
+          Focus.<br/>
+          Ready.<br/>
+          Saucy.<br/>
+          Krazy.<br/>
+        </span>
+      </div>
+    </div>
+
+
+    <br/>
+    <div class="appInformation">
+      To-Do List  
+      &nbsp; &nbsp; | &nbsp; &nbsp;
+      Budget & Expenditure 
+      &nbsp; &nbsp; | &nbsp; &nbsp;
+      Focus Timer 
+      &nbsp; &nbsp; | &nbsp; &nbsp;
+      Calendar
+    </div>
+
+    <br/>
+
         <div>
           <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!">
           </button>
