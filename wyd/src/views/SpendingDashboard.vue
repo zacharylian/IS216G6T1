@@ -9,23 +9,12 @@
             </box-container>
         </div>
     </div> -->
-    <div>
-        <canvas id="DayChart" width="400" height="400"></canvas>
-
-    </div>
-    <div>
-        <router-link to="/DayChart">DayChart</router-link>&nbsp
-        <router-link to="/MonthChart">MonthChart</router-link>
-    </div>
 
 </template>
 
 
 <script>
     import navBar from '@/components/layouts/navbar.vue';
-    import DayChart from './DayChart.vue';
-    document.getElementById('DayChart').innerHTML = DayChart;
-
     // import { reactive, toRefs } from '@vue/reactivity';
     // import DayChart from './DayChart.vue';
     
@@ -93,5 +82,4 @@
         //     }
         //     }
     };
-    
     </script>

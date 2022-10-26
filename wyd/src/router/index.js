@@ -80,23 +80,7 @@ const routes = [
         next("/LoginView")
       }
     }
-  },  {
-    path: '/MonthChart',
-    name: 'MonthChart',
-    component: () =>import('../views/MonthChart.vue'),
-    beforeEnter(to, from, next){
-      if (getAuth().currentUser !== null){
-        next()
-      }else{
-        next("/LoginView")
-      }
-    }
   },
-  {
-    path: '/TryOne',
-    name: 'TryOne',
-    component: () =>import('../views/TryOne.vue')
-    },
   {
     path: '/SpendingDashboard',
     name: 'SpendingDashboard',
