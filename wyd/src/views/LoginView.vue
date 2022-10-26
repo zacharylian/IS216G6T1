@@ -1,9 +1,31 @@
 <template>
-  <div>
-    <button v-on:click="googleSignIn">
-      Sign In with Google
-    </button>
-  </div>
+     <div class="context">
+        <h1>Wad Are You 2 Doing</h1>
+      <div>
+        <button v-on:click="googleSignIn" 
+        class="glow-on-hover" type="button">
+          Sign In with Google
+        </button>
+      </div>
+    </div>
+
+
+<div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+    </div >
+
+
 </template>
 <script>
 import Navbar from '../components/layouts/navbar.vue'
@@ -62,4 +84,11 @@ export default {
     color: #42b983;
   }
   </style>
+
+  <style>
+    @import '../LoginView.css';
+  </style>
+
+
+
   
