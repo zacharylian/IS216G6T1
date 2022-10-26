@@ -7,7 +7,7 @@
 
     <div id="tagline">
           Stay
-      <div class="scroller">
+      <div class="scroller" style="color: #7289DA">
         <span>
           Focus.<br/>
           Ready.<br/>
