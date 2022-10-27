@@ -66,8 +66,17 @@
 
   <div class="overlay"></div>
   <div class="text">
-    <h2>Never Stop</h2>
-    <h3>productivity</h3>
+    <div id="tagline2">
+          Stay
+      <div class="scroller" style="color: #7289DA">
+        <span>
+          Focus.<br/>
+          Ready.<br/>
+          Saucy.<br/>
+          Krazy.<br/>
+        </span>
+      </div>
+    </div>
     <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
     
     <button @click="googleSignIn" class="btn-flip-2" data-front="Sign in with Google" data-back="Productive Time!">
