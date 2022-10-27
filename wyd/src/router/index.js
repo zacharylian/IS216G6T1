@@ -45,18 +45,7 @@ const routes = [
       }
     }
   },
-  {
-    path: '/ToDoSample',
-    name: 'ToDoSample',
-    component: () => import('../views/ToDoSample.vue'),
-    beforeEnter(to, from, next){
-      if (getAuth().currentUser !== null){
-        next()
-      }else{
-        next("/LoginView")
-      }
-    }
-  },
+
   {
     path: '/Calendar',
     name: 'Calendar',
@@ -85,6 +74,19 @@ const routes = [
     path: '/SpendingDashboard',
     name: 'SpendingDashboard',
     component: () =>import('../views/SpendingDashboard.vue'),
+    beforeEnter(to, from, next){
+      if (getAuth().currentUser !== null){
+        next()
+      }else{
+        next("/LoginView")
+      }
+    }
+  },
+
+  {
+    path: '/FocusTimer',
+    name: 'FocusTimer',
+    component: () =>import('../views/FocusTimer.vue'),
     beforeEnter(to, from, next){
       if (getAuth().currentUser !== null){
         next()

@@ -19,10 +19,10 @@
 </script>
 
 <template>
-    <router-link :to="to" class="link" :class="{active:isActive}">
+    <router-link :to="to" :class="{active:isActive}">
         <i class="icon" :class="icon"/>
         <transition name="fade">
-            <span v-if="!collapsed">
+            <span v-if="!collapsed" style="padding-left:8px; font-size: 16px;">
                 <slot/>
             </span>
         </transition>
@@ -39,28 +39,6 @@
     opacity:0;
 }
 
-.link{
-    display: flex;
-    align-items: center;
-
-    cursor: pointer;
-    position: relative;
-    font-weight: 800;
-    user-select: none;
-
-    margin: 6em 0;
-    padding: 1em 0.2em ;
-    border-radius: 0.2em;
-    height: 2em;
-
-    /* margin: 0.1em 0;
-    padding: 0.4em;
-    border-radius: 0.25em;
-    height: 1.5em; */
-
-    color: black;
-    text-decoration: none;
-    }
     .link:hover {
         background-color: var(--navbar-item-hover);
     }
@@ -70,9 +48,8 @@
     }
 
     .icon {
-        flex-shrink: 0;
-        width: 18px;
-        margin-right: 2px;
-        padding: 0;
+        width: 35px;
+        padding-right: 3px;
+        padding-left: 2px;
     }
 </style>
