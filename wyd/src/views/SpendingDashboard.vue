@@ -33,37 +33,29 @@ export default {
                 </div>
             </box-container>
         </div>
-<<<<<<< Updated upstream
     </div> -->
     <!-- <DayChart /> -->
 <!--
 </template>-->
-=======
-        <div class="row">
+        <!-- <div class="row">
             <box-container :columnLength="3">
                 <div id="calendar-heatmap">
                     <calendar-heatmap></calendar-heatmap>
                 </div>
             </box-container>
         </div>
-    </div>
+    </div> -->
+<!-- 
+</template> -->
 
-</template>
-
->>>>>>> Stashed changes
 
 <!--
 <script>
     import navBar from '@/components/layouts/navbar.vue';
-<<<<<<< Updated upstream
-    // import { reactive, toRefs } from '@vue/reactivity';
-    // import DayChart from './DayChart.vue';
-=======
     import { reactive, toRefs } from '@vue/reactivity';
     import DayChart from './DayChart.vue';
     //d3.js
     import CalendarHeatmap from './CalendarHeatmap.vue';
->>>>>>> Stashed changes
     
     export default {
 
@@ -126,11 +118,6 @@ export default {
         //     }
         //     });
 
-<<<<<<< Updated upstream
-        //         Chart.plugins.unregister(this.chartData);
-        //     }
-        //     }
-=======
                 Chart.plugins.unregister(this.chartData);
             }
             },
@@ -142,7 +129,6 @@ export default {
             
         },
         name: 'SpendingDashBoard'
->>>>>>> Stashed changes
     };
     </script> -->
 -->
