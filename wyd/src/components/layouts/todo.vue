@@ -22,7 +22,7 @@
         <tbody>
             <tr v-for="(task, index) in tasks" :key="index" :class="{fadeOut: task.completed== true}">
                 <td style="width:5px" class="align-middle"><input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer"></td>
-                <td style="width:50px">
+                <td class="align-middle" style="width:50px">
                     <span :class="{'strikethrough':task.status=='completed'}" >
                         {{task.name}}
                     </span>
@@ -123,8 +123,8 @@
 
         completeTask(index) {
             this.tasks[index].status = 'completed'
-            setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
             this.tasks[index].completed = true
+            setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
         },
 
 
