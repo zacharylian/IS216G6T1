@@ -1,64 +1,7 @@
 <template>
+  
 
-<body>
-
-<section id="introduction">
-<div class="context">
-    <h1>Wad are you 2 Doing</h1>
-
-    <br/>
-
-    <div id="tagline">
-          Stay
-      <div class="scroller" style="color: #7289DA">
-        <span>
-          Focus.<br/>
-          Ready.<br/>
-          Saucy.<br/>
-          Krazy.<br/>
-        </span>
-      </div>
-    </div>
-
-
-    <br/>
-    <div class="appInformation">
-      To-Do List  
-      &nbsp; &nbsp; | &nbsp; &nbsp;
-      Budget & Expenditure 
-      &nbsp; &nbsp; | &nbsp; &nbsp;
-      Focus Timer 
-      &nbsp; &nbsp; | &nbsp; &nbsp;
-      Calendar
-    </div>
-
-    <br/>
-
-        <div>
-          <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!">
-          </button>
-        </div>
-
-
-</div>
-</section>
-
-<div class="area" >
-          <ul class="circles">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-          </ul>
-    </div>
-
-<section class="explanation">
+<section class="introduction">
   <header>
     <h2 class="logo">Wad are you 2 Doing</h2>
   </header>
@@ -66,7 +9,7 @@
 
   <div class="overlay"></div>
   <div class="text">
-    <div id="tagline2">
+    <div id="tagline">
           Stay
       <div class="scroller" style="color: #7289DA">
         <span>
@@ -79,17 +22,29 @@
     </div>
     <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
     
-    <button @click="googleSignIn" class="btn-flip-2" data-front="Sign in with Google" data-back="Productive Time!">
+    <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!">
     </button>
 
 
   </div>
 </section>
 
-</body>
+
+<section class="toDo">
+  <div class="overlay"></div>
+  <div class="text-toDo">
+    <h2>The To-Do List</h2>
+    <h3>Set tasks in an instance</h3>
+  </div>
+  <div class="reveal">
+    <img src="../media/To-Do-List.png">
+  </div>
+</section>
+
 
 </template>
 <script>
+  import '@/LoginView'
   import Navbar from '../components/layouts/navbar.vue'
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
   export default {
@@ -127,6 +82,7 @@
 
       components: { Navbar }
   };
+
 </script>
   
 
