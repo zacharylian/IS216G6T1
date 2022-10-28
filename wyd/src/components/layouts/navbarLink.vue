@@ -22,7 +22,7 @@
     <router-link :to="to" :class="{active:isActive}">
         <i class="icon" :class="icon"/>
         <transition name="fade">
-            <span v-if="!collapsed" style="padding-left:8px; font-size: 16px;">
+            <span v-if="!collapsed" style="padding-left:5px; font-size: 16px;">
                 <slot/>
             </span>
         </transition>
@@ -51,5 +51,8 @@
         width: 35px;
         padding-right: 3px;
         padding-left: 2px;
+        /* display:flex;
+        justify-content: space-between;
+        align-items: center; */
     }
 </style>

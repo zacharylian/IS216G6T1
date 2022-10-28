@@ -17,13 +17,14 @@
         </span>
       </h1> -->
 
-      <navbar-link to="/" icon="fas fa-house fa-2x" class="homelink" :class="{active:isActive}, {home:!collapsed}">Home</navbar-link>
-      <navbar-link to="/Calendar" icon="fas fa-calendar-days fa-2x" class="calendarlink" :class="{active:isActive}, {calendar:!collapsed}">Calendar</navbar-link> 
-      <navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar fa-2x" class="spendingslink" :class="{active:isActive}, {spendings:!collapsed}">Spendings</navbar-link>
-      <navbar-link to="/FocusTimer" icon="fas fa-stopwatch fa-3x" class="timerlink" :class="{active:isActive}, {timer:!collapsed}">Timer</navbar-link>
-
+      <ul>
+      <li><navbar-link to="/" icon="fas fa-house fa-2x" class="link" :class="{active:isActive}, {home:!collapsed}">Home</navbar-link></li>
+      <li><navbar-link to="/Calendar" icon="fas fa-calendar-days fa-2x" class="link" :class="{active:isActive}, {calendar:!collapsed}">Calendar</navbar-link></li>
+      <li><navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar fa-2x" class="link" :class="{active:isActive}, {spendings:!collapsed}">Spendings</navbar-link></li>
+      <li><navbar-link to="/FocusTimer" icon="fas fa-stopwatch fa-3x" class="link" :class="{active:isActive}, {timer:!collapsed}">Timer</navbar-link></li>
+      </ul>
       <span class="collapse-icon" :class="{'rotate-180': collapsed}" @click="toggleNavbar">
-        <i class ="fas fa-angle-double-left" />
+        <i class ="fas fa-angle-double-left fa-2x" />
       </span>
 
     </div>
@@ -101,7 +102,7 @@ export default {
 </style>
 
 <style scoped>
-  .navbar {
+  /* .navbar {
     color: white;
     background-color: var(--navbar-bg-color);
 
@@ -117,7 +118,9 @@ export default {
 
     display: flex;
     flex-direction: column;
-  }
+    justify-content: space-between;
+    align-items: center;
+  } */
   .collapse-icon {
     position: absolute;
     bottom: 0;
@@ -135,7 +138,44 @@ export default {
     transition: 0.2s linear;
   }
 
-  .homelink{
+  .link{
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    position: relative;
+    bottom: 80px;
+    font-weight: 700;
+    user-select: none;
+
+    margin: 6em 0;
+    padding: 1.3em 0.2em ;
+    border-radius: 0.2em;
+    height: 2em;
+
+    color: black;
+    text-decoration: none;
+    }
+
+  .navbar {
+    color: white;
+    background-color: var(--navbar-bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    transition: 0.3s ease;
+  }
+  
+  .navbar li{
+    position: relative;
+    list-style: none;
+  }
+  /* .homelink{
     display: flex;
     align-items: center;
 
@@ -233,7 +273,7 @@ export default {
     }
     .timer {
       left: -134px;
-    }
+    } */
   
 </style>
     
