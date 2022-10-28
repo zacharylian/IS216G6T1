@@ -1,13 +1,11 @@
 <template>
-  
 
 <section class="introduction">
   <header>
     <h2 class="logo">Wad are you 2 Doing</h2>
   </header>
-  <video src="../media/productivity.mp4" muted loop autoplay></video>
+  <video class="video-slide" src="../media/productivity.mp4" muted loop autoplay></video>
 
-  <div class="overlay"></div>
   <div class="text">
     <div id="tagline">
           Stay
@@ -25,19 +23,51 @@
     <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!">
     </button>
 
-
   </div>
 </section>
 
 
 <section class="toDo">
-  <div class="overlay"></div>
   <div class="text-toDo">
     <h2>The To-Do List</h2>
-    <h3>Set tasks in an instance</h3>
+    <h3>Set and Clear Tasks</h3>
+    <p>Seamless way to keep track of tasks at hand</p>
   </div>
   <div class="reveal">
-    <img src="../media/To-Do-List.png">
+    <img src="#">insert image
+  </div>
+</section>
+
+<section class="expenditure">
+  <div class="text-expenditure">
+    <h2>Expenditure</h2>
+    <h3>Manage your Spending</h3>
+    <p>Active tracking of budget and purchases</p>
+  </div>
+  <div class="reveal">
+    <img src="#">insert image
+  </div>
+</section>
+
+<section class="calendar">
+  <div class="text-calendar">
+    <h2>Personalized Calendar</h2>
+    <h3>Never miss an event</h3>
+    <p>Add events, reminders and tasks (Google Calendar sync available)</p>
+  </div>
+  <div class="reveal">
+    <img src="#">insert image
+  </div>
+</section>
+
+<section class="focusTimer">
+  <div class="text-focusTimer">
+    <h2>Focus Timer</h2>
+    <h3>Stay in the Zone</h3>
+    <p>Maintain optimal productivity throughout the day</p>
+  </div>
+  <div class="reveal">
+    <img src="#">insert image
   </div>
 </section>
 
@@ -84,6 +114,5 @@
   };
 
 </script>
-  
 
   
