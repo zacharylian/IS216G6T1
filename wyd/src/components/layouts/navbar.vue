@@ -118,9 +118,9 @@ export default {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  } */
+    /* justify-content: space-between; */
+    /* align-items: flex-start;
+  }  */
   .collapse-icon {
     position: absolute;
     bottom: 0;
@@ -149,17 +149,19 @@ export default {
     justify-content: center;
     cursor: pointer;
     position: relative;
-    bottom: 80px;
     font-weight: 700;
     user-select: none;
-    margin: 2em 0;
+    margin: 1.5em 0;
     /* padding: 1.3em 0.2em ; */
+    /* margin-top: 20px; */
     border-radius: 0.2em;
     height: 2em;
 
     color: black;
     text-decoration: none;
 
+    top: 0;
+    height: 100%;
     }
 
   .navbar {
@@ -169,118 +171,25 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: flex-start;
+    transition: 0.5s ease;
     /* width: 300px; */
     /* display: flex;
     align-items: center;
     justify-content: center;  */
-    transition: 0.3s ease;
-  }
-  
-  /* .navbar li{
-    position: relative;
-    list-style: none;
-
+    /* transition: 0.3s ease; */
   } 
   
-  /* .homelink{
-    display: flex;
-    align-items: center;
-
-    cursor: pointer;
+  .navbar li{
     position: relative;
-    bottom: 80px;
-    font-weight: 700;
-    user-select: none;
-
-    margin: 6em 0;
-    padding: 1.3em 0.2em ;
-    border-radius: 0.2em;
-    height: 2em;
-
-    color: black;
-    text-decoration: none;
-    }
-
-    .calendarlink{
-    display: flex;
-    align-items: center;
-
-    cursor: pointer;
-    position: relative;
-    bottom: 255px;
-    font-weight: 700;
-    user-select: none;
-
-    margin: 6em 0;
-    padding: 1.3em 0.2em ;
-    border-radius: 0.2em;
-    height: 2em;
-
-    color: black;
-    text-decoration: none;
-    }
+    /* list-style: none; */
+    margin-left:-20px;
+  } 
   
-    .spendingslink{
-    display: flex;
-    align-items: center;
 
-    cursor: pointer;
-    position: relative;
-    bottom: 430px;
-    font-weight: 700;
-    user-select: none;
-
-    margin: 6em 0;
-    padding: 1.3em 0.2em ;
-    border-radius: 0.2em;
-    height: 2em;
-
-    color: black;
-    text-decoration: none;
-    }
-
-    .timerlink{
-    display: flex;
-    align-items: center;
-
-    cursor: pointer;
-    position: relative;
-    bottom: -110px;
-    left: -48px;
-    font-weight: 700;
-    user-select: none;
-
-    margin: 6em 0;
-    padding: 1.3em 0.2em ;
-    border-radius: 0.2em;
-    height: 2em;
-
-    color: black;
-    text-decoration: none;
-    }
-
-    .homelink:hover, .calendarlink:hover, .spendingslink:hover,.timerlink:hover {
-        background-color: var(--navbar-item-hover);
-    }
-
-    .homelink.active, .calendarlink.active, .spendingslink.active, .timerlink.active {
-        background-color: var(--navbar-item-active);
-    }
-
-    .home{ 
-      left: -10px;
-    }
-
-    .calendar {
-      left:3px
-    }
-
-    .spendings {
-      left:8px;
-    }
-    .timer {
-      left: -134px;
-    } */
   
 </style>
     

@@ -57,13 +57,12 @@
     } */
 
     .icon {
-    display:flex;
-    position: relative;
+    /* display:flex;
+    position: relative; */
     justify-content: center;
     align-items: center;
     bottom: 0;
     /* padding: 0.75em; */
-    
     color: black;
 
     transition: 0.2s linear;
