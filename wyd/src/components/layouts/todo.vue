@@ -3,7 +3,7 @@
 
         <!-- Input -->
         <div class="d-flex align-items-center justify-content-center">
-            <input v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 225px">
+            <input @keypress.enter="submitTask()" v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 225px">
             <button @click="submitTask()" class="btn"><span class="fa fa-check pointer"></span></button>
         </div>
 
