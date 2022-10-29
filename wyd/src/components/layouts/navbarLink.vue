@@ -47,12 +47,27 @@
         background-color: var(--navbar-item-active);
     }
 
-    .icon {
+    /* .icon {
         width: 35px;
         padding-right: 3px;
-        padding-left: 2px;
-        /* display:flex;
+        padding-left: 2px; 
+        display:flex;
         justify-content: space-between;
-        align-items: center; */
-    }
+        align-items: center;
+    } */
+
+    .icon {
+    display:flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    /* padding: 0.75em; */
+    
+    color: black;
+
+    transition: 0.2s linear;
+
+    cursor: pointer;
+  }
 </style>
