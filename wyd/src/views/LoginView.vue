@@ -1,11 +1,10 @@
 <template>
 
-<section id="introduction">
-
-<header>
+<header class="navbar-fixed-top">
   <a class="logo" href="#introduction">Wad are you 2 Doing</a>
   <div class="navigation">
     <div class="navigation-items">
+        <a href="#introduction">Login</a>
         <a href="#toDo">To-Do</a>
         <a href="#expenditure">Expenditure</a>
         <a href="#calendar">Calendar</a>
@@ -13,6 +12,8 @@
     </div>
   </div>
 </header>
+
+<section id="introduction">
 
   <video class="video-slide" src="../media/productivity.mp4" muted loop autoplay></video>
 
@@ -38,17 +39,6 @@
 
 
 <section id="toDo">
-  <header>
-  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
-  <div class="navigation">
-    <div class="navigation-items">
-        <a href="#toDo">To-Do</a>
-        <a href="#expenditure">Expenditure</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#focusTimer">Focus Timer</a>
-    </div>
-  </div>
-</header>
   <div class="text-toDo">
     <h2>To-Do List</h2>
     <h3>Set and Clear Tasks</h3>
@@ -60,17 +50,6 @@
 </section>
 
 <section id="expenditure">
-  <header>
-  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
-  <div class="navigation">
-    <div class="navigation-items">
-        <a href="#toDo">To-Do</a>
-        <a href="#expenditure">Expenditure</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#focusTimer">Focus Timer</a>
-    </div>
-  </div>
-</header>
   <div class="text-expenditure">
     <h2>Expenditure</h2>
     <h3>Manage your Spending</h3>
@@ -82,17 +61,6 @@
 </section>
 
 <section id="calendar">
-  <header>
-  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
-  <div class="navigation">
-    <div class="navigation-items">
-        <a href="#toDo">To-Do</a>
-        <a href="#expenditure">Expenditure</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#focusTimer">Focus Timer</a>
-    </div>
-  </div>
-</header>
   <div class="text-calendar">
     <h2>Personalized <br/> Calendar</h2>
     <h3>Never miss an event</h3>
@@ -105,17 +73,6 @@
 </section>
 
 <section id="focusTimer">
-  <header>
-  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
-  <div class="navigation">
-    <div class="navigation-items">
-        <a href="#toDo">To-Do</a>
-        <a href="#expenditure">Expenditure</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#focusTimer">Focus Timer</a>
-    </div>
-  </div>
-</header>
   <div class="text-focusTimer">
     <h2>Focus Timer</h2>
     <h3>Stay in the Zone</h3>
