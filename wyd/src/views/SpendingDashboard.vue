@@ -1,6 +1,27 @@
 <template>
     <navigation-bar></navigation-bar>
-    <DayChart></DayChart>
+    <div style="height:95%">
+        <div class="row position-relative h-50">
+            <div class="w-50 h-50">
+                <div class="well">
+                    <DayChart></DayChart>
+                </div>
+            </div>
+            <div class="w-50 h-50">
+                <div class="well">
+                    today
+                </div>
+            </div>
+        </div>
+        <div class="row h-50">
+            <div class="w-100 h-50">
+                <div class="well">
+                    zach put ur d3 here
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
