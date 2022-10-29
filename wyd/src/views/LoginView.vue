@@ -1,9 +1,19 @@
 <template>
 
-<section class="introduction">
-  <header>
-    <h2 class="logo">Wad are you 2 Doing</h2>
-  </header>
+<section id="introduction">
+
+<header>
+  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
+  <div class="navigation">
+    <div class="navigation-items">
+        <a href="#toDo">To-Do</a>
+        <a href="#expenditure">Expenditure</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#focusTimer">Focus Timer</a>
+    </div>
+  </div>
+</header>
+
   <video class="video-slide" src="../media/productivity.mp4" muted loop autoplay></video>
 
   <div class="text">
@@ -27,50 +37,94 @@
 </section>
 
 
-<section class="toDo">
+<section id="toDo">
+  <header>
+  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
+  <div class="navigation">
+    <div class="navigation-items">
+        <a href="#toDo">To-Do</a>
+        <a href="#expenditure">Expenditure</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#focusTimer">Focus Timer</a>
+    </div>
+  </div>
+</header>
   <div class="text-toDo">
-    <h2>The To-Do List</h2>
+    <h2>To-Do List</h2>
     <h3>Set and Clear Tasks</h3>
     <p>Seamless way to keep track of tasks at hand</p>
   </div>
   <div class="reveal">
-    <img src="#">insert image
+    <img src="../media/To-Do-List.png">
   </div>
 </section>
 
-<section class="expenditure">
+<section id="expenditure">
+  <header>
+  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
+  <div class="navigation">
+    <div class="navigation-items">
+        <a href="#toDo">To-Do</a>
+        <a href="#expenditure">Expenditure</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#focusTimer">Focus Timer</a>
+    </div>
+  </div>
+</header>
   <div class="text-expenditure">
     <h2>Expenditure</h2>
     <h3>Manage your Spending</h3>
     <p>Active tracking of budget and purchases</p>
   </div>
   <div class="reveal">
-    <img src="#">insert image
+    <img src="../media/Expenditure.png">
   </div>
 </section>
 
-<section class="calendar">
+<section id="calendar">
+  <header>
+  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
+  <div class="navigation">
+    <div class="navigation-items">
+        <a href="#toDo">To-Do</a>
+        <a href="#expenditure">Expenditure</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#focusTimer">Focus Timer</a>
+    </div>
+  </div>
+</header>
   <div class="text-calendar">
-    <h2>Personalized Calendar</h2>
+    <h2>Personalized <br/> Calendar</h2>
     <h3>Never miss an event</h3>
-    <p>Add events, reminders and tasks (Google Calendar sync available)</p>
+    <p>Add events, reminders and tasks <br/>
+      <i>(Google Calendar sync available)</i></p>
   </div>
   <div class="reveal">
-    <img src="#">insert image
+    <img src="../media/Calendar.png">
   </div>
 </section>
 
-<section class="focusTimer">
+<section id="focusTimer">
+  <header>
+  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
+  <div class="navigation">
+    <div class="navigation-items">
+        <a href="#toDo">To-Do</a>
+        <a href="#expenditure">Expenditure</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#focusTimer">Focus Timer</a>
+    </div>
+  </div>
+</header>
   <div class="text-focusTimer">
     <h2>Focus Timer</h2>
     <h3>Stay in the Zone</h3>
     <p>Maintain optimal productivity throughout the day</p>
   </div>
   <div class="reveal">
-    <img src="#">insert image
+    <img src="../media/Timer.png">
   </div>
 </section>
-
 
 </template>
 <script>
