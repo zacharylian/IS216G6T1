@@ -13,6 +13,15 @@ template{
     scroll-behavior: smooth;
 }
 
+.navbar-fixed-top {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #111;
+    opacity: 0.9;
+}
+
 header{
     z-index: 999;
     position: absolute;
@@ -22,7 +31,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 200px;
+    padding: 15px 150px;
     transition: 0.5s ease;
 }
 
@@ -32,6 +41,37 @@ header .logo{
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
+}
+
+header .logo:hover{
+    position: relative;
+    color: white;
+}
+
+.logo {
+    color:#7289DA;
+    position: relative;
+    text-decoration: none;
+  }
+  
+.logo::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    color: #7289DA;
+    background-color: #ffffff;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+  
+.logo:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
 }
 
 header .navigation .navigation-items a {
@@ -49,7 +89,7 @@ header .navigation .navigation-items a:before {
     position: absolute;
     background: white;
     width: 0;
-    height: 3px;
+    height: 1.5px;
     bottom: 0;
     left: 0;
     transition: 0.3s ease;
