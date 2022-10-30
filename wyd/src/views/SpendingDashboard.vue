@@ -1,23 +1,17 @@
 <template>
     <navigation-bar></navigation-bar>
-    <div style="height:95%">
-        <div class="row position-relative h-50">
-            <div class="w-50 h-50">
-                <div class="well">
-                    <DayChart></DayChart>
-                </div>
+    <div class="border border-info" style="height:95%">
+        <div class="row border border-primary h-50">
+            <div class="col border border-danger w-50" >
+                <DayChart></DayChart>
             </div>
-            <div class="w-50 h-50">
-                <div class="well">
-                    today
-                </div>
+            <div class="col border border-success w-50">
+                today
             </div>
         </div>
-        <div class="row h-50">
-            <div class="w-100 h-50">
-                <div class="well">
-                    zach put ur d3 here
-                </div>
+        <div class="row border border-warning h-50">
+            <div class="col border border-primary">
+                zach put ur d3 here
             </div>
         </div>
     </div>
