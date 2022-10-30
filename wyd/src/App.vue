@@ -12,12 +12,14 @@
   // import { h } from 'vue';
   // import { Doughnut } from 'vue-chartjs';
   // import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js';
+
+
   
 
   export default {
       name: 'App',
       components: {
-        'navigation-bar': navBar
+        'navigation-bar': navBar,
     },
       data() {
         return {

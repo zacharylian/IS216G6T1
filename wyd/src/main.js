@@ -1,5 +1,12 @@
 import { createApp } from 'vue'
 
+//calendar
+
+import { registerLicense } from '@syncfusion/ej2-base';
+
+registerLicense('ORg4AjUWIQA/Gnt2VVhjQlFaclhJXGJWfFppR2NbfU53flVCal9WVAciSV9jS3xSdkZjWXhedXRRRmJcVw==');
+
+
 //css
 import "./assets/global.css";
 import "./main.scss";
