@@ -2,7 +2,7 @@
     <navigation-bar></navigation-bar>
     <div class="border border-info" style="height:95%">
         <div class="row border border-primary h-50">
-            <div class="col border border-danger w-50" >
+            <div class="col border border-danger w-50">
                 <DayChart></DayChart>
             </div>
             <div class="col border border-success w-50">
