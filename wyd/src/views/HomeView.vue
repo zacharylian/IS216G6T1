@@ -6,10 +6,10 @@
       <router-view />
     </div>
 
-    <div class="pt-3" style="margin:0px 0px 0px 80px">
+    <div class="pt-3 mw-100" style="margin:0px 0px 0px 80px">
 
       <div class="row">
-        <div class="col">
+        <div class="col col-8">
           <div class="row">
             <div class="col bg wanbottom">
             <!--NAME-->
@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-        <div class="col bg">
+        <div class="col col-4 bg">
           <h2 class="p-2">to-do list</h2>
           <todo></todo>          
         </div>
@@ -73,24 +73,5 @@ export default {
 
 <style>
 
-.col {
-  border-radius:30px;
-}
-
-.row {
-  background: none;
-}
-
-.bg {
-  background-color: #EFF0FF;
-}
-
-.wanbottom {
-  margin: 0px 20px 20px 0px;
-}
-
-.wanright {
-  margin: 0px 20px 0px 0px;
-}
 
 </style>
