@@ -1,13 +1,18 @@
 <template>
         <navigation-bar></navigation-bar>
-        <div class="container-fluid">
-            <div src="../components/layouts/calendar.html" id="app">
+        <!-- <div class="container-fluid">
+            <div src="../components/layouts/calendar.html" id="app"> -->
                 <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
                 <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
-            </div>
-            <ejs-schedule currentView="Month"
-            :eventSettings="appointmentData">
-            </ejs-schedule>
+            <!-- </div> -->
+            <div class="row pt-3 justify-content-center">
+                <div class="col col-2"></div>
+                <div class="col col-8">
+                    <ejs-schedule currentView="Month"
+                    :eventSettings="appointmentData">
+                    </ejs-schedule>
+                </div>
+                <div class="col col-2"></div>
         </div>
 
 </template>
