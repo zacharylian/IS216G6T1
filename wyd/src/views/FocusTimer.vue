@@ -8,14 +8,14 @@
         <div class="button-group mode-buttons" id="js-mode-buttons">
           <button
             data-mode="pomodoro"
-            class="button active mode-button"
+            class="button active mode-button mx-2 px-4"
             id="js-pomodoro"
           >
-            Pomodoro
+            Focus
           </button>
           <button
             data-mode="shortBreak"
-            class="button mode-button"
+            class="button mode-button mx-2 px-4"
             id="js-short-break"
           >
             Break
@@ -268,16 +268,18 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor: pointer;
     box-shadow: none;
     font-weight: 300;
-    color: red;
+    color: #F6F8FB;
+    background-color:#7289DA;
     border: 1px solid transparent;
     margin: 0px;
     border-radius: 4px;
     padding: 2px 12px;
-    background: none;
   }
   
   .mode-button.active {
-    border-color: red;
+    border-color: #7289DA;
+    background: none;
+    color: #7289DA
   }
   
   .main-button {
