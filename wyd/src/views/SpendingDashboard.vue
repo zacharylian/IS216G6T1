@@ -1,68 +1,41 @@
 <template>
+  <div>
     <navigation-bar></navigation-bar>
-    <div class="border border-info" style="height:95%">
-        <div class="row border border-primary h-50">
-            <div class="col border border-danger w-50" >
-                <DayChart></DayChart>
-            </div>
-            <div class="col border border-success w-50">
-                today
-            </div>
+    <div class="border border-info" style="height: 95%">
+      <div class="row border border-primary h-50">
+        <div class="col border border-danger w-50">
+          <DayChart></DayChart>
         </div>
-        <div class="row border border-warning h-50">
-            <div class="col border border-primary">
-                zach put ur d3 here
-            </div>
-        </div>
+        <div class="col border border-success w-50">today</div>
+      </div>
+      <div class="row border border-warning h-50">
+        <div class="col border border-primary">zach put ur d3 here - asdf</div>
+        <CalendarHeatmap />
+      </div>
     </div>
-
+  </div>
 </template>
 
 <script>
-
 // IMPORTS
-import navBar from '@/components/layouts/navbar.vue';
+import navBar from "@/components/layouts/navbar.vue";
 
-import DayChart from './DayChart.vue'
+import DayChart from "./DayChart.vue";
+import CalendarHeatmap from "./ActualCalendarHeatmap.vue";
+import "../plugins/calendar";
 
 //EXPORTS
 export default {
-    name: 'SpendingDashboard',
-    components: {
+  name: "SpendingDashboard",
+  components: {
     "navigation-bar": navBar,
-    "DayChart": DayChart
-    }
-}
-
-
+    DayChart: DayChart,
+    CalendarHeatmap: CalendarHeatmap,
+  },
+};
 </script>
 
-<!-- 
-<template>
-    <navigation-bar></navigation-bar>
-<div class="container-fluid base-bg">
-        <div class="row">
-            <box-container :columnLength="3">
-                <div id="day-chart">
-                    <day-chart :chartData="chartData" :options="chartOptions" :width="200"></day-chart>
-                </div>
-            </box-container>
-        </div>
-    </div> -->
-    <!-- <DayChart /> -->
-<!--
-</template>-->
-        <!-- <div class="row">
-            <box-container :columnLength="3">
-                <div id="calendar-heatmap">
-                    <calendar-heatmap></calendar-heatmap>
-                </div>
-            </box-container>
-        </div>
-    </div> -->
-<!-- 
-</template> -->
-
+<style></style>
 
 <!--
 <script>
