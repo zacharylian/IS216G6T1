@@ -1,26 +1,10 @@
 <template>
   <div>
     <navigation-bar></navigation-bar>
-<<<<<<< HEAD
     <div class="border border-info" style="height: 95%">
       <div class="row border border-primary h-50">
         <div class="col border border-danger w-50">
           <DayChart></DayChart>
-=======
-    <div class="border border-info" style="height:95%">
-        <div class="row border border-primary h-50">
-            <div class="col border border-danger w-50">
-                <DayChart></DayChart>
-            </div>
-            <div class="col border border-success w-50">
-                today
-            </div>
-        </div>
-        <div class="row border border-warning h-50">
-            <div class="col border border-primary">
-                zach put ur d3 here
-            </div>
->>>>>>> parent of 6f2cf9b (Revert "idky not clickable but yay...")
         </div>
         <div class="col border border-success w-50">today</div>
       </div>
