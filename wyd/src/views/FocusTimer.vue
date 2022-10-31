@@ -28,13 +28,17 @@
             Long break
           </button> -->
         </div>
-        <div class="clock" id="js-clock">
+        <div class="clock bg px-5 py-3" id="js-clock" style="border-radius:30px">
           <span id="js-minutes">25</span>
           <span class="separator">:</span>
           <span id="js-seconds">00</span>
         </div>
         <button class="main-button" data-action="start" id="js-btn">
           Start
+        </button>
+        &nbsp
+        <button class="main-button" data-action="start" id="js-btn">
+          Stop
         </button>
       </div>
     </main>
@@ -223,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   body {
     background-color: var(--pomodoro);
     transition: background-color 1s ease;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
     user-select: none;
   }
   
@@ -259,45 +263,46 @@ document.addEventListener('DOMContentLoaded', () => {
     line-height: 1;
     display: flex;
     align-items: center;
-    font-family: arial, sans-serif;
+    color: #899DDF;
+    /* font-family: arial, sans-serif; */
   }
   
   .mode-button {
     font-size: 16px;
-    height: 28px;
     cursor: pointer;
     box-shadow: none;
-    font-weight: 300;
+    font-weight: bold;
     color: #F6F8FB;
     background-color:#7289DA;
     border: 1px solid transparent;
     margin: 0px;
-    border-radius: 4px;
-    padding: 2px 12px;
+    border-radius: 10px;
+    padding: 4px 12px;
   }
   
   .mode-button.active {
     border-color: #7289DA;
-    background: none;
+    background: #EFF0FF;
     color: #7289DA
   }
   
   .main-button {
     cursor: pointer;
-    box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+    /* box-shadow: rgb(235, 235, 235) 0px 6px 0px; */
     font-size: 22px;
     height: 55px;
     text-transform: uppercase;
-    color: hsl(175, 26%, 41%);
+    color: #899DDF;
     font-weight: bold;
     width: 200px;
-    background-color: white;
+    background-color: #EFF0FF;
     border-width: initial;
     border-style: none;
     margin: 20px 0px 0px;
     padding: 0px 12px;
-    border-radius: 4px;
+    border-radius: 30px;
     transition: color 0.5s ease-in-out 0s;
+    border: 1px solid #7289DA;
   }
   
   button:focus, button:active {

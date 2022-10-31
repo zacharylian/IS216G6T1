@@ -1,16 +1,25 @@
 <template>
     <navigation-bar></navigation-bar>
-    <div class="border border-info" style="height:95%">
-        <div class="row border border-primary h-50">
-            <div class="col border border-danger w-50">
-                <DayChart></DayChart>
+    <div class="border border-info pt-3" style="height:95%;margin:0px 0px 0px 80px">
+        <div class="row border wanbottom border-primary h-50">
+            <!-- <div class="col">
+                <div class="row"> -->
+                    <div class="col bg border wanright border-danger w-50">
+                        daychart supp be here but it's fuckywucky rn
+                        <DayChart></DayChart>
+                    <!-- </div>
+                </div> -->
             </div>
-            <div class="col border border-success w-50">
-                today
+            <!-- <div class="col">
+                <div class="row"> -->
+                    <div class="col bg border border-success w-50">
+                        today
+                    <!-- </div>
+                </div> -->
             </div>
         </div>
-        <div class="row border border-warning h-50">
-            <div class="col border border-primary">
+        <div class="row border wanright border-warning h-50">
+            <div class="col bg border border-primary">
                 zach put ur d3 here
             </div>
         </div>
