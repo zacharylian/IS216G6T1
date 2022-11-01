@@ -1,17 +1,32 @@
 <template>
 
-<header class="navbar-fixed-top">
-  <a class="logo" href="#introduction">Wad are you 2 Doing</a>
-  <div class="navigation">
-    <div class="navigation-items">
-        <a href="#introduction">Login</a>
-        <a href="#toDo">To-Do</a>
-        <a href="#expenditure">Expenditure</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#focusTimer">Focus Timer</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="color:#7289DA;font-weight:bold;">Wad Are You 2 Doing</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#introduction">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#toDo">To-Do</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#expenditure">Expenditure</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#calendar">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#focusTimer">Timer</a>
+        </li>
+      </ul>
     </div>
   </div>
-</header>
+</nav>
 
 <section id="introduction">
 
@@ -22,16 +37,16 @@
           Stay
       <div class="scroller" style="color: #7289DA">
         <span>
-          Focus.<br/>
-          Ready.<br/>
-          Saucy.<br/>
-          Krazy.<br/>
+          Focused.<br/>
+          Prepared.<br/>
+          Organised.<br/>
+          <i>Krazy!</i><br/>
         </span>
       </div>
     </div>
     <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
     
-    <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!">
+    <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family:Georgia;font-style:italic;">
     </button>
 
   </div>
