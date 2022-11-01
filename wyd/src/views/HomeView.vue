@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col bg wanbottom">
             <!--NAME-->
-            <h1 class="px-3 py-1" style="text-align:left;font-family:Georgia, 'Times New Roman', Times, serif;font-style:italic">hi, <b>krazywoman</b></h1>
+            <h1 class="px-3 py-1" style="text-align:left;font-family:Georgia, 'Times New Roman', Times, serif;font-style:italic">hi, <b>{{this.username}}</b></h1>
           </div></div>
           <div class="row">
             <div class="col bg wanbottom pb-4">
@@ -57,6 +57,7 @@ import navBar from '@/components/layouts/navbar.vue';
 import {collapsed, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 
 import todo from '@/components/layouts/todo.vue';
+import { getAuth } from '@firebase/auth';
 
 export default {
   name: 'HomeView',
@@ -65,8 +66,11 @@ export default {
     "todo": todo,
   },
   setup() {
-    return {collapsed, toggleNavbar, navbarWidth}
-  } 
+    return {navbarWidth}
+  },
+  data() {return {
+    username: getAuth().currentUser.displayName
+  }},
 }
 
 </script>
