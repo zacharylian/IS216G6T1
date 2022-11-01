@@ -1,4 +1,5 @@
 <template>
+  <navigation-bar />
   <router-view/>
 </template>
 

@@ -22,8 +22,8 @@
     <router-link :to="to" :class="{active:isActive}">
         <i class="icon" :class="icon"/>
         <transition name="fade">
-            <span v-if="!collapsed" style="padding-left:5px; font-size: 16px;">
-                <slot/>
+            <span v-if="!collapsed" style="padding-left:5px; font-size: 16px;" :class="{fadeOut:collapsed}">
+                <slot />
             </span>
         </transition>
     </router-link>
@@ -41,10 +41,12 @@
 
     .link:hover {
         background-color: var(--navbar-item-hover);
+        transition: 0.1s ease;
     }
 
     .link.active {
         background-color: var(--navbar-item-active);
+        transition: 0.1s ease;
     }
 
     /* .icon {
@@ -65,8 +67,22 @@
     /* padding: 0.75em; */
     color: black;
 
-    transition: 0.2s linear;
+    /* transition: 0.5s linear; */
 
     cursor: pointer;
-  }
+    }
+
+    .fadeOut {
+        animation: fadeOut 0.3s;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        } 
+
+        to {
+            opacity: 0;
+        }
+    }
 </style>

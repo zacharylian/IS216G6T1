@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="container">
 
@@ -12,24 +14,27 @@
         <table class="table border-bottom-1 mt-3 center"  >
         <thead>
             <tr>
-            <th scope="col"></th>
-            <th scope="col">Task</th>
-            <th scope="col" class="text-center">Status</th>
-            <th scope="col" class="text-center">Edit</th>
-            <th scope="col" class="text-center">Delete</th>
+            <th scope="col" style="width:1%"></th>
+            <th scope="col" style="width:67%">Task</th>
+            <th scope="col" style="width: 30%" class="text-center">Status</th>
+            <th scope="col" style="width: 1%" class="text-center">Edit</th>
+            <th scope="col" style="width: 1%" class="text-center">Delete</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(task, index) in tasks" :key="index" :class="{fadeOut: task.completed== true}">
-                <td style="width:5px" class="align-middle"><input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer"></td>
+                <td style="width:5px" class="align-middle">
+                    <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true">
+                </td>
                 <td class="align-middle" style="width:50px">
-                    <span :class="{'strikethrough':task.status=='completed'}" >
+                    <span :class="{'strikethrough':task.status=='done'}" >
                         {{task.name}}
                     </span>
                 </td>
+
                 <td class="align-middle" style="width: 10%" >
                     <span class="pointer" @click="changeStatus(index)" 
-                    :class="{'text-danger': task.status=='   to-do   ', 'text-warning': task.status==='in progress', 'text-success':task.status==='completed'}">
+                    :class="{'text-danger': task.status=='   to-do   ', 'text-warning': task.status==='started', 'text-success':task.status==='done'}">
                         {{task.status}}
                     </span>
                 </td>
@@ -40,7 +45,11 @@
                 </td>
                 <td class="align-middle" style="width: 1%">
                     <div @click="deleteTask(index)">
-                        <span class="fa fa-trash pointer"></span>
+                        <!-- <span class="fa fa-trash pointer"></span> -->
+                        <span class="trash pointer">
+                            <span></span>
+    	                    <i></i>
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -64,7 +73,7 @@
         return {
             new_task: "",
             edit_task: null,
-            available_statuses: ['   to-do   ', 'in progress'],
+            available_statuses: ['   to-do   ', 'started'],
             completed: false,
             tasks: [
                 {
@@ -122,7 +131,7 @@
         },
 
         completeTask(index) {
-            this.tasks[index].status = 'completed'
+            this.tasks[index].status = 'done'
             this.tasks[index].completed = true
             setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
         },
@@ -161,4 +170,91 @@
             opacity: 0;
         }
     }
+
+    .trash {
+	background:black;
+	width: 10px;
+	height: 13px;
+	display: inline-block;
+	margin:0 auto;
+	
+	position: relative;
+	-webkit-border-bottom-right-radius: 0.5px;
+	-webkit-border-bottom-left-radius: 0.5px;
+	-moz-border-radius-bottomright: 0.5px;
+	-moz-border-radius-bottomleft: 0.5px;
+	border-bottom-right-radius: 0.5px;
+	border-bottom-left-radius: 0.5px;
+}
+.trash:after {
+	position: absolute;
+	left: -16px;
+	right: 0;
+	bottom: -8px;
+	width: 50px;
+}
+.trash span {
+	position: absolute;
+	height: 2px;
+	background: black;
+	top: -3px;
+	left: -1px;
+	right: -1px;
+	
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
+	transform: rotate(0deg);
+	transition: transform 250ms;
+	transform-origin: 19% 100%;
+}
+.trash span:after {
+	content: '';
+	position: absolute;
+	width: 5px;
+	height: 0.5px;
+	background: black;
+	top: -3px;
+	
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
+	transform: rotate(0deg);
+	transition: transform 250ms;
+	transform-origin: 19% 100%;
+	left: 5px;
+}
+
+
+.trash i {
+	position:relative;
+	width: 0.5px;
+	height:8px;
+	background:#fff;
+	display:block;
+	margin:5px auto;
+	border-radius: 0.5px;
+}
+.trash i:after {
+	content: '';
+	width: 0.5px;
+	height: 8px;
+	background: #fff;
+	position: absolute;
+	left: -3px;
+	border-radius: 0.5px;
+}
+.trash i:before {
+	content: '';
+	width: 0.5px;
+	height: 8px;
+	background: #fff;
+	position: absolute;
+	right: -1px;
+	border-radius: 0.5px;
+}
+
+.trash:hover span {
+	transform: rotate(-45deg);
+	transition: transform 250ms;
+}
 </style>
+

@@ -54,7 +54,7 @@
 <script>
 // @ is an alias to /src
 import navBar from '@/components/layouts/navbar.vue';
-import {navbarWidth} from '@/components/layouts/state';
+import {collapsed, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 
 import todo from '@/components/layouts/todo.vue';
 
@@ -65,7 +65,7 @@ export default {
     "todo": todo,
   },
   setup() {
-    return {navbarWidth}
+    return {collapsed, toggleNavbar, navbarWidth}
   } 
 }
 

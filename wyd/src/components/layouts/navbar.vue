@@ -18,7 +18,7 @@
       </h1> -->
 
       <ul>
-      <li><navbar-link to="/" icon="fas fa-house fa-2x" class="link" :class="{active:isActive}">Home</navbar-link></li>
+      <li><navbar-link to="/" icon="fas fa-house fa-2x" class="link" :class="{active:isActive}" >Home</navbar-link></li>
       <li><navbar-link to="/Calendar" icon="fas fa-calendar-days fa-2x" class="link" :class="{active:isActive}">Calendar</navbar-link></li>
       <li><navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar fa-2x" class="link" :class="{active:isActive}">Spendings</navbar-link></li>
       <li><navbar-link to="/FocusTimer" icon="fas fa-stopwatch fa-2x" class="link" :class="{active:isActive}">Timer</navbar-link></li>
@@ -102,25 +102,6 @@ export default {
 </style>
 
 <style scoped>
-  /* .navbar {
-    color: white;
-    background-color: var(--navbar-bg-color);
-
-    float: left;
-    position: fixed;
-    z-index: 1;
-    top:0;
-    left: 0;
-    bottom: 0;
-    padding: 0.5em;
-
-    transition: 0.3s ease;
-
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    /* align-items: flex-start;
-  }  */
   .collapse-icon {
     position: absolute;
     bottom: 0;
@@ -146,7 +127,7 @@ export default {
   .link{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     cursor: pointer;
     position: relative;
     font-weight: 700;
@@ -175,7 +156,7 @@ export default {
     flex-direction: column;
     /* justify-content: space-between; */
     align-items: flex-start;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
     /* width: 300px; */
     /* display: flex;
     align-items: center;
@@ -183,12 +164,36 @@ export default {
     /* transition: 0.3s ease; */
   } 
   
+  /* .navbar_new {
+    position:fixed;
+    width: 100%;
+    height: 100vh;
+    top:0;
+    left:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--navbar-bg-color);
+  } */
   .navbar li{
     position: relative;
-    /* list-style: none; */
+    list-style: none;
     margin-left:-20px;
   } 
   
+  .fadeOut {
+        animation: fadeOut 0.3s;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        } 
+
+        to {
+            opacity: 0;
+        }
+    }
 
   
 </style>
