@@ -106,11 +106,9 @@
   export default {
       methods: {
           googleSignIn() {
-            console.log("=====hello im here=====")
               // We'll create functionality here
               const auth = getAuth();
               const provider = new GoogleAuthProvider()
-              console.log("=====furry balls=====")
               signInWithPopup(auth, provider)
             .then((result) => {
               console.log(getAuth().currentUser)
@@ -123,7 +121,6 @@
               this.$router.push('/')
               
             }).catch((error) => {
-              console.log("===== your moms funny =====")
               // Handle Errors here.
               const errorCode = error.code;
               const errorMessage = error.message;
