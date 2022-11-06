@@ -24,7 +24,7 @@
         <tbody>
             <tr v-for="(task, index) in tasks" :key="index" :class="{fadeOut: task.completed== true}">
                 <td style="width:5px" class="align-middle">
-                    <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true">
+                    <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
                 </td>
                 <td class="align-middle" style="width:50px">
                     <span :class="{'strikethrough':task.status=='done'}" >
@@ -171,6 +171,8 @@
         }
     }
 
+
+    /* animated trashbin css */
     .trash {
 	background:black;
 	width: 10px;
@@ -223,7 +225,6 @@
 	left: 5px;
 }
 
-
 .trash i {
 	position:relative;
 	width: 0.5px;
@@ -256,5 +257,7 @@
 	transform: rotate(-45deg);
 	transition: transform 250ms;
 }
+
+
 </style>
 
