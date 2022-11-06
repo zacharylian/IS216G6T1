@@ -15,8 +15,8 @@
         <thead>
             <tr>
             <th scope="col" style="width:1%"></th>
-            <th scope="col" style="width:67%">Task</th>
-            <th scope="col" style="width: 30%" class="text-center">Status</th>
+            <th scope="col" style="width:57%">Task</th>
+            <th scope="col" style="width: 40%" class="text-center">Status</th>
             <th scope="col" style="width: 1%" class="text-center">Edit</th>
             <th scope="col" style="width: 1%" class="text-center">Delete</th>
             </tr>
@@ -34,7 +34,7 @@
 
                 <td class="align-middle" style="width: 10%" >
                     <span class="pointer" @click="changeStatus(index)" 
-                    :class="{'text-danger': task.status=='   to-do   ', 'text-warning': task.status==='started', 'text-success':task.status==='done'}">
+                    :class="{'text-danger': task.status=='   to - do   ', 'text-warning': task.status==='started', 'text-success':task.status==='done'}">
                         {{task.status}}
                     </span>
                 </td>
@@ -73,17 +73,17 @@
         return {
             new_task: "",
             edit_task: null,
-            available_statuses: ['   to-do   ', 'started'],
+            available_statuses: ['   to - do   ', 'started'],
             completed: false,
             tasks: [
                 {
                     name: 'Steal bananas from the store',
-                    status: '   to-do   ',
+                    status: '   to - do   ',
                     completed: false,
                 },
                 {
                     name: 'Eat 1kg chocolate in 1 hour',
-                    status: '   to-do   ',
+                    status: '   to - do   ',
                     completed: false,
                 },
             ]
@@ -101,7 +101,7 @@
                 this.tasks.push(
                     {
                         name: this.new_task,
-                        status: '   to-do   ' 
+                        status: '   to - do   ' 
                     }
                 )
             } else {

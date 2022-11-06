@@ -156,13 +156,13 @@ export default {
     flex-direction: column;
     /* justify-content: space-between; */
     align-items: flex-start;
-    transition: 0.3s ease;
+    transition: 1s ease;
     /* width: 300px; */
-    /* display: flex;
-    align-items: center;
-    justify-content: center;  */
-    /* transition: 0.3s ease; */
+    /* align-items: center;  */
+    /* justify-content: center;   */
   } 
+
+
   
   /* .navbar_new {
     position:fixed;
@@ -182,7 +182,7 @@ export default {
   } 
   
   .fadeOut {
-        animation: fadeOut 0.3s;
+        animation: fadeOut 1s;
     }
 
     @keyframes fadeOut {
