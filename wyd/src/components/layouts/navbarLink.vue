@@ -31,23 +31,31 @@
 
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 0.1s;
+.fade-enter-active {
+    transition: opacity 0.2s linear;
 }
 
-.fade-enter,.fade-leave-to {
+.fade-leave-active {
+    transition: opacity 0.2s linear;
+}
+
+.fade-enter {
     opacity:0;
 }
 
-    .link:hover {
-        background-color: var(--navbar-item-hover);
-        transition: 0.1s ease;
-    }
+.fade-leave-to {
+    opacity: 0;
+}
 
-    .link.active {
-        background-color: var(--navbar-item-active);
-        transition: 0.1s ease;
-    }
+.link:hover {
+        background-color: var(--navbar-item-hover);
+        transition: 0.1s ease-in-out;
+}
+
+.link.active {
+    background-color: var(--navbar-item-active);
+    transition: 0.1s ease-in-out;
+}
 
     /* .icon {
         width: 35px;
@@ -73,7 +81,7 @@
     }
 
     .fadeOut {
-        animation: fadeOut 0.3s;
+        animation: fadeOut 0.1s;
     }
 
     @keyframes fadeOut {
