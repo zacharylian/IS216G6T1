@@ -4,12 +4,18 @@
     <div class="border border-info" style="height: 95%">
       <div class="row border border-primary h-50">
         <div class="col border border-danger w-50">
-          <DayChart></DayChart>
+            <h2><u>Overall Spendings</u></h2>
+            <DayChart></DayChart>
         </div>
-        <div class="col border border-success w-50">today</div>
+        <div class="col border border-success w-50">
+            <h2><u>Today's Spendings</u></h2>
+            <TodaySpending />
+        </div>
       </div>
       <div class="row border border-warning h-50">
-        <div class="col border border-primary">Monthly Spendings</div>
+        <div class="col border border-primary">
+            <h2><u>Monthly Spendings</u></h2>
+        </div>
         <div id="d3sucks">
             <CalendarHeatmap />
         </div>
@@ -26,6 +32,7 @@ import navBar from "@/components/layouts/navbar.vue";
 import DayChart from "./DayChart.vue";
 import CalendarHeatmap from "./ActualCalendarHeatmap.vue";
 import "../plugins/calendar";
+import TodaySpending from "./TodaySpending.vue";
 
 //EXPORTS
 export default {
@@ -34,6 +41,7 @@ export default {
     "navigation-bar": navBar,
     DayChart: DayChart,
     CalendarHeatmap: CalendarHeatmap,
+    TodaySpending: TodaySpending,
   },
 };
 </script>
