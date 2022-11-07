@@ -1,34 +1,18 @@
 <template>
   <navigation-bar></navigation-bar>
-  <div>
 
-    <div class="timer">
-      <div class="button-group mode-buttons" id="js-mode-buttons" @click="handleMode()">
-        <button
-          data-mode="pomodoro"
-          class="button active mode-button mx-2 px-4"
-          id="js-pomodoro"
-        >
-          Focus
-        </button>
-        <button
-          data-mode="shortBreak"
-          class="button mode-button mx-2 px-4"
-          id="js-short-break"
-        >
-          Break
-        </button>
-      </div>
-      <div class="clock bg px-5 py-3" id="js-clock" style="border-radius:30px">
-        <span id="js-minutes">25</span>
-        <span class="separator">:</span>
-        <span id="js-seconds">00</span>
-      </div>
-      <button class="main-button" data-action="start" id="js-btn" @click="mainButton()">
-        Start
-      </button>
+  <div class="mt-4 text-center">
+
+    <div class="clock bg px-5 py-3 w-50 mb-4" id="time" style="border-radius:30px;margin:auto;">
+      00:00
     </div>
-</div>
+
+    <div class="mb-4">
+      <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50">
+      <button id="btn" @click="timer()">Click me</button>
+    </div>
+
+  </div>
 
 </template>
 
@@ -42,141 +26,52 @@ export default {
   components: {
   "navigation-bar": navBar,
   },
+
   data() {
     
-    const timer = {
-      pomodoro: 25,
-      shortBreak: 5,
-      longBreak: 15,
-      longBreakInterval: 4,
-      sessions: 0,
-    };
-
-    let interval;
-
   },
+
   methods: {
 
-    switchMode(mode) {
-      timer.mode = mode;
-      timer.remainingTime = {
-        total: timer[mode] * 60,
-        minutes: timer[mode],
-        seconds: 0,
-      };
 
-      document
-        .querySelectorAll('button[data-mode]')
-        .forEach(e => e.classList.remove('active'));
-      document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
-      document.body.style.backgroundColor = `var(--${mode})`;
-      document
-        .getElementById('js-progress')
-        .setAttribute('max', timer.remainingTime.total);
+timer() {
+  var myCounter;
+  let seconds = 60;
+  clearInterval(myCounter); //to stop counter if already counting ??
+  let mins = Number(document.getElementById('min').value);
+  var i = mins * seconds;
+  myCounter = setInterval(function() {
+    if (i <= 0) {
+      console.log('completed');
+      clearInterval(myCounter);
+      let time = document.getElementById('time');
+      time.innerHTML='00:00'
+      //here i would ideally send the information to the database!
 
-      updateClock();
-      },
-
-    startTimer() {
-      let { total } = timer.remainingTime;
-      const endTime = Date.parse(new Date()) + total * 1000;
-
-      if (timer.mode === 'pomodoro') timer.sessions++;
-
-      mainButton.dataset.action = 'stop';
-      mainButton.textContent = 'stop';
-      mainButton.classList.add('active');
-
-      interval = setInterval(function() {
-        timer.remainingTime = getRemainingTime(endTime);
-        updateClock();
-
-        total = timer.remainingTime.total;
-        if (total <= 0) {
-          clearInterval(interval);
-
-          switch (timer.mode) {
-            case 'pomodoro':
-              if (timer.sessions % timer.longBreakInterval === 0) {
-                switchMode('longBreak');
-              } else {
-                switchMode('shortBreak');
-              }
-              break;
-            default:
-              switchMode('pomodoro');
-          }
-
-          startTimer();
-        }
-      }, 1000);
-      },
-
-    mainButton() {
-      const { action } = document.getElementById('js-btn').dataset;
-      if (action === 'start') {
-        startTimer();
-      } else {
-        stopTimer();
+    } else {
+      
+      let time = document.getElementById('time');
+      let minutess=Math.floor(i/60);
+      let secondss=i-minutess*60;
+      if (minutess<10) {
+        minutess="0"+minutess.toString();
       }
-    },
-
-    getRemainingTime(endTime) {
-      const currentTime = Date.parse(new Date());
-      const difference = endTime - currentTime;
-
-      const total = Number.parseInt(difference / 1000, 10);
-      const minutes = Number.parseInt((total / 60) % 60, 10);
-      const seconds = Number.parseInt(total % 60, 10);
-
-      return {
-        total,
-        minutes,
-        seconds,
-      };
-    },
-
-  stopTimer() {
-    clearInterval(interval);
-
-    mainButton.dataset.action = 'start';
-    mainButton.textContent = 'start';
-    mainButton.classList.remove('active');
-    },
-
-  updateClock() {
-    const { remainingTime } = timer;
-    const minutes = `${remainingTime.minutes}`.padStart(2, '0');
-    const seconds = `${remainingTime.seconds}`.padStart(2, '0');
-
-    const min = document.getElementById('js-minutes');
-    const sec = document.getElementById('js-seconds');
-    min.textContent = minutes;
-    sec.textContent = seconds;
-
-    const text =
-      timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
-    document.title = `${minutes}:${seconds} — ${text}`;
-
-    const progress = document.getElementById('js-progress');
-    progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
-    },
-
-  handleMode(event) {
-    const { mode } = event.target.dataset;
-
-    if (!mode) return;
-
-    switchMode(mode);
-    stopTimer();
+      if (secondss<10) {
+        secondss="0"+secondss.toString();
+      }
+      time.innerHTML = minutess+":"+secondss;
+      console.log(i--);
     }
 
-}}
+  }, 1000);
+}
+
+  },
+
+}
 
 
-// document.addEventListener('DOMContentLoaded', () => {
-// switchMode('pomodoro');
-// });
+
 </script>
 
 <style>
@@ -237,7 +132,6 @@ body {
 
 .main-button {
   cursor: pointer;
-      /* box-shadow: rgb(235, 235, 235) 0px 6px 0px; */
       font-size: 22px;
   height: 55px;
   text-transform: uppercase;
