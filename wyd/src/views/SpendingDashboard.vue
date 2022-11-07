@@ -8,9 +8,12 @@
         <div class="col border border-success w-50">today</div>
       </div>
       <div class="row border border-warning h-50">
-        <div class="col border border-primary">zach put ur d3 here - asdf</div>
-        <CalendarHeatmap />
+        <div class="col border border-primary">Monthly Spendings</div>
+        <div id="d3sucks">
+            <CalendarHeatmap />
+        </div>
       </div>
+      
     </div>
   </div>
 </template>
