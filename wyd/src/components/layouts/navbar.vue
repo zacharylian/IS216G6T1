@@ -180,20 +180,6 @@ export default {
     list-style: none;
     margin-left:-20px;
   } 
-  
-  .fadeOut {
-        animation: fadeOut 1s;
-    }
-
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-        } 
-
-        to {
-            opacity: 0;
-        }
-    }
 
   
 </style>
