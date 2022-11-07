@@ -46,7 +46,8 @@ export default {
   line-height: 1;
   font-weight: bold;
   padding: 20px;
-  background: rgba(150, 60, 0, 0.8);
+  background: #7289DA;
   color: #000;
+  border-radius: 5px;
 }
 </style>
