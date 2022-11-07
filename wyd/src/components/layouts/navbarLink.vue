@@ -20,7 +20,7 @@
 
 <template>
     <router-link :to="to" class="link" :class="{active:isActive}">
-        <i class="icon" :class="icon"/>
+        <i class="icon" :class="icon,{active:isActive}" />
         <transition name="slide-fade">
             <span v-if="!open" style="padding-left:5px; font-size: 16px;" >
                 <slot />
@@ -48,11 +48,11 @@
 } */
 
 .slide-fade-enter-active {
-    transition: all 0.3s ease-out;
+    transition: all 1.5s ease-out;
 }
 
 .slide-fade-leave-active {
-    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,
@@ -74,19 +74,19 @@
 
     color: black;
     text-decoration: none;
+    filter: grayscale(100%) opacity(0.6);
 
     top: 0;
     height: 100%;
     }
 
 .link:hover {
-        background-color: var(--navbar-item-hover);
-        /* transition: 0.1s ease-in-out; */
+    /* background-color: var(--navbar-item-hover); */
+    filter: grayscale(0%) opacity(1);
 }
 
 .link.active {
-    background-color: var(--navbar-item-active);
-    /* transition: 0.1s ease-in-out; */
+    filter: grayscale(0%) opacity(1); 
 }
 
 
@@ -100,39 +100,11 @@
     color: black;
     flex-shrink: 0;
     width: 35px;
-
-    /* transition: 0.5s linear; */
-
     cursor: pointer;
+    filter: grayscale(100%) opacity(0.6);
     }
 
-    /* .fadeOut {
-        animation: fadeOut 0.1s;
-    }
-
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-
-        } 
-
-        to {
-            opacity: 0;
-
-        }
-    }
-
-    .fadeIn {
-        animation: fadeIn 0.1s;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    } */
+.link .icon:hover {
+    filter: grayscale(0%) opacity(1)
+}
 </style>

@@ -10,11 +10,17 @@
     <div class="navbar" :style="{width:navbarWidth}">
 
       <ul>
+      <!-- <li class="logo">
+        <span class="collapse-icon" :class="{'rotate-180': open}" @click="toggleNavbar">
+          <i class ="fas fa-angle-double-left fa-2x" />
+      </span>
+      </li> -->
       <li><navbar-link to="/" icon="fas fa-house fa-2x"  >Home</navbar-link></li>
       <li><navbar-link to="/Calendar" icon="fas fa-calendar-days fa-2x" >Calendar</navbar-link></li>
       <li><navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar fa-2x"  >Spendings</navbar-link></li>
       <li><navbar-link to="/FocusTimer" icon="fas fa-stopwatch fa-2x">Timer</navbar-link></li>
       </ul>
+
       <span class="logout-button" @click="googleSignOut">
         <i class="fas fa-right-from-bracket fa-2x"></i>
           <!-- <span v-if="!open" style="padding-left:5px; font-size: 16px; font-weight: 700;" >
@@ -92,29 +98,40 @@ export default {
     bottom: 5%;
     padding: 0.75em;
     margin-left:0.5em;
-
-
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center;  */
-
-    display: inline-block;
-
     color: black;
     cursor: pointer;
+    filter: grayscale(100%) opacity(0.6);
   }
+
+  .logout-button:hover {
+    color: black;
+    filter: grayscale(0%) opacity(1)
+  }
+
+  /* .logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.3ch;
+    width: 100%;
+    margin-bottom: -50%;
+  } */
   .collapse-icon {
     position: absolute;
     bottom: 0;
     padding: 0.75em;
-    margin-left:0.5em;
-
-    /* display: inline-block;
-    vertical-align: middle; */
-    
+    margin-left:0.5em; 
     color: black;
     transition: 0.5s linear;
     cursor: pointer;
+    filter: grayscale(100%) opacity(0.6);
+  }
+
+  .collapse-icon:hover {
+    color: black;
+    filter: grayscale(0%) opacity(1)
   }
 
   .rotate-180 {
@@ -125,7 +142,6 @@ export default {
 
 
   .navbar {
-    color: white;
     background-color: var(--navbar-bg-color);
     position: fixed;
     top: 0;
@@ -133,12 +149,8 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     align-items: flex-start;
     transition: 1s ease;
-    /* width: 300px; */
-    /* align-items: center;  */
-    /* justify-content: center;   */
   } 
 
 
@@ -148,6 +160,7 @@ export default {
     list-style: none;
     margin-left:-20px;
   } 
+
 
   
 </style>
