@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <navigation-bar></navigation-bar>
+  <div :style="{'margin-left': navbarWidth}">
     <div class="border border-info" style="height: 95%">
       <div class="row border border-primary h-50">
         <div class="col border border-danger w-50">
@@ -27,8 +26,7 @@
 
 <script>
 // IMPORTS
-import navBar from "@/components/layouts/navbar.vue";
-
+import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 import DayChart from "./DayChart.vue";
 import CalendarHeatmap from "./ActualCalendarHeatmap.vue";
 import "../plugins/calendar";
@@ -38,10 +36,12 @@ import TodaySpending from "./TodaySpending.vue";
 export default {
   name: "SpendingDashboard",
   components: {
-    "navigation-bar": navBar,
     DayChart: DayChart,
     CalendarHeatmap: CalendarHeatmap,
     TodaySpending: TodaySpending,
+  },
+  setup() {
+    return {open, toggleNavbar, navbarWidth}
   },
 };
 </script>

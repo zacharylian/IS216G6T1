@@ -15,8 +15,8 @@
         <thead>
             <tr>
             <th scope="col" style="width:1%"></th>
-            <th scope="col" style="width:57%">Task</th>
-            <th scope="col" style="width: 40%" class="text-center">Status</th>
+            <th scope="col" style="width:62%">Task</th>
+            <th scope="col" style="width: 35%" class="text-center">Status</th>
             <th scope="col" style="width: 1%" class="text-center">Edit</th>
             <th scope="col" style="width: 1%" class="text-center">Delete</th>
             </tr>

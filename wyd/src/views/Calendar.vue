@@ -1,5 +1,5 @@
 <template>
-        <navigation-bar></navigation-bar>
+
         <!-- <div class="container-fluid">
             <div src="../components/layouts/calendar.html" id="app"> -->
                 <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>

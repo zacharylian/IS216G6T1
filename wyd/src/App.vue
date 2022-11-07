@@ -1,12 +1,10 @@
-<template>
-  <navigation-bar />
-  <router-view/>
-</template>
+
 
 <script>
   // import axios from 'axios';
   
   import navBar from '@/components/layouts/navbar.vue';
+  import {navbarWidth} from '@/components/layouts/state'
   // import { ChartDoughnut } from '@/components/ChartDoughnut.vue';
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
   import router from './router';
@@ -21,6 +19,9 @@
       name: 'App',
       components: {
         'navigation-bar': navBar,
+        setup() {
+          return {navbarWidth}
+        }
     },
       data() {
         return {
@@ -41,6 +42,13 @@
       }
   };
 </script>
+
+<template>
+  <navigation-bar />
+  <div>
+    <router-view/>
+  </div>
+</template>
 
   
 <style>
