@@ -5,25 +5,23 @@
       <router-link to="/AboutView">About</router-link> |
       <router-link to="/SpendingDashboard">Spendings</router-link> |
       <router-link to="/Calendar">Calendar</router-link> | -->
-      <button v-on:click="googleSignOut">Sign Out</button>
+      <!-- <button v-on:click="googleSignOut">Sign Out</button> -->
 
     <div class="navbar" :style="{width:navbarWidth}">
-      <!-- <h1>
-        <span v-if="collapsed">
-          WAD
-        </span>
-        <span v-else>
-          WAD ARE U 2 DOING
-        </span>
-      </h1> -->
 
       <ul>
-      <li><navbar-link to="/" icon="fas fa-house fa-2x" class="link" :class="{active:isActive}" >Home</navbar-link></li>
-      <li><navbar-link to="/Calendar" icon="fas fa-calendar-days fa-2x" class="link" :class="{active:isActive}">Calendar</navbar-link></li>
-      <li><navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar fa-2x" class="link" :class="{active:isActive}">Spendings</navbar-link></li>
-      <li><navbar-link to="/FocusTimer" icon="fas fa-stopwatch fa-2x" class="link" :class="{active:isActive}">Timer</navbar-link></li>
+      <li><navbar-link to="/" icon="fas fa-house fa-2x"  >Home</navbar-link></li>
+      <li><navbar-link to="/Calendar" icon="fas fa-calendar-days fa-2x" >Calendar</navbar-link></li>
+      <li><navbar-link to="/SpendingDashboard" icon="fas fa-sack-dollar fa-2x"  >Spendings</navbar-link></li>
+      <li><navbar-link to="/FocusTimer" icon="fas fa-stopwatch fa-2x">Timer</navbar-link></li>
       </ul>
-      <span class="collapse-icon" :class="{'rotate-180': collapsed}" @click="toggleNavbar">
+      <span class="logout-button" @click="googleSignOut">
+        <i class="fas fa-right-from-bracket fa-2x"></i>
+          <!-- <span v-if="!open" style="padding-left:5px; font-size: 16px; font-weight: 700;" >
+                  <slot>Logout</slot>
+          </span> -->
+      </span>
+      <span class="collapse-icon" :class="{'rotate-180': open}" @click="toggleNavbar">
         <i class ="fas fa-angle-double-left fa-2x" />
       </span>
 
@@ -36,12 +34,12 @@
   import { getAuth, signOut } from "firebase/auth"
 
   import navbarLink from './navbarLink'
-  import {collapsed, toggleNavbar, navbarWidth} from './state'
+  import {open, toggleNavbar, navbarWidth} from './state'
 
 export default {
   props: {},
   setup() {
-    return {collapsed, toggleNavbar, navbarWidth}
+    return {open, toggleNavbar, navbarWidth}
   },
   name: "navBar",
   components: {
@@ -78,19 +76,6 @@ export default {
       color: #2c3e50;
     }
     
-    /* nav {
-      padding: 30px;
-    }
-    
-    nav a {
-      font-weight: bold;
-      color: #2c3e50;
-    }
-    
-    nav a.router-link-exact-active {
-      color: #7289DA;
-    } */
-
     :root {
       --navbar-bg-color: #7289DA;
       --navbar-item-hover: #6479c5;
@@ -102,20 +87,33 @@ export default {
 </style>
 
 <style scoped>
+  .logout-button {
+    position: absolute;
+    bottom: 5%;
+    padding: 0.75em;
+    margin-left:0.5em;
+
+
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center;  */
+
+    display: inline-block;
+
+    color: black;
+    cursor: pointer;
+  }
   .collapse-icon {
     position: absolute;
     bottom: 0;
     padding: 0.75em;
     margin-left:0.5em;
 
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center;  */
+    /* display: inline-block;
+    vertical-align: middle; */
     
     color: black;
-
-    transition: 0.2s linear;
-
+    transition: 0.5s linear;
     cursor: pointer;
   }
 
@@ -124,26 +122,7 @@ export default {
     transition: 0.2s linear;
   }
 
-  .link{
-    display: flex;
-    align-items: center;
-    /* justify-content:center; */
-    cursor: pointer;
-    position: relative;
-    font-weight: 700;
-    user-select: none;
-    margin: 1.5em 0;
-    /* padding: 1.3em 0.2em ; */
-    /* margin-top: 20px; */
-    border-radius: 0.2em;
-    height: 2em;
 
-    color: black;
-    text-decoration: none;
-
-    top: 0;
-    height: 100%;
-    }
 
   .navbar {
     color: white;
@@ -163,18 +142,7 @@ export default {
   } 
 
 
-  
-  /* .navbar_new {
-    position:fixed;
-    width: 100%;
-    height: 100vh;
-    top:0;
-    left:0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--navbar-bg-color);
-  } */
+
   .navbar li{
     position: relative;
     list-style: none;

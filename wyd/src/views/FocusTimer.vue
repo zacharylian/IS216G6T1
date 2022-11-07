@@ -1,6 +1,6 @@
 <template>
-  <navigation-bar></navigation-bar>
-  <div>
+
+<div :style="{'margin-left': navbarWidth}">
 
     <div class="timer">
       <div class="button-group mode-buttons" id="js-mode-buttons" @click="handleMode()">
@@ -30,18 +30,21 @@
     </div>
 </div>
 
+
 </template>
 
 <script>
 //IMPORTS
-import navBar from '@/components/layouts/navbar.vue';
+import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 
 //EXPORTS
 export default {
   name: 'FocusTimer',
-  components: {
-  "navigation-bar": navBar,
+
+  setup() {
+    return {open, toggleNavbar, navbarWidth}
   },
+
   data() {
     
     const timer = {

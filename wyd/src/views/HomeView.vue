@@ -1,14 +1,13 @@
 <template>
 
-  <section>
-    <navigation-bar/>
-    <div :style="{'margin-left': navbarWidth}">
-      <router-view />
-    </div>
 
-    <div class="pt-3 mw-100" style="margin:0px 0px 0px 80px">
 
-<div class="row">
+  <!-- <button v-on:click="googleSignOut">Sign Out</button> -->
+
+  <div :style="{'margin-left': navbarWidth}">
+  <div class="pt-3 mw-100">
+
+<div class="row" >
   <div class="col col-8">
           <div class="row">
             <div class="col bg wanbottom">
@@ -45,16 +44,16 @@
         </div>
       </div>
 </div>
+</div>
 
-  </section>
+
 
 </template>
 
 
 <script>
 // @ is an alias to /src
-import navBar from '@/components/layouts/navbar.vue';
-import {collapsed, toggleNavbar, navbarWidth} from '@/components/layouts/state';
+import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 
 import todo from '@/components/layouts/todo.vue';
 import { getAuth } from '@firebase/auth';
@@ -62,11 +61,10 @@ import { getAuth } from '@firebase/auth';
 export default {
   name: 'HomeView',
   components: {
-    "navigation-bar": navBar,
     "todo": todo,
   },
   setup() {
-    return {navbarWidth}
+    return {open, toggleNavbar, navbarWidth}
   },
   data() {return {
     username: getAuth().currentUser.displayName
