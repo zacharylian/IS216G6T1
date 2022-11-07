@@ -122,3 +122,17 @@ h3 {font-weight:bold; font-style:italic}
   .bgp {
     background-color: #7289DA
   }
+ 
+
+  // sorry the color choice damn ugly but i just incl this coz i chanced upon it, can just remove
+    body::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: #a495bd;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: #a495bd;
+    }

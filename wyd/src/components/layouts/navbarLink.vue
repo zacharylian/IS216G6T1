@@ -1,7 +1,7 @@
 <script>
     import {computed} from 'vue'
     import {useRoute} from 'vue-router'
-    import {collapsed} from './state'
+    import {open, collapsed} from './state'
 
     export default {
         name: "navbarLink",
@@ -13,16 +13,16 @@
         setup(props) {
             const route = useRoute()
             const isActive = computed(() => route.path === props.to)
-            return {isActive, collapsed}
+            return {isActive, open}
         }
     }
 </script>
 
 <template>
-    <router-link :to="to" :class="{active:isActive}">
-        <i class="icon" :class="icon"/>
-        <transition name="fade">
-            <span v-if="!collapsed" style="padding-left:5px; font-size: 16px;" :class="{fadeOut:collapsed, fadeIn:isActive}">
+    <router-link :to="to" class="link" :class="{active:isActive}">
+        <i class="icon" :class="icon,{active:isActive}" />
+        <transition name="slide-fade">
+            <span v-if="!open" style="padding-left:5px; font-size: 16px;" >
                 <slot />
             </span>
         </transition>
@@ -31,38 +31,66 @@
 
 
 <style scoped>
-.fade-enter-active {
+/* .fade-enter-active {
     transition: opacity 0.2s linear;
-    /* transform: translateX(-100px); */
 }
 
 .fade-leave-active {
     transition: opacity 0.2s linear;
-    /* transform: translateX(0); */
 }
 
 .fade-enter {
     opacity:0;
-    /* transform: translateX(0px); */
 }
 
 .fade-leave-to {
     opacity: 0;
-    /* transform: translateX(-100px); */
+} */
+
+.slide-fade-enter-active {
+    transition: all 1.5s ease-out;
 }
 
+.slide-fade-leave-active {
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(-20px);
+    opacity: 0;
+}
+
+.link{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    font-weight: 700;
+    user-select: none;
+    margin: 1.5em 0;
+    border-radius: 0.2em;
+    height: 2em;
+
+    color: black;
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.6);
+
+    top: 0;
+    height: 100%;
+    }
+
 .link:hover {
-        background-color: var(--navbar-item-hover);
-        transition: 0.1s ease-in-out;
+    /* background-color: var(--navbar-item-hover); */
+    filter: grayscale(0%) opacity(1);
 }
 
 .link.active {
-    background-color: var(--navbar-item-active);
-    transition: 0.1s ease-in-out;
+    filter: grayscale(0%) opacity(1); 
 }
 
 
-    .icon {
+.link .icon {
     /* display:flex;
     position: relative; */
     justify-content: center;
@@ -70,39 +98,13 @@
     bottom: 0;
     /* padding: 0.75em; */
     color: black;
-
-    /* transition: 0.5s linear; */
-
+    flex-shrink: 0;
+    width: 35px;
     cursor: pointer;
+    filter: grayscale(100%) opacity(0.6);
     }
 
-    .fadeOut {
-        animation: fadeOut 0.1s;
-    }
-
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: translateX(0);
-        } 
-
-        to {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-    }
-
-    .fadeIn {
-        animation: fadeIn 0.1s;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
+.link .icon:hover {
+    filter: grayscale(0%) opacity(1)
+}
 </style>

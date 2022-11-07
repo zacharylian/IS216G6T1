@@ -1,9 +1,8 @@
 <template>
-        <navigation-bar></navigation-bar>
+    <div :style="{'margin-left': navbarWidth}">
         <!-- <div class="container-fluid">
             <div src="../components/layouts/calendar.html" id="app"> -->
-                <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-                <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+                <!-- <button id="authorize_button" onclick="handleAuthClick()">Authorize</button> -->
             <!-- </div> -->
             <div class="row pt-3 justify-content-center">
                 <div class="col col-2"></div>
@@ -14,13 +13,13 @@
                 </div>
                 <div class="col col-2"></div>
         </div>
-
+    </div>
 </template>
 
 <!-- <script src="../../src/external.js"></script> -->
 
 <script>
-import navBar from '@/components/layouts/navbar.vue';
+import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-vue-schedule';
 
 
@@ -28,8 +27,10 @@ import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusi
 export default {
     name: 'Calendar',
     components: {
-    "navigation-bar": navBar,
     'ejs-schedule': ScheduleComponent
+    },
+    setup() {
+    return {open, toggleNavbar, navbarWidth}
     },
     provide : {
         schedule: [Day, Week, WorkWeek, Month, Agenda]

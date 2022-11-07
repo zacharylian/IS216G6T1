@@ -15,8 +15,8 @@
         <thead>
             <tr>
             <th scope="col" style="width:1%"></th>
-            <th scope="col" style="width:57%">Task</th>
-            <th scope="col" style="width: 40%" class="text-center">Status</th>
+            <th scope="col" style="width:62%">Task</th>
+            <th scope="col" style="width: 35%" class="text-center">Status</th>
             <th scope="col" style="width: 1%" class="text-center">Edit</th>
             <th scope="col" style="width: 1%" class="text-center">Delete</th>
             </tr>
@@ -171,14 +171,169 @@
         }
     }
 
+    /* animated pencil css */
+    /* .pencil {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	animation: yeah 5s infinite ease-in-out;
+}
+
+@keyframes yeah {
+	0% {
+		transform: translate(-50%, 10px) rotate(0deg);
+	}
+	20% {
+		transform: translate(-50%, 70px) rotate(17deg);
+	}
+	40% {
+		transform: translate(-50%, 70px) rotate(-17deg);
+	}
+}
+
+.line {
+	z-index: -1;
+	position: absolute;
+	top: 428px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 100px;
+	height: 20px;
+	border-radius: 50%;
+	box-shadow: 0 5px 0 0 #555;
+	animation: line 5s infinite ease-in-out;
+}
+
+@keyframes line {
+	0% {
+		transform: translate(Calc(-50% - 50px), 0);
+		opacity: 1;
+		width: 0px;
+		height: 0px;
+	}
+	20% {
+		transform: translate(Calc(-50% - 50px), 0);
+		opacity: 1;
+		width: 0px;
+		height: 10px;
+	}
+	40%,
+	55% {
+		transform: translate(-50%, 0);
+		opacity: 1;
+		width: 100px;
+		height: 10px;
+	}
+	60% {
+		transform: translate(Calc(-50% + 50px), 0);
+		opacity: 0;
+		width: 0px;
+		height: 10px;
+	}
+	100% {
+		transform: translate(Calc(-50% + 50px), 0);
+		opacity: 0;
+		width: 0px;
+		height: 10px;
+	}
+}
+
+.rubber {
+	z-index: 1;
+	position: relative;
+	left: 5px;
+	width: 90px;
+	height: 40px;
+	background: grey;
+	border-radius: 25px 25px 0 0;
+}
+
+
+.ferrule {
+	z-index: 2;
+	position: relative;
+	width: 100px;
+	height: 40px;
+	background: grey;
+	border-radius: 4px;
+	box-shadow: 0px 2px 0 0px rgba(0, 0, 0, 0.4);
+}
+
+.stripe:nth-child(1) {
+	top: 10px;
+}
+
+.stripe:nth-child(2) {
+	top: 15px;
+}
+
+.stick {
+	z-index: 1;
+	position: relative;
+	left: 5px;
+	width: 90px;
+	height: 200px;
+	background: grey;
+	border-radius: 15px;
+}
+
+.side {
+	position: absolute;
+	width: 30px;
+	height: 200px;
+	border-radius: 0 0 25px 25px;
+}
+
+.side:nth-child(1) {
+	left: 0;
+	top: 0;
+	background: grey;
+}
+
+.side:nth-child(2) {
+	left: 30px;
+	top: 0;
+	background: grey;
+}
+
+.side:nth-child(3) {
+	left: 60px;
+	top: 0;
+	background: grey;
+}
+
+
+.bottom {
+	z-index: 2;
+	position: relative;
+	left: 5px;
+	top: -11px;
+	width: 0;
+	height: 10px;
+	border-left: 45px solid transparent;
+	border-right: 45px solid transparent;
+	border-top: 90px solid grey;
+}
+
+.graphite {
+	position: relative;
+	left: 45px;
+	top: -33px;
+	width: 10px;
+	height: 15px;
+	background: grey;
+	border-radius: 2px 2px 50% 50%;
+} */
 
     /* animated trashbin css */
     .trash {
 	background:black;
 	width: 10px;
-	height: 13px;
+	height: 15px;
 	display: inline-block;
 	margin:0 auto;
+    margin-bottom: -3px;
 	
 	position: relative;
 	-webkit-border-bottom-right-radius: 0.5px;
@@ -200,8 +355,8 @@
 	height: 2px;
 	background: black;
 	top: -3px;
-	left: -1px;
-	right: -1px;
+	left: -1.5px;
+	right: -1.5px;
 	
 	border-top-left-radius: 1px;
 	border-top-right-radius: 1px;
@@ -213,7 +368,7 @@
 	content: '';
 	position: absolute;
 	width: 5px;
-	height: 0.5px;
+	height: 1px;
 	background: black;
 	top: -3px;
 	
@@ -222,16 +377,17 @@
 	transform: rotate(0deg);
 	transition: transform 250ms;
 	transform-origin: 19% 100%;
-	left: 5px;
+	left: 4px;
 }
 
 .trash i {
 	position:relative;
-	width: 0.5px;
+	width: 0px;
 	height:8px;
 	background:#fff;
 	display:block;
-	margin:5px auto;
+	margin:4px auto;
+    margin-left: 6px;
 	border-radius: 0.5px;
 }
 .trash i:after {
