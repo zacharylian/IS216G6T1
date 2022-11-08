@@ -85,7 +85,12 @@ export default {
 
 
   data() {
-    date: new Date()
+    return {
+      goalhours: '5', /* is stored in hours, one value per day */
+      duration: '20', /* is stored in minutes, many values per day, one per instance */
+      end_date: '09-11-2022', /* is stored in DD-MM-YYYY, one per instance */
+      end_time: '03:52:46' /* is stored in HH:MM:SS, one per instance */
+    }
   },
 
   methods: {
@@ -105,6 +110,10 @@ timer() {
       clearInterval(myCounter);
       let time = document.getElementById('time');
       time.innerHTML='00:00'
+      date=new Date();
+      duration=mins;
+      end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
+      end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
       //here i would ideally send the information to the database!
       //maybe can play a jingle when time ends?
 
