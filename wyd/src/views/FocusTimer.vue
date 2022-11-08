@@ -48,15 +48,18 @@
 
     </ul>
   </nav>
-<div style="margin-left:6rem">
+<div style="margin-left:6rem;overflow:hidden;">
 
-  <div class="mt-4 text-center">
+  <div class="mt-5 text-center">
 
     <div class="mt-4">
-      <h4 class="font-weight-bold">How many hours would you like to focus today?</h4><input type="text" id="goalhours" class="h5 text-center font-weight-bold"><h5>hours</h5>
+      <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
+        <input type="text" id="goalhours" class="h5 text-center font-weight-bold" placeholder="0 hours">&nbsp;&nbsp;&nbsp;
+        <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="uppointfive()">↑</button>&nbsp;
+        <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="downpointfive()">↓</button>
     </div>
 
-    <br>
+    <br><br>
     <div class="row">
       <div class="col">
         <div class="clock bg px-5 py-3 mb-4 text-center" id="time" style="border-radius:30px;margin:auto;width:60%;text-align:center;font-size:18vw;">
@@ -76,7 +79,7 @@
       <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50 text-center"><br>
       <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
       <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
-      <button id="stoppie" class="main-button" @click="stoppie()">Stop</button>
+      <button id="stoppie" class="main-button" @click="stoppie()">Reset</button>
     </div>
 <!-- <br>
 <div class="h6 font-italic">Insert motivational prompts here...</div> -->
@@ -203,15 +206,17 @@ upfive() {
   console.log(time);
   let timearr=time.split(':');
   console.log(timearr);
-  let newmins=Number(timearr[0])+5;
+  let minny=Number(timearr[0]);
   let secondy=Number(timearr[1]);
+  if (minny*60+secondy <= 86100) {
+  let newmins=Number(timearr[0])+5;
   newmins=newmins.toString();
   if (newmins.length<2) {newmins='0'+newmins};
   secondy=secondy.toString();
   if (secondy.length<2) {secondy='0'+secondy};
   let newtime=newmins+':'+secondy;
   document.getElementById('time').innerHTML=newtime;
-  console.log(newtime);
+  console.log(newtime);}
 },
 
 downfive() {
@@ -233,6 +238,28 @@ downfive() {
   console.log(newtime);
   }
 },
+
+uppointfive() {
+  console.log('Uppointfive!');
+  let goalhours = document.getElementById('goalhours').value;
+  if (Number(goalhours) <=23.5) {
+  console.log(goalhours);
+  goalhours=Number(goalhours)+0.5;
+  console.log(goalhours);
+  document.getElementById('goalhours').value=goalhours;}
+},
+
+downpointfive() {
+  console.log('Downpointfive!');
+  let goalhours = document.getElementById('goalhours').value;
+  if (Number(goalhours) > 0) {
+  console.log(goalhours);
+  goalhours=Number(goalhours)-0.5;
+  console.log(goalhours);
+  document.getElementById('goalhours').value=goalhours;
+  }
+  }
+,
 
 googleSignOut() {
           const auth = getAuth();
