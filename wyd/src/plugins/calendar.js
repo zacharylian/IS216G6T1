@@ -5,8 +5,8 @@ export default () => {
   )
     .then((response) => response.json())
     .then((data) => {
-      var sudoData = {
-        months: [
+      const sudoData = {
+        months: 
           {"oct": [
             {"amt": 24, "cat": "finance"},
             {"amt": 25, "cat": "finance"},
@@ -39,8 +39,8 @@ export default () => {
             {"amt": 10, "cat": "food"},
             {"amt": 123,  "cat": "investment"},
             {"amt": 232,  "cat": "investment"},
-          ]},
-          {"nov": [
+          ],
+          "nov": [
             {"amt": 24, "cat": "finance"},
             {"amt": 25, "cat": "finance"},
             {"amt": 30, "cat": "transport"},
@@ -72,28 +72,42 @@ export default () => {
             {"amt": 10, "cat": "food"},
             {"amt": 123,  "cat": "investment"}
           ]},
-        ]
       }
       var gotData = data.monthlyVariance; //data
-      var tryData = sudoData.months[0]
-      console.log(tryData)
+      var amtArr = []
+      var catArr = []
+      console.log(sudoData.months)
+      
+      for (let [month, details] of Object.entries(sudoData.months)) {
+        console.log(month)
+        console.log(details)
+        for (let day of details) {
+          // console.log(day)
+          let price = day.amt;
+          let category = day.cat;
+          amtArr.push(price);
+          catArr.push(category);
+        }
+      }
+      // var tryData = sudoData.months[0]
+      // console.log(tryData)
       var itemSize = 18;
       var cellSize = itemSize - 1;
       var margin = { top: 30, right: 100, bottom: 40, left: 90 };
       var width = 780 - margin.left - margin.right;
       var height = 480 - margin.top - margin.bottom;
       var colors = [
-        "#15f4c1",
-        "#12dbad",
-        "#10c39a",
-        "#0eaa87",
-        "#0c9273",
-        "#0a7a60",
-        "#08614d",
-        "#064939",
-        "#043026",
-        "#021813",
-        "#000000",
+        "#00FF7F",
+        "#90EF90",
+        "#3BCA6D",
+        "#77945C",
+        "#45731E",
+        "#675E24",
+        "#B25F4A",
+        "#B13433",
+        "#C82538",
+        "#ED2938",
+        "#FF0D0D",
       ];
 
       var months = [
@@ -111,9 +125,19 @@ export default () => {
         "Dec",
       ];
 
+      var weeks = [
+        "week1",
+        "week2",
+        "week3",
+        "week4",
+        "week5"
+      ]
+
       var minYear = 2010;
+      var dayStart = 0;
       // var maxYear = gotData[gotData.length - 1].year;
       var maxYear = 2015;
+      var dayEnd = 8;
       // var minVar = d3.min(gotData, function (d) {
       //   return d.variance;
       // });
@@ -128,10 +152,11 @@ export default () => {
       var baseSpendings = 0;
 
       // Set the x axis to years
-      var x = d3.scale.linear().domain([minYear, maxYear]).range([0, width]);
+      // var x = d3.scale.linear().domain([minYear, maxYear]).range([0, width]);
+      var x = d3.scale.linear().domain([dayStart, dayEnd]).range([0, width]);
 
       // Set the y axis to months
-      var y = d3.scale.linear().domain([1, 13]).range([0, height]);
+      var y = d3.scale.linear().domain([1, 6]).range([0, height]);
 
       // Set the z axis to colors
       var z = d3.scale.quantile().domain([0, 501]).range(colors);
@@ -142,7 +167,7 @@ export default () => {
         .scale(x)
         .orient("bottom")
         .tickFormat(yearFormat)
-        .ticks((maxYear - minYear) / 10);
+        .ticks((dayEnd - dayStart) / 10);
 
       // Tooltips
       var tip = d3
@@ -170,17 +195,38 @@ export default () => {
       // Draw data rectangles
       var rect = svg
         .selectAll(".rect")
-        .data(gotData)
+        // .data(gotData)
+        .data(sudoData.months) //
         .enter()
         .append("rect")
         .attr("fill", function (d) {
-          return z(d.variance);
+          // return z(d.variance);
+          console.log(d)
+          for (let [month, details] of Object.entries(d)) {
+            for (let day of details) {
+              console.log(day)
+              return z(day.amt)
+            }
+          }
+          // return z(d.amt)
         })
         .attr("x", function (d) {
-          return x(d.year);
+          // return x(d.year);
+          // return x(d.amt)
+          for (let [month, details] of Object.entries(d)) {
+            for (let day of details) {
+              return x(day.amt)
+            }
+          }
         })
         .attr("y", function (d) {
-          return y(d.month);
+          // return y(d.month);
+          // return y(d.category)
+          for (let [month, details] of Object.entries(d)) {
+            for (let day of details) {
+              return x(day.category)
+            }
+          }
         })
         .attr("width", barWidth)
         .attr("height", barHeight)
@@ -199,7 +245,7 @@ export default () => {
       // Draw month labels
       var monthLabels = svg
         .selectAll(".month-label")
-        .data(months)
+        .data(weeks)
         .enter()
         .append("text")
         .text(function (d) {
@@ -248,7 +294,7 @@ export default () => {
         .attr("text-anchor", "middle")
         .attr("transform", "rotate(-90)")
         .attr("class", "axis-label")
-        .text("Month");
+        .text("Week");
 
       svg
         .append("g")
@@ -256,6 +302,6 @@ export default () => {
         .append("text")
         .attr("text-anchor", "middle")
         .attr("class", "axis-label")
-        .text("Year");
+        .text("Days");
     });
 };

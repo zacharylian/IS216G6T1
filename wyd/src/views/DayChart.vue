@@ -1,4 +1,92 @@
 <template>
+    <div class="card shadow-4 rounded-5 mx-auto my-auto ho">
+        <Bar
+            :chart-options="chartOptions"
+            :chart-data="chartData"
+            :chart-id="chartId"
+            :dataset-id-key="datasetIdKey"
+            :plugins="plugins"
+            :css-classes="cssClasses"
+            :styles="styles"
+            :width="width"
+            :height="height"
+        />
+    </div>
+</template>
+  
+<script>
+    import { Bar } from 'vue-chartjs'
+    import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+    
+    ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+    
+    const barLabels = [ 'Week1', 'Week2', 'Week3', 'Week4', 'Week5' ]
+    const backgroundColor = ["#FF0D0D", "#C82538", "#B25F4A", "#45731E", "#3BCA6D"] 
+
+
+    export default {
+        name: 'BarChart',
+        components: { Bar },
+        props: {
+        chartId: {
+            type: String,
+            default: 'bar-chart'
+        },
+        datasetIdKey: {
+            type: String,
+            default: 'label'
+        },
+        width: {
+            type: Number,
+            default: 150
+        },
+        height: {
+            type: Number,
+            default: 150
+        },
+        cssClasses: {
+            default: '',
+            type: String
+        },
+        styles: {
+            type: Object,
+            default: () => {}
+        },
+        plugins: {
+            type: Object,
+            default: () => {}
+        }
+        },
+        data() {
+        return {
+            
+            chartData: {
+            labels: barLabels,
+            datasets: [ { 
+                label: barLabels,
+                data: [500, 350, 225, 110, 78],
+                backgroundColor: backgroundColor
+            } ]
+            },
+            chartOptions: {
+                responsive: true,
+                legend: {
+                display: true,
+                labels: {
+                    generateLabels() {
+                    return barLabels.map((label, index) => ({
+                        text: label,
+                        fillStyle: backgroundColor[index]
+                    }))
+                    }
+                    }   
+                }
+            }
+        }
+    }}
+</script>
+
+<!-- <template>
     <Doughnut
       :chart-options="chartOptions"
       :chart-data="chartData"
@@ -37,11 +125,11 @@
             },
             width: {
                 type: Number,
-                default: 100,
+                default: 50,
             },
             height: {
                 type: Number,
-                default: 100,
+                default: 50,
             },
             cssClasses: {
                 default: '',
@@ -104,4 +192,4 @@
         
 
     });
-    </script>
+    </script> -->
