@@ -84,8 +84,29 @@
               <div class="col py-2 bg wanright">
               <!--FOCUS TIME TODAY-->
               <h3>focus time today</h3><br>
-              <div style="border: 15px pink solid; height: 140px;width:140px;border-radius:70px;margin:auto;">100%</div>
-              <br>
+              <div>
+
+                <div class="skill">
+                  <div class="outer">
+                      <div class="inner">
+                          <div id="number">
+                              65%
+                          </div>
+                      </div>
+                  </div>
+
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px" class="mysvg">
+                      <defs>
+                          <linearGradient id="GradientColor">
+                            <stop offset="0%" stop-color="#e91e63" />
+                            <stop offset="100%" stop-color="#5865F2" />
+                          </linearGradient>
+                      </defs>
+                      <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                  </svg>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -142,4 +163,61 @@ export default {
 
 <style>
 @import "@/navbar.css";
+
+.skill {
+    width:160px;
+    height:160px;
+    position: relative;
+    margin:auto;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.outer {
+    height:160px;
+    width:160px;
+    border-radius:50%;
+    padding:20px;
+    box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15),
+               -6px -6px 10px 1px rgba(255,255,255,0.7);
+}
+.inner {
+    height:120px;
+    width:120px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+                inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+                -0.5px -0.5px 0px rgba(255,255,255,1),
+                0.5px 0.5px 0px rgba(0,0,0,0.15),
+                0px 12px 10px -10px rgba(0,0,0,0.05);
+}
+#number {
+    font-weight: 600px;
+    color: #555;
+}
+circle {
+    fill:none;
+    stroke:url(#GradientColor);
+    stroke-width: 20px;
+    stroke-dasharray: 472; /* for some reason the complete circle is 472 LOL */
+    stroke-dashoffset: 472;
+    animation: anim 1s linear forwards;
+}
+.mysvg {
+    position:absolute;
+    top:0;
+    left:0;
+}
+@keyframes anim{
+    100%{
+        stroke-dashoffset: 165; /*this is what actually controls the % so later when taking in data, modify this*/
+    }
+}
+ 
 </style>

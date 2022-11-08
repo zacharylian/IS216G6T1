@@ -5,11 +5,10 @@
   
 
   // import { ChartDoughnut } from '@/components/ChartDoughnut.vue';
+  import navBar from '@/components/layouts/navbar.vue';
+  import {navbarWidth} from '@/components/layouts/state'
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
   import router from './router';
-  // import { h } from 'vue';
-  // import { Doughnut } from 'vue-chartjs';
-  // import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js';
 
 
   
