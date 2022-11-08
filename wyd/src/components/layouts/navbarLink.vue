@@ -20,7 +20,7 @@
 
 <template>
     <router-link :to="to" class="link" :class="{active:isActive}">
-        <i class="icon" :class="icon,{active:isActive}" />
+        <i class="icon" :class="icon" />
         <transition name="slide-fade">
             <span v-if="!open" style="padding-left:5px; font-size: 16px;" >
                 <slot />
@@ -31,22 +31,6 @@
 
 
 <style scoped>
-/* .fade-enter-active {
-    transition: opacity 0.2s linear;
-}
-
-.fade-leave-active {
-    transition: opacity 0.2s linear;
-}
-
-.fade-enter {
-    opacity:0;
-}
-
-.fade-leave-to {
-    opacity: 0;
-} */
-
 .slide-fade-enter-active {
     transition: all 1s ease-out;
 }
@@ -76,8 +60,8 @@
     text-decoration: none;
     filter: grayscale(100%) opacity(0.6);
 
-    top: 0;
-    height: 100%;
+    /* top: 0; */
+    /* height: 100%; */
     }
 
 .link:hover {
@@ -91,14 +75,10 @@
 
 
 .link .icon {
-    /* display:flex;
-    position: relative; */
     justify-content: center;
     align-items: center;
     bottom: 0;
-    /* padding: 0.75em; */
     color: black;
-    flex-shrink: 0;
     width: 35px;
     cursor: pointer;
     filter: grayscale(100%) opacity(0.6);
@@ -106,5 +86,14 @@
 
 .link .icon:hover {
     filter: grayscale(0%) opacity(1)
+}
+
+
+@media only screen and (min-width:600px) {
+
+}
+
+@media only screen and (max-width:600px) {
+
 }
 </style>

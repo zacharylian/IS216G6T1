@@ -1,27 +1,82 @@
 <template>
-    <navigation-bar />
-    <div :style="{'margin-left': navbarWidth}">
-        <!-- <div class="container-fluid">
-            <div src="../components/layouts/calendar.html" id="app"> -->
-                <!-- <button id="authorize_button" onclick="handleAuthClick()">Authorize</button> -->
-            <!-- </div> -->
+    <nav class="navbar_main">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <router-link to="/" class="nav-link">
+            <i class="fas fa-house fa-2x" />
+            <span class="link-text" >
+                    Home
+            </span>
+            </router-link>
+        </li>
+
+        <li class="nav-item">
+            <router-link to="/Calendar" class="nav-link">
+            <i class="fas fa-calendar-days fa-2x" />
+            <span class="link-text" >
+                    Calendar
+            </span>
+            </router-link>
+        </li>
+
+        <li class="nav-item">
+            <router-link to="/SpendingDashboard" class="nav-link">
+            <i class="fas fa-sack-dollar fa-2x" />
+            <span class="link-text" >
+                    Spendings
+            </span>
+            </router-link>
+        </li>
+
+        <li class="nav-item">
+            <router-link to="/FocusTimer" class="nav-link">
+            <i class="fas fa-stopwatch fa-2x" />
+            <span class="link-text" >
+                    Timer
+            </span>
+            </router-link>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+            <span @click="googleSignOut">
+                <i class="fas fa-right-from-bracket fa-2x" @click="googleSignOut"></i>
+            </span>
+            </a>
+        </li>
+
+    </ul>
+    </nav>
+    <div style="margin-left:6rem">
+        <div class="scheduler-title">Doctor's Appointment
             <div class="row pt-3 justify-content-center">
                 <div class="col col-2"></div>
                 <div class="col col-8">
                     <ejs-schedule currentView="Month"
-                    :eventSettings="appointmentData">
+                    :eventSettings="appointmentData"
+                    :selectedDate="schedulerSelectedDate"
+                    ref="schedulerObject">
                     </ejs-schedule>
+                </div>
+            </div>
+            <div class="treeview-title">Common Task List
+                <div class="treeview-component">
+                    <ejs-treeview :fields="treeviewFields" 
+                    :allowDragAndDrop='true'
+                    :nodeDragStop="onTreeDragStop"
+                    ref="treeviewObject">
+                    </ejs-treeview>
+                </div>
                 </div>
                 <div class="col col-2"></div>
         </div>
     </div>
 </template>
 
-<!-- <script src="../../src/external.js"></script> -->
-
 <script>
 import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-vue-schedule';
+import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
 import navBar from '@/components/layouts/navbar.vue';
 
 
@@ -30,6 +85,7 @@ export default {
     name: 'Calendar',
     components: {
     'ejs-schedule': ScheduleComponent,
+    'ejs-treeview': TreeViewComponent,
     'navigation-bar': navBar,
     },
     setup() {
@@ -38,35 +94,55 @@ export default {
     provide : {
         schedule: [Day, Week, WorkWeek, Month, Agenda]
     },
-    data(){
-        return{
-            appointmentData : {
-                dataSource : [ // can put in data dynamically, just need to know the format.
-                    {
-                        Subject: 'Project Meeting',
-                        StartTime: new Date(2022, 10, 7, 9, 0), // idk why but month starts from 0 (jan), 1 (feb)
-                        EndTime: new Date(2022, 10, 8, 10, 0)
-                    },
-                    {
-                        Subject: 'Feed Myself',
-                        StartTime: new Date(2022, 10, 17, 10, 0),
-                        EndTime: new Date(2022, 10, 17, 11, 30)
-                    },
-                    {
-                        Subject: 'Learn Thai',
-                        StartTime: new Date(2022, 10, 17, 11, 30),
-                        EndTime: new Date(2022, 10, 17, 12, 30)
-                    },
-                    {
-                        Subject: 'SOS for WADII Project',
-                        StartTime: new Date(2022, 10, 8, 11, 30),
-                        EndTime: new Date(2022, 10, 13, 23, 30)
-                    }
-                ]
+    data() {
+    return {
+      draggedItemId : null,   
+      treeviewFields: { 
+        dataSource: [
+          {Id: 1, Name: 'WADII'},
+          {Id: 2, Name: 'CT'},
+          {Id: 3, Name: 'BPAS'},
+          {Id: 4, Name: 'IDP'},
+          {Id: 5, Name: 'Feed Dog'}
+        ],
+        id:'Id', text:'Name'
+      },
+      schedulerSelectedDate : new Date(),
+      appointmentData : {
+         dataSource : [
+             {
+              Id : 1,
+              Subject : 'Learn Thai',
+              StartTime: new Date(2022, 10, 5, 8, 0, 0),
+              EndTime: new Date(2022, 10, 6, 9, 0, 0)
+            },
+            {
+              Id : 2,
+              Subject : 'WAD Help',
+              StartTime: new Date(2022, 10, 8, 10, 0, 0),
+              EndTime: new Date(2022, 10, 8, 11, 30, 0)
             }
-
-        }
+         ]
+      }
+    };
+  },
+  methods : {
+    onTreeDragStop : function(args) {
+      args.cancel = true;
+      let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances;
+      let cellData = schedulerComponentObject.getCellDetails(args.target);
+      let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances;
+      let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
+      let eventData = {
+        Subject : filteredData[0].Name,
+        StartTime : cellData.startTime,
+        EndTime : cellData.endTime,
+        IsAllDay : cellData.isAllDay
+      };
+      //schedulerComponentObject.addEvent(eventData);
+      schedulerComponentObject.openEditor(eventData,'Add',true);
     }
+  }
 }
 </script>
 

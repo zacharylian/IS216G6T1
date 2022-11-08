@@ -5,21 +5,21 @@
 
         <!-- Input -->
         <div class="d-flex align-items-center justify-content-center">
-			<button @click="undo()" class="btn"><span class="fa fa-rotate-left"></span></button>
+            <button @click="undo()" class="btn fix" v-if="completed_tasks.length>0"><span class="fa fa-rotate-left"></span></button>
             <input @keypress.enter="submitTask()" v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 225px">
             <button @click="submitTask()" class="btn"><span class="fa fa-check pointer"></span></button>
         </div>
 
         <!-- Task Table -->
 
-        <table class="table border-bottom-1 mt-3 center"  >
+        <table class="table border-bottom-1 mt-3 center" style="width:100%; table-layout: fixed">
         <thead>
             <tr>
-            <th scope="col" style="width:1%"></th>
-            <th scope="col" style="width:62%">Task</th>
-            <th scope="col" style="width: 35%" class="text-center">Status</th>
-            <th scope="col" style="width: 1%" class="text-center">Edit</th>
-            <th scope="col" style="width: 1%" class="text-center">Delete</th>
+            <th class="text-center" style="width: 4%;"></th>
+            <th class="text-center" style="width: 51%;">Task</th>
+            <th class="text-center" style="width: 20%;">Status</th>
+            <th class="text-center" style="width: 10%;">Edit</th>
+            <th class="text-center" style="width: 15%;">Delete</th>
             </tr>
         </thead>
 
@@ -32,24 +32,24 @@
                 <td style="width:5px" class="align-middle">
                     <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
                 </td>
-                <td class="align-middle" style="width:50px">
+                <td class="align-middle" >
                     <span :class="{'strikethrough':task.completed==true}" >
                         {{task.name}}
                     </span>
                 </td>
 
-                <td class="align-middle" style="width: 10%" >
+                <td class="align-middle" >
                     <span class="pointer" @click="changeStatus(index)" 
                     :class="{'text-danger': task.status=='to - do!', 'text-warning': task.status==='started', 'text-success':task.status==='done :)'}">
                         {{task.status}}
                     </span>
                 </td>
-                <td class="align-middle" style="width: 1%">
-                    <div @click="editTask(index)">
+                <td class="align-middle">
+                    <div @click="editTask(index)" class="pen">
                         <span class="fa fa-pen pointer"></span>
                     </div>
                 </td>
-                <td class="align-middle" style="width: 1%">
+                <td class="align-middle" >
                     <div @click="deleteTask(index)">
                         <!-- <span class="fa fa-trash pointer"></span> -->
                         <span class="trash pointer">
@@ -71,24 +71,24 @@
                 <td style="width:5px" class="align-middle">
                     <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
 				</td>
-                <td class="align-middle" style="width:50px">
+                <td class="align-middle">
                     <span :class="{'strikethrough':task.completed==true}" >
                         {{task.name}}
                     </span>
                 </td>
 
-                <td class="align-middle" style="width: 10%" >
+                <td class="align-middle"  >
                     <span class="pointer" @click="changeStatus(index)" 
                     :class="{'text-danger': task.status=='to - do!', 'text-warning': task.status==='started', 'text-success':task.status==='done :)'}">
                         {{task.status}}
                     </span>
                 </td>
-                <td class="align-middle" style="width: 1%">
+                <td class="align-middle">
                     <div @click="editTask(index)" class="pen">
                         <span class="fa fa-pen pointer"></span>
                     </div>
                 </td>
-                <td class="align-middle" style="width: 1%">
+                <td class="align-middle" >
                     <div @click="deleteTask(index)">
                         <!-- <span class="fa fa-trash pointer"></span> -->
                         <span class="trash pointer">
@@ -226,14 +226,14 @@
         },
 
 		undo() {
-			if (this.completed_tasks.length == 0 ){
-				return ""
-			} else {
+			// if (this.completed_tasks.length == 0 ){
+			// 	return ""
+			// } else {
 			let index = this.completed_tasks.length - 1
 			let task = this.completed_tasks[index]
 			this.tasks.push(task)
 			this.completed_tasks.splice(this.completed_tasks.length - 1, 1)
-		}
+		
 		}
 
 
@@ -244,6 +244,11 @@
 
 <style>
     @import "../../main.scss";
+
+    .fix {
+        position: fixed;
+        margin-left: -325px;
+    }
 
     .pointer {
         cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d3sucks">
     <svg class="chart"></svg>
   </div>
 </template>
