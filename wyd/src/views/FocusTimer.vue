@@ -4,13 +4,30 @@
 
   <div class="mt-4 text-center">
 
-    <div class="clock bg px-5 py-3 w-50 mb-4" id="time" style="border-radius:30px;margin:auto;">
+    <div>
+      <button
+          class="button active mode-button mx-2 px-4"
+          id="focus"
+        >
+          Focus
+        </button>
+        <button
+          class="button mode-button mx-2 px-4"
+          id="breakie"
+        >
+          Break
+        </button>
+    </div>
+    <br>
+    <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:55%;text-align:center;">
       00:00
     </div>
 
     <div class="mb-4">
-      <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50">
-      <button id="btn" @click="timer()">Click me</button>
+      <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50"><br>
+      <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
+      <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
+      <button id="stoppie" class="main-button" @click="stoppie()">Stop</button>
     </div>
 
   </div>
@@ -41,7 +58,7 @@ export default {
 timer() {
   var myCounter;
   let seconds = 60;
-  clearInterval(myCounter); //to stop counter if already counting ??
+  clearInterval(myCounter);
   let mins = Number(document.getElementById('min').value);
   var i = mins * seconds;
   myCounter = setInterval(function() {
@@ -65,11 +82,22 @@ timer() {
       }
       time.innerHTML = minutess+":"+secondss;
       console.log(i--);
+      console.log(myCounter);
     }
 
   }, 1000);
-}
+},
 
+pause() {
+  //this one pause
+},
+
+stoppie() {
+  let time = document.getElementById('time');
+  clearInterval(myCounter);
+  console.log(myCounter);
+  time.innerHTML=('00:00');
+}
   },
 
 }
