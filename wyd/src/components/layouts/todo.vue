@@ -21,8 +21,13 @@
             <th scope="col" style="width: 1%" class="text-center">Delete</th>
             </tr>
         </thead>
+
         <tbody>
-            <tr v-for="(task, index) in tasks" :key="index" :class="{fadeOut: task.completed== true}">
+			<tr style="background-color:grey; filter:opacity(50%)">
+				<th colspan=5><span style="color:white; filter:opacity(100%)">In Progress</span></th>
+			</tr>
+			<template v-for="(task, index) in tasks">  
+			<tr v-if="task.status==='started' || task.status==='done :)'" :key="index" :class="{fadeOut: task.completed== true}">
                 <td style="width:5px" class="align-middle">
                     <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
                 </td>
@@ -53,6 +58,47 @@
                     </div>
                 </td>
             </tr>
+		</template>
+		</tbody>
+
+		<tbody>
+			<tr style="background-color:grey; filter:opacity(50%)">
+				<th colspan=5> <span style="color:white; filter:opacity(100%)">To-Do</span></th>
+			</tr>
+			<template v-for="(task, index) in tasks"> 
+            <tr v-if="task.status==='to - do!' || task.status==='done :)'" :key="index" :class="{fadeOut: task.completed== true}">
+                <td style="width:5px" class="align-middle">
+                    <!-- <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" > -->
+					<input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" >
+				</td>
+                <td class="align-middle" style="width:50px">
+                    <span :class="{'strikethrough':task.status=='done'}" >
+                        {{task.name}}
+                    </span>
+                </td>
+
+                <td class="align-middle" style="width: 10%" >
+                    <span class="pointer" @click="changeStatus(index)" 
+                    :class="{'text-danger': task.status=='to - do!', 'text-warning': task.status==='started', 'text-success':task.status==='done :)'}">
+                        {{task.status}}
+                    </span>
+                </td>
+                <td class="align-middle" style="width: 1%">
+                    <div @click="editTask(index)">
+                        <span class="fa fa-pen pointer"></span>
+                    </div>
+                </td>
+                <td class="align-middle" style="width: 1%">
+                    <div @click="deleteTask(index)">
+                        <!-- <span class="fa fa-trash pointer"></span> -->
+                        <span class="trash pointer">
+                            <span></span>
+    	                    <i></i>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+		</template>
         </tbody>
         </table>
     </div>
@@ -75,7 +121,7 @@
             edit_task: null,
             available_statuses: ['to - do!', 'started'],
             completed: false,
-            tasks: [
+            todo_tasks: [
                 {
                     name: 'Steal bananas from the store',
                     status: 'to - do!',
@@ -87,6 +133,8 @@
                     completed: false,
                 },
             ]
+
+			
         }
     },
 
