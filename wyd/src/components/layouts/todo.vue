@@ -157,7 +157,7 @@
             } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
-            setDoc(docRef, {todo:[], started:[]});
+            setDoc(docRef, {todo:[], completed:[]});
             }
         },
 
