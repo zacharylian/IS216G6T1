@@ -97,7 +97,7 @@ export default {
     position: absolute;
     bottom: 5%;
     padding: 0.75em;
-    margin-left:0.5em;
+    margin-left:0.25em;
     color: black;
     cursor: pointer;
     filter: grayscale(100%) opacity(0.6);
@@ -122,7 +122,7 @@ export default {
     position: absolute;
     bottom: 0;
     padding: 0.75em;
-    margin-left:0.5em; 
+    margin-left:0.25em; 
     color: black;
     transition: 0.5s linear;
     cursor: pointer;
