@@ -23,7 +23,7 @@
         </thead>
 
         <tbody>
-			<tr style="background-color:grey; filter:opacity(50%)">
+			<tr style="background-color:#B19CD9; filter:opacity(50%)">
 				<th colspan=5><span style="color:white; filter:opacity(100%)">In Progress</span></th>
 			</tr>
 			<template v-for="(task, index) in tasks">  
@@ -32,7 +32,7 @@
                     <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
                 </td>
                 <td class="align-middle" style="width:50px">
-                    <span :class="{'strikethrough':task.status=='done'}" >
+                    <span :class="{'strikethrough':task.completed==true}" >
                         {{task.name}}
                     </span>
                 </td>
@@ -62,17 +62,17 @@
 		</tbody>
 
 		<tbody>
-			<tr style="background-color:grey; filter:opacity(50%)">
+			<tr style="background-color:#B19CD9; filter:opacity(50%)">
 				<th colspan=5> <span style="color:white; filter:opacity(100%)">To-Do</span></th>
 			</tr>
 			<template v-for="(task, index) in tasks"> 
             <tr v-if="task.status==='to - do!' || task.status==='done :)'" :key="index" :class="{fadeOut: task.completed== true}">
                 <td style="width:5px" class="align-middle">
-                    <!-- <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" > -->
-					<input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" >
+                    <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
+					<!-- <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" > -->
 				</td>
                 <td class="align-middle" style="width:50px">
-                    <span :class="{'strikethrough':task.status=='done'}" >
+                    <span :class="{'strikethrough':task.completed==true}" >
                         {{task.name}}
                     </span>
                 </td>
@@ -179,7 +179,7 @@
         },
 
         completeTask(index) {
-            this.tasks[index].status = 'done :)'
+            // this.tasks[index].status = 'done :)'
             this.tasks[index].completed = true
             setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
         },
