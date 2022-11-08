@@ -1,94 +1,62 @@
 export default () => {
   console.log("HELLO!!!");
-  fetch(
-    "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json"
-  )
-    .then((response) => response.json())
-    .then((data) => {
+  // fetch(
+  //   "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json"
+  // )
+  //   .then((response) => response.json())
+  //   .then((data) => {
       const sudoData = {
-        months: 
-          {"oct": [
-            {"amt": 24, "cat": "finance"},
-            {"amt": 25, "cat": "finance"},
-            {"amt": 30, "cat": "transport"},
-            {"amt": 5, "cat": "food"},
-            {"amt": 30, "cat": "food"},
-            {"amt": 123, "cat": "investment"},
-            {"amt": 45, "cat": "finance"},
-            {"amt": 123, "cat": "investment"},
-            {"amt": 78, "cat": "finance"},
-            {"amt": 10, "cat": "finance"},
-            {"amt": 234, "cat": "investment"},
-            {"amt": 44, "cat": "finance"},
-            {"amt": 33, "cat": "food"},
-            {"amt": 22, "cat": "transport"},
-            {"amt": 25, "cat": "finance"},
-            {"amt": 455, "cat": "investment"},
-            {"amt": 46, "cat": "transport"},
-            {"amt": 67, "cat": "transport"},
-            {"amt": 78, "cat": "finance"},
-            {"amt": 89, "cat": "finance"},
-            {"amt": 90, "cat": "finance"},
-            {"amt": 95,  "cat": "finance"},
-            {"amt": 124, "cat": "investment"},
-            {"amt": 123, "cat": "investment"},
-            {"amt": 122, "cat": "investment"},
-            {"amt": 10, "cat": "food"},
-            {"amt": 89, "cat": "finance"},
-            {"amt": 90, "cat": "finance"},
-            {"amt": 10, "cat": "food"},
-            {"amt": 123,  "cat": "investment"},
-            {"amt": 232,  "cat": "investment"},
+        "allowance": 1000, 
+        "oct": [
+            {"date": 1, "day": "mon", "week": 1 ,"amt": 24, "cat": "finance"},
+            {"date": 2, "day": "tue", "week": 1 ,"amt": 25, "cat": "finance"},
+            {"date": 3, "day": "wed", "week": 1 ,"amt": 30, "cat": "transport"},
+            {"date": 4, "day": "thu", "week": 1 ,"amt": 5, "cat": "food"},
+            {"date": 5, "day": "fri", "week": 1 ,"amt": 30, "cat": "food"},
+            {"date": 6, "day": "sat", "week": 1 ,"amt": 123, "cat": "investment"},
+            {"date": 7, "day": "sun", "week": 1 ,"amt": 45, "cat": "finance"},
+            {"date": 8, "day": "mon", "week": 2 ,"amt": 123, "cat": "investment"},
+            {"date": 9, "day": "tue", "week": 2 ,"amt": 78, "cat": "finance"},
+            {"date": 10, "day": "wed", "week": 2 ,"amt": 10, "cat": "finance"},
+            {"date": 11, "day": "thu", "week": 2 ,"amt": 234, "cat": "investment"},
+            {"date": 12, "day": "fri", "week": 2 ,"amt": 44, "cat": "finance"},
+            {"date": 13, "day": "sat", "week": 2 ,"amt": 33, "cat": "food"},
+            {"date": 14, "day": "sun", "week": 2 ,"amt": 22, "cat": "transport"},
+            {"date": 15, "day": "mon", "week": 3 ,"amt": 25, "cat": "finance"},
+            {"date": 16, "day": "tue", "week": 3 ,"amt": 455, "cat": "investment"},
+            {"date": 17, "day": "wed", "week": 3 ,"amt": 46, "cat": "transport"},
+            {"date": 18, "day": "thu", "week": 3 ,"amt": 67, "cat": "transport"},
+            {"date": 19, "day": "fri", "week": 3 ,"amt": 78, "cat": "finance"},
+            {"date": 20, "day": "sat", "week": 3 ,"amt": 89, "cat": "finance"},
+            {"date": 21, "day": "sun", "week": 3 ,"amt": 90, "cat": "finance"},
+            {"date": 22, "day": "mon", "week": 4 ,"amt": 95,  "cat": "finance"},
+            {"date": 23, "day": "tue", "week": 4 ,"amt": 124, "cat": "investment"},
+            {"date": 24, "day": "wed", "week": 4 ,"amt": 123, "cat": "investment"},
+            {"date": 25, "day": "thu", "week": 4 ,"amt": 122, "cat": "investment"},
+            {"date": 26, "day": "fri", "week": 4 ,"amt": 10, "cat": "food"},
+            {"date": 27, "day": "sat", "week": 4 ,"amt": 89, "cat": "finance"},
+            {"date": 28, "day": "sun", "week": 4 ,"amt": 90, "cat": "finance"},
+            {"date": 29, "day": "mon", "week": 5 ,"amt": 10, "cat": "food"},
+            {"date": 30, "day": "tue", "week": 5 ,"amt": 123,  "cat": "investment"},
+            {"date": 31, "day": "wed", "week": 5 ,"amt": 232,  "cat": "investment"},
           ],
-          "nov": [
-            {"amt": 24, "cat": "finance"},
-            {"amt": 25, "cat": "finance"},
-            {"amt": 30, "cat": "transport"},
-            {"amt": 5, "cat": "food"},
-            {"amt": 30, "cat": "food"},
-            {"amt": 123, "cat": "investment"},
-            {"amt": 45, "cat": "finance"},
-            {"amt": 123, "cat": "investment"},
-            {"amt": 78, "cat": "finance"},
-            {"amt": 10, "cat": "finance"},
-            {"amt": 234, "cat": "investment"},
-            {"amt": 44, "cat": "finance"},
-            {"amt": 33, "cat": "food"},
-            {"amt": 22, "cat": "transport"},
-            {"amt": 25, "cat": "finance"},
-            {"amt": 455, "cat": "investment"},
-            {"amt": 46, "cat": "transport"},
-            {"amt": 67, "cat": "transport"},
-            {"amt": 78, "cat": "finance"},
-            {"amt": 89, "cat": "finance"},
-            {"amt": 90, "cat": "finance"},
-            {"amt": 95,  "cat": "finance"},
-            {"amt": 124, "cat": "investment"},
-            {"amt": 123, "cat": "investment"},
-            {"amt": 122, "cat": "investment"},
-            {"amt": 10, "cat": "food"},
-            {"amt": 89, "cat": "finance"},
-            {"amt": 90, "cat": "finance"},
-            {"amt": 10, "cat": "food"},
-            {"amt": 123,  "cat": "investment"}
-          ]},
       }
-      var gotData = data.monthlyVariance; //data
-      var amtArr = []
-      var catArr = []
-      console.log(sudoData.months)
-      
-      for (let [month, details] of Object.entries(sudoData.months)) {
-        console.log(month)
-        console.log(details)
-        for (let day of details) {
-          // console.log(day)
-          let price = day.amt;
-          let category = day.cat;
-          amtArr.push(price);
-          catArr.push(category);
-        }
-      }
+      // var gotData = data.monthlyVariance; //data
+      // var amtArr = []
+      // var catArr = []
+      // console.log(sudoData.months)
+    
+      // for (let [month, details] of Object.entries(sudoData)) {
+      //   console.log(month)
+      //   console.log(details)
+      //   for (let day of details) {
+      //           // console.log(day)
+      //           let price = day.amt;
+      //           let category = day.cat;
+      //           amtArr.push(price);
+      //           catArr.push(category);
+      //   }
+      // }
       // var tryData = sudoData.months[0]
       // console.log(tryData)
       var itemSize = 18;
@@ -110,20 +78,29 @@ export default () => {
         "#FF0D0D",
       ];
 
-      var months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sept",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
+      // var months = [
+      //   "Jan",
+      //   "Feb",
+      //   "Mar",
+      //   "Apr",
+      //   "May",
+      //   "Jun",
+      //   "Jul",
+      //   "Aug",
+      //   "Sept",
+      //   "Oct",
+      //   "Nov",
+      //   "Dec",
+      // ];
+      var days = [
+        "Monday",
+        "Tuesday", 
+        "Wednesday",
+        "Thursday", 
+        "Friday", 
+        "Saturday", 
+        "Sunday"
+      ]
 
       var weeks = [
         "week1",
@@ -132,11 +109,11 @@ export default () => {
         "week4",
         "week5"
       ]
-
-      var minYear = 2010;
+      console.log(sudoData.oct)
+      // var minYear = 2010;
       var dayStart = 0;
       // var maxYear = gotData[gotData.length - 1].year;
-      var maxYear = 2015;
+      // var maxYear = 2015;
       var dayEnd = 8;
       // var minVar = d3.min(gotData, function (d) {
       //   return d.variance;
@@ -144,12 +121,12 @@ export default () => {
       // var maxVar = d3.max(gotData, function (d) {
       //   return d.variance;
       // });
-      var yearFormat = d3.format("04d");
+      // var yearFormat = d3.format("04d");
       // var barWidth = Math.ceil(width / gotData.length) + 3;
       var barWidth = 20;
       var barHeight = 20;
       // var baseVariance = data.baseTemperature; //8.66 -> change to spendings
-      var baseSpendings = 0;
+      // var baseSpendings = 0;
 
       // Set the x axis to years
       // var x = d3.scale.linear().domain([minYear, maxYear]).range([0, width]);
@@ -166,8 +143,10 @@ export default () => {
         .axis()
         .scale(x)
         .orient("bottom")
-        .tickFormat(yearFormat)
-        .ticks((dayEnd - dayStart) / 10);
+        .tickFormat((d, i) => days[i])
+        // .ticks((dayEnd - dayStart) / 10)
+        // .tickValues([0, 0.17, 0.33, 0.5, 0.67, 0.83, 1]);
+        .ticks(7)
 
       // Tooltips
       var tip = d3
@@ -176,11 +155,11 @@ export default () => {
         .offset([-10, 0])
         .html(function (d) {
           return (
-            months[d.month - 1] +
+            weeks[d.week - 1] +
             " " +
-            d.year +
+            d.date +
             "<br/>Spendings: " +
-            (baseSpendings + d.variance).toFixed(2)
+            d.amt
           );
         });
 
@@ -196,43 +175,45 @@ export default () => {
       var rect = svg
         .selectAll(".rect")
         // .data(gotData)
-        .data(sudoData.months) //
+        .data(sudoData.oct) //
         .enter()
         .append("rect")
         .attr("fill", function (d) {
           // return z(d.variance);
-          console.log(d)
-          for (let [month, details] of Object.entries(d)) {
-            for (let day of details) {
-              console.log(day)
-              return z(day.amt)
-            }
-          }
-          // return z(d.amt)
+          // for (let [month, details] of Object.entries(d)) {
+          //   for (let item of details) {
+          //     console.log(item)
+          //     return z(item.amt)
+          //   }
+          // }
+          return z(d.amt);
         })
         .attr("x", function (d) {
           // return x(d.year);
           // return x(d.amt)
-          for (let [month, details] of Object.entries(d)) {
-            for (let day of details) {
-              return x(day.amt)
-            }
-          }
+          // for (let [month, details] of Object.entries(d)) {
+          //   for (let item of details) {
+          //     return x(item.date)
+          //   }
+          // }
+          return x(d.date);
         })
         .attr("y", function (d) {
           // return y(d.month);
           // return y(d.category)
-          for (let [month, details] of Object.entries(d)) {
-            for (let day of details) {
-              return x(day.category)
-            }
-          }
+          // for (let [month, details] of Object.entries(d)) {
+          //   for (let item of details) {
+          //     return y(item.week)
+          //   }
+          // }
+          return y(d.week);
         })
         .attr("width", barWidth)
         .attr("height", barHeight)
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide);
 
+      
       svg.call(tip);
 
       // Draw axis
@@ -303,5 +284,6 @@ export default () => {
         .attr("text-anchor", "middle")
         .attr("class", "axis-label")
         .text("Days");
-    });
-};
+  }
+//     });
+// };
