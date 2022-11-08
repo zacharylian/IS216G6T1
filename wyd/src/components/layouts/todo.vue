@@ -121,7 +121,7 @@
             edit_task: null,
             available_statuses: ['to - do!', 'started'],
             completed: false,
-            todo_tasks: [
+            tasks: [
                 {
                     name: 'Steal bananas from the store',
                     status: 'to - do!',
