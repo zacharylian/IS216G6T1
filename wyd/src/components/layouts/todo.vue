@@ -5,6 +5,7 @@
 
         <!-- Input -->
         <div class="d-flex align-items-center justify-content-center">
+			<button @click="undo()" class="btn"><span class="fa fa-rotate-left"></span></button>
             <input @keypress.enter="submitTask()" v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 225px">
             <button @click="submitTask()" class="btn"><span class="fa fa-check pointer"></span></button>
         </div>
@@ -69,7 +70,6 @@
             <tr v-if="task.status==='to - do!' || task.status==='done :)'" :key="index" :class="{fadeOut: task.completed== true}">
                 <td style="width:5px" class="align-middle">
                     <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" :checked="task.completed== true" >
-					<!-- <input type="checkbox" style="float:center" @click="completeTask(index)" class="pointer" > -->
 				</td>
                 <td class="align-middle" style="width:50px">
                     <span :class="{'strikethrough':task.completed==true}" >
@@ -84,7 +84,7 @@
                     </span>
                 </td>
                 <td class="align-middle" style="width: 1%">
-                    <div @click="editTask(index)">
+                    <div @click="editTask(index)" class="pen">
                         <span class="fa fa-pen pointer"></span>
                     </div>
                 </td>
@@ -132,7 +132,9 @@
                     status: 'to - do!',
                     completed: false,
                 },
-            ]
+            ],
+
+			completed_tasks: []
 
 			
         }
@@ -181,8 +183,26 @@
         completeTask(index) {
             // this.tasks[index].status = 'done :)'
             this.tasks[index].completed = true
+			this.completed_tasks.push(
+				{
+                        name: this.tasks[index].name,
+                        status: this.tasks[index].status
+                }
+			)
             setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
+			console.log(this.completed_tasks)
         },
+
+		undo() {
+			if (this.completed_tasks.length == 0 ){
+				return ""
+			} else {
+			let index = this.completed_tasks.length - 1
+			let task = this.completed_tasks[index]
+			this.tasks.push(task)
+			this.completed_tasks.splice(this.completed_tasks.length - 1, 1)
+		}
+		}
 
 
     }
@@ -192,6 +212,7 @@
 
 <style>
     @import "../../main.scss";
+
     .pointer {
         cursor: pointer;
     }
@@ -219,160 +240,11 @@
         }
     }
 
-    /* animated pencil css */
-    /* .pencil {
-	position: absolute;
-	top: 10px;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	animation: yeah 5s infinite ease-in-out;
-}
-
-@keyframes yeah {
-	0% {
-		transform: translate(-50%, 10px) rotate(0deg);
+	.pen:hover {
+		transform: rotate(45deg);
+		transition: 0.2s linear;
 	}
-	20% {
-		transform: translate(-50%, 70px) rotate(17deg);
-	}
-	40% {
-		transform: translate(-50%, 70px) rotate(-17deg);
-	}
-}
 
-.line {
-	z-index: -1;
-	position: absolute;
-	top: 428px;
-	left: 50%;
-	transform: translate(-50%, 0);
-	width: 100px;
-	height: 20px;
-	border-radius: 50%;
-	box-shadow: 0 5px 0 0 #555;
-	animation: line 5s infinite ease-in-out;
-}
-
-@keyframes line {
-	0% {
-		transform: translate(Calc(-50% - 50px), 0);
-		opacity: 1;
-		width: 0px;
-		height: 0px;
-	}
-	20% {
-		transform: translate(Calc(-50% - 50px), 0);
-		opacity: 1;
-		width: 0px;
-		height: 10px;
-	}
-	40%,
-	55% {
-		transform: translate(-50%, 0);
-		opacity: 1;
-		width: 100px;
-		height: 10px;
-	}
-	60% {
-		transform: translate(Calc(-50% + 50px), 0);
-		opacity: 0;
-		width: 0px;
-		height: 10px;
-	}
-	100% {
-		transform: translate(Calc(-50% + 50px), 0);
-		opacity: 0;
-		width: 0px;
-		height: 10px;
-	}
-}
-
-.rubber {
-	z-index: 1;
-	position: relative;
-	left: 5px;
-	width: 90px;
-	height: 40px;
-	background: grey;
-	border-radius: 25px 25px 0 0;
-}
-
-
-.ferrule {
-	z-index: 2;
-	position: relative;
-	width: 100px;
-	height: 40px;
-	background: grey;
-	border-radius: 4px;
-	box-shadow: 0px 2px 0 0px rgba(0, 0, 0, 0.4);
-}
-
-.stripe:nth-child(1) {
-	top: 10px;
-}
-
-.stripe:nth-child(2) {
-	top: 15px;
-}
-
-.stick {
-	z-index: 1;
-	position: relative;
-	left: 5px;
-	width: 90px;
-	height: 200px;
-	background: grey;
-	border-radius: 15px;
-}
-
-.side {
-	position: absolute;
-	width: 30px;
-	height: 200px;
-	border-radius: 0 0 25px 25px;
-}
-
-.side:nth-child(1) {
-	left: 0;
-	top: 0;
-	background: grey;
-}
-
-.side:nth-child(2) {
-	left: 30px;
-	top: 0;
-	background: grey;
-}
-
-.side:nth-child(3) {
-	left: 60px;
-	top: 0;
-	background: grey;
-}
-
-
-.bottom {
-	z-index: 2;
-	position: relative;
-	left: 5px;
-	top: -11px;
-	width: 0;
-	height: 10px;
-	border-left: 45px solid transparent;
-	border-right: 45px solid transparent;
-	border-top: 90px solid grey;
-}
-
-.graphite {
-	position: relative;
-	left: 45px;
-	top: -33px;
-	width: 10px;
-	height: 15px;
-	background: grey;
-	border-radius: 2px 2px 50% 50%;
-} */
 
     /* animated trashbin css */
     .trash {
