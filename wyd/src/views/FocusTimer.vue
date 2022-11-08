@@ -108,42 +108,81 @@ export default {
 
 
 timer() {
-  var self=this;
-  let myCounter;
-  //resume aft pausing how?
-  let seconds = 60;
-  clearInterval(this.interval);
-  let mins = Number(document.getElementById('min').value);
   let time = document.getElementById('time');
-  var i = mins * seconds;
-  myCounter = setInterval(function() {
-    if (i <= 0) {
-      console.log('completed');
-      clearInterval(myCounter);
-      time.innerHTML='00:00'
-      date=new Date();
-      duration=mins;
-      end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
-      end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
-      //here i would ideally send the information to the database!
-      //maybe can play a jingle when time ends?
+  if (time.innerHTML == '00:00') {
+              var self=this;
+              let myCounter;
+              let seconds = 60;
+              clearInterval(this.interval);
+              let mins = Number(document.getElementById('min').value);
+              var i = mins * seconds;
+              myCounter = setInterval(function() {
+                if (i <= 0) {
+                  console.log('completed');
+                  clearInterval(myCounter);
+                  time.innerHTML='00:00'
+                  date=new Date();
+                  duration=mins;
+                  end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
+                  end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
+                  //here i would ideally send the information to the database!
+                  //maybe can play a jingle when time ends?
 
-    } else {
-      let minutess=Math.floor(i/60);
-      let secondss=i-minutess*60;
-      if (minutess<10) {
-        minutess="0"+minutess.toString();
-      }
-      if (secondss<10) {
-        secondss="0"+secondss.toString();
-      }
-      time.innerHTML = minutess+":"+secondss;
-      console.log(i--);
-      console.log(myCounter);
-    }
+                } else {
+                  let minutess=Math.floor(i/60);
+                  let secondss=i-minutess*60;
+                  if (minutess<10) {
+                    minutess="0"+minutess.toString();
+                  }
+                  if (secondss<10) {
+                    secondss="0"+secondss.toString();
+                  }
+                  time.innerHTML = minutess+":"+secondss;
+                  console.log(i--);
+                  console.log(myCounter);
+                }
 
-  }, 1000);
-  this.interval=myCounter;
+              }, 1000);
+              this.interval=myCounter;
+                }
+                  else {
+                    var self=this;
+                    let myCounter;
+                    let seconds = 60;
+                    clearInterval(this.interval);
+                    let timearr=time.innerHTML.split(':');
+                    let mins = Number(timearr[0]);
+                    let seccy = Number(timearr[1]);
+                    var i = mins * seconds + seccy;
+                    myCounter = setInterval(function() {
+                      if (i <= 0) {
+                        console.log('completed');
+                        clearInterval(myCounter);
+                        time.innerHTML='00:00'
+                        date=new Date();
+                        duration=mins;
+                        end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
+                        end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
+                        //here i would ideally send the information to the database!
+                        //maybe can play a jingle when time ends?
+
+                      } else {
+                        let minutess=Math.floor(i/60);
+                        let secondss=i-minutess*60;
+                        if (minutess<10) {
+                          minutess="0"+minutess.toString();
+                        }
+                        if (secondss<10) {
+                          secondss="0"+secondss.toString();
+                        }
+                        time.innerHTML = minutess+":"+secondss;
+                        console.log(i--);
+                        console.log(myCounter);
+                      }
+
+                    }, 1000);
+                    this.interval=myCounter;
+                  }
 },
 
 pause() {
@@ -207,13 +246,7 @@ googleSignOut() {
           console.log(error)
           });
         },
-  },
-
-
-
-}
-
-
+  }}
 
 </script>
 
