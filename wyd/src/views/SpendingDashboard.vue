@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar_main">
+    <nav class="navbar_home">
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link to="/" class="nav-link">
@@ -80,12 +80,12 @@
 
 <script>
 // IMPORTS
-import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
+import { getAuth, signOut } from '@firebase/auth';
 import DayChart from "./DayChart.vue";
 import CalendarHeatmap from "./ActualCalendarHeatmap.vue";
 import "../plugins/calendar";
 import TodaySpending from "./TodaySpending.vue";
-import navBar from '@/components/layouts/navbar.vue';
+
 
 //EXPORTS
 export default {
@@ -94,11 +94,21 @@ export default {
     DayChart: DayChart,
     CalendarHeatmap: CalendarHeatmap,
     TodaySpending: TodaySpending,
-    'navigation-bar': navBar,
   },
-  setup() {
-    return {open, toggleNavbar, navbarWidth}
-  },
+  methods: {
+        googleSignOut() {
+          const auth = getAuth();
+          signOut(auth).then(() => {
+          // Sign-out successful.
+          alert("Successful Sign Out")
+          console.log(getAuth().currentUser)
+          location.reload()
+          }).catch((error) => {
+          // An error happened.
+          console.log(error)
+          });
+        },
+  }
 };
 </script>
 

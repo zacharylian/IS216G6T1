@@ -1,6 +1,6 @@
 <template>
 
-<nav class="navbar_main">
+<nav class="navbar_home">
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link to="/" class="nav-link">
@@ -77,20 +77,12 @@
 
 <script>
 //IMPORTS
-import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
-import navBar from '@/components/layouts/navbar.vue';
+import { getAuth, signOut } from '@firebase/auth';
 
 //EXPORTS
 export default {
   name: 'FocusTimer',
 
-  components: {
-    'navigation-bar': navBar,
-  },
-
-  setup() {
-    return {open, toggleNavbar, navbarWidth}
-  },
 
   data() {
     date: new Date()
@@ -146,8 +138,23 @@ stoppie() {
   clearInterval(this.interval);
   console.log(this.interval);
   time.innerHTML=('00:00');
-}
+},
+
+googleSignOut() {
+          const auth = getAuth();
+          signOut(auth).then(() => {
+          // Sign-out successful.
+          alert("Successful Sign Out")
+          console.log(getAuth().currentUser)
+          location.reload()
+          }).catch((error) => {
+          // An error happened.
+          console.log(error)
+          });
+        },
   },
+
+
 
 }
 
