@@ -1,7 +1,7 @@
 <template>
 
 
-  <nav class="navbar_main">
+    <nav class="navbar_main">
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link to="/" class="nav-link">
@@ -49,7 +49,8 @@
 
     </ul>
   </nav>
-  <div style="margin-left:6rem">
+  <div style="margin-left:6rem">  
+
   <div class="pt-3 mw-100">
 
 <div class="row" >
@@ -136,5 +137,5 @@ export default {
 </script>
 
 <style>
-
+  @import "@/navbar.css";
 </style>
