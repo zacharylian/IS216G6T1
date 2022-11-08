@@ -94,7 +94,7 @@
                       <defs>
                           <linearGradient id="GradientColor">
                             <stop offset="0%" stop-color="#e91e63" />
-                            <stop offset="100%" stop-color="#673ab7" />
+                            <stop offset="100%" stop-color="#5865F2" />
                           </linearGradient>
                       </defs>
                       <circle cx="80" cy="80" r="70" stroke-linecap="round" />
