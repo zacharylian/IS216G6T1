@@ -1,7 +1,54 @@
 <template>
 
-<navigation-bar />
-<div :style="{'margin-left': navbarWidth}">
+<nav class="navbar_main">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <router-link to="/" class="nav-link">
+          <i class="fas fa-house fa-2x" />
+          <span class="link-text" >
+                Home
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/Calendar" class="nav-link">
+          <i class="fas fa-calendar-days fa-2x" />
+          <span class="link-text" >
+                Calendar
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/SpendingDashboard" class="nav-link">
+          <i class="fas fa-sack-dollar fa-2x" />
+          <span class="link-text" >
+                Spendings
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/FocusTimer" class="nav-link">
+          <i class="fas fa-stopwatch fa-2x" />
+          <span class="link-text" >
+                Timer
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <span @click="googleSignOut">
+            <i class="fas fa-right-from-bracket fa-2x" @click="googleSignOut"></i>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+<div style="margin-left:6rem">
 
   <div class="mt-4 text-center">
 

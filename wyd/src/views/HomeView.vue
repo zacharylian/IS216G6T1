@@ -1,8 +1,55 @@
 <template>
 
 
-  <navigation-bar />
-  <div :style="{'margin-left': navbarWidth}">
+  <nav class="navbar_main">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <router-link to="/" class="nav-link">
+          <i class="fas fa-house fa-2x" />
+          <span class="link-text" >
+                Home
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/Calendar" class="nav-link">
+          <i class="fas fa-calendar-days fa-2x" />
+          <span class="link-text" >
+                Calendar
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/SpendingDashboard" class="nav-link">
+          <i class="fas fa-sack-dollar fa-2x" />
+          <span class="link-text" >
+                Spendings
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/FocusTimer" class="nav-link">
+          <i class="fas fa-stopwatch fa-2x" />
+          <span class="link-text" >
+                Timer
+          </span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <span @click="googleSignOut">
+            <i class="fas fa-right-from-bracket fa-2x" @click="googleSignOut"></i>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+  <div style="margin-left:6rem">
   <div class="pt-3 mw-100">
 
 <div class="row" >
@@ -49,30 +96,45 @@
 
 <script>
 // @ is an alias to /src
-import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
-import navBar from '@/components/layouts/navbar.vue';
+// import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
+// import navBar from '@/components/layouts/navbar.vue';
 
 import todo from '@/components/layouts/todo.vue';
-import { getAuth } from '@firebase/auth';
+import { getAuth, signOut } from '@firebase/auth';
 
 export default {
   name: 'HomeView',
   components: {
     "todo": todo,
-    'navigation-bar': navBar,
+    // 'navigation-bar': navBar,
   },
-  setup() {
-    return {open, toggleNavbar, navbarWidth}
-  },
+  // setup() {
+  //   return {open, toggleNavbar, navbarWidth}
+  // },
   data() {return {
     username: getAuth().currentUser.displayName,
     date: new Date(),
   }},
+
+  methods: {
+                googleSignOut() {
+                      const auth = getAuth();
+                      signOut(auth).then(() => {
+                        // Sign-out successful.
+                        alert("Successful Sign Out")
+                        console.log(getAuth().currentUser)
+                        location.reload()
+                 
+                      }).catch((error) => {
+                        // An error happened.
+                        console.log(error)
+                      });
+                    },
+              }
 }
 
 </script>
 
 <style>
- 
- 
+
 </style>
