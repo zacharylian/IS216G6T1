@@ -48,7 +48,7 @@
 } */
 
 .slide-fade-enter-active {
-    transition: all 1.5s ease-out;
+    transition: all 1s ease-out;
 }
 
 .slide-fade-leave-active {

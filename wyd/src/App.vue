@@ -44,7 +44,7 @@
 </script>
 
 <template>
-  <navigation-bar />
+  <!-- <navigation-bar /> -->
   <div>
     <router-view/>
   </div>

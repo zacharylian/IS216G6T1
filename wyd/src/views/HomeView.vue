@@ -1,9 +1,7 @@
 <template>
 
 
-
-  <!-- <button v-on:click="googleSignOut">Sign Out</button> -->
-
+  <navigation-bar />
   <div :style="{'margin-left': navbarWidth}">
   <div class="pt-3 mw-100">
 
@@ -54,6 +52,7 @@
 <script>
 // @ is an alias to /src
 import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
+import navBar from '@/components/layouts/navbar.vue';
 
 import todo from '@/components/layouts/todo.vue';
 import { getAuth } from '@firebase/auth';
@@ -62,6 +61,7 @@ export default {
   name: 'HomeView',
   components: {
     "todo": todo,
+    'navigation-bar': navBar,
   },
   setup() {
     return {open, toggleNavbar, navbarWidth}

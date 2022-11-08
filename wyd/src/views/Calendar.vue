@@ -1,4 +1,5 @@
 <template>
+    <navigation-bar />
     <div :style="{'margin-left': navbarWidth}">
         <!-- <div class="container-fluid">
             <div src="../components/layouts/calendar.html" id="app"> -->
@@ -21,13 +22,15 @@
 <script>
 import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-vue-schedule';
+import navBar from '@/components/layouts/navbar.vue';
 
 
 //EXPORTS
 export default {
     name: 'Calendar',
     components: {
-    'ejs-schedule': ScheduleComponent
+    'ejs-schedule': ScheduleComponent,
+    'navigation-bar': navBar,
     },
     setup() {
     return {open, toggleNavbar, navbarWidth}

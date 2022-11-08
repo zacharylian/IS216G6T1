@@ -1,5 +1,6 @@
 <template>
 
+<navigation-bar />
 <div :style="{'margin-left': navbarWidth}">
 
   <div class="mt-4 text-center">
@@ -44,10 +45,15 @@
 <script>
 //IMPORTS
 import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
+import navBar from '@/components/layouts/navbar.vue';
 
 //EXPORTS
 export default {
   name: 'FocusTimer',
+
+  components: {
+    'navigation-bar': navBar,
+  },
 
   setup() {
     return {open, toggleNavbar, navbarWidth}

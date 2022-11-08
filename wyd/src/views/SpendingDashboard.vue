@@ -1,4 +1,5 @@
 <template>
+  <navigation-bar />
   <div :style="{'margin-left': navbarWidth}">
     <div class="border border-info" style="height: 95%">
       <div class="row border border-primary h-50">
@@ -31,6 +32,7 @@ import DayChart from "./DayChart.vue";
 import CalendarHeatmap from "./ActualCalendarHeatmap.vue";
 import "../plugins/calendar";
 import TodaySpending from "./TodaySpending.vue";
+import navBar from '@/components/layouts/navbar.vue';
 
 //EXPORTS
 export default {
@@ -39,6 +41,7 @@ export default {
     DayChart: DayChart,
     CalendarHeatmap: CalendarHeatmap,
     TodaySpending: TodaySpending,
+    'navigation-bar': navBar,
   },
   setup() {
     return {open, toggleNavbar, navbarWidth}
