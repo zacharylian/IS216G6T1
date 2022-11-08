@@ -56,7 +56,8 @@ export default {
 
 
 timer() {
-  var myCounter;
+  var self=this;
+  let myCounter;
   let seconds = 60;
   clearInterval(myCounter);
   let mins = Number(document.getElementById('min').value);
@@ -86,16 +87,18 @@ timer() {
     }
 
   }, 1000);
+  this.interval=myCounter;
 },
 
 pause() {
-  //this one pause
+  clearInterval(this.interval);
+  console.log(this.interval);
 },
 
 stoppie() {
   let time = document.getElementById('time');
-  clearInterval(myCounter);
-  console.log(myCounter);
+  clearInterval(this.interval);
+  console.log(this.interval);
   time.innerHTML=('00:00');
 }
   },
