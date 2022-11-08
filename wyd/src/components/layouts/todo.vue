@@ -108,8 +108,22 @@
 
 
 <script>
-    // import lightDark from './lightdark.vue';
+    import { getAuth } from 'firebase/auth'
+    import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore'
+    import { ref, onMounted } from 'vue'
+    import { db } from '../../main'
+    
+    
     export default {
+        created(){
+            
+        console.log("=====getting UID=====")
+        this.uid = getAuth().currentUser.uid
+        console.log(this.uid)
+
+        console.log("=====extracting data from db=====")
+        this.checkdb()
+        },
         name: "todo",
         props: {
             msg: String
@@ -117,22 +131,12 @@
 
     data() {
         return {
+            uid: "",
             new_task: "",
             edit_task: null,
             available_statuses: ['to - do!', 'started'],
             completed: false,
-            tasks: [
-                {
-                    name: 'Steal bananas from the store',
-                    status: 'to - do!',
-                    completed: false,
-                },
-                {
-                    name: 'Eat 1kg chocolate in 1 hour',
-                    status: 'to - do!',
-                    completed: false,
-                },
-            ],
+            tasks: [],
 
 			completed_tasks: []
 
@@ -141,6 +145,27 @@
     },
 
     methods: {
+        async checkdb(){
+            const docRef = doc(db, "todolist", this.uid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            this.tasks = docSnap.data().todo
+            this.completed_tasks = docSnap.data().completed
+
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            setDoc(docRef, {todo:[], started:[]});
+            }
+        },
+
+        async updatedb(){
+            const docRef = doc(db, "todolist", this.uid);
+            await updateDoc(docRef, { todo: this.tasks, completed: this.completed_tasks})
+
+        },
         submitTask() {
             console.log("-- you are in submitTask() func --")
             if (this.new_task.length === 0) {
@@ -151,12 +176,16 @@
                 this.tasks.push(
                     {
                         name: this.new_task,
-                        status: 'to - do!' 
+                        status: 'to - do!',
+                        completed: false
                     }
                 )
+                this.updatedb()
+
             } else {
                 this.tasks[this.edit_task].name = this.new_task
                 this.edit_task = null;
+                this.updatedb()
             }
 
             this.new_task = "";
@@ -164,6 +193,7 @@
 
         deleteTask(index) {
             this.tasks.splice(index, 1);
+            this.updatedb()
         },
 
         editTask(index) {
@@ -186,11 +216,13 @@
 			this.completed_tasks.push(
 				{
                         name: this.tasks[index].name,
-                        status: this.tasks[index].status
+                        status: this.tasks[index].status,
+                        completed: true
                 }
 			)
             setTimeout(() => {this.tasks.splice(index, 1)}, 2000);
 			console.log(this.completed_tasks)
+            this.updatedb()
         },
 
 		undo() {
