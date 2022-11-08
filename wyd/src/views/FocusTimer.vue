@@ -15,15 +15,6 @@
         <div class="col col-5 text-left"><h2>hours</h2></div>
     </div> -->
     <br>
-    <div> <!-- make the buttons clickable :( if focus then time gets recorded. if break then time doesnt get recorded. -->
-      <button class="button active mode-button mx-2 px-4" id="focus">
-          Focus
-      </button>
-      <button class="button mode-button mx-2 px-4" id="breakie">
-          Break
-      </button>
-    </div>
-    <br>
     <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:55%;text-align:center;">
       00:00
     </div>
