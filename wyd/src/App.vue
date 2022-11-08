@@ -3,8 +3,7 @@
 <script>
   // import axios from 'axios';
   
-  import navBar from '@/components/layouts/navbar.vue';
-  import {navbarWidth} from '@/components/layouts/state'
+
   // import { ChartDoughnut } from '@/components/ChartDoughnut.vue';
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
   import router from './router';
@@ -17,12 +16,7 @@
 
   export default {
       name: 'App',
-      components: {
-        'navigation-bar': navBar,
-        setup() {
-          return {navbarWidth}
-        }
-    },
+
       data() {
         return {
           currentTheme: localStorage.getItem("theme-color"),

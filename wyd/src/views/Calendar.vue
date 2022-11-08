@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar_main">
+    <nav class="navbar_home">
     <ul class="navbar-nav">
         <li class="nav-item">
             <router-link to="/" class="nav-link">
@@ -74,11 +74,10 @@
 </template>
 
 <script>
-import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
+
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-vue-schedule';
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
-import navBar from '@/components/layouts/navbar.vue';
-
+import { getAuth, signOut } from '@firebase/auth';
 
 //EXPORTS
 export default {
@@ -86,11 +85,9 @@ export default {
     components: {
     'ejs-schedule': ScheduleComponent,
     'ejs-treeview': TreeViewComponent,
-    'navigation-bar': navBar,
+
     },
-    setup() {
-    return {open, toggleNavbar, navbarWidth}
-    },
+
     provide : {
         schedule: [Day, Week, WorkWeek, Month, Agenda]
     },
@@ -141,7 +138,19 @@ export default {
       };
       //schedulerComponentObject.addEvent(eventData);
       schedulerComponentObject.openEditor(eventData,'Add',true);
-    }
+    },
+    googleSignOut() {
+          const auth = getAuth();
+          signOut(auth).then(() => {
+          // Sign-out successful.
+          alert("Successful Sign Out")
+          console.log(getAuth().currentUser)
+          location.reload()
+          }).catch((error) => {
+          // An error happened.
+          console.log(error)
+          });
+        },
   }
 }
 </script>

@@ -1,7 +1,10 @@
 <template>
+  <head>
+    <link rel="stylesheet" href="@/navbar.css">
+  </head>
 
-
-    <nav class="navbar_main">
+<body>
+  <nav class="navbar_home">
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link to="/" class="nav-link">
@@ -49,6 +52,8 @@
 
     </ul>
   </nav>
+
+<main>
   <div style="margin-left:6rem">  
 
   <div class="pt-3 mw-100">
@@ -91,6 +96,8 @@
       </div>
 </div>
 </div>
+</main>
+</body>
 
 </template>
 
@@ -107,35 +114,32 @@ export default {
   name: 'HomeView',
   components: {
     "todo": todo,
-    // 'navigation-bar': navBar,
+
   },
-  // setup() {
-  //   return {open, toggleNavbar, navbarWidth}
-  // },
+
   data() {return {
     username: getAuth().currentUser.displayName,
     date: new Date(),
   }},
 
   methods: {
-                googleSignOut() {
-                      const auth = getAuth();
-                      signOut(auth).then(() => {
-                        // Sign-out successful.
-                        alert("Successful Sign Out")
-                        console.log(getAuth().currentUser)
-                        location.reload()
-                 
-                      }).catch((error) => {
-                        // An error happened.
-                        console.log(error)
-                      });
-                    },
-              }
+        googleSignOut() {
+          const auth = getAuth();
+          signOut(auth).then(() => {
+          // Sign-out successful.
+          alert("Successful Sign Out")
+          console.log(getAuth().currentUser)
+          location.reload()
+          }).catch((error) => {
+          // An error happened.
+          console.log(error)
+          });
+        },
+  }
 }
 
 </script>
 
 <style>
-  @import "@/navbar.css";
+@import "@/navbar.css";
 </style>
