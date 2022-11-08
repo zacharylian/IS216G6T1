@@ -1,9 +1,6 @@
 <template>
-  <head>
-    <link rel="stylesheet" href="@/navbar.css">
-  </head>
 
-<body>
+<!-- <body> -->
   <nav class="navbar_home">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -53,7 +50,7 @@
     </ul>
   </nav>
 
-<main>
+<!-- <main> -->
   <div style="margin-left:6rem">  
 
   <div class="pt-3 mw-100">
@@ -117,8 +114,8 @@
       </div>
 </div>
 </div>
-</main>
-</body>
+<!-- </main>
+</body> -->
 
 </template>
 
