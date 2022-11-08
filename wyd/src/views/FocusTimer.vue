@@ -57,9 +57,20 @@
     </div>
 
     <br>
-    <div class="clock bg px-5 py-3 mb-4 text-center" id="time" style="border-radius:30px;margin:auto;width:60%;text-align:center;font-size:18vw;">
+    <div class="row">
+      <div class="col">
+        <div class="clock bg px-5 py-3 mb-4 text-center" id="time" style="border-radius:30px;margin:auto;width:60%;text-align:center;font-size:18vw;">
       00:00
     </div>
+      </div>
+    </div>
+        <div class="row m-auto">
+          <div class="col col-4"></div>
+          <div class="col col-2 bg"><button class="main-button mt-0" style="font-size:3vw;border:none;" @click="upfive()">↑</button></div>
+          &nbsp&nbsp&nbsp&nbsp
+          <div class="col col-2 bg"><button class="main-button mt-0" style="font-size:3vw;border:none;" @click="downfive()">↓</button></div>
+          <div class="col col-4"></div>
+        </div><br>
 
     <div class="mb-4">
       <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50 text-center"><br>
@@ -101,14 +112,14 @@ timer() {
   let myCounter;
   //resume aft pausing how?
   let seconds = 60;
-  clearInterval(myCounter);
+  clearInterval(this.interval);
   let mins = Number(document.getElementById('min').value);
+  let time = document.getElementById('time');
   var i = mins * seconds;
   myCounter = setInterval(function() {
     if (i <= 0) {
       console.log('completed');
       clearInterval(myCounter);
-      let time = document.getElementById('time');
       time.innerHTML='00:00'
       date=new Date();
       duration=mins;
@@ -118,8 +129,6 @@ timer() {
       //maybe can play a jingle when time ends?
 
     } else {
-      
-      let time = document.getElementById('time');
       let minutess=Math.floor(i/60);
       let secondss=i-minutess*60;
       if (minutess<10) {
@@ -147,6 +156,43 @@ stoppie() {
   clearInterval(this.interval);
   console.log(this.interval);
   time.innerHTML=('00:00');
+},
+
+upfive() {
+  console.log('Upfive!');
+  let time = document.getElementById('time').innerHTML;
+  console.log(time);
+  let timearr=time.split(':');
+  console.log(timearr);
+  let newmins=Number(timearr[0])+5;
+  let secondy=Number(timearr[1]);
+  newmins=newmins.toString();
+  if (newmins.length<2) {newmins='0'+newmins};
+  secondy=secondy.toString();
+  if (secondy.length<2) {secondy='0'+secondy};
+  let newtime=newmins+':'+secondy;
+  document.getElementById('time').innerHTML=newtime;
+  console.log(newtime);
+},
+
+downfive() {
+  console.log('Downfive!');
+  let time = document.getElementById('time').innerHTML;
+  console.log(time);
+  let timearr=time.split(':');
+  let currmins=Number(timearr[0]);
+  if (currmins>0) {
+  console.log(timearr);
+  let newmins=Number(timearr[0])-5;
+  let secondy=Number(timearr[1]);
+  newmins=newmins.toString();
+  if (newmins.length<2) {newmins='0'+newmins};
+  secondy=secondy.toString();
+  if (secondy.length<2) {secondy='0'+secondy};
+  let newtime=newmins+':'+secondy;
+  document.getElementById('time').innerHTML=newtime;
+  console.log(newtime);
+  }
 },
 
 googleSignOut() {
