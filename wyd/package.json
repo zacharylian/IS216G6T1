@@ -10,6 +10,7 @@
   "dependencies": {
     "@syncfusion/ej2-angular-schedule": "^20.3.52",
     "@syncfusion/ej2-vue-calendars": "^20.3.50",
+    "@syncfusion/ej2-vue-navigations": "^20.3.56",
     "@syncfusion/ej2-vue-schedule": "^20.3.52",
     "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
