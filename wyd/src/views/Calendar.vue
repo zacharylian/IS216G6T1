@@ -55,7 +55,21 @@
                     <ejs-schedule currentView="Month"
                     :eventSettings="appointmentData"
                     :selectedDate="schedulerSelectedDate"
+                    :dragStart="onDragStart"
+                    :resizeStart="onResizeStart"
+                    allowMultiDrag='true'
                     ref="schedulerObject">
+                        <e-resources>
+                            <e-resource
+                            :dataSource="prioDatasource"
+                            field="PriorityId"
+                            title="Priority Level"
+                            name="Priority Level"
+                            textField="prioName"
+                            idField="prioId"
+                            colorField="color"> 
+                            </e-resource>
+                        </e-resources>
                     </ejs-schedule>
                 </div>
             </div>
@@ -75,7 +89,7 @@
 
 <script>
 import {open, toggleNavbar, navbarWidth} from '@/components/layouts/state';
-import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-vue-schedule';
+import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective } from '@syncfusion/ej2-vue-schedule';
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
 import navBar from '@/components/layouts/navbar.vue';
 
@@ -86,18 +100,24 @@ export default {
     components: {
     'ejs-schedule': ScheduleComponent,
     'ejs-treeview': TreeViewComponent,
+    'e-resources' : ResourcesDirective,
+    'e-resource' : ResourceDirective,
     'navigation-bar': navBar,
     },
     setup() {
     return {open, toggleNavbar, navbarWidth}
     },
     provide : {
-        schedule: [Day, Week, WorkWeek, Month, Agenda]
+        schedule: [Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize]
     },
     data() {
-    return {
-      draggedItemId : null,   
-      treeviewFields: { 
+    return {  
+    prioDatasource: [
+        {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
+        {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},
+        {prioName: 'Low-Priority', prioId: 3, color: '#008450'}
+    ],
+    treeviewFields: { 
         dataSource: [
           {Id: 1, Name: 'WADII'},
           {Id: 2, Name: 'CT'},
@@ -114,13 +134,15 @@ export default {
               Id : 1,
               Subject : 'Learn Thai',
               StartTime: new Date(2022, 10, 5, 8, 0, 0),
-              EndTime: new Date(2022, 10, 6, 9, 0, 0)
+              EndTime: new Date(2022, 10, 6, 9, 0, 0),
+              PriorityId : 1
             },
             {
               Id : 2,
               Subject : 'WAD Help',
               StartTime: new Date(2022, 10, 8, 10, 0, 0),
-              EndTime: new Date(2022, 10, 8, 11, 30, 0)
+              EndTime: new Date(2022, 10, 8, 11, 30, 0),
+              PriorityId : 2
             }
          ]
       }
@@ -141,6 +163,24 @@ export default {
       };
       //schedulerComponentObject.addEvent(eventData);
       schedulerComponentObject.openEditor(eventData,'Add',true);
+    },
+    onDragStart : function (args) {
+        args.excludeSelectors = 'e-header-cells,e-all-day-cells';
+        args.navigation.enable = true;
+        args.interval = 1, 
+        args.scroll = {
+            enable : true,
+            scrollBy : 4,
+            timeDelay : 100
+        }
+    },
+    onResizeStart : function (args) {
+        args.interval = 1, 
+        args.scroll = { 
+            enable : true,
+            scrollBy : 4,
+            timeDelay : 100
+        }
     }
   }
 }
@@ -159,9 +199,3 @@ export default {
 
 
 </style>
-
-
-<!-- <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script> -->
-
-// how to move the top two scripts into "external.js"?
