@@ -266,7 +266,9 @@ enterTime() {
   if (mins.length<2) {
     mins='0'+mins;
   }
+  if (Number(mins)<=1400) {
   document.getElementById('time').innerHTML=mins+':00';
+}
   document.getElementById('min').value='';
 },
 
