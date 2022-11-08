@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar_home">
     <ul class="navbar-nav">
-        <li class="nav-item">
-            <router-link to="/" class="nav-link">
+        <li class="nav-li">
+            <router-link to="/" class="nav-link2">
             <i class="fas fa-house fa-2x" />
             <span class="link-text" >
                     Home
@@ -10,8 +10,8 @@
             </router-link>
         </li>
 
-        <li class="nav-item">
-            <router-link to="/Calendar" class="nav-link">
+        <li class="nav-li">
+            <router-link to="/Calendar" class="nav-link2">
             <i class="fas fa-calendar-days fa-2x" />
             <span class="link-text" >
                     Calendar
@@ -19,8 +19,8 @@
             </router-link>
         </li>
 
-        <li class="nav-item">
-            <router-link to="/SpendingDashboard" class="nav-link">
+        <li class="nav-li">
+            <router-link to="/SpendingDashboard" class="nav-link2">
             <i class="fas fa-sack-dollar fa-2x" />
             <span class="link-text" >
                     Spendings
@@ -28,8 +28,8 @@
             </router-link>
         </li>
 
-        <li class="nav-item">
-            <router-link to="/FocusTimer" class="nav-link">
+        <li class="nav-li">
+            <router-link to="/FocusTimer" class="nav-link2">
             <i class="fas fa-stopwatch fa-2x" />
             <span class="link-text" >
                     Timer
@@ -37,8 +37,8 @@
             </router-link>
         </li>
 
-        <li class="nav-item">
-            <a href="#" class="nav-link">
+        <li class="nav-li">
+            <a href="#" class="nav-link2">
             <span @click="googleSignOut">
                 <i class="fas fa-right-from-bracket fa-2x" @click="googleSignOut"></i>
             </span>
