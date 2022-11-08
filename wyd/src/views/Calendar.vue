@@ -41,18 +41,23 @@ export default {
                 dataSource : [ // can put in data dynamically, just need to know the format.
                     {
                         Subject: 'Project Meeting',
-                        StartTime: new Date(2022, 9, 9, 9, 0), // idk why but month starts from 0 (jan), 1 (feb)
-                        EndTime: new Date(2022, 9, 10, 10, 0)
+                        StartTime: new Date(2022, 10, 7, 9, 0), // idk why but month starts from 0 (jan), 1 (feb)
+                        EndTime: new Date(2022, 10, 8, 10, 0)
                     },
                     {
                         Subject: 'Feed Myself',
-                        StartTime: new Date(2022, 9, 11, 10, 0),
-                        EndTime: new Date(2022, 9, 11, 11, 30)
+                        StartTime: new Date(2022, 10, 17, 10, 0),
+                        EndTime: new Date(2022, 10, 17, 11, 30)
                     },
                     {
                         Subject: 'Learn Thai',
-                        StartTime: new Date(2022, 9, 12, 11, 30),
-                        EndTime: new Date(2022, 9, 12, 12, 30)
+                        StartTime: new Date(2022, 10, 17, 11, 30),
+                        EndTime: new Date(2022, 10, 17, 12, 30)
+                    },
+                    {
+                        Subject: 'SOS for WADII Project',
+                        StartTime: new Date(2022, 10, 8, 11, 30),
+                        EndTime: new Date(2022, 10, 13, 23, 30)
                     }
                 ]
             }
