@@ -15,7 +15,7 @@
         <div class="col col-5 text-left"><h2>hours</h2></div>
     </div> -->
     <br>
-    <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:55%;text-align:center;">
+    <div class="clock bg px-5 py-3 mb-4 text-center" id="time" style="border-radius:30px;margin:auto;width:60%;text-align:center;font-size:18vw;">
       00:00
     </div>
 
