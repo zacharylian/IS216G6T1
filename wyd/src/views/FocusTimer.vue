@@ -6,14 +6,9 @@
   <div class="mt-4 text-center">
 
     <div class="mt-4">
-      <h4 class="font-weight-bold">Today's goal:</h4><input type="text" id="goalhours" class="h5 text-center font-weight-bold"><h5>hours</h5>
+      <h4 class="font-weight-bold">How many hours would you like to focus today?</h4><input type="text" id="goalhours" class="h5 text-center font-weight-bold"><h5>hours</h5>
     </div>
 
-    <!-- <div class="row">
-        <div class="col col-6 text-right"><h2>Today's goal: </h2></div>
-        <div class="col col-1"><input type="text" id="goalhours"></div>
-        <div class="col col-5 text-left"><h2>hours</h2></div>
-    </div> -->
     <br>
     <div class="clock bg px-5 py-3 mb-4 text-center" id="time" style="border-radius:30px;margin:auto;width:60%;text-align:center;font-size:18vw;">
       00:00
@@ -51,7 +46,7 @@ export default {
   },
 
   data() {
-    
+    date: new Date()
   },
 
   methods: {

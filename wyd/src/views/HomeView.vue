@@ -44,8 +44,6 @@
 </div>
 </div>
 
-
-
 </template>
 
 
@@ -68,7 +66,7 @@ export default {
   },
   data() {return {
     username: getAuth().currentUser.displayName,
-    date: new Date()
+    date: new Date(),
   }},
 }
 
