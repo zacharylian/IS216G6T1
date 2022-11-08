@@ -76,7 +76,7 @@
         </div><br>
 
     <div class="mb-4">
-      <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50 text-center"><br>
+      <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50 text-center" @keypress.enter="enterTime()"><br>
       <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
       <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
       <button id="stoppie" class="main-button" @click="stoppie()">Reset</button>
@@ -260,6 +260,15 @@ downpointfive() {
   }
   }
 ,
+
+enterTime() {
+  let mins = document.getElementById('min').value.toString();
+  if (mins.length<2) {
+    mins='0'+mins;
+  }
+  document.getElementById('time').innerHTML=mins+':00';
+  document.getElementById('min').value='';
+},
 
 googleSignOut() {
           const auth = getAuth();
