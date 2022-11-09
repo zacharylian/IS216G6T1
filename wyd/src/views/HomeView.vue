@@ -68,6 +68,14 @@
             <h3 class="py-2">upcoming events</h3>
             <div class="mx-3" style="margin:auto;">
             today is {{ this.date.getFullYear() }}-{{ this.date.getMonth() +1 }}-{{ this.date.getDate() }}</div>
+            <ejs-treegrid :dataSource="data" 
+                :treeColumnIndex="1">
+                <e-columns>
+                    <e-column field="Subject" headerText="Task" width="500" textAlign="center"></e-column>
+                    <e-column field="StartTime" headerText="Start" width="150" format="yMd" textAlign="center"></e-column>
+                    <e-column field="EndTime" headerText="End" width="150" format="yMd" textAlign="center"></e-column>
+                </e-columns>
+            </ejs-treegrid>
           </div>
           </div>
           <div class="row">
@@ -129,7 +137,8 @@ import todo from '@/components/layouts/todo.vue';
 import { getAuth, signOut } from '@firebase/auth';
 import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
 import { db } from '../main';
-
+import {sampleData} from '@/data.js';
+import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-vue-treegrid';
 
 export default {
   name: 'HomeView',
@@ -145,10 +154,15 @@ export default {
   },
   components: {
     "todo": todo,
+    'ejs-treegrid' : TreeGridComponent,
+    'e-columns' : ColumnsDirective,
+    'e-column' : ColumnDirective
+
 
   },
 
   data() {return {
+    data: sampleData,
     username: getAuth().currentUser.displayName,
     date: new Date(),
     percentagedone: 0,

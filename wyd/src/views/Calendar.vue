@@ -48,7 +48,7 @@
     </ul>
     </nav>
     <div style="margin-left:6rem">
-        <div class="scheduler-title">Doctor's Appointment
+        <div class="scheduler-title">Personalised Calendar
             <div class="d-flex row pt-3">
                 <div class="col col-2"></div>
                 <div class="col col-8">
@@ -98,18 +98,33 @@
                     ref="treeviewObject">
                     </ejs-treeview>
                 </div>
-                </div>
-                <div class="col col-2"></div>
+            </div>
+            <div class="col col-2"></div>
+            <ejs-treegrid :dataSource="appointmentData.dataSource" 
+                :treeColumnIndex="1" style="z-index:-1">
+                <e-columns>
+                    <e-column field="Id" headerText="S/N" width="5" textAlign="center"></e-column>
+                    <e-column field="Subject" headerText="Task" width="30" textAlign="center"></e-column>
+                    <e-column field="StartTime" headerText="Start" width="20" format="yMd" textAlign="center"></e-column>
+                    <e-column field="EndTime" headerText="End" width="20" format="yMd" textAlign="center"></e-column>
+                    <e-column field="PriorityId" headerText="Priority" width="10" textAlign="center"></e-column>
+                    <e-column field="modId" headerText="Mod" width="5" textAlign="center"></e-column>
+                </e-columns>
+            </ejs-treegrid>
         </div>
     </div>
 </template>
 
 <script>
-
+import { getAuth, signOut } from '@firebase/auth';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective, HeaderRowDirective, HeaderRowsDirective} from '@syncfusion/ej2-vue-schedule';
 import {DataManager, WebApiAdaptor} from "@syncfusion/ej2-data";
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
-import { getAuth, signOut } from '@firebase/auth';
+import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-vue-treegrid';
+import { directive } from '@babel/types';
+
+// import {sampleData} from '@/data.js'
+
 
 
 // for remote data binding
@@ -129,6 +144,9 @@ export default {
     'e-resource' : ResourceDirective,
     'e-header-rows' : HeaderRowsDirective,
     'e-header-row' : HeaderRowDirective,
+    'ejs-treegrid' : TreeGridComponent,
+    'e-columns' : ColumnsDirective,
+    'e-column' : ColumnDirective
 
     },
 
@@ -137,6 +155,8 @@ export default {
     },
     data() {
     return {  
+    // data: sampleData,
+
     prioDatasource: [
         {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
         {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},
@@ -161,57 +181,59 @@ export default {
           {Id: 5, Name: 'Feed Dog'}
         ],
         id:'Id', text:'Name'
-      },
-      schedulerSelectedDate : new Date(),
+    },
+    schedulerSelectedDate : new Date(),
 
     //   appointmentData : {
     //      dataSource : remoteData
     //   },
     appointmentData : {
-         dataSource : [
-             {
-              Id : 1,
-              Subject : 'Learn Thai',
-              StartTime: new Date(2022, 10, 5, 8, 0, 0),
-              EndTime: new Date(2022, 10, 6, 9, 0, 0),
-              PriorityId : 1,
-              modId: 1,
+        dataSource : [
+            {
+                Id : 1,
+                Subject : 'Learn Thai',
+                StartTime: new Date(2022, 10, 5, 8, 0, 0),
+                EndTime: new Date(2022, 10, 6, 9, 0, 0),
+                PriorityId : 1,
+                modId: 1,
             },
             {
-              Id : 2,
-              Subject : 'WAD Help',
-              StartTime: new Date(2022, 10, 8, 10, 0, 0),
-              EndTime: new Date(2022, 10, 8, 11, 30, 0),
-              PriorityId : 2,
-              modId: 2,
+                Id : 2,
+                Subject : 'WAD Help',
+                StartTime: new Date(2022, 10, 8, 10, 0, 0),
+                EndTime: new Date(2022, 10, 8, 11, 30, 0),
+                PriorityId : 2,
+                modId: 2,
             },
             {
-              Id : 3,
-              Subject : 'Mtg',
-              StartTime: new Date(2022, 10, 11, 12, 0, 0),
-              EndTime: new Date(2022, 10, 11, 13, 30, 0),
-              PriorityId : 3,
-              modId: 3,
+                Id : 3,
+                Subject : 'Mtg',
+                StartTime: new Date(2022, 10, 11, 12, 0, 0),
+                EndTime: new Date(2022, 10, 11, 13, 30, 0),
+                PriorityId : 3,
+                modId: 3,
             }
-         ]
-      }
+        ]
+    },
+
     };
-  },
-  methods : {
+},
+
+methods : {
     onTreeDragStop : function(args) {
-      args.cancel = true;
-      let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances;
-      let cellData = schedulerComponentObject.getCellDetails(args.target);
-      let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances;
-      let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
-      let eventData = {
+        args.cancel = true;
+        let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances;
+        let cellData = schedulerComponentObject.getCellDetails(args.target);
+        let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances;
+        let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
+    let eventData = {
         Subject : filteredData[0].Name,
         StartTime : cellData.startTime,
         EndTime : cellData.endTime,
         IsAllDay : cellData.isAllDay
-      };
+    };
       //schedulerComponentObject.addEvent(eventData);
-      schedulerComponentObject.openEditor(eventData,'Add',true);
+    chedulerComponentObject.openEditor(eventData,'Add',true);
     },
     onDragStart : function (args) {
         args.excludeSelectors = 'e-header-cells,e-all-day-cells';
@@ -257,6 +279,9 @@ export default {
 @import '../../node_modules/@syncfusion/ej2-navigations/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-popups/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-vue-schedule/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import "../../node_modules/@syncfusion/ej2-grids/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-vue-treegrid/styles/material.css";
 
 
 </style>

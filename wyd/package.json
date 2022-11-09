@@ -12,6 +12,7 @@
     "@syncfusion/ej2-vue-calendars": "^20.3.50",
     "@syncfusion/ej2-vue-navigations": "^20.3.56",
     "@syncfusion/ej2-vue-schedule": "^20.3.52",
+    "@syncfusion/ej2-vue-treegrid": "^20.3.56",
     "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
     "core-js": "^3.8.3",
