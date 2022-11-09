@@ -231,6 +231,7 @@
 			// } else {
 			let index = this.completed_tasks.length - 1
 			let task = this.completed_tasks[index]
+            task.completed = false
 			this.tasks.push(task)
 			this.completed_tasks.splice(this.completed_tasks.length - 1, 1)
 		
