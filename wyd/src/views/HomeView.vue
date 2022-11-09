@@ -87,7 +87,7 @@
                   <div class="outer">
                       <div class="inner">
                           <div id="number">
-                              65%
+                              {{this.percentagedone}}%
                           </div>
                       </div>
                   </div>
@@ -127,9 +127,22 @@
 
 import todo from '@/components/layouts/todo.vue';
 import { getAuth, signOut } from '@firebase/auth';
+import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+import { db } from '../main';
+
 
 export default {
   name: 'HomeView',
+  created(){
+    console.log("=====getting UID=====")
+        this.uid = getAuth().currentUser.uid
+        console.log(this.uid)
+
+        console.log("=====extracting data from db=====")
+        this.checkdb()
+        this.percentagedone = this.totalduration/(Number(this.goalhours)*60)*100
+        console.log(this.percentagedone)
+  },
   components: {
     "todo": todo,
 
@@ -138,9 +151,30 @@ export default {
   data() {return {
     username: getAuth().currentUser.displayName,
     date: new Date(),
+    percentagedone: 0,
+    uid: "",
+    goalhours: 0,
+    totalduration: 0,
   }},
 
   methods: {
+    async checkdb(){
+            const docRef = doc(db, "focustimer", this.uid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            this.goalhours = docSnap.data().goalhours
+            this.totalduration = docSnap.data().totalduration
+            
+
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            console.log("=====creating document=====")
+            setDoc(docRef, {goalhours: this.goalhours, totalduration: 0 });
+            }
+        },
         googleSignOut() {
           const auth = getAuth();
           signOut(auth).then(() => {

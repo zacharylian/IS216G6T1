@@ -54,8 +54,8 @@
 
     <div class="mt-4">
       <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
-        <input type="text" id="goalhours" class="h5 text-center font-weight-bold" placeholder="0 hours">&nbsp;&nbsp;&nbsp;
-        <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="uppointfive()">↑</button>&nbsp;
+        <input type="text" id="goalhours" class="h5 text-center font-weight-bold" placeholder="0 hours" v-model="goalhours">&nbsp;&nbsp;&nbsp;
+        <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="uppointfive()" >↑</button>&nbsp;
         <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="downpointfive()">↓</button>
     </div>
 
@@ -92,22 +92,58 @@
 <script>
 //IMPORTS
 import { getAuth, signOut } from '@firebase/auth';
+import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+import { db } from '../main';
 
 //EXPORTS
 export default {
   name: 'FocusTimer',
 
+  created(){
+    console.log("=====getting UID=====")
+        this.uid = getAuth().currentUser.uid
+        console.log(this.uid)
+
+        console.log("=====extracting data from db=====")
+        this.checkdb()
+
+  },
+
 
   data() {
     return {
+      uid: "", //userid for checking db
       goalhours: '5', /* is stored in hours, one value per day */
       duration: '20', /* is stored in minutes, many values per day, one per instance */
       end_date: '09-11-2022', /* is stored in DD-MM-YYYY, one per instance */
-      end_time: '03:52:46' /* is stored in HH:MM:SS, one per instance */
+      end_time: '03:52:46', /* is stored in HH:MM:SS, one per instance */
+      totalduration: 0
     }
   },
 
   methods: {
+    async checkdb(){
+            const docRef = doc(db, "focustimer", this.uid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            this.goalhours = docSnap.data().goalhours
+            this.totalduration = docSnap.data().totalduration
+            
+
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            console.log("=====creating document=====")
+            setDoc(docRef, {goalhours: parseFloat(this.goalhours), totalduration: 0 });
+            }
+        },
+    async updatedb(){
+        const docRef = doc(db, "focustimer", this.uid);
+        await updateDoc(docRef, { goalhours: this.goalhours, focusinstance: this.totalduration })
+
+    },
 
 
 timer() {
@@ -129,6 +165,9 @@ timer() {
                   end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
                   end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                   //here i would ideally send the information to the database!
+                  this.totalduration += Number(duration)
+                  this.updatedb()
+
                   //maybe can play a jingle when time ends?
 
                 } else {
@@ -167,6 +206,8 @@ timer() {
                         end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
                         end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                         //here i would ideally send the information to the database!
+                        this.totalduration += parseFloat(duration)
+                        this.updatedb
                         //maybe can play a jingle when time ends?
 
                       } else {
