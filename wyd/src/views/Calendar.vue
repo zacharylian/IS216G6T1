@@ -49,27 +49,44 @@
     </nav>
     <div style="margin-left:6rem">
         <div class="scheduler-title">Doctor's Appointment
-            <div class="row pt-3 justify-content-center">
+            <div class="d-flex row pt-3">
                 <div class="col col-2"></div>
                 <div class="col col-8">
-                    <ejs-schedule currentView="Month"
+                    <ejs-schedule height="120%" width="100%" currentView="Month"
                     :eventSettings="appointmentData"
                     :selectedDate="schedulerSelectedDate"
                     :dragStart="onDragStart"
                     :resizeStart="onResizeStart"
                     allowMultiDrag='true'
-                    ref="schedulerObject">
+                    ref="schedulerObject"
+                    :group="groupResource">
                         <e-resources>
                             <e-resource
                             :dataSource="prioDatasource"
-                            field="PriorityId"
+                            field="PriorityId" 
                             title="Priority Level"
-                            name="Priority Level"
+                            name="Priority"
                             textField="prioName"
                             idField="prioId"
                             colorField="color"> 
                             </e-resource>
+                            <!-- <e-resource 
+                            :dataSource="modDatasource" 
+                            field="modId"
+                            title="Mod Details"
+                            name="Modules"
+                            textField="modName"
+                            idField="modId"
+                            colorField="color"
+                            allowMultiple="true"></e-resource> -->
                         </e-resources>
+                        <e-header-rows>
+                            <e-header-row option="Year"></e-header-row>
+                            <e-header-row option="Month"></e-header-row>
+                            <e-header-row option="Week"></e-header-row>
+                            <e-header-row option="Date"></e-header-row>
+                            <e-header-row option="Hour"></e-header-row>
+                        </e-header-rows>
                     </ejs-schedule>
                 </div>
             </div>
@@ -89,9 +106,18 @@
 
 <script>
 
-import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective } from '@syncfusion/ej2-vue-schedule';
+import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective, HeaderRowDirective, HeaderRowsDirective} from '@syncfusion/ej2-vue-schedule';
+import {DataManager, WebApiAdaptor} from "@syncfusion/ej2-data";
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
 import { getAuth, signOut } from '@firebase/auth';
+
+
+// for remote data binding
+var remoteData = new DataManager({
+    url: "https://ej2services.syncfusion.com/production/web-services/api/Schedule",
+    adaptor: new WebApiAdaptor,
+    crossDomain: true
+})
 
 //EXPORTS
 export default {
@@ -101,6 +127,8 @@ export default {
     'ejs-treeview': TreeViewComponent,
     'e-resources' : ResourcesDirective,
     'e-resource' : ResourceDirective,
+    'e-header-rows' : HeaderRowsDirective,
+    'e-header-row' : HeaderRowDirective,
 
     },
 
@@ -114,6 +142,16 @@ export default {
         {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},
         {prioName: 'Low-Priority', prioId: 3, color: '#008450'}
     ],
+    // modDatasource:[
+    //     {modName: 'WAD', modId:1, color: 'blue', taskPrioId:1 },
+    //     {modName: 'IDP', modId:2, color: 'purple', taskPrioId:2},
+    //     {modName: 'BPAS', modId:3, color: 'orange', taskPrioId:2}
+    // ],
+    groupResource : {
+        byDate: true,
+        byGroupID: false,
+        resources : ["Priority"]
+    },
     treeviewFields: { 
         dataSource: [
           {Id: 1, Name: 'WADII'},
@@ -125,21 +163,35 @@ export default {
         id:'Id', text:'Name'
       },
       schedulerSelectedDate : new Date(),
-      appointmentData : {
+
+    //   appointmentData : {
+    //      dataSource : remoteData
+    //   },
+    appointmentData : {
          dataSource : [
              {
               Id : 1,
               Subject : 'Learn Thai',
               StartTime: new Date(2022, 10, 5, 8, 0, 0),
               EndTime: new Date(2022, 10, 6, 9, 0, 0),
-              PriorityId : 1
+              PriorityId : 1,
+              modId: 1,
             },
             {
               Id : 2,
               Subject : 'WAD Help',
               StartTime: new Date(2022, 10, 8, 10, 0, 0),
               EndTime: new Date(2022, 10, 8, 11, 30, 0),
-              PriorityId : 2
+              PriorityId : 2,
+              modId: 2,
+            },
+            {
+              Id : 3,
+              Subject : 'Mtg',
+              StartTime: new Date(2022, 10, 11, 12, 0, 0),
+              EndTime: new Date(2022, 10, 11, 13, 30, 0),
+              PriorityId : 3,
+              modId: 3,
             }
          ]
       }
@@ -180,18 +232,18 @@ export default {
         }
     },
     googleSignOut() {
-          const auth = getAuth();
-          signOut(auth).then(() => {
-          // Sign-out successful.
-          alert("Successful Sign Out")
-          console.log(getAuth().currentUser)
-          location.reload()
-          }).catch((error) => {
-          // An error happened.
-          console.log(error)
-          });
-        },
-  }
+        const auth = getAuth();
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        alert("Successful Sign Out")
+        console.log(getAuth().currentUser)
+        location.reload()
+        }).catch((error) => {
+        // An error happened.
+        console.log(error)
+        });
+    },
+}
 }
 </script>
 
