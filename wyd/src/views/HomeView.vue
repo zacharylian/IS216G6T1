@@ -121,7 +121,7 @@ export default {
     data: appointmentData.sampleData,
     username: getAuth().currentUser.displayName,
     date: new Date(),
-    percentagedone: 0,
+    percentagedone: 5,
     uid: "",
     goalhours: 0,
     totalduration: 0,
@@ -137,6 +137,8 @@ export default {
             console.log("Document data:", docSnap.data());
             this.goalhours = docSnap.data().goalhours
             this.totalduration = docSnap.data().totalduration
+            this.percentagedone = this.totalduration/(this.goalhours*60)*100
+            console.log(this.percentagedone)
             
 
             } else {
