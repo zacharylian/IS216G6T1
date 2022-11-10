@@ -5,7 +5,8 @@
             <div class="col-2">
                 <div class="treeview-title">Common Task List
                     <div class="treeview-component mx-auto">
-                        <ejs-treeview :fields="treeviewFields" 
+                        <ejs-treeview id="treeview"
+                        :fields="treeviewFields" 
                         :allowDragAndDrop='true'
                         :nodeDragStop="onTreeDragStop"
                         ref="treeviewObject">
@@ -15,14 +16,34 @@
             </div>
             <div class="col-10">
                 <div class=" col-10 d-flex mx-auto" >
+                    <tr>
+                    <td>
+                        <div>
+                            <ejs-button v-on:click.native='onSubmit'>Add</ejs-button>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <ejs-button v-on:click.native='onSave'>Edit</ejs-button>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <ejs-button v-on:click.native='onDelete'>Delete</ejs-button>
+                        </div>
+                    </td>
+                </tr><br>
                     <ejs-schedule height="150%" width="100%" currentView="Month"
+                    id='Schedule'
                     :eventSettings="appointmentData"
                     :selectedDate="schedulerSelectedDate"
                     :dragStart="onDragStart"
                     :resizeStart="onResizeStart"
                     allowMultiDrag='true'
                     ref="schedulerObject"
-                    :group="groupResource">
+                    :group="groupResource"
+                    :cellClick='onCellClick'
+                    :eventClick='onEventClick'>
                         <e-resources>
                             <e-resource
                             :dataSource="prioDatasource"
@@ -47,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div>Appointment Data: {{appointmentData}}</div>
+        <div>Events: {{appointmentData.dataSource}}</div>
 
         
     </div>
@@ -57,22 +78,24 @@
 import navbar from '@/components/layouts/new_navbar.vue';
 import { getAuth, signOut } from '@firebase/auth';
 import {appointmentData} from '@/data.js';
+import { ButtonComponent } from '@syncfusion/ej2-vue-buttons';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective, HeaderRowDirective, HeaderRowsDirective} from '@syncfusion/ej2-vue-schedule';
 import {DataManager, WebApiAdaptor} from "@syncfusion/ej2-data";
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
 import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-vue-treegrid';
 import { directive } from '@babel/types';
+import { getDatePredicate } from '@syncfusion/ej2-grids';
 
-// import {sampleData} from '@/data.js'
+
 
 
 
 // for remote data binding
-var remoteData = new DataManager({
-    url: "https://ej2services.syncfusion.com/production/web-services/api/Schedule",
-    adaptor: new WebApiAdaptor,
-    crossDomain: true
-})
+// var remoteData = new DataManager({
+//     url: "https://ej2services.syncfusion.com/production/web-services/api/Schedule",
+//     adaptor: new WebApiAdaptor,
+//     crossDomain: true
+// })
 
 //EXPORTS
 export default {
@@ -87,7 +110,8 @@ export default {
     'e-header-row' : HeaderRowDirective,
     'ejs-treegrid' : TreeGridComponent,
     'e-columns' : ColumnsDirective,
-    'e-column' : ColumnDirective
+    'e-column' : ColumnDirective,
+    "ejs-button": ButtonComponent, 
 
     },
 
@@ -96,6 +120,7 @@ export default {
     },
     data() {
     return {  
+    // data: appointmentData,
 
     prioDatasource: [
         {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
@@ -128,6 +153,7 @@ export default {
     //      dataSource : remoteData
     //   },
     appointmentData : {
+        enableTooltip: true,
         dataSource : [
             {
                 Id : 1,
@@ -139,8 +165,8 @@ export default {
             {
                 Id : 2,
                 Subject : 'WAD Help',
-                StartTime: new Date(2022, 10, 8, 10, 0, 0),
-                EndTime: new Date(2022, 10, 8, 11, 30, 0),
+                StartTime: new Date(2022, 10, 8, 8, 0, 0),
+                EndTime: new Date(2022, 10, 8, 9, 0, 0),
                 PriorityId : 2,
             },
             {
@@ -149,7 +175,15 @@ export default {
                 StartTime: new Date(2022, 10, 11, 12, 0, 0),
                 EndTime: new Date(2022, 10, 11, 13, 30, 0),
                 PriorityId : 3,
-            }
+            },
+            {
+                Id : 4,
+                Subject : 'WAD Proj',
+                StartTime: new Date(2022, 10, 11, 12, 0, 0),
+                EndTime: new Date(2022, 10, 11, 13, 30, 0),
+                PriorityId : 3,
+                IsAllDay: true
+            },
         ]
     },
 
@@ -158,20 +192,33 @@ export default {
 
 methods : {
     onTreeDragStop : function(args) {
+        console.log("[start] onTreeDragStop")
         args.cancel = true;
-        let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances;
+        let schedulerComponentObject = document.getElementById('Schedule').ej2_instances[0];
         let cellData = schedulerComponentObject.getCellDetails(args.target);
-        let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances;
+        let treeviewComponentObject = document.getElementById('treeview').ej2_instances[0];
         let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
     let eventData = {
         Subject : filteredData[0].Name,
-        StartTime : cellData.startTime,
-        EndTime : cellData.endTime,
+        startTime : cellData.startTime,
+        endTime : cellData.endTime,
         IsAllDay : cellData.isAllDay
     };
       //schedulerComponentObject.addEvent(eventData);
-    SchedulerComponentObject.openEditor(eventData,'Add',true);
+    schedulerComponentObject.openEditor(eventData,'Add',true);
+    let apptdata = this.appointmentData.dataSource;
+    console.log(this.appointmentData.dataSource)
+    apptdata.push(eventData)
+    console.log(apptdata)
+    this.getData(eventData);
     },
+
+    getData(data) {
+        console.log("[start] getData")
+        console.log(data.Subject)
+        console.log(data.startTime)
+    },
+
     onDragStart : function (args) {
         args.excludeSelectors = 'e-header-cells,e-all-day-cells';
         args.navigation.enable = true;
@@ -190,6 +237,59 @@ methods : {
             timeDelay : 100
         }
     },
+
+    // onSave: function () {
+    //     console.log("[start] onSave")
+    //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+    //     let eventData = {
+    //         Id: 5,
+    //         Subject: 'Testing-edited',
+    //         StartTime: new Date(2022, 10, 11, 10, 0, 0),
+    //         EndTime: new Date(2022, 10, 11, 12, 0, 0),
+    //         PriorityId : 3,
+    //     };
+    //         scheduleObj.saveEvent(eventData);
+    //     },
+    // onSubmit: function () {
+    //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+    //     let cellData = {
+    //         subject: "",
+    //         startTime: "",
+    //         endTime: "",
+    //         PriorityId: 3,
+    //     };
+    //     scheduleObj.openEditor(cellData,'Add');
+    //     console.log(cellData)
+    //     appointmentData.push(cellData);
+    //     },
+
+    // onDelete: function () {
+    //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+    //     scheduleObj.deleteEvent(4);
+    // },
+
+    onCellClick: function(args) {
+        console.log("[start] onCellClick")
+        console.log(args)
+        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+        scheduleObj.openEditor(args, 'Add');
+        let apptdata = this.appointmentData.dataSource;
+        console.log(this.appointmentData.dataSource)
+        
+        apptdata.push(args)
+        console.log(apptdata)
+    },
+
+    onEventClick: function(args) {   
+        console.log("[start] onEventClick")
+        console.log(args)
+        console.log(args.event)
+        console.log(args.event.Id)
+        console.log(args.event.Subject)
+        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];       
+        scheduleObj.openEditor(args.event, 'Save');
+    },
+
     googleSignOut() {
         const auth = getAuth();
         signOut(auth).then(() => {
@@ -202,6 +302,7 @@ methods : {
         console.log(error)
         });
     },
+
 }
 }
 </script>
@@ -219,18 +320,7 @@ methods : {
 @import '../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 @import "../../node_modules/@syncfusion/ej2-grids/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-vue-treegrid/styles/material.css";
+@import '../../node_modules/@syncfusion/ej2-base/styles/material.css'; 
+@import '../../node_modules/@syncfusion/ej2-buttons/styles/material.css'; 
 
-.e-treegrid .e-rowcell.customcss{
-    background-color: #ecedee;
-    font-family: 'Bell MT';
-    color: 'red';
-    font-size: '20px';
-}
-
-.e-treegrid .e-headercell.customcss{
-    background-color: #B19CD9;
-    color: white;
-    font-family: 'Bell MT';
-    font-size: '20px';
-}
 </style>

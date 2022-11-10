@@ -21,7 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
         StartTime: new Date(2022, 10, 11, 12, 0, 0),
         EndTime: new Date(2022, 10, 11, 13, 30, 0),
         PriorityId : 3,
-    }
+    },
     ]} 
 // Object.defineProperty(exports, "__esModule", { value: true });
 //     export let sampleData = [
