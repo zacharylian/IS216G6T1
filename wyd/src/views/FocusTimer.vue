@@ -74,7 +74,7 @@ export default {
       duration: '20', /* is stored in minutes, many values per day, one per instance */
       end_date: '09-11-2022', /* is stored in DD-MM-YYYY, one per instance */
       end_time: '03:52:46', /* is stored in HH:MM:SS, one per instance */
-      totalduration: 0
+      totalduration: 0 //total duration focused
     }
   },
 
@@ -98,7 +98,7 @@ export default {
         },
     async updatedb(){
         const docRef = doc(db, "focustimer", this.uid);
-        await updateDoc(docRef, { goalhours: this.goalhours, focusinstance: this.totalduration })
+        await updateDoc(docRef, { goalhours: this.goalhours, totalduration: this.totalduration })
 
     },
 
@@ -123,6 +123,7 @@ timer() {
                   end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                   //here i would ideally send the information to the database!
                   this.totalduration += Number(duration)
+                  console.log(this.totalduration)
                   this.updatedb()
 
                   //maybe can play a jingle when time ends?
@@ -163,7 +164,7 @@ timer() {
                         end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
                         end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                         //here i would ideally send the information to the database!
-                        this.totalduration += parseFloat(duration)
+                        this.totalduration += Number(duration)
                         this.updatedb
                         //maybe can play a jingle when time ends?
 
@@ -239,22 +240,24 @@ downfive() {
 
 uppointfive() {
   console.log('Uppointfive!');
-  let goalhours = document.getElementById('goalhours').value;
+  let goalhours = this.goalhours;
   if (Number(goalhours) <=23.5) {
   console.log(goalhours);
   goalhours=Number(goalhours)+0.5;
   console.log(goalhours);
-  document.getElementById('goalhours').value=goalhours;}
+  this.goalhours=goalhours;}
+  this.updatedb()
 },
 
 downpointfive() {
   console.log('Downpointfive!');
-  let goalhours = document.getElementById('goalhours').value;
+  let goalhours = this.goalhours;
   if (Number(goalhours) > 0) {
   console.log(goalhours);
   goalhours=Number(goalhours)-0.5;
   console.log(goalhours);
-  document.getElementById('goalhours').value=goalhours;
+  this.goalhours=goalhours;
+  this.updatedb()
   }
   }
 ,
