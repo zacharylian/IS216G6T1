@@ -43,7 +43,8 @@
                     ref="schedulerObject"
                     :group="groupResource"
                     :cellClick='onCellClick'
-                    :eventClick='onEventClick'>
+                    :eventClick='onEventClick'
+                    :editorTemplate="'schedulerEditorTemplate'">
                         <e-resources>
                             <e-resource
                             :dataSource="prioDatasource"
@@ -64,6 +65,61 @@
                             colorField="color"
                             allowMultiple="true"></e-resource> -->
                         </e-resources>
+                        <template v-slot:schedulerEditorTemplate="{}">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="e-textlabel">
+                                            Summary
+                                        </td>
+                                        <td colspan="4">
+                                            <input class="e-field e-input" type="text" name="Subject"/>
+                                            <!-- e-field and name need to be same -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="e-textlabel">
+                                            Priority Level
+                                        </td>
+                                        <td colspan="4">
+                                            <ejs-dropdownlist class="e-field" placeholder="Choose Priority"
+                                            :dataSource="prioHardCodedDataSource" name="PriorityId">
+
+                                            </ejs-dropdownlist>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="e-textlabel">
+                                            From
+                                        </td>
+                                        <td colspan="4">
+                                            <ejs-datetimepicker class="e-field" name="StartTime">
+
+                                            </ejs-datetimepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="e-textlabel">
+                                            To
+                                        </td>
+                                        <td colspan="4">
+                                            <ejs-datetimepicker class="e-field" name="EndTime">
+
+                                            </ejs-datetimepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="e-textlabel">
+                                            Description
+                                        </td>
+                                        <td colspan="4">
+                                            <input class="e-field e-input" type="text" name="Description" />
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </template>
                     </ejs-schedule>
                 </div>
             </div>
@@ -85,10 +141,19 @@ import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
 import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-vue-treegrid';
 import { directive } from '@babel/types';
 import { getDatePredicate } from '@syncfusion/ej2-grids';
+import { DropDownListComponent } from '@syncfusion/ej2-vue-dropdowns';
+import { DateTimePickerComponent } from '@syncfusion/ej2-vue-calendars';
+import { L10n } from '@syncfusion/ej2-base';
 
-
-
-
+L10n.load({
+    'en-US': {
+        'schedule' : {
+            'saveButton': 'Add',
+            'cancelButton': 'Close',
+            'newEvent': 'Add Event'
+        }
+    }
+})
 
 // for remote data binding
 // var remoteData = new DataManager({
@@ -102,6 +167,8 @@ export default {
     name: 'Calendar',
     components: {
     "navbar" : navbar,
+    'ejs-datetimepicker': DateTimePickerComponent,
+    'ejs-dropdownlist' : DropDownListComponent,
     'ejs-schedule': ScheduleComponent,
     'ejs-treeview': TreeViewComponent,
     'e-resources' : ResourcesDirective,
@@ -122,6 +189,8 @@ export default {
     return {  
     // data: appointmentData,
 
+
+    prioHardCodedDataSource: ['High-Priority', 'Mid-Priority', 'Low-Priority'],
     prioDatasource: [
         {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
         {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},

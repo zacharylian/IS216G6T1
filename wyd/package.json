@@ -10,7 +10,8 @@
   "dependencies": {
     "@syncfusion/ej2-angular-schedule": "^20.3.52",
     "@syncfusion/ej2-vue-buttons": "^20.3.56",
-    "@syncfusion/ej2-vue-calendars": "^20.3.50",
+    "@syncfusion/ej2-vue-calendars": "^20.3.56",
+    "@syncfusion/ej2-vue-dropdowns": "^20.3.56",
     "@syncfusion/ej2-vue-navigations": "^20.3.56",
     "@syncfusion/ej2-vue-schedule": "^20.3.52",
     "@syncfusion/ej2-vue-treegrid": "^20.3.56",
