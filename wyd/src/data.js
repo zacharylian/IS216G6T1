@@ -1,3 +1,28 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+    export let appointmentData = 
+    { sampleData: [
+    {
+        Id : 1,
+        Subject : 'Learn Thai',
+        StartTime: new Date(2022, 10, 5, 8, 0, 0),
+        EndTime: new Date(2022, 10, 6, 9, 0, 0),
+        PriorityId : 1,
+    },
+    {
+        Id : 2,
+        Subject : 'WAD Help',
+        StartTime: new Date(2022, 10, 8, 10, 0, 0),
+        EndTime: new Date(2022, 10, 8, 11, 30, 0),
+        PriorityId : 2,
+    },
+    {
+        Id : 3,
+        Subject : 'Mtg',
+        StartTime: new Date(2022, 10, 11, 12, 0, 0),
+        EndTime: new Date(2022, 10, 11, 13, 30, 0),
+        PriorityId : 3,
+    }
+    ]} 
 // Object.defineProperty(exports, "__esModule", { value: true });
 //     export let sampleData = [
 //         {
@@ -125,31 +150,3 @@
 // ];
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-    export let sampleData = 
-[
-    {
-        Id : 1,
-        Subject : 'Learn Thai',
-        StartTime: new Date(2022, 10, 5, 8, 0, 0),
-        EndTime: new Date(2022, 10, 6, 9, 0, 0),
-        PriorityId : 1,
-        modId: 1,
-    },
-    {
-        Id : 2,
-        Subject : 'WAD Help',
-        StartTime: new Date(2022, 10, 8, 10, 0, 0),
-        EndTime: new Date(2022, 10, 8, 11, 30, 0),
-        PriorityId : 2,
-        modId: 2,
-    },
-    {
-        Id : 3,
-        Subject : 'Mtg',
-        StartTime: new Date(2022, 10, 11, 12, 0, 0),
-        EndTime: new Date(2022, 10, 11, 13, 30, 0),
-        PriorityId : 3,
-        modId: 3,
-    }
-]

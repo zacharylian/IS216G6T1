@@ -1,53 +1,6 @@
 <template>
 
-<nav class="navbar_home">
-    <ul class="navbar-nav">
-      <li class="nav-li">
-        <router-link to="/" class="nav-link2">
-          <i class="fas fa-house fa-2x" />
-          <span class="link-text" >
-                Home
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <router-link to="/Calendar" class="nav-link2">
-          <i class="fas fa-calendar-days fa-2x" />
-          <span class="link-text" >
-                Calendar
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <router-link to="/SpendingDashboard" class="nav-link2">
-          <i class="fas fa-sack-dollar fa-2x" />
-          <span class="link-text" >
-                Spendings
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <router-link to="/FocusTimer" class="nav-link2">
-          <i class="fas fa-stopwatch fa-2x" />
-          <span class="link-text" >
-                Timer
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <a href="#" class="nav-link2">
-          <span @click="googleSignOut">
-            <i class="fas fa-right-from-bracket fa-2x" @click="googleSignOut"></i>
-          </span>
-        </a>
-      </li>
-
-    </ul>
-  </nav>
+  <navbar></navbar>
 <div style="margin-left:6rem;overflow:hidden;">
 
   <div class="mt-5 text-center">
@@ -91,6 +44,7 @@
 
 <script>
 //IMPORTS
+import navbar from '@/components/layouts/new_navbar.vue';
 import { getAuth, signOut } from '@firebase/auth';
 import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
 import { db } from '../main';
@@ -98,6 +52,9 @@ import { db } from '../main';
 //EXPORTS
 export default {
   name: 'FocusTimer',
+  components : {
+    "navbar" : navbar
+  },
 
   created(){
     console.log("=====getting UID=====")

@@ -1,54 +1,7 @@
 <template>
 
 <!-- <body> -->
-  <nav class="navbar_home">
-    <ul class="navbar-nav">
-      <li class="nav-li">
-        <router-link to="/" class="nav-link2">
-          <i class="fas fa-house fa-2x" />
-          <span class="link-text" >
-                Home
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <router-link to="/Calendar" class="nav-link2">
-          <i class="fas fa-calendar-days fa-2x" />
-          <span class="link-text" >
-                Calendar
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <router-link to="/SpendingDashboard" class="nav-link2">
-          <i class="fas fa-sack-dollar fa-2x" />
-          <span class="link-text" >
-                Spendings
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <router-link to="/FocusTimer" class="nav-link2">
-          <i class="fas fa-stopwatch fa-2x" />
-          <span class="link-text" >
-                Timer
-          </span>
-        </router-link>
-      </li>
-
-      <li class="nav-li">
-        <a href="#" class="nav-link2">
-          <span @click="googleSignOut">
-            <i class="fas fa-right-from-bracket fa-2x" @click="googleSignOut"></i>
-          </span>
-        </a>
-      </li>
-
-    </ul>
-  </nav>
+  <navbar></navbar>
 
 <!-- <main> -->
   <div style="margin-left:6rem">  
@@ -68,14 +21,15 @@
             <h3 class="py-2">upcoming events</h3>
             <div class="mx-3" style="margin:auto;">
             today is {{ this.date.getFullYear() }}-{{ this.date.getMonth() +1 }}-{{ this.date.getDate() }}</div>
-            <ejs-treegrid :dataSource="data" 
-                :treeColumnIndex="1">
-                <e-columns>
-                    <e-column field="Subject" headerText="Task" width="500" textAlign="center"></e-column>
-                    <e-column field="StartTime" headerText="Start" width="150" format="yMd" textAlign="center"></e-column>
-                    <e-column field="EndTime" headerText="End" width="150" format="yMd" textAlign="center"></e-column>
-                </e-columns>
-            </ejs-treegrid>
+            <div class="mx-3" style="padding-left:20%;">
+              <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
+                  <e-columns>
+                      <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="StartTime" headerText="Start" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="EndTime" headerText="End" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                  </e-columns>
+              </ejs-treegrid>
+            </div>
           </div>
           </div>
           <div class="row">
@@ -137,8 +91,9 @@ import todo from '@/components/layouts/todo.vue';
 import { getAuth, signOut } from '@firebase/auth';
 import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
 import { db } from '../main';
-import {sampleData} from '@/data.js';
+import {appointmentData} from '@/data.js';
 import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-vue-treegrid';
+import navbar from '@/components/layouts/new_navbar.vue';
 
 export default {
   name: 'HomeView',
@@ -154,6 +109,7 @@ export default {
   },
   components: {
     "todo": todo,
+    "navbar" : navbar,
     'ejs-treegrid' : TreeGridComponent,
     'e-columns' : ColumnsDirective,
     'e-column' : ColumnDirective
@@ -162,13 +118,14 @@ export default {
   },
 
   data() {return {
-    data: sampleData,
+    data: appointmentData.sampleData,
     username: getAuth().currentUser.displayName,
     date: new Date(),
     percentagedone: 0,
     uid: "",
     goalhours: 0,
     totalduration: 0,
+    
   }},
 
   methods: {
@@ -201,13 +158,28 @@ export default {
           console.log(error)
           });
         },
+        rowTemplate: 
+          function () {
+              return { template : Vue.component('rowTemplate',{
+                  template: `<tr>
+                  <td class="border" style='padding-left:18px;'>
+                    {{data.Subject}}
+                  </td>
+                  <td class="border" style='padding: 10px 0px 0px 20px;'>
+                    {{data.StartTime}}
+                  </td>
+                  <td class="border">
+                    {{data.EndTime}}
+                  </td>
+                  </tr>`
+        })}},
   }
 }
 
 </script>
 
 <style>
-@import "@/navbar.css";
+
 
 .skill {
     width:160px;
@@ -227,7 +199,7 @@ export default {
     border-radius:50%;
     padding:20px;
     box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15),
-               -6px -6px 10px 1px rgba(255,255,255,0.7);
+    -6px -6px 10px 1px rgba(255,255,255,0.7);
 }
 .inner {
     height:120px;
@@ -264,5 +236,32 @@ circle {
         stroke-dashoffset: 165; /*this is what actually controls the % so later when taking in data, modify this*/
     }
 }
- 
+
+@import '../../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-vue-schedule/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import "../../node_modules/@syncfusion/ej2-grids/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-vue-treegrid/styles/material.css";
+
+.e-treegrid .e-rowcell.customcss{
+    background-color: #ecedee;
+    font-family: 'Bell MT';
+    color: 'red';
+    font-size: '20px';
+}
+
+.e-treegrid .e-headercell.customcss{
+    background-color: #B19CD9;
+    color: white;
+    filter: opacity(70%);
+    font-family: 'Bell MT';
+    font-size: '20px';
+}
+
 </style>
