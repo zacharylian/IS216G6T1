@@ -16,7 +16,7 @@
             </div>
             <div class="col-10">
                 <div class=" col-10 d-flex mx-auto" >
-                    <tr>
+                    <!-- <tr>
                     <td>
                         <div>
                             <ejs-button v-on:click.native='onSubmit'>Add</ejs-button>
@@ -32,7 +32,7 @@
                             <ejs-button v-on:click.native='onDelete'>Delete</ejs-button>
                         </div>
                     </td>
-                </tr><br>
+                </tr><br> -->
                     <ejs-schedule height="150%" width="100%" currentView="Month"
                     id='Schedule'
                     :eventSettings="appointmentData"
@@ -42,7 +42,6 @@
                     allowMultiDrag='true'
                     ref="schedulerObject"
                     :group="groupResource"
-                    :cellClick='onCellClick'
                     :eventClick='onEventClick'
                     :editorTemplate="'schedulerEditorTemplate'">
                         <e-resources>
@@ -73,7 +72,7 @@
                                             Summary
                                         </td>
                                         <td colspan="4">
-                                            <input class="e-field e-input" type="text" name="Subject"/>
+                                            <input class="e-field e-input" type="text" id="Subject" name="Subject" />
                                             <!-- e-field and name need to be same -->
                                         </td>
                                     </tr>
@@ -83,7 +82,7 @@
                                         </td>
                                         <td colspan="4">
                                             <ejs-dropdownlist class="e-field" placeholder="Choose Priority"
-                                            :dataSource="prioHardCodedDataSource" name="PriorityId">
+                                            :dataSource="prioHardCodedDataSource" id="PriorityId" name="PriorityId">
 
                                             </ejs-dropdownlist>
                                         </td>
@@ -93,7 +92,7 @@
                                             From
                                         </td>
                                         <td colspan="4">
-                                            <ejs-datetimepicker class="e-field" name="StartTime">
+                                            <ejs-datetimepicker class="e-field" id="StartTime" name="StartTime" >
 
                                             </ejs-datetimepicker>
                                         </td>
@@ -103,7 +102,7 @@
                                             To
                                         </td>
                                         <td colspan="4">
-                                            <ejs-datetimepicker class="e-field" name="EndTime">
+                                            <ejs-datetimepicker class="e-field" id="EndTime" name="EndTime">
 
                                             </ejs-datetimepicker>
                                         </td>
@@ -113,7 +112,12 @@
                                             Description
                                         </td>
                                         <td colspan="4">
-                                            <input class="e-field e-input" type="text" name="Description" />
+                                            <input class="e-field e-input" type="text" id="Description" name="Description" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ejs-button v-on:click.native='Add()'>Add</ejs-button>
                                         </td>
                                     </tr>
                                     
@@ -260,6 +264,53 @@ export default {
 },
 
 methods : {
+    Add() {
+        console.log("[start] Add()")
+        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+        let subject = document.getElementById("Subject")
+        let priority = document.getElementById("PriorityId")
+        let StartTime = document.getElementById("StartTime")
+        let EndTime = document.getElementById("EndTime")
+        console.log(subject.value)
+        console.log(priority.value)
+        console.log(StartTime.value)
+        console.log(EndTime.value)
+        let apptdata = this.appointmentData.dataSource;
+        let id = apptdata.length + 1
+        if (priority.value == 'High-Priority') {
+            let priorityId = 1
+            let data = {
+                Id : id,
+                subject: subject.value,
+                startTime: StartTime.value,
+                endTime: EndTime.value,
+                PriorityId: priorityId,
+            };
+            apptdata.push(data);
+        } else if (priority.value == 'Mid-Priority') {
+            let priorityId = 2
+            let data = {
+                Id : id,
+                subject: subject.value,
+                startTime: StartTime.value,
+                endTime: EndTime.value,
+                PriorityId: priorityId,
+            };
+            apptdata.push(data);
+        } else if (priority.value == 'Low-Priority') {
+            let priorityId = 3
+            let data = {
+                Id : id,
+                subject: subject.value,
+                startTime: StartTime.value,
+                endTime: EndTime.value,
+                PriorityId: priorityId,
+            };
+            apptdata.push(data)
+        }
+        // scheduleObj.openEditor(data,'Add');
+    },
+
     onTreeDragStop : function(args) {
         console.log("[start] onTreeDragStop")
         args.cancel = true;
@@ -275,18 +326,12 @@ methods : {
     };
       //schedulerComponentObject.addEvent(eventData);
     schedulerComponentObject.openEditor(eventData,'Add',true);
-    let apptdata = this.appointmentData.dataSource;
-    console.log(this.appointmentData.dataSource)
-    apptdata.push(eventData)
-    console.log(apptdata)
-    this.getData(eventData);
+    // let apptdata = this.appointmentData.dataSource;
+    // console.log(this.appointmentData.dataSource)
+    // apptdata.push(eventData)
+    // console.log(apptdata)
     },
 
-    getData(data) {
-        console.log("[start] getData")
-        console.log(data.Subject)
-        console.log(data.startTime)
-    },
 
     onDragStart : function (args) {
         args.excludeSelectors = 'e-header-cells,e-all-day-cells';
@@ -319,18 +364,7 @@ methods : {
     //     };
     //         scheduleObj.saveEvent(eventData);
     //     },
-    // onSubmit: function () {
-    //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-    //     let cellData = {
-    //         subject: "",
-    //         startTime: "",
-    //         endTime: "",
-    //         PriorityId: 3,
-    //     };
-    //     scheduleObj.openEditor(cellData,'Add');
-    //     console.log(cellData)
-    //     appointmentData.push(cellData);
-    //     },
+
 
     // onDelete: function () {
     //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
@@ -341,12 +375,13 @@ methods : {
         console.log("[start] onCellClick")
         console.log(args)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-        scheduleObj.openEditor(args, 'Add');
+        scheduleObj.openEditor(args, "Add");
         let apptdata = this.appointmentData.dataSource;
-        console.log(this.appointmentData.dataSource)
-        
-        apptdata.push(args)
-        console.log(apptdata)
+        // console.log(this.appointmentData.dataSource)
+        // apptdata.push(args)
+        // console.log(apptdata)
+        let subject = document.getElementById("Subject")
+        console.log(subject.value)
     },
 
     onEventClick: function(args) {   
@@ -356,7 +391,9 @@ methods : {
         console.log(args.event.Id)
         console.log(args.event.Subject)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];       
-        scheduleObj.openEditor(args.event, 'Save');
+        scheduleObj.openEditor(args.event);
+        let subject = document.getElementById("Subject")
+        console.log(subject.value)
     },
 
     googleSignOut() {
