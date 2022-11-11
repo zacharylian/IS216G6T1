@@ -208,6 +208,7 @@
                 new_index = 0
             }
             this.tasks[index].status = this.available_statuses[new_index];
+            this.updatedb()
         },
 
         completeTask(index) {
