@@ -4,6 +4,10 @@
         <div class="d-flex row pt-3">
             <div class="col-2">
                 <div class="treeview-title">Common Task List
+                    <div>
+                        <input class="e-field e-input" type="text" id="Treeview" name="Treeview" />
+                        <ejs-button v-on:click.native='Add_Treeview()'>Add</ejs-button>
+                    </div>
                     <div class="treeview-component mx-auto">
                         <ejs-treeview id="treeview"
                         :fields="treeviewFields" 
@@ -12,27 +16,16 @@
                         ref="treeviewObject">
                         </ejs-treeview>
                     </div>
+                    <div>
+                        Trees: {{treeviewFields.dataSource}}
+                    </div>
                 </div>
             </div>
             <div class="col-10">
+                <div>
+                    <ejs-button cssClass='e-info' v-on:click.native='onRefreshLayout'>Refresh Layout</ejs-button>
+                </div>
                 <div class=" col-10 d-flex mx-auto" >
-                    <!-- <tr>
-                    <td>
-                        <div>
-                            <ejs-button v-on:click.native='onSubmit'>Add</ejs-button>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <ejs-button v-on:click.native='onSave'>Edit</ejs-button>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <ejs-button v-on:click.native='onDelete'>Delete</ejs-button>
-                        </div>
-                    </td>
-                </tr><br> -->
                     <ejs-schedule height="150%" width="100%" currentView="Month"
                     id='Schedule'
                     :eventSettings="appointmentData"
@@ -92,7 +85,7 @@
                                             From
                                         </td>
                                         <td colspan="4">
-                                            <ejs-datetimepicker class="e-field" id="StartTime" name="StartTime" >
+                                            <ejs-datetimepicker format="dd/MM/yyyy HH:mm" class="e-field" id="StartTime" name="StartTime" >
 
                                             </ejs-datetimepicker>
                                         </td>
@@ -102,7 +95,7 @@
                                             To
                                         </td>
                                         <td colspan="4">
-                                            <ejs-datetimepicker class="e-field" id="EndTime" name="EndTime">
+                                            <ejs-datetimepicker format="dd/MM/yyyy HH:mm"  class="e-field" id="EndTime" name="EndTime">
 
                                             </ejs-datetimepicker>
                                         </td>
@@ -193,7 +186,6 @@ export default {
     return {  
     // data: appointmentData,
 
-
     prioHardCodedDataSource: ['High-Priority', 'Mid-Priority', 'Low-Priority'],
     prioDatasource: [
         {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
@@ -205,20 +197,20 @@ export default {
     //     {modName: 'IDP', modId:2, color: 'purple', taskPrioId:2},
     //     {modName: 'BPAS', modId:3, color: 'orange', taskPrioId:2}
     // ],
-    groupResource : {
-        byDate: true,
-        byGroupID: false,
-        resources : ["Priority"]
-    },
+    // groupResource : {
+    //     byDate: true,
+    //     byGroupID: false,
+    //     resources : ["Priority"]
+    // },
     treeviewFields: { 
         dataSource: [
-          {Id: 1, Name: 'WADII'},
-          {Id: 2, Name: 'CT'},
-          {Id: 3, Name: 'BPAS'},
-          {Id: 4, Name: 'IDP'},
-          {Id: 5, Name: 'Feed Dog'}
+            {Name: 'WADII'},
+            {Name: 'CT'},
+            {Name: 'BPAS'},
+            {Name: 'IDP'},
+            {Name: 'Feed Dog'}
         ],
-        id:'Id', text:'Name'
+        text:'Name'
     },
     schedulerSelectedDate : new Date(),
 
@@ -264,26 +256,78 @@ export default {
 },
 
 methods : {
+    onRefreshLayout: function () {
+        console.log("[start] onRefreshLayout")
+        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+        scheduleObj.refreshLayout();
+    },
+
     Add() {
         console.log("[start] Add()")
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
         let subject = document.getElementById("Subject")
         let priority = document.getElementById("PriorityId")
-        let StartTime = document.getElementById("StartTime")
-        let EndTime = document.getElementById("EndTime")
+        let input_StartTime = document.getElementById("StartTime").value
+        let input_EndTime = document.getElementById("EndTime").value
         console.log(subject.value)
         console.log(priority.value)
-        console.log(StartTime.value)
-        console.log(EndTime.value)
+        console.log(StartTime)
+        console.log(EndTime)
+
+        // get id
         let apptdata = this.appointmentData.dataSource;
         let id = apptdata.length + 1
+
+        // format start time and date
+        let str_length = input_StartTime.length
+        let start_date = input_StartTime.slice(0,10)
+        let date_ele = start_date.split("/")
+        let year = date_ele[2]
+        let month = date_ele[1] -1
+        let day = date_ele[0]
+
+        let start_time = input_StartTime.slice(11,str_length)
+        let hour_min = start_time.split(":")
+        let hour = hour_min[0]
+        let min = hour_min[1]
+
+        let start = new Date(year, month, day, hour, min, 0)
+        // console.log(hour)
+        // console.log(min)
+        // console.log(start_date)
+        // console.log(start_time)
+        // console.log(year, month, day)
+        console.log(start)
+
+        // format end time and date
+        let str_length2 = input_EndTime.length
+        let end_date = input_EndTime.slice(0,10)
+        let date_ele2 = end_date.split("/")
+        let year2 = date_ele2[2]
+        let month2 = date_ele2[1] -1
+        let day2 = date_ele2[0]
+
+        let end_time = input_EndTime.slice(11,str_length2)
+        let hour_min2 = end_time.split(":")
+        let hour2 = hour_min2[0]
+        let min2 = hour_min2[1]
+
+        let end = new Date(year2, month2, day2, hour2, min2, 0)
+        // console.log(hour)
+        // console.log(min)
+        // console.log(start_date)
+        // console.log(start_time)
+        // console.log(year, month, day)
+        console.log(end)
+
+
         if (priority.value == 'High-Priority') {
             let priorityId = 1
             let data = {
                 Id : id,
-                subject: subject.value,
-                startTime: StartTime.value,
-                endTime: EndTime.value,
+                Subject: subject.value,
+                StartTime: start,
+                EndTime: end,
                 PriorityId: priorityId,
             };
             apptdata.push(data);
@@ -291,9 +335,9 @@ methods : {
             let priorityId = 2
             let data = {
                 Id : id,
-                subject: subject.value,
-                startTime: StartTime.value,
-                endTime: EndTime.value,
+                Subject: subject.value,
+                StartTime: start,
+                EndTime: end,
                 PriorityId: priorityId,
             };
             apptdata.push(data);
@@ -301,14 +345,25 @@ methods : {
             let priorityId = 3
             let data = {
                 Id : id,
-                subject: subject.value,
-                startTime: StartTime.value,
-                endTime: EndTime.value,
+                Subject: subject.value,
+                StartTime: start,
+                EndTime: end,
                 PriorityId: priorityId,
             };
             apptdata.push(data)
         }
-        // scheduleObj.openEditor(data,'Add');
+        scheduleObj.closeEditor();
+    },
+
+    Add_Treeview() {
+        console.log("[start] Add_Treeview")
+        let new_tree =  document.getElementById("Treeview").value
+        console.log(new_tree)
+        let data = this.treeviewFields.dataSource
+        data.push(
+            {Name: new_tree}
+        )
+        document.getElementById("Treeview").value = ""
     },
 
     onTreeDragStop : function(args) {
@@ -325,7 +380,7 @@ methods : {
         IsAllDay : cellData.isAllDay
     };
       //schedulerComponentObject.addEvent(eventData);
-    schedulerComponentObject.openEditor(eventData,'Add',true);
+    schedulerComponentObject.openEditor();
     // let apptdata = this.appointmentData.dataSource;
     // console.log(this.appointmentData.dataSource)
     // apptdata.push(eventData)
@@ -352,36 +407,12 @@ methods : {
         }
     },
 
-    // onSave: function () {
-    //     console.log("[start] onSave")
-    //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-    //     let eventData = {
-    //         Id: 5,
-    //         Subject: 'Testing-edited',
-    //         StartTime: new Date(2022, 10, 11, 10, 0, 0),
-    //         EndTime: new Date(2022, 10, 11, 12, 0, 0),
-    //         PriorityId : 3,
-    //     };
-    //         scheduleObj.saveEvent(eventData);
-    //     },
-
-
-    // onDelete: function () {
-    //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-    //     scheduleObj.deleteEvent(4);
-    // },
 
     onCellClick: function(args) {
         console.log("[start] onCellClick")
         console.log(args)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-        scheduleObj.openEditor(args, "Add");
-        let apptdata = this.appointmentData.dataSource;
-        // console.log(this.appointmentData.dataSource)
-        // apptdata.push(args)
-        // console.log(apptdata)
-        let subject = document.getElementById("Subject")
-        console.log(subject.value)
+        scheduleObj.openEditor();
     },
 
     onEventClick: function(args) {   

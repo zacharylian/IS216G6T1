@@ -193,6 +193,13 @@
 
         deleteTask(index) {
             this.tasks.splice(index, 1);
+            // this.completed_tasks.push(
+			// 	{
+            //             name: this.tasks[index].name,
+            //             status: this.tasks[index].status,
+            //             completed: false
+            //     }
+			// )
             this.updatedb()
         },
 
