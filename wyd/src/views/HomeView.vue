@@ -118,7 +118,7 @@ export default {
   },
 
   data() {return {
-    data: appointmentData.sampleData,
+    apptdata: appointmentData.sampleData,
     username: getAuth().currentUser.displayName,
     date: new Date(),
     percentagedone: 5,
@@ -144,9 +144,25 @@ export default {
             } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
-            console.log("=====creating document=====")
+            console.log("=====creating focustimer document=====")
             setDoc(docRef, {goalhours: this.goalhours, totalduration: 0 });
             }
+
+            const docRef2 = doc(db, "calendar", this.uid);
+            const docSnap2 = await getDoc(docRef2);
+            if (docSnap2.exists()) {
+            console.log("Document data:", docSnap2.data());
+            this.apptData = docSnap2.data().appointmentData
+            
+
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            console.log("=====creating calendar document=====")
+            setDoc(docRef2, { enableTooltip: true, appointmentData: {}});
+            }
+
+
         },
         googleSignOut() {
           const auth = getAuth();
