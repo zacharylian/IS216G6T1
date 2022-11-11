@@ -141,6 +141,8 @@ import { getDatePredicate } from '@syncfusion/ej2-grids';
 import { DropDownListComponent } from '@syncfusion/ej2-vue-dropdowns';
 import { DateTimePickerComponent } from '@syncfusion/ej2-vue-calendars';
 import { L10n } from '@syncfusion/ej2-base';
+import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+import { db } from '../main';
 
 L10n.load({
     'en-US': {
@@ -161,6 +163,14 @@ L10n.load({
 
 //EXPORTS
 export default {
+    created(){
+    console.log("=====getting UID=====")
+        this.uid = getAuth().currentUser.uid
+        console.log(this.uid)
+
+        console.log("=====extracting data from db=====")
+        this.checkdb()
+    },
     name: 'Calendar',
     components: {
     "navbar" : navbar,
@@ -186,6 +196,7 @@ export default {
     return {  
     // data: appointmentData,
 
+    uid: "",
     prioHardCodedDataSource: ['High-Priority', 'Mid-Priority', 'Low-Priority'],
     prioDatasource: [
         {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
@@ -256,6 +267,29 @@ export default {
 },
 
 methods : {
+    
+    async checkdb(){
+        const docRef2 = doc(db, "calendar", this.uid);
+            const docSnap2 = await getDoc(docRef2);
+            if (docSnap2.exists()) {
+            console.log("Document data:", docSnap2.data());
+            this.appointmentData.dataSource = docSnap2.data().appointmentData
+            this.treeviewFields.dataSource = docSnap2.data().treeviewData
+            console.log(this.appointmentData)
+            
+
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            console.log("=====creating calendar document=====")
+            setDoc(docRef2, { appointmentData: [], treeviewData: []});
+            }
+
+    },
+    async updatedb(){
+        const docRef = doc(db, "calendar", this.uid);
+        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource, treeviewData: this.treeviewFields.dataSource })
+    },
     onRefreshLayout: function () {
         console.log("[start] onRefreshLayout")
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
@@ -353,6 +387,7 @@ methods : {
             apptdata.push(data)
         }
         scheduleObj.closeEditor();
+        this.updatedb() //used to update new data into db, keep at the end of function
     },
 
     Add_Treeview() {
@@ -364,6 +399,7 @@ methods : {
             {Name: new_tree}
         )
         document.getElementById("Treeview").value = ""
+        this.updatedb() //used to update new data into db, keep at the end of function
     },
 
     onTreeDragStop : function(args) {
