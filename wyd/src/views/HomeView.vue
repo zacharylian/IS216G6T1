@@ -11,7 +11,7 @@
   </body>
 
 <!-- <main> -->
-  <div :style={navbar_margin}>  
+  <div :style={newnavbar_margin}>  
 
   <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
@@ -232,7 +232,7 @@ export default {
 
 @import '../Background.css';
 @media only screen and (max-width: 768px) {
-    .navbar_margin {
+    .newnavbar_margin {
       margin-left: 0rem;
     }
 
@@ -240,7 +240,7 @@ export default {
 
 
 @media only screen and (min-width: 768px) {
-    .navbar_margin {
+    .newnavbar_margin {
       margin-left: 6rem;
     }
 }

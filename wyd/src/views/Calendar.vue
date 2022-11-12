@@ -24,7 +24,7 @@
                         </ejs-treeview>
                     </div>
                     <div>
-                        Trees: {{treeviewFields.dataSource}}
+                        <!-- Trees: {{treeviewFields.dataSource}} -->
                     </div>
                 </div>
             </div>
@@ -113,8 +113,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan=10>
-                                            <ejs-button v-on:click.native='Add()'>Add</ejs-button>
+                                        <td colspan=10 style="text-align:right">
+                                            <ejs-button v-on:click.native='Add(curr_id)'>Add/Edit</ejs-button>
+                                            <ejs-button v-on:click.native='Delete(curr_id)'>Delete</ejs-button>
                                         </td>
                                     </tr>
                                     
@@ -125,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <div>Events: {{appointmentData.dataSource}}</div>
+        <div>Events: {{this.appointmentData.dataSource}}</div>
 
         
     </div>
@@ -151,8 +152,8 @@ import { db } from '../main';
 L10n.load({
     'en-US': {
         'schedule' : {
-            'saveButton': 'Add',
-            'cancelButton': 'Close',
+            'saveButton': '',
+            'cancelButton': '',
             'newEvent': 'Add Event'
         }
     }
@@ -167,15 +168,15 @@ L10n.load({
 
 //EXPORTS
 export default {
-    created(){
-    console.log("=====getting UID=====")
-        this.uid = getAuth().currentUser.uid
-        console.log(this.uid)
+    // created(){
+    // console.log("=====getting UID=====")
+    //     this.uid = getAuth().currentUser.uid
+    //     console.log(this.uid)
 
-        console.log("=====extracting data from db=====")
-        this.checkdb()
+    //     console.log("=====extracting data from db=====")
+    //     this.checkdb()
 
-    },
+    // },
     name: 'Calendar',
     components: {
     "navbar" : navbar,
@@ -199,7 +200,8 @@ export default {
     },
     data() {
     return {  
-    // data: appointmentData,
+    // just this curr_id only!!! thanks jamesss :>>>>>
+    curr_id : 0,
 
     uid: "",
     prioHardCodedDataSource: ['High-Priority', 'Mid-Priority', 'Low-Priority'],
@@ -314,24 +316,36 @@ methods : {
         const docRef = doc(db, "calendar", this.uid);
         await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource[0] })
     },
-    onRefreshLayout: function () {
-        console.log("[start] onRefreshLayout")
-        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-        scheduleObj.refreshLayout();
-    },
 
-    Add() {
+    // new func that will update db!
+    Delete(curr_id) {
+        console.log("[start] Delete()")
+        if (curr_id != 0) {
+            let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+            let apptdata = this.appointmentData.dataSource;
+            console.log(apptdata)
+            for (let eventdata in apptdata) {
+                console.log(eventdata)
+                console.log(apptdata[eventdata].Id)
+                if (apptdata[eventdata].Id == curr_id) {
+                    apptdata.splice(eventdata,1)
+                }
+            }
+            this.curr_id = 0
+            scheduleObj.closeEditor();
+        }
+    },  
+
+    // edited abit!!
+    Add(curr_id) {
         console.log("[start] Add()")
         // console.log(this.appointmentData.dataSource)
+        console.log(curr_id)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
         let subject = document.getElementById("Subject")
         let priority = document.getElementById("PriorityId")
         let input_StartTime = document.getElementById("StartTime").value
         let input_EndTime = document.getElementById("EndTime").value
-
-        // get id
-        let apptdata = this.appointmentData.dataSource;
-        let id = apptdata.length + 1
 
         // format start time and date
         let str_length = input_StartTime.length
@@ -363,7 +377,10 @@ methods : {
 
         let end = new Date(year2, month2, day2, hour2, min2, 0)
 
-
+        if (curr_id == 0) {
+            // get id
+            let apptdata = this.appointmentData.dataSource;
+            let id = apptdata.length + 1
         if (priority.value == 'High-Priority') {
             let priorityId = 1
             let data = {
@@ -403,11 +420,43 @@ methods : {
         }
         this.updatedbevent() //used to update new data into db, keep at the end of function
         scheduleObj.closeEditor();
+        } else {
+            console.log(curr_id)
+            let apptdata = this.appointmentData.dataSource;
+            console.log(apptdata)
+            for (let eventdata of apptdata) {
+                console.log(eventdata.Id)
+                if (eventdata.Id == curr_id) {
+                    console.log(eventdata.Subject)
+                    console.log(eventdata.StartTime)
+                    console.log(eventdata.EndTime)
+                    console.log(subject.value)
+                    eventdata.Subject = subject.value;
+                    eventdata.StartTime = start;
+                    eventdata.EndTime = end;
+                    console.log(eventdata.Subject)
+                    console.log(eventdata.StartTime)
+                    console.log(eventdata.EndTime)
+                    if (priority.value == 'High-Priority') {
+                        let priorityId = 1
+                        eventdata.PriorityId = priorityId;
+                    } else if (priority.value == 'Mid-Priority') {
+                        let priorityId = 2
+                        eventdata.PriorityId = priorityId;
+                    } else if (priority.value == 'Low-Priority') {
+                        let priorityId = 3
+                        eventdata.PriorityId = priorityId;
+                    }
+            }
+        }
+        scheduleObj.closeEditor();
+        this.curr_id = 0
+        }
     },
 
     Add_Treeview() {
         console.log("[start] Add_Treeview")
-        let new_tree =  document.getElementById("Treeview").value
+        let new_tree =  document.getElementById("treeview").value
         console.log(new_tree)
         let data = this.treeviewFields.dataSource[0]
         let id = data.length + 1
@@ -433,12 +482,14 @@ methods : {
         let cellData = schedulerComponentObject.getCellDetails(args.target);
         let treeviewComponentObject = document.getElementById('treeview').ej2_instances[0];
         let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
-    let eventData = {
+        console.log(filteredData[0].Name)
+        let eventData = {
         Subject : filteredData[0].Name,
         startTime : cellData.startTime,
         endTime : cellData.endTime,
         IsAllDay : cellData.isAllDay
     };
+    
       //schedulerComponentObject.addEvent(eventData);
     schedulerComponentObject.openEditor(eventData,'Add',true);
     // let apptdata = this.appointmentData.dataSource;
@@ -477,9 +528,11 @@ methods : {
 
     onEventClick: function(args) {   
         console.log("[start] onEventClick")
-        console.log(args)
-        console.log(args.event)
-        console.log(args.event.Id)
+        // console.log(args)
+        // console.log(args.event)
+        // console.log(args.event.Id)
+        this.curr_id = args.event.Id
+        console.log(this.curr_id)
         console.log(args.event.Subject)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];       
         scheduleObj.openEditor(args.event);
