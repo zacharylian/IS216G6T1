@@ -2,6 +2,13 @@
 
 <!-- <body> -->
   <navbar></navbar>
+  <body>
+    <div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+  </body>
 
 <!-- <main> -->
   <div style="margin-left:6rem">  
@@ -217,6 +224,8 @@ export default {
 </script>
 
 <style>
+
+@import '../Background.css';
 
 
 .skill {

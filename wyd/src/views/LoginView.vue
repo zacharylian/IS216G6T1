@@ -80,7 +80,7 @@
     <h2>Personalized <br/> Calendar</h2>
     <h3>Never miss an event</h3>
     <p>Add events, reminders and tasks <br/>
-      <i>(Google Calendar sync available)</i></p>
+    </p>
   </div>
   <div class="reveal">
     <img src="../media/Calendar.png">

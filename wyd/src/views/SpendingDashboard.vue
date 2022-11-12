@@ -1,6 +1,12 @@
 <template>
-  <navbar>
-  </navbar>
+  <navbar></navbar>
+  <body>
+    <div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+  </body>
   <div style="margin-left:6rem">
     <!-- <div class="border border-info" style="height: 95%"> -->
       <div class="row border border-primary h-50">
