@@ -136,7 +136,7 @@ export default {
   computed: {
     cssVars() {
       return {
-        '--numbers': 472 - (472 * this.percentagedone)
+        '--numbers': 472 - (472 * this.percentagedone/100)
       }
     }
   }
