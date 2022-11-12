@@ -174,14 +174,17 @@ export default {
             const docSnap2 = await getDoc(docRef2);
             if (docSnap2.exists()) {
             console.log("Document data:", docSnap2.data());
-            this.apptData = docSnap2.data().appointmentData
-            
-
-            } else {
+            this.apptData = []
+            for (var info of docSnap2.data().appointmentData){
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+              this.apptdata.push(info)
+            }
+          } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { enableTooltip: true, appointmentData: {}});
+            setDoc(docRef2, { treeviewsData: [], appointmentData: []});
             }
 
 
