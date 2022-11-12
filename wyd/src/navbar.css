@@ -2,6 +2,11 @@
     position: fixed;
     background-color: #5E6EE6;
     transition: 200ms ease;
+    background: rgba( 94, 110, 230, 0.55 );
+    box-shadow: 0 8px 32px 0 rgba(139, 139, 139, 0.37);
+    backdrop-filter: blur( 9px );
+    -webkit-backdrop-filter: blur( 9px );
+
 }
 
 .navbar-nav {
@@ -86,7 +91,8 @@
 
     .navbar_home:hover{ 
         width: 13rem;
-        filter: opacity(95%)
+        filter: opacity(95%);
+        border-right: 1px solid rgba(73,85,179, 0.8);
     }
 
     .navbar_home:hover .link-text{
