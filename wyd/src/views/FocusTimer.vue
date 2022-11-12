@@ -16,7 +16,6 @@
     <div class="row">
       <div class="col">
         <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:56vw;height:20vw;text-align:center;font-size:18vw;">
-      <!-- <div style="margin:auto;">00:00</div> -->
       00:00
     </div>
       </div>

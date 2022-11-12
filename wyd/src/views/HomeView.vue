@@ -1,7 +1,7 @@
 <template>
 
 <!-- <body> -->
-  <navbar></navbar>
+  <navbar style="z-index:5"></navbar>
   <body>
     <div>
       <div class="wave"></div>
@@ -16,7 +16,7 @@
   <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
 <div class="row" >
-  <div class="col col-xxl-8 col-md-12">
+  <div class="col col col-xxl-6 col-xl-6 col-md-12">
           <div class="row">
             <div class="col bg wanbottom">
             <!--NAME-->
@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-        <div class="col col-xxl-4 bg" style="overflow:scroll">
+        <div class="col col-xxl-6 col-xl-6 col-md-12 bg" style="overflow:scroll">
           <h3 class="p-2"><i>to-do list</i></h3>
           <todo></todo>          
         </div>
