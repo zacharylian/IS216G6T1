@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" style="color:#7289DA;font-weight:bold;">Wad Are You 2 Doing</a>
+    <a class="navbar-brand" style="color:#5E6EE6;font-weight:bold;">Wad Are You 2 Doing</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,7 +35,7 @@
 <div class="text">
   <div id="tagline">
         Stay
-    <div class="scroller" style="color: #7289DA">
+    <div class="scroller" style="color: #5E6EE6">
       <span>
         Focused.<br/>
         Prepared.<br/>
@@ -46,7 +46,7 @@
   </div>
   <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
   
-  <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family:Georgia;font-style:italic;">
+  <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family: 'Poppins', sans-serif;background-color:white">
 
   </button>
 

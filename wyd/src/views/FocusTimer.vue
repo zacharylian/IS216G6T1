@@ -13,35 +13,35 @@
   <div class="mt-5 text-center">
     <div class="mt-4">
       <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
-        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg" placeholder="0 hours" v-model="goalhours" style="width:6.2vw;border:none;border-radius:5px">&nbsp;&nbsp;&nbsp;
-        <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
-        <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
+        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg bgbon" placeholder="0 hours" v-model="goalhours" style="width:6.2vw;border:none;border-radius:5px">&nbsp;&nbsp;&nbsp;
+        <button class="main-button2 mt-0 bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
+        <button class="main-button2 mt-0 bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
         <!-- <button class="main-button mt-0" style="font-size:1.5vw;border:none;width:12vw;height:4vw" @click="submitgoal()">confirm?</button> -->
     </div>
 
     <br>
     <div class="row">
       <div class="col">
-        <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:56vw;height:20vw;text-align:center;font-size:18vw;">
+        <div class="clock bg bgbon px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:56vw;height:20vw;text-align:center;font-size:18vw;">
       00:00
     </div>
       </div>
     </div>
         <div class="row m-auto">
           <div class="col col-4"></div>
-          <div class="col col-2 bg">
-            <button class="main-button2 mt-0" style="font-size:3vw;border:none;width:4vw;" @click="upfive()">↑</button></div>
+          <div class="col col-2">
+            <button class="main-button2 bgbon mt-0" style="font-size:3vw;border:none;width:4vw;" @click="upfive()">↑</button></div>
           &nbsp&nbsp&nbsp&nbsp
-          <div class="col col-2 bg">
-            <button class="main-button2 mt-0" style="font-size:3vw;border:none;width:4vw;" @click="downfive()">↓</button></div>
+          <div class="col col-2">
+            <button class="main-button2 bgbon mt-0" style="font-size:3vw;border:none;width:4vw;" @click="downfive()">↓</button></div>
           <div class="col col-4"></div>
         </div><br>
 
     <div class="mb-4">
-      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="text-center" @keypress.enter="enterTime()"><br>
-      <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
-      <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
-      <button id="stoppie" class="main-button" @click="stoppie()">Reset</button>
+      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="text-center" @keypress.enter="enterTime()" style="width:52vw"><br>
+      <button id="btn" class="main-button bgbon" @click="timer()">Start</button>&nbsp
+      <button id="pause" class="main-button bgbon" @click="pause()">Pause</button>&nbsp
+      <button id="stoppie" class="main-button bgbon" @click="stoppie()">Reset</button>
     </div>
 <!-- <br>
 <div class="h6 font-italic">Insert motivational prompts here...</div> -->
@@ -380,7 +380,7 @@ body {
   display: flex;
   align-items: center;
   justify-content:center;
-  color: #899DDF;
+  color: #E6E8FF;
 }
 
 .mode-button {
@@ -389,35 +389,35 @@ body {
   box-shadow: none;
   font-weight: bold;
   color: #F6F8FB;
-  background-color:#7289DA;
+  background-color:#5E6EE6;
   border: 1px solid transparent;
   margin: 0px;
   border-radius: 10px;
   padding: 4px 12px;
 }
 
-.mode-button.active {
-  border-color: #7289DA;
-  background: #EFF0FF;
-  color: #7289DA
-}
+/* .mode-button.active {
+  border-color: #5E6EE6;
+  background: #E6E8FF;
+  color: #5E6EE6
+} */
 
 .main-button {
   cursor: pointer;
   font-size: 22px;
   height: 55px;
   text-transform: uppercase;
-  color: #899DDF;
+  color: #E6E8FF;
   font-weight: bold;
   width: 200px;
-  background-color: #EFF0FF;
+  /* background-color: #5E6EE6; */
   border-width: initial;
   border-style: none;
   margin: 20px 0px 0px;
   padding: 0px 12px;
   border-radius: 30px;
   transition: color 0.5s ease-in-out 0s;
-  border: 1px solid #7289DA;
+  /* border: 1px solid #E6E8FF; */
   
 }
 
@@ -426,16 +426,16 @@ body {
       font-size: 22px;
   height: 55px;
   text-transform: uppercase;
-  color: #899DDF;
+  color: #E6E8FF;
   font-weight: bold;
-  background-color: #EFF0FF;
+  /* background-color: #E6E8FF; */
   border-width: initial;
   border-style: none;
   margin: 20px 0px 0px;
   padding: 0px 12px;
   border-radius: 50%;
   transition: color 0.5s ease-in-out 0s;
-  border: 1px solid #7289DA;
+  /* border: 1px solid #5E6EE6; */
 }
 
 button:focus, button:active {

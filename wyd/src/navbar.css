@@ -1,6 +1,6 @@
 .navbar_home {
     position: fixed;
-    background-color: #7289DA;
+    background-color: #5E6EE6;
     transition: 200ms ease;
 }
 
@@ -35,7 +35,7 @@
 
 .nav-link2:hover {
     filter: grayscale(0%) opacity(1);
-    background: #6479c5;
+    background: #4955B3;
     color: black;
 }
 
