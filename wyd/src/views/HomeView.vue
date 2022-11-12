@@ -18,15 +18,15 @@
 <div class="row" >
   <div class="col col col-xxl-7 col-xl-7 col-md-12">
           <div class="row">
-            <div class="col bg wanbottom">
+            <div class="col mt-2">
             <!--NAME-->
-            <h1 class="px-3 py-1" style="text-align:left;font-family:Georgia, Times, serif;font-style:italic;height:10%">hi, <b>{{this.username}}</b></h1>
+            <h1 class="px-3 py-1" style="text-align:left;font-style:italic;height:5vw;color:whitesmoke">hi, <b style="">{{this.username}}!</b></h1>
           </div></div>
           <div class="row">
-            <div class="col bg wanbottom pb-4" style="height:350px">
+            <div class="col wanbottom pb-4" style="height:340px">
             <!--UPCOMING EVENTS-->
-            <h3 class="py-2">upcoming events</h3>
-            <div class="d-flex justify-content-center align-items-center" style="overflow:scroll;margin:auto;z-index:-1">
+            <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
+            <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
               <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
                   <e-columns>
                       <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
@@ -37,7 +37,7 @@
             </div>
           </div>
           </div>
-          <div class="row">
+          <div class="row wanbottom">
             <div class="col py-2 bg wanright" style="height:230px">
               <!--EXPENSES-->
               <h3>expenses<br><br></h3>
@@ -47,12 +47,12 @@
               <br><h4>$40/$50</h4></div>
               <br>
               </div>
-              <div class="col py-2 bg wanright" style="height:230px">
+              <div class="col py-2  wanright" style="height:230px">
               <!--FOCUS TIME TODAY-->
-              <h3>focus time today</h3>
+              <h3 style="font-style:normal">focus time today:</h3>
               <div>
                 <div class="skill">
-                  <div class="outer">
+                  <div class="outer bg">
                       <div class="inner">
                           <div id="number">
                               {{this.percentagedone}}%
@@ -75,7 +75,7 @@
             </div>
           </div>
         </div>
-        <div class="col col-xxl-5 col-xl-5 col-md-12 bg" style="overflow:scroll">
+        <div class="col col-xxl-5 col-xl-12 col-md-12 bg px-5" style="overflow:auto;border-radius:20px;height:650px;width:500px;margin:auto;">
           <h3 class="p-2"><i>to-do list</i></h3>
           <todo></todo>          
         </div>
@@ -250,8 +250,8 @@ export default {
     width:160px;
     border-radius:50%;
     padding:20px;
-    box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15),
-    -6px -6px 10px 1px rgba(255,255,255,0.7);
+    /* box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15), */
+    /* -6px -6px 10px 1px rgba(255,255,255,0.7); */
     
 }
 
