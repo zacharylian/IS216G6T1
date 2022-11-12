@@ -65,14 +65,26 @@
         },
 
         methods: {
+            showAlert() {
+            console.log('test')
+            this.$swal({
+                title:'Logout Successful',
+                text: 'Remember to drink up!', 
+                timer: 2000,
+                showConfirmButton: false
+                }
+            );
+            },
             googleSignOut() {
                 const auth = getAuth();
                 signOut(auth).then(() => {
                 // Sign-out successful.
-                alert("Successful Sign Out")
+                // alert("Successful Sign Out")
                 console.log(getAuth().currentUser)
                 location.reload()
-                }).catch((error) => {
+                })
+                .then(this.showAlert())
+                .catch((error) => {
                 // An error happened.
                 console.log(error)
                 });

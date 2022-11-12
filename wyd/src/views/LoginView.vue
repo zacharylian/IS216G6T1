@@ -46,7 +46,7 @@
     </div>
     <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
     
-    <button @click="googleSignIn" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family:Georgia;font-style:italic;">
+    <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family:Georgia;font-style:italic;">
     </button>
 
   </div>
@@ -105,6 +105,10 @@
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
   export default {
       methods: {
+          showAlert() {
+            console.log('test')
+            this.$swal('Login Successful', 'Productivity starts now', 'success');
+          },
           googleSignIn() {
               // We'll create functionality here
               const auth = getAuth();
@@ -119,7 +123,7 @@
               const user = result.user;
               // ...
               this.$router.push('/')
-              
+              .then(this.showAlert())
             }).catch((error) => {
               // Handle Errors here.
               const errorCode = error.code;

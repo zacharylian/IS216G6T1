@@ -6,6 +6,12 @@ import { registerLicense } from '@syncfusion/ej2-base';
 
 registerLicense('ORg4AjUWIQA/Gnt2VVhjQlFaclhJXGJWfFppR2NbfU53flVCal9WVAciSV9jS3xSdkZjWXhedXRRRmJcVw==');
 
+// sweetalert2
+
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+
 
 //css
 import "./assets/global.css";
@@ -51,7 +57,7 @@ const firebaseConfig = {
   appId: "1:578928448222:web:f00f1a2dde51ad927d284f",
   measurementId: "G-BK1QG28M8Q"
 };
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(VueSweetalert2).mount('#app')
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

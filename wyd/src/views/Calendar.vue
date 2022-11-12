@@ -135,7 +135,7 @@
 <script>
 import navbar from '@/components/layouts/new_navbar.vue';
 import { getAuth, signOut } from '@firebase/auth';
-import {appointmentData} from '@/data.js';
+import { appointmentData } from '@/data.js';
 import { ButtonComponent } from '@syncfusion/ej2-vue-buttons';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective, HeaderRowDirective, HeaderRowsDirective} from '@syncfusion/ej2-vue-schedule';
 import {DataManager, WebApiAdaptor} from "@syncfusion/ej2-data";
@@ -192,7 +192,6 @@ export default {
     'e-columns' : ColumnsDirective,
     'e-column' : ColumnDirective,
     "ejs-button": ButtonComponent, 
-
     },
 
     provide : {
