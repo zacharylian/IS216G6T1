@@ -1,3 +1,5 @@
+import d3 from "d3";
+
 export default () => {
   console.log("HELLO!!!");
   // fetch(
@@ -40,6 +42,30 @@ export default () => {
             {"date": 30, "day": "tue", "week": 5 ,"amt": 123,  "cat": "investment"},
             {"date": 31, "day": "wed", "week": 5 ,"amt": 232,  "cat": "investment"},
           ],
+      }
+
+      function colorAssignment(d) {
+        if (d >= 500) {
+          return "FF0D0D"
+        } else if (d >= 400) {
+          return "ED2938"
+        } else if (d >= 350) {
+          return "C82538"
+        } else if (d >= 300) {
+          return "B13433"
+        } else if (d >= 250) {
+          return "B25F4A"
+        } else if (d >= 200) {
+          return "675E24"
+        } else if (d >= 150) {
+          return "45731E"
+        } else if (d >= 100) {
+          return "77945C"
+        } else if (d >= 50) {
+          return "3BCA6D"
+        } else {
+          return "90EF90"
+        }
       }
       // var gotData = data.monthlyVariance; //data
       // var amtArr = []
@@ -130,23 +156,13 @@ export default () => {
 
       // Set the x axis to years
       // var x = d3.scale.linear().domain([minYear, maxYear]).range([0, width]);
-      var x = d3.scale.linear().domain([dayStart, dayEnd]).range([0, width]);
+      var x = d3.scaleLinear().domain([dayStart, dayEnd]).range([0, width]);
 
       // Set the y axis to months
-      var y = d3.scale.linear().domain([1, 6]).range([0, height]);
+      var y = d3.scaleLinear().domain([1, 6]).range([0, height]);
 
       // Set the z axis to colors
-      var z = d3.scale.quantile().domain([0, 501]).range(colors);
-
-      // xAxis SVG function
-      var xAxis = d3.svg
-        .axis()
-        .scale(x)
-        .orient("bottom")
-        .tickFormat((d, i) => days[i])
-        // .ticks((dayEnd - dayStart) / 10)
-        // .tickValues([0, 0.17, 0.33, 0.5, 0.67, 0.83, 1]);
-        .ticks(7)
+      // var z = d3.scale.quantile().domain([0, 501]).range(colors);
 
       // Tooltips
       var tip = d3
@@ -163,19 +179,23 @@ export default () => {
           );
         });
 
+      
       // Set up the chart space
       var svg = d3
         .select(".chart")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        // .append("g")
+        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .style("background-color", "blue");
+      
+      
 
       // Draw data rectangles
       var rect = svg
         .selectAll(".rect")
         // .data(gotData)
-        .data(sudoData.oct) //
+        .data(sudoData.oct.amt) //
         .enter()
         .append("rect")
         .attr("fill", function (d) {
@@ -186,7 +206,7 @@ export default () => {
           //     return z(item.amt)
           //   }
           // }
-          return z(d.amt);
+          return colorAssignment(d);
         })
         .attr("x", function (d) {
           // return x(d.year);
@@ -196,7 +216,13 @@ export default () => {
           //     return x(item.date)
           //   }
           // }
-          return x(d.date);
+          for (let i in days) {
+            let edited = days[i].slice(0, 3).toLowerCase()
+            if (d.day == edited) {
+              return x(i+1)
+            }
+          }
+          // return x(d.day);
         })
         .attr("y", function (d) {
           // return y(d.month);
@@ -206,6 +232,7 @@ export default () => {
           //     return y(item.week)
           //   }
           // }
+          
           return y(d.week);
         })
         .attr("width", barWidth)
@@ -216,12 +243,30 @@ export default () => {
       
       svg.call(tip);
 
-      // Draw axis
+      // // xAxis SVG function
+      // var xAxis = d3.svg
+      // .axis()
+      // .scale(x)
+      // .orient("bottom")
+      // .tickFormat((d, i) => days[i])
+      // .ticks((dayEnd - dayStart) / 10)
+      // // .tickValues([0, 0.17, 0.33, 0.5, 0.67, 0.83, 1]);
+      // // .ticks(7)
+
+      // // Draw axis
+      // var xAxisGroup = svg
+      //   .append("g")
+      //   .attr("class", "axis")
+      //   .attr("transform", "translate(0," + height + ")")
+      //   .call(xAxis);
+
       var xAxisGroup = svg
         .append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        .data(days)
+        .join("text")
+        .text((d) => d)
+        .attr("x", (d, i) => x(i) + margin.left)
+        .attr("y", height - margin.bottom)
 
       // Draw month labels
       var monthLabels = svg
@@ -240,32 +285,32 @@ export default () => {
         .attr("transform", "translate(-35,15)") //update yaxis here
         .attr("class", "month-label");
 
-      // Draw legend
-      var legend = svg
-        .selectAll(".legend")
-        .data([0].concat(z.quantiles()), function (d) {
-          return d;
-        })
-        .enter()
-        .append("g")
-        .attr("class", "legend")
-        .attr("transform", function (d, i) {
-          return "translate(" + (width + 20) + "," + (20 + i * 20) + ")";
-        });
+      // // Draw legend
+      // var legend = svg
+      //   .selectAll(".legend")
+      //   .data([0].concat(z.quantiles()), function (d) {
+      //     return d;
+      //   })
+      //   .enter()
+      //   .append("g")
+      //   .attr("class", "legend")
+      //   .attr("transform", function (d, i) {
+      //     return "translate(" + (width + 20) + "," + (20 + i * 20) + ")";
+      //   });
 
-      legend
-        .append("rect")
-        .attr("width", 20)
-        .attr("height", 20)
-        .style("fill", z);
+      // legend
+      //   .append("rect")
+      //   .attr("width", 20)
+      //   .attr("height", 20)
+      //   .style("fill", z);
 
-      legend
-        .append("text")
-        .text(function (d, i) {
-          return d.toFixed(0);
-        })
-        .attr("x", 30)
-        .attr("y", 15);
+      // legend
+      //   .append("text")
+      //   .text(function (d, i) {
+      //     return d.toFixed(0);
+      //   })
+      //   .attr("x", 30)
+      //   .attr("y", 15);
 
       // Draw axis labels
       svg

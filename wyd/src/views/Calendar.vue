@@ -24,7 +24,7 @@
                         </ejs-treeview>
                     </div>
                     <div>
-                        <!-- Trees: {{treeviewFields.dataSource}} -->
+                        Trees: {{treeviewFields.dataSource}}
                     </div>
                 </div>
             </div>
@@ -272,8 +272,7 @@ export default {
     };
 },
 
-methods : {
-    
+methods : {  
     async checkdb(){
         const docRef2 = doc(db, "calendar", this.uid);
             const docSnap2 = await getDoc(docRef2);
@@ -309,7 +308,7 @@ methods : {
     },
     async updatedbevent(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource,treeviewData: this.treeviewFields.dataSource[0] })
+        await updateDoc(docRef, { currId: this.curr_id, appointmentData: this.appointmentData.dataSource,treeviewData: this.treeviewFields.dataSource[0] })
     },
 
     async updatedbtree(){
@@ -461,10 +460,12 @@ methods : {
 
     Add_Treeview() {
         console.log("[start] Add_Treeview")
-        let new_tree =  document.getElementById("treeview").value
+        let new_tree =  document.getElementById("Treeview").value
         console.log(new_tree)
-        let data = this.treeviewFields.dataSource[0]
+        let data = this.treeviewFields.dataSource
+        console.log(data)
         let id = data.length + 1
+        console.log(id)
         data.push(
             {
                 Id: id,
@@ -477,7 +478,7 @@ methods : {
                 Id: id,
                 Name: new_tree
             }])
-        document.getElementById("treeview").value = ""
+        document.getElementById("Treeview").value = ""
     },
 
     onTreeDragStop : function(args) {
