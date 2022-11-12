@@ -110,6 +110,24 @@ h3 {font-weight:bold; font-style:italic}
   .bg {
     background-color: #EFF0FF;
   }
+
+  .bgbox {
+background: rgba( 230, 232, 255, 0.55 );
+box-shadow: 0 8px 32px 0 rgba(131, 131, 131, 0.37);
+backdrop-filter: blur( 9px );
+-webkit-backdrop-filter: blur( 9px );
+/*border-radius: 10px;*/
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+
+  .bgbox2 {
+    background: rgba(151, 160, 228, 0.55);
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 9px );
+-webkit-backdrop-filter: blur( 9px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
   
   .wanbottom {
     margin: 0px 20px 20px 0px;

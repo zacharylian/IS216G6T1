@@ -23,7 +23,7 @@
             <h1 class="px-3 py-1" style="text-align:left;font-style:italic;height:5vw;color:whitesmoke">hi, <b style="">{{this.username}}!</b></h1>
           </div></div>
           <div class="row">
-            <div class="col wanbottom pb-4" style="height:340px">
+            <div class="col wanbottom bgbox pb-4" style="height:340px">
             <!--UPCOMING EVENTS-->
             <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
             <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
@@ -38,7 +38,7 @@
           </div>
           </div>
           <div class="row wanbottom">
-            <div class="col py-2 bg wanright" style="height:230px">
+            <div class="col py-2 bgbox wanright" style="height:230px">
               <!--EXPENSES-->
               <h3>expenses<br><br></h3>
               <div class="mx-3" style="margin:auto;">
@@ -47,12 +47,12 @@
               <br><h4>$40/$50</h4></div>
               <br>
               </div>
-              <div class="col py-2  wanright" style="height:230px">
+              <div class="col py-2 bgbox wanright" style="height:230px">
               <!--FOCUS TIME TODAY-->
               <h3 style="font-style:normal">focus time today:</h3>
               <div>
                 <div class="skill">
-                  <div class="outer bg">
+                  <div class="outer bgbox">
                       <div class="inner">
                           <div id="number">
                               {{this.percentagedone}}%
@@ -75,7 +75,7 @@
             </div>
           </div>
         </div>
-        <div class="col col-xxl-5 col-xl-12 col-md-12 bg px-5" style="overflow:auto;border-radius:20px;height:650px;width:500px;margin:auto;">
+        <div class="col col-xxl-5 col-xl-12 col-md-12 bgbox px-5" style="overflow:auto;border-radius:20px;height:650px;width:500px;margin:auto;">
           <h3 class="p-2"><i>to-do list</i></h3>
           <todo></todo>          
         </div>

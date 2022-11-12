@@ -31,7 +31,7 @@
         </div><br>
 
     <div class="mb-4">
-      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="w-50 text-center" @keypress.enter="enterTime()"><br>
+      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="text-center" @keypress.enter="enterTime()"><br>
       <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
       <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
       <button id="stoppie" class="main-button" @click="stoppie()">Reset</button>
@@ -211,10 +211,12 @@ pause() {
 
 stoppie() {
   let time = document.getElementById('time');
+  if (time.innerHTML != '00:00') {
+    this.showAlert()
+  }
   clearInterval(this.interval);
   console.log(this.interval);
   time.innerHTML=('00:00');
-  this.showAlert()
 },
 
 upfive() {
