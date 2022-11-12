@@ -174,12 +174,7 @@ export default {
 
         console.log("=====extracting data from db=====")
         this.checkdb()
-        // for (data in appointmentData.dataSource) {
-        //     console.log("====here data====")
-        //     console.log(data)
-        //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-        //     scheduleObj.addEvent(this.appointmentData.dataSource[data]);
-        // }
+
     },
     name: 'Calendar',
     components: {
@@ -293,13 +288,13 @@ methods : {
                 scheduleObj.addEvent(info);
             }
             this.appointmentData.dataSource = apptinfo
-            let treeinfo = docSnap2.data().treeviewsData
+            let treeinfo = docSnap2.data().treeviewData
             for (var info of treeinfo){
                 var treeGridObj = document.getElementById("Treeview").ej2_instances[0]
                 treeGridObj.addRecord(info)
             }
             console.log(this.appointmentData)
-            this.treeviewFields.dataSource = docSnap2.data().treeviewsData
+            this.treeviewFields.dataSource = docSnap2.data().treeviewData
             
 
             
@@ -309,7 +304,7 @@ methods : {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { appointmentData: [], treeviewsData: []});
+            setDoc(docRef2, { appointmentData: [], treeviewData: []});
             }
 
     },
@@ -320,7 +315,7 @@ methods : {
 
     async updatedbtree(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource, treeviewData: this.treeviewFields.dataSource })
+        await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource })
     },
     onRefreshLayout: function () {
         console.log("[start] onRefreshLayout")
@@ -409,8 +404,8 @@ methods : {
             apptdata.push(data)
             scheduleObj.addEvent(data)
         }
-        scheduleObj.closeEditor();
         this.updatedbevent() //used to update new data into db, keep at the end of function
+        scheduleObj.closeEditor();
     },
 
     Add_Treeview() {
@@ -425,8 +420,8 @@ methods : {
                 Name: new_tree
             }
         )
+        this.updatedbtree() //used to update new data into db, keep at the end of function
         document.getElementById("Treeview").value = ""
-        this.updatedb() //used to update new data into db, keep at the end of function
     },
 
     onTreeDragStop : function(args) {

@@ -183,7 +183,7 @@ export default {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { treeviewsData: [], appointmentData: []});
+            setDoc(docRef2, { treeviewData: [], appointmentData: []});
             }
 
 
