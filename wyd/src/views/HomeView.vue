@@ -24,9 +24,9 @@
             <div class="mx-3" style="padding-left:20%;">
               <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
                   <e-columns>
-                      <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                      <e-column field="StartTime" headerText="Start" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                      <e-column field="EndTime" headerText="End" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="Subject" headerText="Name" width="200" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="StartTime" headerText="Start" width="150" format="y/M/d, HH:mm" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="EndTime" headerText="End" width="150" format="y/M/d, HH:mm" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
                   </e-columns>
               </ejs-treegrid>
             </div>
