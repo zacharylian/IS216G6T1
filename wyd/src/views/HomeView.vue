@@ -11,7 +11,7 @@
   </body>
 
 <!-- <main> -->
-  <div style="margin-left:6rem">  
+  <div :style={navbar_margin}>  
 
   <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
@@ -231,7 +231,19 @@ export default {
 <style>
 
 @import '../Background.css';
+@media only screen and (max-width: 768px) {
+    .navbar_margin {
+      margin-left: 0rem;
+    }
 
+}
+
+
+@media only screen and (min-width: 768px) {
+    .navbar_margin {
+      margin-left: 6rem;
+    }
+}
 
 .skill {
     width:160px;
