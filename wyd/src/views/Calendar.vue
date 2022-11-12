@@ -375,6 +375,7 @@ methods : {
             };
             console.log(data)
             apptdata.push(data);
+            scheduleObj.addEvent(data)
         } else if (priority.value == 'Mid-Priority') {
             let priorityId = 2
             let data = {
@@ -386,6 +387,7 @@ methods : {
             };
             console.log(data)
             apptdata.push(data);
+            scheduleObj.addEvent(data)
         } else if (priority.value == 'Low-Priority') {
             let priorityId = 3
             let data = {
@@ -397,6 +399,7 @@ methods : {
             };
             console.log(data)
             apptdata.push(data)
+            scheduleObj.addEvent(data)
         }
         scheduleObj.closeEditor();
         this.updatedb() //used to update new data into db, keep at the end of function
