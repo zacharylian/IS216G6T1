@@ -309,7 +309,7 @@ methods : {
     },
     async updatedbevent(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource,treeviewData: this.treeviewFields.dataSource[0] })
+        await updateDoc(docRef, { currId: this.curr_id, appointmentData: this.appointmentData.dataSource,treeviewData: this.treeviewFields.dataSource[0] })
     },
 
     async updatedbtree(){
