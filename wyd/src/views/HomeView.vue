@@ -16,7 +16,7 @@
   <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
 <div class="row" >
-  <div class="col col col-xxl-6 col-xl-6 col-md-12">
+  <div class="col col col-xxl-7 col-xl-7 col-md-12">
           <div class="row">
             <div class="col bg wanbottom">
             <!--NAME-->
@@ -26,7 +26,7 @@
             <div class="col bg wanbottom pb-4" style="height:350px">
             <!--UPCOMING EVENTS-->
             <h3 class="py-2">upcoming events</h3>
-            <div class="" style="overflow:scroll;margin:auto;z-index:-1">
+            <div class="d-flex justify-content-center align-items-center" style="overflow:scroll;margin:auto;z-index:-1">
               <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
                   <e-columns>
                       <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
@@ -42,7 +42,9 @@
               <!--EXPENSES-->
               <h3>expenses<br><br></h3>
               <div class="mx-3" style="margin:auto;">
-              <br><br><h2>$40/$50</h2></div>
+              <!-- cld potentially use the same code for progress circle as focus time today.
+                can modify colours & variables no problemo -->
+              <br><h4>$40/$50</h4></div>
               <br>
               </div>
               <div class="col py-2 bg wanright" style="height:230px">
@@ -73,7 +75,7 @@
             </div>
           </div>
         </div>
-        <div class="col col-xxl-6 col-xl-6 col-md-12 bg" style="overflow:scroll">
+        <div class="col col-xxl-5 col-xl-5 col-md-12 bg" style="overflow:scroll">
           <h3 class="p-2"><i>to-do list</i></h3>
           <todo></todo>          
         </div>

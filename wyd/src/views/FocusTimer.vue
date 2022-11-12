@@ -6,7 +6,7 @@
   <div class="mt-5 text-center">
     <div class="mt-4">
       <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
-        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg" placeholder="0 hours" v-model="goalhours" style="width:5.5vw;border:none">&nbsp;&nbsp;&nbsp;
+        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg" placeholder="0 hours" v-model="goalhours" style="width:5.5vw;border:none;border-radius:5px">&nbsp;&nbsp;&nbsp;
         <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
         <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
         <!-- <button class="main-button mt-0" style="font-size:1.5vw;border:none;width:12vw;height:4vw" @click="submitgoal()">confirm?</button> -->
@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       uid: "", //userid for checking db
-      goalhours: '5', /* is stored in hours, one value per day */
+      goalhours: '0', /* is stored in hours, one value per day */
       duration: '20', /* is stored in minutes, many values per day, one per instance */
       end_date: '09-11-2022', /* is stored in DD-MM-YYYY, one per instance */
       end_time: '03:52:46', /* is stored in HH:MM:SS, one per instance */
