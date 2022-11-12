@@ -13,14 +13,14 @@ template{
     scroll-behavior: smooth;
 }
 
-.navbar-fixed-top {
+/* .navbar-fixed-top {
     position: fixed;
     right: 0;
     left: 0;
     z-index: 999;
     background-color: #111;
     opacity: 0.9;
-}
+} */
 
 header{
     z-index: 999;
@@ -179,7 +179,7 @@ font-weight: bold;
     }
 }
 
-@media(max-width: 798px) {
+@media(max-width: 768px) {
     .introduction, 
     .introduction header {
         padding: 40px;

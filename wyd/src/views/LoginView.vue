@@ -30,73 +30,100 @@
 
 <section id="introduction">
 
-  <video class="video-slide" src="../media/productivity.mp4" muted loop autoplay></video>
+<video class="video-slide" src="../media/productivity.mp4" muted loop autoplay></video>
 
-  <div class="text">
-    <div id="tagline">
-          Stay
-      <div class="scroller" style="color: #7289DA">
-        <span>
-          Focused.<br/>
-          Prepared.<br/>
-          Organised.<br/>
-          <i>Krazy!</i><br/>
-        </span>
-      </div>
+<div class="text">
+  <div id="tagline">
+        Stay
+    <div class="scroller" style="color: #7289DA">
+      <span>
+        Focused.<br/>
+        Prepared.<br/>
+        Organised.<br/>
+        Managed.<br/>
+      </span>
     </div>
-    <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
-    
-    <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family:Georgia;font-style:italic;">
-    </button>
-
   </div>
+  <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
+  
+  <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family:Georgia;font-style:italic;">
+
+  </button>
+
+</div>
 </section>
 
 
 <section id="toDo">
-  <div class="text-toDo">
-    <h2>To-Do List</h2>
-    <h3>Set and Clear Tasks</h3>
-    <p>Seamless way to keep track of tasks at hand</p>
+<div class="row">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-center align-items-center">
+    <div class="text-toDo">
+      <h2>To-Do List</h2>
+      <h3>Set and Clear Tasks</h3>
+      <p>Seamless way to keep track of tasks at hand</p>
+    </div>
   </div>
-  <div class="reveal">
-    <img src="../media/To-Do-List.png">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12">
+    <div class="reveal">
+      <img src="../media/To-Do-List.png">
+    </div>
   </div>
+</div>
 </section>
 
 <section id="expenditure">
-  <div class="text-expenditure">
-    <h2>Expenditure</h2>
-    <h3>Manage your Spending</h3>
-    <p>Active tracking of budget and purchases</p>
+<div class="row">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-center align-items-center">
+    <div class="text-expenditure">
+      <h2>Expenditure</h2>
+      <h3>Manage your Spending</h3>
+      <p>Active tracking of budget and purchases</p>
+    </div>
   </div>
-  <div class="reveal">
-    <img src="../media/Expenditure.png">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12">
+    <div class="reveal">
+      <img src="../media/Expenditure.png">
+    </div>
   </div>
+</div>
 </section>
 
 <section id="calendar">
-  <div class="text-calendar">
-    <h2>Personalized <br/> Calendar</h2>
-    <h3>Never miss an event</h3>
-    <p>Add events, reminders and tasks <br/>
-    </p>
+<div class="row ">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-center align-items-center">
+    <div class="text-calendar">
+      <h2>Personalized <br/> Calendar</h2>
+      <h3>Never miss an event</h3>
+      <p>Add events, reminders and tasks <br/>
+        <i>(Google Calendar sync available)</i></p>
+    </div>
   </div>
-  <div class="reveal">
-    <img src="../media/Calendar.png">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12">
+    <div class="reveal">
+      <img src="../media/Calendar.png">
+    </div>
   </div>
+</div>
+
 </section>
 
 <section id="focusTimer">
-  <div class="text-focusTimer">
-    <h2>Focus Timer</h2>
-    <h3>Stay in the Zone</h3>
-    <p>Maintain optimal productivity throughout the day</p>
+<div class="row ">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-center align-items-center">
+    <div class="text-focusTimer">
+      <h2>Focus Timer</h2>
+      <h3>Stay in the Zone</h3>
+      <p>Maintain optimal productivity throughout the day</p>
+    </div>
   </div>
-  <div class="reveal">
-    <img src="../media/Timer.png">
+  <div class="col col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12">
+    <div class="reveal">
+      <img src="../media/Timer.png">
+    </div>
   </div>
+</div>
 </section>
+
 
 </template>
 <script>
