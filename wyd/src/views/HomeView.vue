@@ -159,7 +159,7 @@ export default {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { enableTooltip: true, appointmentData: {}});
+            setDoc(docRef2, { appointmentData: [], treeviewData: []});
             }
 
 
@@ -193,6 +193,7 @@ export default {
         })}},
   }
 }
+
 
 </script>
 
@@ -283,3 +284,4 @@ circle {
 }
 
 </style>
+
