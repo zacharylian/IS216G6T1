@@ -289,16 +289,13 @@ methods : {
             }
             this.appointmentData.dataSource = apptinfo
             let treeinfo = docSnap2.data().treeviewData
-            for (var info of treeinfo){
-                var treeGridObj = document.getElementById("Treeview").ej2_instances[0]
-                treeGridObj.addRecord(info)
-            }
-            console.log(this.appointmentData)
-            this.treeviewFields.dataSource = docSnap2.data().treeviewData
-            
-
-            
-            
+            console.log("=====updating treee=====")
+            this.treeviewFields.dataSource[0] = docSnap2.data().treeviewData
+            // for (let info of treeinfo){
+            //     var treeGridObj = document.getElementById("Treeview").ej2_instances[0]
+            //     treeGridObj.addRecord(info)
+            // }
+            console.log(this.treeviewFields)
 
             } else {
             // doc.data() will be undefined in this case
@@ -310,12 +307,12 @@ methods : {
     },
     async updatedbevent(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource })
+        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource,treeviewData: this.treeviewFields.dataSource[0] })
     },
 
     async updatedbtree(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource })
+        await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource[0] })
     },
     onRefreshLayout: function () {
         console.log("[start] onRefreshLayout")
@@ -420,7 +417,7 @@ methods : {
                 Name: new_tree
             }
         )
-        this.updatedbtree() //used to update new data into db, keep at the end of function
+        this.updatedbevent() //used to update new data into db, keep at the end of function
         document.getElementById("Treeview").value = ""
     },
 
