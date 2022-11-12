@@ -29,9 +29,6 @@
                 </div>
             </div>
             <div class="col-10">
-                <div>
-                    <ejs-button cssClass='e-info' v-on:click.native='onRefreshLayout'>Refresh Layout</ejs-button>
-                </div>
                 <div class=" col-10 d-flex mx-auto" >
                     <ejs-schedule height="150%" width="100%" currentView="Month"
                     id='Schedule'
@@ -116,7 +113,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td colspan=10>
                                             <ejs-button v-on:click.native='Add()'>Add</ejs-button>
                                         </td>
                                     </tr>
@@ -228,11 +225,11 @@ export default {
     // },
     treeviewFields: { 
         dataSource: [
-            {Id: 1, Name: 'WADII'},
-            {Id: 2, Name: 'CT'},
-            {Id: 3, Name: 'BPAS'},
-            {Id: 4, Name: 'IDP'},
-            {Id: 5, Name: 'Feed Dog'}
+            // {Id: 1, Name: 'WADII'},
+            // {Id: 2, Name: 'CT'},
+            // {Id: 3, Name: 'BPAS'},
+            // {Id: 4, Name: 'IDP'},
+            // {Id: 5, Name: 'Feed Dog'}
         ],
         id:'Id', text:'Name'
     },
@@ -296,9 +293,15 @@ methods : {
                 scheduleObj.addEvent(info);
             }
             this.appointmentData.dataSource = apptinfo
+            let treeinfo = docSnap2.data().treeviewsData
+            for (var info of treeinfo){
+                var treeGridObj = document.getElementById("Treeview").ej2_instances[0]
+                treeGridObj.addRecord(info)
+            }
             console.log(this.appointmentData)
-            this.treeviewFields.dataSource = docSnap2.data().treeviewData
+            this.treeviewFields.dataSource = docSnap2.data().treeviewsData
             
+
             
             
 
@@ -306,18 +309,13 @@ methods : {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { appointmentData: [], treeviewData: []});
+            setDoc(docRef2, { appointmentData: [], treeviewsData: []});
             }
 
     },
     async updatedb(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource, treeviewData: this.treeviewFields.dataSource })
-    },
-    onRefreshLayout: function () {
-        console.log("[start] onRefreshLayout")
-        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-        scheduleObj.refreshLayout();
+        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource, treeviewsData: this.treeviewFields.dataSource })
     },
 
     Add() {
@@ -410,11 +408,15 @@ methods : {
         let new_tree =  document.getElementById("Treeview").value
         console.log(new_tree)
         let data = this.treeviewFields.dataSource
+        let id = data.length + 1
         data.push(
-            {Name: new_tree}
+            {
+                Id: id,
+                Name: new_tree
+            }
         )
-        document.getElementById("Treeview").value = ""
         this.updatedb() //used to update new data into db, keep at the end of function
+        document.getElementById("Treeview").value = ""
     },
 
     onTreeDragStop : function(args) {
