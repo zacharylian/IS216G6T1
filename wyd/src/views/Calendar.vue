@@ -291,10 +291,10 @@ methods : {
             let treeinfo = docSnap2.data().treeviewData
             console.log("=====updating treee=====")
             this.treeviewFields.dataSource[0] = docSnap2.data().treeviewData
-            // for (let info of treeinfo){
-            //     var treeGridObj = document.getElementById("Treeview").ej2_instances[0]
-            //     treeGridObj.addRecord(info)
-            // }
+            for (let info of treeinfo){
+                var treeGridObj = document.getElementById("treeview").ej2_instances[0]
+                treeGridObj.addNodes([info])
+            }
             console.log(this.treeviewFields)
 
             } else {
@@ -409,7 +409,7 @@ methods : {
         console.log("[start] Add_Treeview")
         let new_tree =  document.getElementById("Treeview").value
         console.log(new_tree)
-        let data = this.treeviewFields.dataSource
+        let data = this.treeviewFields.dataSource[0]
         let id = data.length + 1
         data.push(
             {
@@ -417,8 +417,13 @@ methods : {
                 Name: new_tree
             }
         )
-        this.updatedbevent() //used to update new data into db, keep at the end of function
-        document.getElementById("Treeview").value = ""
+        this.updatedbtree() //used to update new data into db, keep at the end of function
+        var treeGridObj = document.getElementById("treeview").ej2_instances[0]
+        treeGridObj.addNodes([{
+                Id: id,
+                Name: new_tree
+            }])
+        document.getElementById("treeview").value = ""
     },
 
     onTreeDragStop : function(args) {
