@@ -279,31 +279,31 @@ methods : {
         const docRef2 = doc(db, "calendar", this.uid);
             const docSnap2 = await getDoc(docRef2);
             if (docSnap2.exists()) {
-            console.log(this.appointmentData)
-            console.log("Document data:", docSnap2.data());
-            let apptinfo = docSnap2.data().appointmentData
-            for (let info of apptinfo){
-                console.log("for loooooooop")
-                info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
-                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
-                let scheduleObj =     document.getElementById('Schedule').ej2_instances[0];
-                scheduleObj.addEvent(info);
-            }
-            this.appointmentData.dataSource = apptinfo
-            let treeinfo = docSnap2.data().treeviewData
-            console.log("=====updating treee=====")
-            this.treeviewFields.dataSource[0] = docSnap2.data().treeviewData
-            for (let info of treeinfo){
-                var treeGridObj = document.getElementById("treeview").ej2_instances[0]
-                treeGridObj.addNodes([info])
-            }
-            console.log(this.treeviewFields)
+                console.log(this.appointmentData)
+                console.log("Document data:", docSnap2.data());
+                let apptinfo = docSnap2.data().appointmentData
+                for (let info of apptinfo){
+                    console.log("for loooooooop")
+                    info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+                    info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                    let scheduleObj =     document.getElementById('Schedule').ej2_instances[0];
+                    scheduleObj.addEvent(info);
+                }
+                this.appointmentData.dataSource = apptinfo
+                let treeinfo = docSnap2.data().treeviewData
+                console.log("=====updating treee=====")
+                this.treeviewFields.dataSource[0] = docSnap2.data().treeviewData
+                for (let info of treeinfo){
+                    var treeGridObj = document.getElementById("treeview").ej2_instances[0]
+                    treeGridObj.addNodes([info])
+                }
+                console.log(this.treeviewFields)
 
             } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
-            console.log("=====creating calendar document=====")
-            setDoc(docRef2, { appointmentData: [], treeviewData: []});
+                console.log("No such document!");
+                console.log("=====creating calendar document=====")
+                setDoc(docRef2, { currId: 0, appointmentData: [], treeviewData: [] });
             }
 
     },
@@ -315,6 +315,11 @@ methods : {
     async updatedbtree(){
         const docRef = doc(db, "calendar", this.uid);
         await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource[0] })
+    },
+
+    async updatedbcurrid(){
+        const docRef = doc(db, "calendar", this.uid);
+        await updateDoc(docRef, { currId: this.curr_id })
     },
 
     // new func that will update db!
@@ -538,6 +543,7 @@ methods : {
         scheduleObj.openEditor(args.event);
         let subject = document.getElementById("Subject")
         console.log(subject.value)
+        this.updatedbcurrid()
     },
 
     googleSignOut() {
