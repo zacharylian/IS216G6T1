@@ -5,7 +5,7 @@
 
         <!-- Input -->
         <div class="d-flex align-items-center justify-content-center">
-            <button @click="undo()" class="btn fix" v-if="completed_tasks.length>0"><span class="fa fa-rotate-left"></span></button>
+            <button @click="undo()" class="btn" v-if="completed_tasks.length>0"><span class="fa fa-rotate-left"></span></button>
             <input @keypress.enter="submitTask()" v-model="new_task" type="text" placeholder="New Task" class="form-control rounded-5" style="width: 225px">
             <button @click="submitTask()" class="btn"><span class="fa fa-check pointer"></span></button>
         </div>
