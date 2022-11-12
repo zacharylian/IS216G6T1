@@ -279,6 +279,7 @@ methods : {
         const docRef2 = doc(db, "calendar", this.uid);
             const docSnap2 = await getDoc(docRef2);
             if (docSnap2.exists()) {
+                this.curr_id = docSnap2.data().currId
                 console.log(this.appointmentData)
                 console.log("Document data:", docSnap2.data());
                 let apptinfo = docSnap2.data().appointmentData
