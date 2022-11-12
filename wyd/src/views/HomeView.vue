@@ -11,7 +11,7 @@
   </body>
 
 <!-- <main> -->
-  <div :style={newnavbar_margin}>  
+  <div style="margin-left:6rem">  
 
   <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
@@ -23,17 +23,33 @@
             <h1 class="px-3 py-1" style="text-align:left;font-style:italic;height:5vw;color:whitesmoke">hi, <b style="">{{this.username}}!</b></h1>
           </div></div>
           <div class="row">
-            <div class="col wanbottom bgbox pb-4" style="height:340px">
+            <div class="col wanbottom bgbox pb-4" style="height:340px;overflow:auto;">
             <!--UPCOMING EVENTS-->
             <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
             <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
-              <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
+              <div class="card" style="width: 18vw;">
+                <div class="card-body">
+                  <h5 class="card-title">Event name</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Date & Time</h6>
+                  <p class="card-text">Does it repeat</p>
+                  <p class="card-text">Are you a funky fresh chicken</p>
+                </div>
+              </div>
+              <div class="card" style="width: 18vw;">
+                <div class="card-body">
+                  <h5 class="card-title">Event name</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Date & Time</h6>
+                  <p class="card-text">Does it repeat</p>
+                  <p class="card-text">Are you a funky fresh chicken</p>
+                </div>
+              </div>
+              <!-- <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
                   <e-columns>
                       <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
                       <e-column field="StartTime" headerText="Start" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
                       <e-column field="EndTime" headerText="End" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
                   </e-columns>
-              </ejs-treegrid>
+              </ejs-treegrid> -->
             </div>
           </div>
           </div>
@@ -231,7 +247,7 @@ export default {
 <style>
 
 @import '../Background.css';
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     .newnavbar_margin {
       margin-left: 0rem;
     }
@@ -243,7 +259,7 @@ export default {
     .newnavbar_margin {
       margin-left: 6rem;
     }
-}
+} */
 
 .skill {
     width:160px;
