@@ -27,7 +27,7 @@
             <!--UPCOMING EVENTS-->
             <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
             <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
-              <div class="card" style="width: 18vw;">
+              <div class="card mx-2" style="width: 18vw;">
                 <div class="card-body">
                   <h5 class="card-title">Event name</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Date & Time</h6>
@@ -35,7 +35,7 @@
                   <p class="card-text">Are you a funky fresh chicken</p>
                 </div>
               </div>
-              <div class="card" style="width: 18vw;">
+              <div class="card mx-2" style="width: 18vw;">
                 <div class="card-body">
                   <h5 class="card-title">Event name</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Date & Time</h6>
@@ -79,8 +79,8 @@
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px" class="mysvg">
                       <defs>
                           <linearGradient id="GradientColor">
-                            <stop offset="0%" stop-color="#e91e63" />
-                            <stop offset="100%" stop-color="#5865F2" />
+                            <stop offset="0%" stop-color="#5E6EE6" />
+                            <stop offset="100%" stop-color="#2A3166" />
                           </linearGradient>
                       </defs>
                       <circle cx="80" cy="80" r="70" stroke-linecap="round" :style='cssVars'/>

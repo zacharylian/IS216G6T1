@@ -83,8 +83,8 @@
                     }
                     
                     :root {
-                      --navbar-bg-color: #7289DA;
-                      --navbar-item-hover: #6479c5;
+                      --navbar-bg-color: #5E6EE6;
+                      --navbar-item-hover: #4955B3;
                       --navbar-item-active: #5e71b4;
                     }
                 

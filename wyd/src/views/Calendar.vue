@@ -65,19 +65,19 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td class="e-textlabel">
+                                        <td colspan=4 class="e-textlabel">
                                             Summary
                                         </td>
-                                        <td colspan="4">
+                                        <td colspan=10>
                                             <input class="e-field e-input" type="text" id="Subject" name="Subject" />
                                             <!-- e-field and name need to be same -->
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="e-textlabel">
+                                        <td colspan=4 class="e-textlabel">
                                             Priority Level
                                         </td>
-                                        <td colspan="4">
+                                        <td colspan=10>
                                             <ejs-dropdownlist class="e-field" placeholder="Choose Priority"
                                             :dataSource="prioHardCodedDataSource" id="PriorityId" name="PriorityId">
 
@@ -85,31 +85,36 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="e-textlabel">
+                                        <td colspan=4 class="e-textlabel">
                                             From
                                         </td>
-                                        <td colspan="4">
+                                        <td colspan=10>
                                             <ejs-datetimepicker format="dd/MM/yyyy HH:mm" class="e-field" id="StartTime" name="StartTime" >
 
                                             </ejs-datetimepicker>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="e-textlabel">
+                                        <td colspan=4 class="e-textlabel">
                                             To
                                         </td>
-                                        <td colspan="4">
+                                        <td colspan=10>
                                             <ejs-datetimepicker format="dd/MM/yyyy HH:mm"  class="e-field" id="EndTime" name="EndTime">
 
                                             </ejs-datetimepicker>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="e-textlabel">
+                                        <td colspan=4 class="e-textlabel">
                                             Description
                                         </td>
-                                        <td colspan="4">
+                                        <td colspan=10>
                                             <input class="e-field e-input" type="text" id="Description" name="Description" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -199,7 +204,6 @@ export default {
     },
     data() {
     return {  
-    // just this curr_id only!!! thanks jamesss :>>>>>
     curr_id : 0,
 
     uid: "",
@@ -220,12 +224,13 @@ export default {
     //     resources : ["Priority"]
     // },
     treeviewFields: { 
-        dataSource: [
-            // {Id: 1, Name: 'WADII'},
-            // {Id: 2, Name: 'CT'},
-            // {Id: 3, Name: 'BPAS'},
-            // {Id: 4, Name: 'IDP'},
-            // {Id: 5, Name: 'Feed Dog'}
+        dataSource: 
+        [
+        //     {Id: 1, Name: 'WADII'},
+        //     {Id: 2, Name: 'CT'},
+        //     {Id: 3, Name: 'BPAS'},
+        //     {Id: 4, Name: 'IDP'},
+        //     {Id: 5, Name: 'Feed Dog'}
         ],
         id:'Id', text:'Name'
     },
@@ -473,10 +478,10 @@ methods : {
         )
         this.updatedbtree() //used to update new data into db, keep at the end of function
         var treeGridObj = document.getElementById("treeview").ej2_instances[0]
-        treeGridObj.addNodes([{
+        treeGridObj.addNodes({
                 Id: id,
                 Name: new_tree
-            }])
+            })
         document.getElementById("Treeview").value = ""
     },
 

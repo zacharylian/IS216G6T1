@@ -1,40 +1,47 @@
 <template>
 
-  <navbar></navbar>
+<navbar></navbar>
+<body>
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+</body>
 <div class="d-flex justify-content-center align-items-center h-100" style="margin-left:6rem;overflow:hidden;">
 
   <div class="mt-5 text-center">
     <div class="mt-4">
       <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
-        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg" placeholder="0 hours" v-model="goalhours" style="width:6.2vw;border:none;border-radius:5px">&nbsp;&nbsp;&nbsp;
-        <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
-        <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
+        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg bgbon" placeholder="0 hours" v-model="goalhours" style="width:6.2vw;border:none;border-radius:5px">&nbsp;&nbsp;&nbsp;
+        <button class="main-button2 mt-0 bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
+        <button class="main-button2 mt-0 bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
         <!-- <button class="main-button mt-0" style="font-size:1.5vw;border:none;width:12vw;height:4vw" @click="submitgoal()">confirm?</button> -->
     </div>
 
     <br>
     <div class="row">
       <div class="col">
-        <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:56vw;height:20vw;text-align:center;font-size:18vw;">
+        <div class="clock bg bgbon px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:56vw;height:20vw;text-align:center;font-size:18vw;">
       00:00
     </div>
       </div>
     </div>
         <div class="row m-auto">
           <div class="col col-4"></div>
-          <div class="col col-2 bg">
-            <button class="main-button2 mt-0" style="font-size:3vw;border:none;width:4vw;" @click="upfive()">↑</button></div>
+          <div class="col col-2">
+            <button class="main-button2 bgbon mt-0" style="font-size:3vw;border:none;width:4vw;" @click="upfive()">↑</button></div>
           &nbsp&nbsp&nbsp&nbsp
-          <div class="col col-2 bg">
-            <button class="main-button2 mt-0" style="font-size:3vw;border:none;width:4vw;" @click="downfive()">↓</button></div>
+          <div class="col col-2">
+            <button class="main-button2 bgbon mt-0" style="font-size:3vw;border:none;width:4vw;" @click="downfive()">↓</button></div>
           <div class="col col-4"></div>
         </div><br>
 
     <div class="mb-4">
-      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="text-center" @keypress.enter="enterTime()"><br>
-      <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
-      <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
-      <button id="stoppie" class="main-button" @click="stoppie()">Reset</button>
+      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="text-center" @keypress.enter="enterTime()" style="width:52vw"><br>
+      <button id="btn" class="main-button bgbon" @click="timer()">Start</button>&nbsp
+      <button id="pause" class="main-button bgbon" @click="pause()">Pause</button>&nbsp
+      <button id="stoppie" class="main-button bgbon" @click="stoppie()">Reset</button>
     </div>
 <!-- <br>
 <div class="h6 font-italic">Insert motivational prompts here...</div> -->
@@ -81,6 +88,22 @@ export default {
   },
 
   methods: {
+    showAlert() {
+      this.$swal({
+                  title:'Timer Stopped',
+                  text: 'Taking a break? No problem!', 
+                  imageUrl: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                  imageWidth: 300,
+                  imageHeight: 200,
+                  imageAlt: 'Kitkat break!',
+                  animation: false,
+                  customClass: {
+                    icon: 'no-border'
+                    },
+                  showConfirmButton: true
+                  }
+                )
+  },
     async checkdb(){
             const docRef = doc(db, "focustimer", this.uid);
             const docSnap = await getDoc(docRef);
@@ -104,45 +127,29 @@ export default {
 
     },
 
-showAlert() {
-  this.$swal.fire({
-                title:'Timer Stopped',
-                text: 'Taking a break? No problem!', 
-                imageUrl: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-                imageWidth: 300,
-                imageHeight: 200,
-                imageAlt: 'Kitkat break!',
-                animation: false,
-                timer: 5000,
-                customClass: {
-                  icon: 'no-border'
-                },
-                showConfirmButton: false
-                }
-  )
-},
-
 timer() {
   let time = document.getElementById('time');
   if (time.innerHTML == '00:00') {
-              var self=this;
+              console.log("==start of if==")
+              var self = this;
               let myCounter;
               let seconds = 60;
               clearInterval(this.interval);
               let mins = Number(document.getElementById('min').value);
               var i = mins * seconds;
-              myCounter = setInterval(function() {
-                if (i <= 0) {
+              myCounter = setInterval( () => {
+                if (i === 0) {
                   console.log('completed');
                   clearInterval(myCounter);
                   time.innerHTML='00:00'
-                  date=new Date();
-                  duration=mins;
-                  end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
-                  end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
+                  let date = new Date();
+                  let duration = mins;
+                  let end_date = date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
+                  let end_time = date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                   //here i would ideally send the information to the database!
                   this.totalduration += Number(duration)
                   console.log(this.totalduration)
+                  console.log('success')
                   this.updatedb()
 
                 } else {
@@ -162,6 +169,7 @@ timer() {
               this.interval=myCounter;
                 }
                   else {
+                    console.log("==start of else==")
                     var self=this;
                     let myCounter;
                     let seconds = 60;
@@ -170,18 +178,21 @@ timer() {
                     let mins = Number(timearr[0]);
                     let seccy = Number(timearr[1]);
                     var i = mins * seconds + seccy;
-                    myCounter = setInterval(function() {
-                      if (i <= 0) {
+                    myCounter = setInterval( () => {
+                      if (i === 0) {
                         console.log('completed');
                         clearInterval(myCounter);
                         time.innerHTML='00:00'
-                        date=new Date();
-                        duration=mins;
-                        end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
-                        end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
+                        // let date=new Date();
+                        let duration=mins;
+                        // let end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
+                        // let end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                         //here i would ideally send the information to the database!
                         this.totalduration += Number(duration)
+                        console.log('success')
                         this.updatedb()
+                        console.log('showAlert')
+                        this.showAlert()
                         //i j added the brackets here... if sth breaks then remove that i guess
                         //maybe can play a jingle when time ends?
 
@@ -369,7 +380,7 @@ body {
   display: flex;
   align-items: center;
   justify-content:center;
-  color: #899DDF;
+  color: #E6E8FF;
 }
 
 .mode-button {
@@ -378,35 +389,35 @@ body {
   box-shadow: none;
   font-weight: bold;
   color: #F6F8FB;
-  background-color:#7289DA;
+  background-color:#5E6EE6;
   border: 1px solid transparent;
   margin: 0px;
   border-radius: 10px;
   padding: 4px 12px;
 }
 
-.mode-button.active {
-  border-color: #7289DA;
-  background: #EFF0FF;
-  color: #7289DA
-}
+/* .mode-button.active {
+  border-color: #5E6EE6;
+  background: #E6E8FF;
+  color: #5E6EE6
+} */
 
 .main-button {
   cursor: pointer;
   font-size: 22px;
   height: 55px;
   text-transform: uppercase;
-  color: #899DDF;
+  color: #E6E8FF;
   font-weight: bold;
   width: 200px;
-  background-color: #EFF0FF;
+  /* background-color: #5E6EE6; */
   border-width: initial;
   border-style: none;
   margin: 20px 0px 0px;
   padding: 0px 12px;
   border-radius: 30px;
   transition: color 0.5s ease-in-out 0s;
-  border: 1px solid #7289DA;
+  /* border: 1px solid #E6E8FF; */
   
 }
 
@@ -415,16 +426,16 @@ body {
       font-size: 22px;
   height: 55px;
   text-transform: uppercase;
-  color: #899DDF;
+  color: #E6E8FF;
   font-weight: bold;
-  background-color: #EFF0FF;
+  /* background-color: #E6E8FF; */
   border-width: initial;
   border-style: none;
   margin: 20px 0px 0px;
   padding: 0px 12px;
   border-radius: 50%;
   transition: color 0.5s ease-in-out 0s;
-  border: 1px solid #7289DA;
+  /* border: 1px solid #5E6EE6; */
 }
 
 button:focus, button:active {

@@ -24,8 +24,8 @@
         </thead>
 
         <tbody>
-			<tr style="background-color:#B19CD9; filter:opacity(50%)">
-				<th colspan=5><span style="color:white; filter:opacity(100%)">In Progress</span></th>
+			<tr style="background-color:#4955B3; filter:opacity(50%)">
+				<th colspan=5><span style="color:#E6E8FF; filter:opacity(100%)">In Progress</span></th>
 			</tr>
 			<template v-for="(task, index) in tasks">  
 			<tr v-if="task.status==='started' || task.status==='done :)'" :key="index" :class="{fadeOut: task.completed== true}">
@@ -63,8 +63,8 @@
 		</tbody>
 
 		<tbody>
-			<tr style="background-color:#B19CD9; filter:opacity(50%)">
-				<th colspan=5> <span style="color:white; filter:opacity(100%)">To-Do</span></th>
+			<tr style="background-color:#4955B3; filter:opacity(50%)">
+				<th colspan=5> <span style="color:#E6E8FF; filter:opacity(100%)">To-Do</span></th>
 			</tr>
 			<template v-for="(task, index) in tasks"> 
             <tr v-if="task.status==='to - do!' || task.status==='done :)'" :key="index" :class="{fadeOut: task.completed== true}">
