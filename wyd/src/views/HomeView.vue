@@ -23,7 +23,7 @@
             <h1 class="px-3 py-1" style="text-align:left;font-family:Georgia, Times, serif;font-style:italic;height:10%">hi, <b>{{this.username}}</b></h1>
           </div></div>
           <div class="row">
-            <div class="col bg wanbottom pb-4" style="height:180px">
+            <div class="col bg wanbottom pb-4" style="height:350px">
             <!--UPCOMING EVENTS-->
             <h3 class="py-2">upcoming events</h3>
             <div class="" style="overflow:scroll;margin:auto;z-index:-1">
@@ -38,18 +38,17 @@
           </div>
           </div>
           <div class="row">
-            <div class="col py-2 bg wanright" style="height:400px">
+            <div class="col py-2 bg wanright" style="height:230px">
               <!--EXPENSES-->
               <h3>expenses<br><br></h3>
               <div class="mx-3" style="margin:auto;">
               <br><br><h2>$40/$50</h2></div>
               <br>
               </div>
-              <div class="col py-2 bg wanright">
+              <div class="col py-2 bg wanright" style="height:230px">
               <!--FOCUS TIME TODAY-->
-              <h3>focus time today</h3><br>
+              <h3>focus time today</h3>
               <div>
-
                 <div class="skill">
                   <div class="outer">
                       <div class="inner">
