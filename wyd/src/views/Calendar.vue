@@ -177,12 +177,12 @@ export default {
 
         console.log("=====extracting data from db=====")
         this.checkdb()
-        for (data in appointmentData.dataSource) {
-            console.log("====here data====")
-            console.log(data)
-            let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-            scheduleObj.addEvent(this.appointmentData.dataSource[data]);
-        }
+        // for (data in appointmentData.dataSource) {
+        //     console.log("====here data====")
+        //     console.log(data)
+        //     let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+        //     scheduleObj.addEvent(this.appointmentData.dataSource[data]);
+        // }
     },
     name: 'Calendar',
     components: {
@@ -228,13 +228,13 @@ export default {
     // },
     treeviewFields: { 
         dataSource: [
-            {Name: 'WADII'},
-            {Name: 'CT'},
-            {Name: 'BPAS'},
-            {Name: 'IDP'},
-            {Name: 'Feed Dog'}
+            {Id: 1, Name: 'WADII'},
+            {Id: 2, Name: 'CT'},
+            {Id: 3, Name: 'BPAS'},
+            {Id: 4, Name: 'IDP'},
+            {Id: 5, Name: 'Feed Dog'}
         ],
-        text:'Name'
+        id:'Id', text:'Name'
     },
     schedulerSelectedDate : new Date(),
 
@@ -285,10 +285,20 @@ methods : {
         const docRef2 = doc(db, "calendar", this.uid);
             const docSnap2 = await getDoc(docRef2);
             if (docSnap2.exists()) {
-            console.log("Document data:", docSnap2.data());
-            this.appointmentData.dataSource = docSnap2.data().appointmentData
-            this.treeviewFields.dataSource = docSnap2.data().treeviewData
             console.log(this.appointmentData)
+            console.log("Document data:", docSnap2.data());
+            let apptinfo = docSnap2.data().appointmentData
+            for (let info of apptinfo){
+                console.log("for loooooooop")
+                info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                let scheduleObj =     document.getElementById('Schedule').ej2_instances[0];
+                scheduleObj.addEvent(info);
+            }
+            this.appointmentData.dataSource = apptinfo
+            console.log(this.appointmentData)
+            this.treeviewFields.dataSource = docSnap2.data().treeviewData
+            
             
             
 
@@ -312,15 +322,12 @@ methods : {
 
     Add() {
         console.log("[start] Add()")
+        // console.log(this.appointmentData.dataSource)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
         let subject = document.getElementById("Subject")
         let priority = document.getElementById("PriorityId")
         let input_StartTime = document.getElementById("StartTime").value
         let input_EndTime = document.getElementById("EndTime").value
-        console.log(subject.value)
-        console.log(priority.value)
-        console.log(StartTime)
-        console.log(EndTime)
 
         // get id
         let apptdata = this.appointmentData.dataSource;
@@ -340,12 +347,6 @@ methods : {
         let min = hour_min[1]
 
         let start = new Date(year, month, day, hour, min, 0)
-        // console.log(hour)
-        // console.log(min)
-        // console.log(start_date)
-        // console.log(start_time)
-        // console.log(year, month, day)
-        console.log(start)
 
         // format end time and date
         let str_length2 = input_EndTime.length
@@ -361,12 +362,6 @@ methods : {
         let min2 = hour_min2[1]
 
         let end = new Date(year2, month2, day2, hour2, min2, 0)
-        // console.log(hour)
-        // console.log(min)
-        // console.log(start_date)
-        // console.log(start_time)
-        // console.log(year, month, day)
-        console.log(end)
 
 
         if (priority.value == 'High-Priority') {
@@ -378,6 +373,7 @@ methods : {
                 EndTime: end,
                 PriorityId: priorityId,
             };
+            console.log(data)
             apptdata.push(data);
         } else if (priority.value == 'Mid-Priority') {
             let priorityId = 2
@@ -388,6 +384,7 @@ methods : {
                 EndTime: end,
                 PriorityId: priorityId,
             };
+            console.log(data)
             apptdata.push(data);
         } else if (priority.value == 'Low-Priority') {
             let priorityId = 3
@@ -398,6 +395,7 @@ methods : {
                 EndTime: end,
                 PriorityId: priorityId,
             };
+            console.log(data)
             apptdata.push(data)
         }
         scheduleObj.closeEditor();
@@ -430,7 +428,7 @@ methods : {
         IsAllDay : cellData.isAllDay
     };
       //schedulerComponentObject.addEvent(eventData);
-    schedulerComponentObject.openEditor();
+    schedulerComponentObject.openEditor(eventData,'Add',true);
     // let apptdata = this.appointmentData.dataSource;
     // console.log(this.appointmentData.dataSource)
     // apptdata.push(eventData)
