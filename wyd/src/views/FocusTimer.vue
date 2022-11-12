@@ -107,7 +107,7 @@ export default {
 showAlert() {
   this.$swal.fire({
                 title:'Timer Stopped',
-                text: 'Have a break!', 
+                text: 'Taking a break? No problem!', 
                 imageUrl: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
                 imageWidth: 300,
                 imageHeight: 200,
@@ -211,7 +211,7 @@ pause() {
 
 stoppie() {
   let time = document.getElementById('time');
-  if (time.innerHTML != '00:00') {
+  if (time.innerHTML != '00:00' && (this.interval)) {
     this.showAlert()
   }
   clearInterval(this.interval);
