@@ -104,6 +104,23 @@ export default {
 
     },
 
+showAlert() {
+  this.$swal.fire({
+                title:'Timer Stopped',
+                text: 'Have a break!', 
+                imageUrl: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                imageWidth: 300,
+                imageHeight: 200,
+                imageAlt: 'Kitkat break!',
+                animation: false,
+                timer: 5000,
+                customClass: {
+                  icon: 'no-border'
+                },
+                showConfirmButton: false
+                }
+  )
+},
 
 timer() {
   let time = document.getElementById('time');
@@ -197,6 +214,7 @@ stoppie() {
   clearInterval(this.interval);
   console.log(this.interval);
   time.innerHTML=('00:00');
+  this.showAlert()
 },
 
 upfive() {
@@ -423,4 +441,8 @@ button:focus, button:active {
   }
 }
 
+/* sweetalert CSS */
+.no-border {
+  border: 0 !important;
+}
 </style>
