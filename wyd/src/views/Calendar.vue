@@ -310,9 +310,14 @@ methods : {
             }
 
     },
-    async updatedb(){
+    async updatedbevent(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource, treeviewData: this.treeviewFields.dataSource })
+        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource })
+    },
+
+    async updatedbtree(){
+        const docRef = doc(db, "calendar", this.uid);
+        await updateDoc(docRef, { treeviewsData: this.treeviewFields.dataSource })
     },
     onRefreshLayout: function () {
         console.log("[start] onRefreshLayout")
@@ -402,7 +407,7 @@ methods : {
             scheduleObj.addEvent(data)
         }
         scheduleObj.closeEditor();
-        this.updatedb() //used to update new data into db, keep at the end of function
+        this.updatedbevent() //used to update new data into db, keep at the end of function
     },
 
     Add_Treeview() {
@@ -414,7 +419,7 @@ methods : {
             {Name: new_tree}
         )
         document.getElementById("Treeview").value = ""
-        this.updatedb() //used to update new data into db, keep at the end of function
+        this.updatedbtree() //used to update new data into db, keep at the end of function
     },
 
     onTreeDragStop : function(args) {
