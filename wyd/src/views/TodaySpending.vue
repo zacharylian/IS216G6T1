@@ -1,20 +1,13 @@
 <template>
     <div class="card shadow-4 rounded-5 mx-auto my-auto ho">
-        <div class="p-5">
-
-            <div class="heading">
-                <h4 class="text-center"><b><u>Today</u></b></h4>
-            </div>
-
-            <br>
+        <div class="p-3">
             <form>
+                <br>
                 <div class="lastSpending">
                     <label><p><b>Last Spending: </b></p></label>
-                    <input v-model="lastSpending" type="number" placeholder="$$$" />
+                    <input v-model="last_spending" type="number" placeholder="$$$" />
                 </div>
 
-                <br>
-                <hr>
                 <br>
 
                 <div class="category">
@@ -32,7 +25,7 @@
 
                 <div class="remainingBudget">
                     <label><p><b>Remaining Budget: </b></p></label>
-                    {{ total }}
+                    {{total}}
                 </div>
 
                 <br>
@@ -46,33 +39,32 @@
 </template>
 
 <script>
-import { last } from 'lodash'
 
     export default {
         data() {
             return {
-                lastSpending: 0,
+                last_spending: 0,
                 total: 100,
                 category: 'Food',
                 categories: [
                     { text: 'Food', value: 'food' },
                     { text: 'Transport', value: 'transport' },
                     { text: 'Finance', value: 'finance' },
-                    { text: 'Shopping', value: 'shopping' },
+                    { text: 'Entertainment', value: 'entertainment' },
                     { text: 'Others', value: 'other' },
-                ]
-            }
+                ],
+                
+            };
         },
-        computed: {
+        
+        methods : {
             deduct() {
-                console.log("i will work on this")
-                var total = this.total
-                var lastSpending = this.lastSpending
-                total -= lastSpending
-                console.log(total)
-                return total
+                this.total -= this.last_spending
+                console.log(this.total)
+                return this.total
             }
         }
+        
     }   
 </script>
 
