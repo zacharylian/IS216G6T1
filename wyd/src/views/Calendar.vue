@@ -146,7 +146,7 @@ import { getDatePredicate } from '@syncfusion/ej2-grids';
 import { DropDownListComponent } from '@syncfusion/ej2-vue-dropdowns';
 import { DateTimePickerComponent } from '@syncfusion/ej2-vue-calendars';
 import { L10n } from '@syncfusion/ej2-base';
-import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+import {addDocs, collection, getDoc, doc, setDoc, updateDoc} from 'firebase/firestore';
 import { db } from '../main';
 
 L10n.load({
@@ -168,15 +168,15 @@ L10n.load({
 
 //EXPORTS
 export default {
-    // created(){
-    // console.log("=====getting UID=====")
-    //     this.uid = getAuth().currentUser.uid
-    //     console.log(this.uid)
+    created(){
+    console.log("=====getting UID=====")
+        this.uid = getAuth().currentUser.uid
+        console.log(this.uid)
 
-    //     console.log("=====extracting data from db=====")
-    //     this.checkdb()
+        console.log("=====extracting data from db=====")
+        this.checkdb()
 
-    // },
+    },
     name: 'Calendar',
     components: {
     "navbar" : navbar,
@@ -273,38 +273,38 @@ export default {
 },
 
 methods : {  
-    async checkdb(){
-        const docRef2 = doc(db, "calendar", this.uid);
-            const docSnap2 = await getDoc(docRef2);
-            if (docSnap2.exists()) {
-                this.curr_id = docSnap2.data().currId
-                console.log(this.appointmentData)
-                console.log("Document data:", docSnap2.data());
-                let apptinfo = docSnap2.data().appointmentData
-                for (let info of apptinfo){
-                    console.log("for loooooooop")
-                    info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
-                    info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
-                    let scheduleObj =     document.getElementById('Schedule').ej2_instances[0];
-                    scheduleObj.addEvent(info);
-                }
-                this.appointmentData.dataSource = apptinfo
-                let treeinfo = docSnap2.data().treeviewData
-                console.log("=====updating treee=====")
-                this.treeviewFields.dataSource[0] = docSnap2.data().treeviewData
-                for (let info of treeinfo){
-                    var treeGridObj = document.getElementById("treeview").ej2_instances[0]
-                    treeGridObj.addNodes([info])
-                }
-                console.log(this.treeviewFields)
 
-            } else {
-            // doc.data() will be undefined in this case
-                console.log("No such document!");
-                console.log("=====creating calendar document=====")
-                setDoc(docRef2, { currId: 0, appointmentData: [], treeviewData: [] });
+    async checkdb(){
+        const docRef = doc(db, "calendar", this.uid)
+        const docSnap = await getDoc(docRef)
+        if (docSnap.exists()){
+            // Retrieving appointData
+            let apptinfo = docSnap.data().appointmentData
+            for (let info of apptinfo){
+                console.log("for loooooooop")
+                info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                let scheduleObj =     document.getElementById('Schedule').ej2_instances[0];
+                scheduleObj.addEvent(info);
+            }
+            console.log("=====input apptinfo=====")
+            this.appointmentData.dataSource = apptinfo
+
+            // Retrieving treeview
+            let treeinfo = docSnap.data().treeviewData
+            console.log("input treeinfo")
+            this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
+            for (let info of treeinfo){
+                var treeGridObj = document.getElementById("treeview").ej2_instances[0]
+                treeGridObj.addNodes([info])
             }
 
+            // Retrieving Curr_Id
+            this.curr_id = docSnap.data().currId
+
+        } else{
+            setDoc(docRef, {appointmentData: [], treeviewData: [], currId: 0})
+        }
     },
     async updatedbevent(){
         const docRef = doc(db, "calendar", this.uid);
@@ -316,10 +316,7 @@ methods : {
         await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource[0] })
     },
 
-    async updatedbcurrid(){
-        const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { currId: this.curr_id })
-    },
+
 
     // new func that will update db!
     Delete(curr_id) {
@@ -397,6 +394,7 @@ methods : {
             console.log(data)
             apptdata.push(data);
             scheduleObj.addEvent(data)
+            this.updatedbevent()
         } else if (priority.value == 'Mid-Priority') {
             let priorityId = 2
             let data = {
@@ -422,13 +420,13 @@ methods : {
             apptdata.push(data)
             scheduleObj.addEvent(data)
         }
-        this.updatedbevent() //used to update new data into db, keep at the end of function
         scheduleObj.closeEditor();
-        } else {
-            console.log(curr_id)
-            let apptdata = this.appointmentData.dataSource;
-            console.log(apptdata)
-            for (let eventdata of apptdata) {
+        this.updatedbevent()
+    } else {
+        console.log(curr_id)
+        let apptdata = this.appointmentData.dataSource;
+        console.log(apptdata)
+        for (let eventdata of apptdata) {
                 console.log(eventdata.Id)
                 if (eventdata.Id == curr_id) {
                     console.log(eventdata.Subject)
@@ -451,13 +449,14 @@ methods : {
                         let priorityId = 3
                         eventdata.PriorityId = priorityId;
                     }
+                }
             }
-        }
-        scheduleObj.closeEditor();
-        this.curr_id = 0
+            scheduleObj.closeEditor();
+            this.curr_id = 0
+            this.updatedbevent() //used to update new data into db, keep at the end of function
         }
     },
-
+    
     Add_Treeview() {
         console.log("[start] Add_Treeview")
         let new_tree =  document.getElementById("Treeview").value
@@ -544,7 +543,7 @@ methods : {
         scheduleObj.openEditor(args.event);
         let subject = document.getElementById("Subject")
         console.log(subject.value)
-        this.updatedbcurrid()
+        this.updatedbevent()
     },
 
     googleSignOut() {
