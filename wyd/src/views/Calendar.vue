@@ -170,6 +170,12 @@ export default {
 
         console.log("=====extracting data from db=====")
         this.checkdb()
+        for (data in appointmentData.dataSource) {
+            console.log("====here data====")
+            console.log(data)
+            let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+            scheduleObj.addEvent(this.appointmentData.dataSource[data]);
+        }
     },
     name: 'Calendar',
     components: {
@@ -231,35 +237,35 @@ export default {
     appointmentData : {
         enableTooltip: true,
         dataSource : [
-            {
-                Id : 1,
-                Subject : 'Learn Thai',
-                StartTime: new Date(2022, 10, 5, 8, 0, 0),
-                EndTime: new Date(2022, 10, 6, 9, 0, 0),
-                PriorityId : 1,
-            },
-            {
-                Id : 2,
-                Subject : 'WAD Help',
-                StartTime: new Date(2022, 10, 8, 8, 0, 0),
-                EndTime: new Date(2022, 10, 8, 9, 0, 0),
-                PriorityId : 2,
-            },
-            {
-                Id : 3,
-                Subject : 'Mtg',
-                StartTime: new Date(2022, 10, 11, 12, 0, 0),
-                EndTime: new Date(2022, 10, 11, 13, 30, 0),
-                PriorityId : 3,
-            },
-            {
-                Id : 4,
-                Subject : 'WAD Proj',
-                StartTime: new Date(2022, 10, 11, 12, 0, 0),
-                EndTime: new Date(2022, 10, 11, 13, 30, 0),
-                PriorityId : 3,
-                IsAllDay: true
-            },
+            // {
+            //     Id : 1,
+            //     Subject : 'Learn Thai',
+            //     StartTime: new Date(2022, 10, 5, 8, 0, 0),
+            //     EndTime: new Date(2022, 10, 6, 9, 0, 0),
+            //     PriorityId : 1,
+            // },
+            // {
+            //     Id : 2,
+            //     Subject : 'WAD Help',
+            //     StartTime: new Date(2022, 10, 8, 8, 0, 0),
+            //     EndTime: new Date(2022, 10, 8, 9, 0, 0),
+            //     PriorityId : 2,
+            // },
+            // {
+            //     Id : 3,
+            //     Subject : 'Mtg',
+            //     StartTime: new Date(2022, 10, 11, 12, 0, 0),
+            //     EndTime: new Date(2022, 10, 11, 13, 30, 0),
+            //     PriorityId : 3,
+            // },
+            // {
+            //     Id : 4,
+            //     Subject : 'WAD Proj',
+            //     StartTime: new Date(2022, 10, 11, 12, 0, 0),
+            //     EndTime: new Date(2022, 10, 11, 13, 30, 0),
+            //     PriorityId : 3,
+            //     IsAllDay: true
+            // },
         ]
     },
 
@@ -276,6 +282,7 @@ methods : {
             this.appointmentData.dataSource = docSnap2.data().appointmentData
             this.treeviewFields.dataSource = docSnap2.data().treeviewData
             console.log(this.appointmentData)
+            
             
 
             } else {
