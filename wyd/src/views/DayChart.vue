@@ -10,6 +10,7 @@
             :styles="styles"
             :width="width"
             :height="height"
+            v-if="loaded"
         />
     </div>
 </template>
@@ -17,12 +18,18 @@
 <script>
     import { Bar } from 'vue-chartjs'
     import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-    
+
     ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
     
-    const barLabels = [ 'Week1', 'Week2', 'Week3', 'Week4', 'Week5' ]
+    const barLabels = [ 'Food', 'Transport', 'Finance', 'Entertainment', 'Others' ]
     const backgroundColor = ["#FF0D0D", "#C82538", "#B25F4A", "#45731E", "#3BCA6D"] 
-
+    const fakeData = {
+            'food': 500,
+            'transport': 350, 
+            'finance': 225, 
+            'entertainment': 110, 
+            'others': 78
+        }
 
     export default {
         name: 'BarChart',
@@ -57,33 +64,90 @@
             default: () => {}
         }
         },
-        data() {
-        return {
-            
+        // created: {
+        //     calcTotal() {
+        //         var totalAmt = 0
+        //         for (let ind of this.fakeData) {
+        //             totalAmt += ind.amt
+        //         }
+        //         return totalAmt
+        //     }
+        // },
+        data: () => ({
+            loaded: false,
+            // chartData: {
+            // labels: barLabels,
+            // datasets: [ { 
+            //     label: "Weekly Spending",
+            //     data: [this.fakeData.food, 350, 225, 110, 78],
+            //     backgroundColor: backgroundColor
+            // } ]
+            // },
             chartData: {
-            labels: barLabels,
-            datasets: [ { 
-                label: barLabels,
-                data: [500, 350, 225, 110, 78],
-                backgroundColor: backgroundColor
-            } ]
+                labels: [],
+                datasets: [{
+                    data: []
+                }]
             },
             chartOptions: {
                 responsive: true,
                 legend: {
-                display: true,
-                labels: {
-                    generateLabels() {
-                    return barLabels.map((label, index) => ({
-                        text: label,
-                        fillStyle: backgroundColor[index]
-                    }))
-                    }
-                    }   
+                    position: "right"
                 }
             }
+        }),
+        async mounted () {
+            this.loaded = false
+
+            try {
+                console.log("you got it")
+                // const testData = await fetch("/Users/zachary/Documents/GitHub/IS216G6T1/wyd/src/views/testData.json") -- insert API link here
+                const testData = {
+                    "allowance": 1000,
+                    "cat": [
+                        {"transport": 500},
+                        {"food": 350},
+                        {"entertainment": 225},
+                        {"finance": 110},
+                        {"others": 78},
+                    ]
+                }
+                this.chartdata = testData.cat
+                console.log("a")
+                console.log(testData)
+                console.log("b")
+                
+                // this.chartData.labels = this.chartdata.map(i => Object.keys(i)); //currently mapping objects - need to change to string 
+                // this.chartData.labels 
+                let keys = this.chartdata.map(i => {
+                    for (let [key, value] of Object.entries(i)) {
+                        return key
+                    }
+                });
+                let vals = this.chartdata.map(i => {
+                    for (let [key, value] of Object.entries(i)) {
+                        return value
+                    }
+                });
+                console.log(keys)
+                console.log(vals)
+                // this.chartData.labels = keys
+                var propertyValues = Object.values(this.chartData.labels)
+                propertyValues = keys
+                console.log(propertyValues)
+                // this.chartData.datasets[0].data = vals
+                var addData = Object.values(this.chartData.datasets[0].data)
+                addData = vals
+                console.log(addData)
+                console.log(this.chartData.labels)
+                console.log(this.chartData.datasets[0].data)
+                
+                this.loaded = true
+            } catch (err) {
+                console.error(err)
+            }
         }
-    }}
+    }
 </script>
 
 <!-- <template>

@@ -1,5 +1,12 @@
 <template>
     <navbar></navbar>
+    <body>
+        <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        </div>
+    </body>
     <div style="margin-left:6rem">
         <div class="d-flex row pt-3">
             <div class="col-2">

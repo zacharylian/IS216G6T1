@@ -1,25 +1,35 @@
 <template>
-  <navbar>
-  </navbar>
+  <navbar></navbar>
+  <body>
+    <div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+  </body>
   <div style="margin-left:6rem">
     <!-- <div class="border border-info" style="height: 95%"> -->
       <div class="row border border-primary h-50">
-        <div class="col border border-danger w-50">
+        <div class="col-lg-12 col-md-6 border border-danger w-50 text-center">
             <br>
             <h2><u>Overall Spendings</u></h2>
             <br>
+            <h4>{{ this.days[this.date.getUTCDate()] }}</h4>
+            <br>
             <DayChart></DayChart>
+            <br>
         </div>
-        <div class="col border border-success w-50">
+        <div class="col-lg-12 col-md-6 border border-success w-50 text-center">
             <br>
             <h2><u>Today's Spendings</u></h2>
             <br>
             <TodaySpending />
+            <br>
         </div>
       </div>
       
       <div class="row border border-warning h-50">
-        <div class="col border border-primary">
+        <div class="col border border-primary text-center">
             <br>
             <h2><u>Monthly Spendings</u></h2>
             <br>
@@ -51,6 +61,20 @@ export default {
     CalendarHeatmap: CalendarHeatmap,
     TodaySpending: TodaySpending,
   },
+  data() {
+    return {
+        date: new Date(),
+        days: [ 
+        "Monday",
+        "Tuesday", 
+        "Wednesday",
+        "Thursday", 
+        "Friday", 
+        "Saturday", 
+        "Sunday"
+        ],
+    }
+  },    
   methods: {
         googleSignOut() {
           const auth = getAuth();
@@ -63,6 +87,13 @@ export default {
           // An error happened.
           console.log(error)
           });
+        },
+        getDay() {
+            var day = ""
+            var idxDay = this.date.getUTCDate()
+            day = this.days[idxDay]
+            console.log(day)
+            return day
         },
   }
 };

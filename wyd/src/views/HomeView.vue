@@ -2,38 +2,43 @@
 
 <!-- <body> -->
   <navbar></navbar>
+  <body>
+    <div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+  </body>
 
 <!-- <main> -->
   <div style="margin-left:6rem">  
 
-  <div class="pt-3 mw-100">
+  <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
 <div class="row" >
-  <div class="col col-8">
+  <div class="col col-xxl-8 col-md-12">
           <div class="row">
             <div class="col bg wanbottom">
             <!--NAME-->
-            <h1 class="px-3 py-1" style="text-align:left;font-family:Georgia, Times, serif;font-style:italic">hi, <b>{{this.username}}</b></h1>
+            <h1 class="px-3 py-1" style="text-align:left;font-family:Georgia, Times, serif;font-style:italic;height:10%">hi, <b>{{this.username}}</b></h1>
           </div></div>
           <div class="row">
-            <div class="col bg wanbottom pb-4">
+            <div class="col bg wanbottom pb-4" style="height:180px">
             <!--UPCOMING EVENTS-->
             <h3 class="py-2">upcoming events</h3>
-            <div class="mx-3" style="margin:auto;">
-            today is {{ this.date.getFullYear() }}-{{ this.date.getMonth() +1 }}-{{ this.date.getDate() }}</div>
-            <div class="mx-3" style="padding-left:20%;">
+            <div class="" style="overflow:scroll;margin:auto;z-index:-1">
               <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
                   <e-columns>
-                      <e-column field="Subject" headerText="Name" width="200" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                      <e-column field="StartTime" headerText="Start" width="150" format="y/M/d, HH:mm" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                      <e-column field="EndTime" headerText="End" width="150" format="y/M/d, HH:mm" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="StartTime" headerText="Start" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
+                      <e-column field="EndTime" headerText="End" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
                   </e-columns>
               </ejs-treegrid>
             </div>
           </div>
           </div>
           <div class="row">
-            <div class="col py-2 bg wanright">
+            <div class="col py-2 bg wanright" style="height:400px">
               <!--EXPENSES-->
               <h3>expenses<br><br></h3>
               <div class="mx-3" style="margin:auto;">
@@ -61,7 +66,7 @@
                             <stop offset="100%" stop-color="#5865F2" />
                           </linearGradient>
                       </defs>
-                      <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                      <circle cx="80" cy="80" r="70" stroke-linecap="round" :style='cssVars'/>
                   </svg>
                 </div>
 
@@ -69,8 +74,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-4 bg">
-          <h2 class="p-2">to-do list</h2>
+        <div class="col col-xxl-4 bg" style="overflow:scroll">
+          <h3 class="p-2"><i>to-do list</i></h3>
           <todo></todo>          
         </div>
       </div>
@@ -121,12 +126,25 @@ export default {
     apptdata: appointmentData.sampleData,
     username: getAuth().currentUser.displayName,
     date: new Date(),
-    percentagedone: 5,
+    percentagedone: 0,
     uid: "",
     goalhours: 0,
     totalduration: 0,
     
   }},
+
+  computed: {
+    cssVars() {
+      return {
+        '--numbers': 472 - (472 * this.percentagedone)
+      }
+    }
+  }
+  ,
+
+  mounted: function(){
+    this.spendingtime()
+  },
 
   methods: {
     async checkdb(){
@@ -138,6 +156,10 @@ export default {
             this.goalhours = docSnap.data().goalhours
             this.totalduration = docSnap.data().totalduration
             this.percentagedone = this.totalduration/(this.goalhours*60)*100
+            if (isNaN(this.percentagedone)) {
+              this.percentagedone=0
+              //set focus circle here also
+            }
             console.log(this.percentagedone)
             
 
@@ -159,14 +181,7 @@ export default {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { appointmentData: [{
-                Id : 4,
-                Subject : 'WAD Proj',
-                StartTime: new Date(2022, 10, 11, 12, 0, 0),
-                EndTime: new Date(2022, 10, 11, 13, 30, 0),
-                PriorityId : 3,
-                IsAllDay: true
-            },], treeviewData: []});
+            setDoc(docRef2, { enableTooltip: true, appointmentData: {}});
             }
 
 
@@ -198,13 +213,19 @@ export default {
                   </td>
                   </tr>`
         })}},
+        spendingtime() {
+          //onload, take into account percentagedone to set stroke-dashoffset
+          let percenty=this.percentagedone;
+          percenty*=472;
+        }
   }
 }
-
 
 </script>
 
 <style>
+
+@import '../Background.css';
 
 
 .skill {
@@ -226,7 +247,9 @@ export default {
     padding:20px;
     box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15),
     -6px -6px 10px 1px rgba(255,255,255,0.7);
+    
 }
+
 .inner {
     height:120px;
     width:120px;
@@ -239,6 +262,7 @@ export default {
                 -0.5px -0.5px 0px rgba(255,255,255,1),
                 0.5px 0.5px 0px rgba(0,0,0,0.15),
                 0px 12px 10px -10px rgba(0,0,0,0.05);
+                
 }
 #number {
     font-weight: 600px;
@@ -259,7 +283,7 @@ circle {
 }
 @keyframes anim{
     100%{
-        stroke-dashoffset: 165; /*this is what actually controls the % so later when taking in data, modify this*/
+        stroke-dashoffset: var(--numbers) /*this is what actually controls the % so later when taking in data, modify this*/
     }
 }
 
@@ -291,4 +315,3 @@ circle {
 }
 
 </style>
-

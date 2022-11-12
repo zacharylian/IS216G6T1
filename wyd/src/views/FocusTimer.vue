@@ -4,32 +4,35 @@
 <div style="margin-left:6rem;overflow:hidden;">
 
   <div class="mt-5 text-center">
-
     <div class="mt-4">
       <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
-        <input type="text" id="goalhours" class="h5 text-center font-weight-bold" placeholder="0 hours" v-model="goalhours">&nbsp;&nbsp;&nbsp;
-        <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="uppointfive()" >↑</button>&nbsp;
-        <button class="main-button mt-0" style="font-size:2vw;border:none;width:5%" @click="downpointfive()">↓</button>
+        <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg" placeholder="0 hours" v-model="goalhours" style="width:5.5vw;border:none">&nbsp;&nbsp;&nbsp;
+        <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
+        <button class="main-button2 mt-0" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
+        <!-- <button class="main-button mt-0" style="font-size:1.5vw;border:none;width:12vw;height:4vw" @click="submitgoal()">confirm?</button> -->
     </div>
 
-    <br><br>
+    <br>
     <div class="row">
       <div class="col">
-        <div class="clock bg px-5 py-3 mb-4 text-center" id="time" style="border-radius:30px;margin:auto;width:60%;text-align:center;font-size:18vw;">
+        <div class="clock bg px-5 py-3 mb-4" id="time" style="border-radius:30px;margin:auto;width:56vw;height:20vw;text-align:center;font-size:18vw;">
+      <!-- <div style="margin:auto;">00:00</div> -->
       00:00
     </div>
       </div>
     </div>
         <div class="row m-auto">
           <div class="col col-4"></div>
-          <div class="col col-2 bg"><button class="main-button mt-0" style="font-size:3vw;border:none;" @click="upfive()">↑</button></div>
+          <div class="col col-2 bg">
+            <button class="main-button2 mt-0" style="font-size:3vw;border:none;width:4vw;" @click="upfive()">↑</button></div>
           &nbsp&nbsp&nbsp&nbsp
-          <div class="col col-2 bg"><button class="main-button mt-0" style="font-size:3vw;border:none;" @click="downfive()">↓</button></div>
+          <div class="col col-2 bg">
+            <button class="main-button2 mt-0" style="font-size:3vw;border:none;width:4vw;" @click="downfive()">↓</button></div>
           <div class="col col-4"></div>
         </div><br>
 
     <div class="mb-4">
-      <input type="text" id="min" placeholder="How many minutes would you like to focus?" class="w-50 text-center" @keypress.enter="enterTime()"><br>
+      <input type="text" id="min" placeholder="How many minutes would you like to focus? (Hit enter!)" class="w-50 text-center" @keypress.enter="enterTime()"><br>
       <button id="btn" class="main-button" @click="timer()">Start</button>&nbsp
       <button id="pause" class="main-button" @click="pause()">Pause</button>&nbsp
       <button id="stoppie" class="main-button" @click="stoppie()">Reset</button>
@@ -126,8 +129,6 @@ timer() {
                   console.log(this.totalduration)
                   this.updatedb()
 
-                  //maybe can play a jingle when time ends?
-
                 } else {
                   let minutess=Math.floor(i/60);
                   let secondss=i-minutess*60;
@@ -141,7 +142,6 @@ timer() {
                   console.log(i--);
                   console.log(myCounter);
                 }
-
               }, 1000);
               this.interval=myCounter;
                 }
@@ -165,7 +165,8 @@ timer() {
                         end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
                         //here i would ideally send the information to the database!
                         this.totalduration += Number(duration)
-                        this.updatedb
+                        this.updatedb()
+                        //i j added the brackets here... if sth breaks then remove that i guess
                         //maybe can play a jingle when time ends?
 
                       } else {
@@ -264,11 +265,32 @@ downpointfive() {
 
 enterTime() {
   let mins = document.getElementById('min').value.toString();
-  if (mins.length<2) {
-    mins='0'+mins;
+  let minny=mins.split('.');
+  console.log(minny);
+  let minnys;
+  let secs;
+  if (minny.length>1) {
+    minnys=minny[0];
+    secs=Number(minny[1])/10*60;
+    secs=secs.toString();
+    if (secs.length > 2) {
+    secs=secs.substring(0, 2);}
+    console.log(minnys, secs);
   }
+  else {
+    minnys=mins;
+    secs='00';
+  }
+  console.log(minnys, secs);
+  if (minnys.length<2) {
+    minnys='0'+minnys;
+  }
+  if (secs.length<2) {
+    secs='00';
+  }
+
   if (Number(mins)<=1400) {
-  document.getElementById('time').innerHTML=mins+':00';
+  document.getElementById('time').innerHTML=minnys+':' + secs;
 }
   document.getElementById('min').value='';
 },
@@ -285,6 +307,10 @@ googleSignOut() {
           console.log(error)
           });
         },
+
+  submitgoal() {
+    //record to database
+  }
   }}
 
 </script>
@@ -323,6 +349,7 @@ body {
   line-height: 1;
   display: flex;
   align-items: center;
+  justify-content:center;
   color: #899DDF;
 }
 
@@ -347,7 +374,7 @@ body {
 
 .main-button {
   cursor: pointer;
-      font-size: 22px;
+  font-size: 22px;
   height: 55px;
   text-transform: uppercase;
   color: #899DDF;
@@ -361,17 +388,35 @@ body {
   border-radius: 30px;
   transition: color 0.5s ease-in-out 0s;
   border: 1px solid #7289DA;
+  
+}
+
+.main-button2 {
+  cursor: pointer;
+      font-size: 22px;
+  height: 55px;
+  text-transform: uppercase;
+  color: #899DDF;
+  font-weight: bold;
+  background-color: #EFF0FF;
+  border-width: initial;
+  border-style: none;
+  margin: 20px 0px 0px;
+  padding: 0px 12px;
+  border-radius: 50%;
+  transition: color 0.5s ease-in-out 0s;
+  border: 1px solid #7289DA;
 }
 
 button:focus, button:active {
   outline: none;
 }
 
-.main-button.active {
+/* .main-button.active {
   transform: translateY(6px);
   box-shadow: none;
   outline: none;
-}
+} */
 
 @media screen and (max-width: 550px) {
   .clock {
