@@ -320,7 +320,12 @@ methods : {
 
     async updatedbtree(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { treeviewssData: this.treeviewFields.dataSource })
+        await updateDoc(docRef, { appointmentData: this.appointmentData.dataSource, treeviewData: this.treeviewFields.dataSource })
+    },
+    onRefreshLayout: function () {
+        console.log("[start] onRefreshLayout")
+        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+        scheduleObj.refreshLayout();
     },
 
     Add() {
