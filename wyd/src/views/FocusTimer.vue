@@ -1,6 +1,13 @@
 <template>
 
-  <navbar></navbar>
+<navbar></navbar>
+<body>
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+</body>
 <div class="d-flex justify-content-center align-items-center h-100" style="margin-left:6rem;overflow:hidden;">
 
   <div class="mt-5 text-center">
