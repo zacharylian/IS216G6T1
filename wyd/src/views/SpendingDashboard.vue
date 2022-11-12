@@ -28,16 +28,16 @@
         </div>
       </div>
       
-      <div class="row border border-warning h-50">
+      <!-- <div class="row border border-warning h-50">
         <div class="col border border-primary text-center">
             <br>
             <h2><u>Monthly Spendings</u></h2>
-            <br>
+            <br> -->
             <CalendarHeatmap />
-        </div>
+        <!-- </div>
         
       </div>
-      
+       -->
     </div>
   <!-- </div> -->
 </template>

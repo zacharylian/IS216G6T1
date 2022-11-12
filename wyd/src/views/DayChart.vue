@@ -23,13 +23,6 @@
     
     const barLabels = [ 'Food', 'Transport', 'Finance', 'Entertainment', 'Others' ]
     const backgroundColor = ["#FF0D0D", "#C82538", "#B25F4A", "#45731E", "#3BCA6D"] 
-    const fakeData = {
-            'food': 500,
-            'transport': 350, 
-            'finance': 225, 
-            'entertainment': 110, 
-            'others': 78
-        }
 
     export default {
         name: 'BarChart',
@@ -64,15 +57,6 @@
             default: () => {}
         }
         },
-        // created: {
-        //     calcTotal() {
-        //         var totalAmt = 0
-        //         for (let ind of this.fakeData) {
-        //             totalAmt += ind.amt
-        //         }
-        //         return totalAmt
-        //     }
-        // },
         data: () => ({
             loaded: false,
             // chartData: {
@@ -119,26 +103,34 @@
                 
                 // this.chartData.labels = this.chartdata.map(i => Object.keys(i)); //currently mapping objects - need to change to string 
                 // this.chartData.labels 
-                let keys = this.chartdata.map(i => {
-                    for (let [key, value] of Object.entries(i)) {
-                        return key
-                    }
-                });
-                let vals = this.chartdata.map(i => {
-                    for (let [key, value] of Object.entries(i)) {
-                        return value
-                    }
-                });
-                console.log(keys)
-                console.log(vals)
-                // this.chartData.labels = keys
+                
+                // console.log(keys)
+                // console.log(vals)
+                
+                var keys = this.chartdata.map(i => {
+                    for (let [key, value] of Object.entries(i))
+                    return key
+                })
+                var vals = this.chartdata.map(i => {
+                    for (let [key, value] of Object.entries(i))
+                    return value
+                })
+                
+                // var propertyValues = await this.getLabels(this.chartdata)
+                // this.chartData.labels = propertyValues
+                
                 var propertyValues = Object.values(this.chartData.labels)
+                // this.chartData.labels = keys
+                // var propertyValues = this.chartData.labels
                 propertyValues = keys
                 console.log(propertyValues)
+                console.log(this.chartData.labels)
                 // this.chartData.datasets[0].data = vals
                 var addData = Object.values(this.chartData.datasets[0].data)
                 addData = vals
                 console.log(addData)
+                // addData = await this.getAmt(this.chartdata)
+                // console.log(addData)
                 console.log(this.chartData.labels)
                 console.log(this.chartData.datasets[0].data)
                 
@@ -146,6 +138,21 @@
             } catch (err) {
                 console.error(err)
             }
+        },
+        methods: {
+            getLabels(a) {
+                var keys = a.map(i => {
+                    Object.keys(i)
+                })
+                return keys
+            },
+            getAmt(a) {
+                var vals = a.map(i => {
+                    Object.values(i)
+                })
+                return vals
+            }
+
         }
     }
 </script>
