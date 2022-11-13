@@ -7,9 +7,9 @@
         <div class="wave"></div>
         </div>
     </body>
-    <div style="margin-left:6rem">
+    <div style="margin:0rem 7rem">
         <div class="d-flex row pt-3">
-            <div class="col-2">
+            <div class="col-3 bgbox" style="border-radius:20px;padding:15px">
                 <div class="treeview-title">Common Task List
                     <div>
                         <input class="e-field e-input" type="text" id="Treeview" name="Treeview" />
@@ -28,8 +28,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-10">
-                <div class=" col-10 d-flex mx-auto" >
+            <div class="col-9" style="margin-left:40px;margin-right:-40px">
+                <div class=" col-11 d-flex justify-content-center align-items-center mx-auto" >
                     <ejs-schedule height="150%" width="100%" currentView="Month"
                     id='Schedule'
                     :eventSettings="appointmentData"
