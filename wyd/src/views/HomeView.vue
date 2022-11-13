@@ -200,11 +200,25 @@ export default {
             const docSnap2 = await getDoc(docRef2);
             if (docSnap2.exists()) {
             console.log("Document data:", docSnap2.data());
+            console.log("Events: ", docSnap2.data().appointmentData)
+            // let first_event = docSnap2.data().appointmentData[0]
+            let upcoming = new Date(2100, 12)
+            console.log(upcoming)
+            let earliest_event = ""
             this.apptdata = []
             for (var info of docSnap2.data().appointmentData){
               let today = new Date
               info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
-              if (info.StartTime > today){
+              if (info.StartTime > today && info.StartTime<=upcoming){
+                console.log("starttime:" + info.StartTime)
+                upcoming = info.StartTime              
+              }
+            }
+            console.log("updated upcoming", upcoming)
+            for (var info of docSnap2.data().appointmentData){
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              // console.log(info.StartTime)
+              if (info.StartTime.toDateString() === upcoming.toDateString()){
                 console.log("starttime:" + info.StartTime)
                 let year = info.StartTime.getFullYear()
                 let month = info.StartTime.getMonth() + 1
@@ -216,10 +230,42 @@ export default {
                 month = info.EndTime.getMonth()
                 day = info.EndTime.getDate()
                 info.EndTime = day + "/" + month + "/" + year
-                this.apptdata.push(info)
+                earliest_event = info   
+                this.apptdata.push(earliest_event)     
+              }
+            }    
+            
+            if (this.apptdata.length < 2) {
+            let second_event = ""
+            let upcoming2 = new Date(2100, 12)
+            for (var info of docSnap2.data().appointmentData){
+              let today = new Date
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              if (info.StartTime > today && info.StartTime<=upcoming2 && info.StartTime.toDateString()!=upcoming.toDateString()){
+                console.log("starttime:" + info.StartTime)
+                upcoming2 = info.StartTime 
               }
             }
-            console.log(this.apptdata)
+            console.log("updated upcoming2", upcoming2)
+            for (var info of docSnap2.data().appointmentData){
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              if (info.StartTime.toDateString() === upcoming2.toDateString()){
+                console.log("starttime:" + info.StartTime)
+                let year = info.StartTime.getFullYear()
+                let month = info.StartTime.getMonth() + 1
+                let day = info.StartTime.getDate()
+                let time = info.StartTime.toLocaleTimeString('en-US')
+                info.StartTime = day + "/" + month + "/" + year + " " + time
+                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                year = info.EndTime.getFullYear()
+                month = info.EndTime.getMonth()
+                day = info.EndTime.getDate()
+                info.EndTime = day + "/" + month + "/" + year
+                second_event = info        
+                this.apptdata.push(second_event) 
+              }
+            } 
+          }   
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
