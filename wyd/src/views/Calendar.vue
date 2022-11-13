@@ -9,7 +9,7 @@
     </body>
     <div style="margin:0rem 7rem">
         <div class="d-flex row pt-3">
-            <div class="col-lg-3 bgbox col-md-12" style="border-radius:20px;padding:15px">
+            <!-- <div class="col-lg-3 bgbox col-md-12" style="border-radius:20px;padding:15px">
                 <div class="treeview-title">Common Task List
                     <div>
                         <input class="e-field e-input" type="text" id="Treeview" name="Treeview" />
@@ -27,11 +27,12 @@
                         Trees: {{treeviewFields.dataSource}}
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-9 col-md-12" style="margin-left:40px;margin-right:-40px">
+            </div> -->
+            <div class="col-12" style="margin-left:40px;margin-right:-40px">
                 <div class=" col-11 d-flex justify-content-center align-items-center mx-auto" >
                     <ejs-schedule height="800px" width="100%" currentView="Month"
-                    id='Schedule' showQuickInfo: false
+                    id='Schedule' 
+                    :popupOpen='onPopupOpen'
                     :eventSettings="appointmentData"
                     :selectedDate="schedulerSelectedDate"
                     :dragStart="onDragStart"
@@ -68,7 +69,7 @@
                                         <td colspan=4 class="e-textlabel">
                                             Summary
                                         </td>
-                                        <td colspan=10>
+                                        <td colspan=20>
                                             <input class="e-field e-input" type="text" id="Subject" name="Subject" />
                                             <!-- e-field and name need to be same -->
                                         </td>
@@ -77,7 +78,7 @@
                                         <td colspan=4 class="e-textlabel">
                                             Priority Level
                                         </td>
-                                        <td colspan=10>
+                                        <td colspan=20>
                                             <ejs-dropdownlist class="e-field" placeholder="Choose Priority"
                                             :dataSource="prioHardCodedDataSource" id="PriorityId" name="PriorityId">
 
@@ -88,7 +89,7 @@
                                         <td colspan=4 class="e-textlabel">
                                             From
                                         </td>
-                                        <td colspan=10>
+                                        <td colspan=20>
                                             <ejs-datetimepicker format="dd/MM/yyyy HH:mm" class="e-field" id="StartTime" name="StartTime" >
 
                                             </ejs-datetimepicker>
@@ -98,7 +99,7 @@
                                         <td colspan=4 class="e-textlabel">
                                             To
                                         </td>
-                                        <td colspan=10>
+                                        <td colspan=20>
                                             <ejs-datetimepicker format="dd/MM/yyyy HH:mm"  class="e-field" id="EndTime" name="EndTime">
 
                                             </ejs-datetimepicker>
@@ -108,7 +109,7 @@
                                         <td colspan=4 class="e-textlabel">
                                             Description
                                         </td>
-                                        <td colspan=10>
+                                        <td colspan=20>
                                             <input class="e-field e-input" type="text" id="Description" name="Description" />
                                         </td>
                                     </tr>
@@ -118,7 +119,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan=10 style="text-align:right">
+                                        <td colspan=20 style="text-align:right">
                                             <ejs-button v-on:click.native='Add(curr_id)'>Add/Edit</ejs-button>
                                             <ejs-button v-on:click.native='Delete(curr_id)'>Delete</ejs-button>
                                         </td>
@@ -176,6 +177,7 @@ L10n.load({
 
 //EXPORTS
 export default {
+
     created(){
     console.log("=====getting UID=====")
         this.uid = getAuth().currentUser.uid
@@ -203,7 +205,7 @@ export default {
     },
 
     provide : {
-        schedule: [Day, Week, Month, Agenda, DragAndDrop, Resize]
+        schedule: [Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize]
     },
 
     data() {
@@ -278,7 +280,11 @@ export default {
     },
 
 methods : {  
-
+    onPopupOpen(args) {
+        if (args.type === "QuickInfo") {
+                args.cancel = true; 
+            }
+    },
 
     async checkdb(){
         const docRef = doc(db, "calendar", this.uid)
@@ -298,11 +304,11 @@ methods : {
 
             // Retrieving treeview
             let treeinfo = docSnap.data().treeviewData
-            console.log(treeinfo)
             console.log("input treeinfo")
             this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
             this.treeviewFields.id = docSnap.data().id
             this.treeviewFields.text = docSnap.data().text
+            console.log(treeinfo)
             for (let info of treeinfo){
                 var treeGridObj = document.getElementById("treeview").ej2_instances[0]
                 treeGridObj.addNodes([info])
@@ -326,8 +332,6 @@ methods : {
     },
 
 
-
-    // new func that will update db!
     Delete(curr_id) {
         console.log("[start] Delete()")
         if (curr_id != 0) {
@@ -351,7 +355,6 @@ methods : {
         }
     },  
 
-    // edited abit!!
     Add(curr_id) {
         console.log("[start] Add()")
         // console.log(this.appointmentData.dataSource)
@@ -361,7 +364,6 @@ methods : {
         let priority = document.getElementById("PriorityId")
         let input_StartTime = document.getElementById("StartTime").value
         let input_EndTime = document.getElementById("EndTime").value
-
         // format start time and date
         let str_length = input_StartTime.length
         let start_date = input_StartTime.slice(0,10)
@@ -403,6 +405,9 @@ methods : {
             }
             let id = max + 1
             console.log(id)
+            let priority = document.getElementById("PriorityId")
+            console.log(priority.value)
+            console.log(subject.value)
             if (priority.value == 'High-Priority') {
                 let priorityId = 1
                 let data = {
@@ -550,14 +555,15 @@ methods : {
     onTreeDragStop : function(args) {
         console.log("[start] onTreeDragStop")
         args.cancel = true;
-        // let schedulerComponentObject = document.getElementById('Schedule').ej2_instances[0];
-        let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances
+        let schedulerComponentObject = document.getElementById('Schedule').ej2_instances[0];
+        // let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances
         let cellData = schedulerComponentObject.getCellDetails(args.target);
         // let treeviewComponentObject = document.getElementById('treeview').ej2_instances[0];
-        let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances
-        let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
-        console.log(treeviewComponentObject.fields.dataSource)
-        // console.log(filteredData[0])
+        // let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances
+        // let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
+        let filteredData = this.treeviewFields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
+        // console.log(treeviewComponentObject.dataSource)
+        console.log(filteredData)
         let eventData = {
             Subject : filteredData[0].Name,
             StartTime : cellData.startTime,

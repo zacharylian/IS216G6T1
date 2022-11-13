@@ -151,7 +151,7 @@ export default {
   },
 
   data() {return {
-    apptdata: appointmentData.sampleData,
+    apptdata: [],
     username: getAuth().currentUser.displayName,
     date: new Date(),
     percentagedone: 0,
@@ -229,7 +229,7 @@ export default {
             let upcoming = new Date(2100, 12)
             console.log(upcoming)
             let earliest_event = ""
-            this.apptdata = []
+            // this.apptdata = []
             for (var info of docSnap2.data().appointmentData){
               let today = new Date
               info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
