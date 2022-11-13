@@ -1,5 +1,5 @@
 <template>
-    <div class="card shadow-4 rounded-5 mx-auto my-auto ho">
+    <div class="card shadow-4 rounded-5 mx-auto my-auto ho w-75">
         <Bar
             :chart-options="chartOptions"
             :chart-data="chartData"
@@ -25,7 +25,7 @@
     ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
     
     const barLabels = [ 'Food', 'Transport', 'Finance', 'Entertainment', 'Others' ]
-    const backgroundColor = ["#FF0D0D", "#C82538", "#B25F4A", "#45731E", "#3BCA6D"] 
+    const backgroundColor = ["#ff6962", "#ffb6b3", "#e7f1e8", "#bde7bd", "#77dd76"] 
 
     export default {
         created(){
@@ -71,20 +71,20 @@
         },
         data: () => ({
             loaded: false,
-            // chartData: {
-            // labels: barLabels,
-            // datasets: [ { 
-            //     label: "Weekly Spending",
-            //     data: [this.fakeData.food, 350, 225, 110, 78],
-            //     backgroundColor: backgroundColor
-            // } ]
-            // },
             chartData: {
-                labels: [],
-                datasets: [{
-                    data: []
-                }]
+            labels: barLabels,
+            datasets: [ { 
+                label: "Categories",
+                data: [500, 350, 225, 110, 78],
+                backgroundColor: backgroundColor
+            } ]
             },
+            // chartData: {
+            //     labels: [],
+            //     datasets: [{
+            //         data: []
+            //     }]
+            // },
             chartOptions: {
                 responsive: true,
                 legend: {
@@ -206,7 +206,18 @@
                 return vals
             }
 
-        }
+        },
+        // computed: {
+        //     chartData() {
+        //         labels: this.barLabels;
+        //         datasets: [ { 
+        //             label: "Categories",
+        //             data: [500, 350, 225, 110, 78],
+        //             backgroundColor: backgroundColor
+        //         } ];
+        //     }
+        // },  
+
     }
 </script>
 
