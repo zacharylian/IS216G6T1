@@ -14,8 +14,8 @@
     <div class="mt-4">
       <label for='goalhours' class='h4 font-weight-bold'>How many hours would you like to focus today?&nbsp&nbsp</label>
         <input type="text" id="goalhours" class="h5 text-center font-weight-bold bg bgbon" placeholder="0 hours" v-model="goalhours" style="width:6.2vw;border:none;border-radius:5px">&nbsp;&nbsp;&nbsp;
-        <button class="main-button2 mt-0 bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
-        <button class="main-button2 mt-0 bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
+        <button class="main-button2 mt-0 justify-content-center align-items-center text-center bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="uppointfive()" >↑</button>&nbsp;
+        <button class="main-button2 mt-0 justify-content-center align-items-center text-center bgbon" style="font-size:2vw;border:none;width:3vw;height:3vw;text-align:center" @click="downpointfive()">↓</button><br>
         <!-- <button class="main-button mt-0" style="font-size:1.5vw;border:none;width:12vw;height:4vw" @click="submitgoal()">confirm?</button> -->
     </div>
 

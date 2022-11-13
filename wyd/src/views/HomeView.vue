@@ -10,14 +10,14 @@
     </div>
   </body>
 
-<!-- <main> -->
-  <div style="margin-left:6rem">  
+<main>
+  <div :style='adjustible'>  
 
   <div class="pt-3 m-auto" style="width:90vw;height:100%">
 
 <div class="row" >
-  <div class="col col col-xxl-7 col-xl-7 col-md-12">
-          <div class="row">
+  <div class="col col col-xxl-7 col-xl-7 ">
+          <div class="row d-flex justify-content-center align-items-center">
             <div class="col mt-2">
             <!--NAME-->
             <h1 class="px-3 py-1" style="text-align:left;font-style:italic;height:5vw;color:whitesmoke">hi, <b style="">{{this.username}}!</b></h1>
@@ -54,7 +54,7 @@
           </div>
           </div>
           <div class="row wanbottom">
-            <div class="col py-2 bgbox wanright" style="height:230px">
+            <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--EXPENSES-->
               <h3>expenses<br><br></h3>
               <div class="mx-3" style="margin:auto;">
@@ -63,7 +63,7 @@
               <br><h4>$40/$50</h4></div>
               <br>
               </div>
-              <div class="col py-2 bgbox wanright" style="height:230px">
+              <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--FOCUS TIME TODAY-->
               <h3 style="font-style:normal">focus time today:</h3>
               <div>
@@ -91,15 +91,15 @@
             </div>
           </div>
         </div>
-        <div class="col col-xxl-5 col-xl-12 col-md-12 bgbox px-5" style="overflow:auto;border-radius:20px;height:650px;width:500px;margin:auto;">
+        <div class="col col-xxl-5 col-xl-5 col-lg-12 col-md-12 bgbox px-5" style="overflow:auto;border-radius:20px;height:650px;width:500px;margin:auto;">
           <h3 class="p-2"><i>to-do list</i></h3>
           <todo></todo>          
         </div>
       </div>
 </div>
 </div>
-<!-- </main>
-</body> -->
+</main>
+<!--</body> -->
 
 </template>
 
@@ -147,6 +147,7 @@ export default {
     uid: "",
     goalhours: 0,
     totalduration: 0,
+    windowWidth: window.innerWidth,
     
   }},
 
@@ -154,6 +155,20 @@ export default {
     cssVars() {
       return {
         '--numbers': 472 - (472 * this.percentagedone/100)
+      }
+    },
+    adjustible() {
+      console.log(this.windowWidth)
+      if (this.windowWidth < 768 ){
+        console.log('runs 0')
+      return {
+        '--marg-left': '0rem'
+      }}
+      else {
+        console.log('runs 6')
+        return {
+          '--marg-left': '6rem'
+        }
       }
     }
   }
@@ -314,6 +329,9 @@ circle {
     stroke-dasharray: 472; /* for some reason the complete circle is 472 LOL */
     stroke-dashoffset: 472;
     animation: anim 1s linear forwards;
+}
+main > div {
+  margin-left: var(--marg-left)
 }
 .mysvg {
     position:absolute;
