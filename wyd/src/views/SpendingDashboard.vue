@@ -26,8 +26,8 @@
         </div>
       </div>
       
-      <div class="row border border-primary">
-        <div class="col bgbox text-center border border-warning" style="border-radius:20px; width:400px">
+      <div class="row">
+        <div class="col bgbox text-center" style="border-radius:20px; width:400px">
             <br>
             <h2><b><u>Monthly Spendings</u></b></h2>
             <br>
