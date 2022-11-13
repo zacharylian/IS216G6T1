@@ -68,12 +68,19 @@
             showAlert() {
             console.log('test')
             this.$swal({
-                title:'Logout Successful',
-                text: 'Remember to drink up!', 
-                timer: 2000,
-                showConfirmButton: false
-                }
-            );
+              title:'Logout successful',
+                  text: 'Remember to drink up!', 
+                  animation: false,
+                  customClass: {
+                    icon: 'no-border'
+                    },
+                  showConfirmButton: true,
+                  background: 'rgba( 230, 232, 255, 0.8 )',
+                  backdrop: `blur( 9px )`,
+                  confirmButtonColor: '#5E6EE6',
+                  color: '#4955b3'
+            })
+            ;
             },
             googleSignOut() {
                 const auth = getAuth();

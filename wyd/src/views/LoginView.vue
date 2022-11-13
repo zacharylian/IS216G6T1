@@ -134,7 +134,19 @@
       methods: {
           showAlert() {
             console.log('test')
-            this.$swal('Login Successful', 'Productivity starts now', 'success');
+            this.$swal({
+              title:'Login successful',
+                  text: 'Productivity starts now!', 
+                  animation: false,
+                  customClass: {
+                    icon: 'no-border'
+                    },
+                  showConfirmButton: true,
+                  background: 'rgba( 230, 232, 255, 0.8 )',
+                  backdrop: `blur( 9px )`,
+                  confirmButtonColor: '#5E6EE6',
+                  color: '#4955b3'
+            })
           },
           googleSignIn() {
               // We'll create functionality here
