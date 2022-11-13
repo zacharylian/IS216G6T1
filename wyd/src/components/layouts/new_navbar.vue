@@ -1,3 +1,4 @@
+<!-- REFERENCE: https://www.youtube.com/watch?v=biOMz4puGt8 -->
 <template>
     <nav class="navbar_home">
         <ul class="navbar-nav">

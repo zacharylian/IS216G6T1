@@ -67,6 +67,7 @@
   <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family: 'Poppins', sans-serif;background-color:white">
 
   </button>
+  <!-- REFERENCE: https://codepen.io/MoorLex/pen/NBwNZa, https://www.w3schools.com/cssref/pr_scroll-behavior.php-->
 
 </div>
 </section>

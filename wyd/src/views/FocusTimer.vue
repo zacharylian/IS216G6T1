@@ -52,6 +52,8 @@
 </template>
 
 <script>
+// REFERENCE: https://stackoverflow.com/questions/67084679/javascript-countdown-timer-user-input
+
 //IMPORTS
 import navbar from '@/components/layouts/new_navbar.vue';
 import { getAuth, signOut } from '@firebase/auth';
@@ -368,6 +370,8 @@ googleSignOut() {
 </script>
 
 <style>
+
+/* INSPO: https://freshman.tech/pomodoro-timer/ */
 
 html {
   box-sizing: border-box;

@@ -29,7 +29,7 @@
             <div class="d-flex justify-content-center align-items-center " style="margin:auto;z-index:-1">
               <div class="card m-2 " style="width: 500px;height:110px;border-radius:20px;border:none;" v-for="event in apptdata1">
                 <div class="card-body bgbog " style="box-shadow:none;border-radius:20px">
-                  <h5 class="card-title  " style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
+                  <h5 class="card-title" style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
                   <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
                 </div>    
               </div>
@@ -47,7 +47,7 @@
           <div class="row wanbottom">
             <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--EXPENSES-->
-              <h3 style="font-style:normal">expenses</h3><br><br>
+              <h3 style="font-style:normal">today's spendings</h3><br><br>
                 <h3>
               <div :style='highlighter'>
               <span style="font-size:2.5vw">
@@ -58,6 +58,7 @@
               <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--FOCUS TIME TODAY-->
               <h3 style="font-style:normal">your focus today</h3>
+              <!-- REFERENCE: https://www.youtube.com/watch?v=mSfsGTIQlxg -->
               <div>
                 <div class="skill">
                   <div class="outer bgbox">
