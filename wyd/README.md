@@ -1,4 +1,9 @@
 # wyd
+# Repository link
+
+```
+https://github.com/zacharylian/IS216G6T1/tree/main/wyd
+```
 
 ## Project setup
 ```
