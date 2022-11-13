@@ -9,7 +9,7 @@
     </body>
     <div style="margin:0rem 7rem">
         <div class="d-flex row pt-3">
-            <div class="col-3 bgbox" style="border-radius:20px;padding:15px">
+            <div class="col-lg-3 bgbox col-md-12" style="border-radius:20px;padding:15px">
                 <div class="treeview-title">Common Task List
                     <div>
                         <input class="e-field e-input" type="text" id="Treeview" name="Treeview" />
@@ -28,10 +28,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-9" style="margin-left:40px;margin-right:-40px">
+            <div class="col-lg-9 col-md-12" style="margin-left:40px;margin-right:-40px">
                 <div class=" col-11 d-flex justify-content-center align-items-center mx-auto" >
-                    <ejs-schedule height="150%" width="100%" currentView="Month"
-                    id='Schedule'
+                    <ejs-schedule height="800px" width="100%" currentView="Month"
+                    id='Schedule' showQuickInfo: false
                     :eventSettings="appointmentData"
                     :selectedDate="schedulerSelectedDate"
                     :dragStart="onDragStart"
@@ -142,7 +142,7 @@ import navbar from '@/components/layouts/new_navbar.vue';
 import { getAuth, signOut } from '@firebase/auth';
 import { appointmentData } from '@/data.js';
 import { ButtonComponent } from '@syncfusion/ej2-vue-buttons';
-import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective, HeaderRowDirective, HeaderRowsDirective} from '@syncfusion/ej2-vue-schedule';
+import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize, ResourcesDirective, ResourceDirective, HeaderRowDirective, HeaderRowsDirective,} from '@syncfusion/ej2-vue-schedule';
 import {DataManager, WebApiAdaptor} from "@syncfusion/ej2-data";
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
 import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-vue-treegrid';
@@ -164,6 +164,8 @@ L10n.load({
         }
     }
 })
+
+
 
 // for remote data binding
 // var remoteData = new DataManager({
@@ -201,84 +203,82 @@ export default {
     },
 
     provide : {
-        schedule: [Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize]
+        schedule: [Day, Week, Month, Agenda, DragAndDrop, Resize]
     },
+
     data() {
-    return {  
-    curr_id : 0,
-
-    uid: "",
-    prioHardCodedDataSource: ['High-Priority', 'Mid-Priority', 'Low-Priority'],
-    prioDatasource: [
-        {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
-        {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},
-        {prioName: 'Low-Priority', prioId: 3, color: '#008450'}
-    ],
-    // modDatasource:[
-    //     {modName: 'WAD', modId:1, color: 'blue', taskPrioId:1 },
-    //     {modName: 'IDP', modId:2, color: 'purple', taskPrioId:2},
-    //     {modName: 'BPAS', modId:3, color: 'orange', taskPrioId:2}
-    // ],
-    // groupResource : {
-    //     byDate: true,
-    //     byGroupID: false,
-    //     resources : ["Priority"]
-    // },
-    treeviewFields: { 
-        dataSource: 
-        [
-        //     {Id: 1, Name: 'WADII'},
-        //     {Id: 2, Name: 'CT'},
-        //     {Id: 3, Name: 'BPAS'},
-        //     {Id: 4, Name: 'IDP'},
-        //     {Id: 5, Name: 'Feed Dog'}
+        return {  
+        curr_id : 0,
+        uid: "",
+        prioHardCodedDataSource: ['High-Priority', 'Mid-Priority', 'Low-Priority'],
+        prioDatasource: [
+            {prioName: 'High-Priority', prioId: 1, color: '#B81D13'},
+            {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},
+            {prioName: 'Low-Priority', prioId: 3, color: '#008450'}
         ],
-        id:'Id', text:'Name'
-    },
-    schedulerSelectedDate : new Date(),
+        // modDatasource:[
+        //     {modName: 'WAD', modId:1, color: 'blue', taskPrioId:1 },
+        //     {modName: 'IDP', modId:2, color: 'purple', taskPrioId:2},
+        //     {modName: 'BPAS', modId:3, color: 'orange', taskPrioId:2}
+        // ],
+        // groupResource : {
+        //     byDate: true,
+        //     byGroupID: false,
+        //     resources : ["Priority"]
+        // },
+        treeviewFields: { 
+            dataSource: 
+            [
+            //     {Id: 1, Name: 'WADII'},
+            //     {Id: 2, Name: 'CT'},
+            //     {Id: 3, Name: 'BPAS'},
+            //     {Id: 4, Name: 'IDP'},
+            //     {Id: 5, Name: 'Feed Dog'}
+            ],
+            id:'Id', text:'Name'
+        },
+        schedulerSelectedDate : new Date(),
+        showQuickInfo: false,
+        appointmentData : {
+            enableTooltip: true,
+            dataSource : [
+                // {
+                //     Id : 1,
+                //     Subject : 'Learn Thai',
+                //     StartTime: new Date(2022, 10, 5, 8, 0, 0),
+                //     EndTime: new Date(2022, 10, 6, 9, 0, 0),
+                //     PriorityId : 1,
+                // },
+                // {
+                //     Id : 2,
+                //     Subject : 'WAD Help',
+                //     StartTime: new Date(2022, 10, 8, 8, 0, 0),
+                //     EndTime: new Date(2022, 10, 8, 9, 0, 0),
+                //     PriorityId : 2,
+                // },
+                // {
+                //     Id : 3,
+                //     Subject : 'Mtg',
+                //     StartTime: new Date(2022, 10, 11, 12, 0, 0),
+                //     EndTime: new Date(2022, 10, 11, 13, 30, 0),
+                //     PriorityId : 3,
+                // },
+                // {
+                //     Id : 4,
+                //     Subject : 'WAD Proj',
+                //     StartTime: new Date(2022, 10, 11, 12, 0, 0),
+                //     EndTime: new Date(2022, 10, 11, 13, 30, 0),
+                //     PriorityId : 3,
+                //     IsAllDay: true
+                // },
+            ]
+        },
 
-    //   appointmentData : {
-    //      dataSource : remoteData
-    //   },
-    appointmentData : {
-        enableTooltip: true,
-        dataSource : [
-            // {
-            //     Id : 1,
-            //     Subject : 'Learn Thai',
-            //     StartTime: new Date(2022, 10, 5, 8, 0, 0),
-            //     EndTime: new Date(2022, 10, 6, 9, 0, 0),
-            //     PriorityId : 1,
-            // },
-            // {
-            //     Id : 2,
-            //     Subject : 'WAD Help',
-            //     StartTime: new Date(2022, 10, 8, 8, 0, 0),
-            //     EndTime: new Date(2022, 10, 8, 9, 0, 0),
-            //     PriorityId : 2,
-            // },
-            // {
-            //     Id : 3,
-            //     Subject : 'Mtg',
-            //     StartTime: new Date(2022, 10, 11, 12, 0, 0),
-            //     EndTime: new Date(2022, 10, 11, 13, 30, 0),
-            //     PriorityId : 3,
-            // },
-            // {
-            //     Id : 4,
-            //     Subject : 'WAD Proj',
-            //     StartTime: new Date(2022, 10, 11, 12, 0, 0),
-            //     EndTime: new Date(2022, 10, 11, 13, 30, 0),
-            //     PriorityId : 3,
-            //     IsAllDay: true
-            // },
-        ]
+        };
     },
-
-    };
-},
 
 methods : {  
+
 
     async checkdb(){
         const docRef = doc(db, "calendar", this.uid)
@@ -298,11 +298,14 @@ methods : {
 
             // Retrieving treeview
             let treeinfo = docSnap.data().treeviewData
+            console.log(treeinfo)
             console.log("input treeinfo")
             this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
-            for (let info of treeinfo){
-                var treeGridObj = document.getElementById("treeview").ej2_instances[0]
-                treeGridObj.addNodes([info])
+            if (treeinfo.length>0) {
+                for (let info of treeinfo){
+                    var treeGridObj = document.getElementById("treeview").ej2_instances[0]
+                    treeGridObj.addNodes([info])
+                }
             }
 
             // Retrieving Curr_Id
@@ -525,7 +528,7 @@ methods : {
         console.log("[start] Add_Treeview")
         let new_tree =  document.getElementById("Treeview").value
         console.log(new_tree)
-        let data = this.treeviewFields.dataSource
+        let data = this.treeviewFields.dataSource[0]
         console.log(data)
         let id = data.length + 1
         console.log(id)
@@ -537,30 +540,32 @@ methods : {
         )
         this.updatedbtree() //used to update new data into db, keep at the end of function
         var treeGridObj = document.getElementById("treeview").ej2_instances[0]
-        treeGridObj.addNodes({
+        treeGridObj.addNodes([{
                 Id: id,
                 Name: new_tree
-            })
+            }])
         document.getElementById("Treeview").value = ""
     },
 
     onTreeDragStop : function(args) {
         console.log("[start] onTreeDragStop")
         args.cancel = true;
-        let schedulerComponentObject = document.getElementById('Schedule').ej2_instances[0];
+        // let schedulerComponentObject = document.getElementById('Schedule').ej2_instances[0];
+        let schedulerComponentObject = this.$refs.schedulerObject.ej2Instances
         let cellData = schedulerComponentObject.getCellDetails(args.target);
-        let treeviewComponentObject = document.getElementById('treeview').ej2_instances[0];
+        // let treeviewComponentObject = document.getElementById('treeview').ej2_instances[0];
+        let treeviewComponentObject = this.$refs.treeviewObject.ej2Instances
         let filteredData = treeviewComponentObject.fields.dataSource.filter(function (item) { return item.Id === parseInt(args.draggedNodeData.id); });
-        console.log(filteredData[0].Name)
+        console.log(treeviewComponentObject.fields.dataSource)
+        // console.log(filteredData[0])
         let eventData = {
-        Subject : filteredData[0].Name,
-        startTime : cellData.startTime,
-        endTime : cellData.endTime,
-        IsAllDay : cellData.isAllDay
-    };
+            Subject : filteredData[0].Name,
+            StartTime : cellData.startTime,
+            EndTime : cellData.endTime,
+        };
     
-      //schedulerComponentObject.addEvent(eventData);
-    schedulerComponentObject.openEditor(eventData,'Add',true);
+        // schedulerComponentObject.addEvent(eventData);
+        schedulerComponentObject.openEditor(eventData,'Add',true);
     // let apptdata = this.appointmentData.dataSource;
     // console.log(this.appointmentData.dataSource)
     // apptdata.push(eventData)
@@ -592,6 +597,7 @@ methods : {
         console.log("[start] onCellClick")
         console.log(args)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
+        scheduleObj.closeQuickInfoPopup();
         scheduleObj.openEditor();
     },
 
@@ -603,7 +609,8 @@ methods : {
         this.curr_id = args.event.Id
         console.log(this.curr_id)
         console.log(args.event.Subject)
-        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];       
+        let scheduleObj = document.getElementById('Schedule').ej2_instances[0];  
+        scheduleObj.closeQuickInfoPopup();     
         scheduleObj.openEditor(args.event);
         let subject = document.getElementById("Subject")
         console.log(subject.value)
@@ -627,7 +634,26 @@ methods : {
 }
 </script>
 
-<style>
+<style type="text/css">
+
+/* .e-control, 
+.e-wrapper { 
+  font-family: 'Times New Roman', Times, serif !important; 
+} 
+  */
+
+
+.e-work-cells, .e-header-cells, .e-work-hours, .e-child-node, .e-parent-node,  .e-all-day-cells  {
+
+    background-color: #B19CD9 !important;
+    filter: grayscale(30%)
+
+}
+
+.e-timeline-view .e-work-hours {
+    background-color: #B19CD9 !important;
+    filter: grayscale(30%)
+}
 
 @import '../../node_modules/@syncfusion/ej2-base/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-buttons/styles/material.css';
