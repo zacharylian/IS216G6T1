@@ -263,7 +263,7 @@ export default {
                 earliest_event = info   
                 if (this.apptdata1.length<2) {
                   this.apptdata1.push(earliest_event) 
-                } else {
+                } else if (this.apptdata2.length<2) {
                   this.apptdata2.push(earliest_event)
                 }
               }
@@ -297,13 +297,12 @@ export default {
                 second_event = info        
                 if (this.apptdata1.length<2) {
                   this.apptdata1.push(second_event) 
-                } else {
+                } else if (this.apptdata2.length<2) {
                   this.apptdata2.push(second_event)
                 }
               }
             } 
-
-            if (this.apptdata1.length < 2 || this.apptdata2.length < 2) {
+      
             let third_event = ""
             let upcoming3 = new Date(2100, 12)
             for (var info of docSnap2.data().appointmentData){
@@ -332,20 +331,18 @@ export default {
                 third_event = info        
                 if (this.apptdata1.length<2) {
                   this.apptdata1.push(third_event) 
-                } else {
+                } else if (this.apptdata2.length<2) {
                   this.apptdata2.push(third_event)
                 }
               }
             }
-            } 
 
-            if (tthis.apptdata1.length < 2 || this.apptdata2.length < 2) {
             let fourth_event = ""
             let upcoming4 = new Date(2100, 12)
             for (var info of docSnap2.data().appointmentData){
               let today = new Date
               info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
-              if (info.StartTime > today && info.StartTime<=upcoming4 && info.StartTime.toDateString()!=upcoming.toDateString() && info.StartTime.toDateString()!=upcoming2.toDateString() && info.StartTime.toDateString()!=upcoming3.toDateString()){
+              if (info.StartTime>today && info.StartTime<=upcoming4 && info.StartTime.toDateString()!=upcoming.toDateString() && info.StartTime.toDateString()!=upcoming2.toDateString() && info.StartTime.toDateString()!=upcoming3.toDateString()){
                 console.log("starttime:" + info.StartTime)
                 upcoming4 = info.StartTime 
               }
@@ -368,13 +365,15 @@ export default {
                 fourth_event = info        
                 if (this.apptdata1.length<2) {
                   this.apptdata1.push(fourth_event) 
-                } else {
+                } else if (this.apptdata2.length<2) {
                   this.apptdata2.push(fourth_event)
                 }
               }
             }
-            } 
+            
           
+            console.log(this.apptdata1)
+            console.log(this.apptdata2)
             
           } else {
             // doc.data() will be undefined in this case
