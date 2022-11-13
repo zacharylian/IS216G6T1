@@ -52,7 +52,7 @@
               <div class="mx-3" style="margin:auto;">
               <!-- cld potentially use the same code for progress circle as focus time today.
                 can modify colours & variables no problemo -->
-              <br><h4>$40/$50</h4></div>
+              <br><h4>${{  this.spent  }}/${{  this.remainingBudget  }}</h4></div>
               <br>
               </div>
               <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
@@ -140,6 +140,8 @@ export default {
     goalhours: 0,
     totalduration: 0,
     windowWidth: window.innerWidth,
+    remainingBudget: 0,
+    spent: 0,
     
   }},
 
@@ -230,6 +232,29 @@ export default {
                 PriorityId : 1,
             },], currId: 0 });
             }
+
+            const docRef3 = doc(db, "spendings", this.uid);
+            const docSnap3 = await getDoc(docRef3);
+
+            if (docSnap3.exists()) {
+            console.log("Document data:", docSnap3.data());
+            let day = new Date
+            let num = day.getDate()
+            this.spent = docSnap3.data().daily[num].amt
+            this.remainingBudget = (docSnap3.data().total / 30).toFixed(2)
+            
+
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            console.log("=====creating focustimer document=====")
+            setDoc(docRef3, { total: 1000, lastSpending: 0, daily: {1:{amt: 0, cat: {}},2:{amt: 0, cat: {}},3:{amt: 0, cat: {}},4:{amt: 0, cat: {}},5:{amt: 0, cat: {}},6:{amt: 0, cat: {}},7:{amt: 0, cat: {}},8:{amt: 0, cat: {}},9:{amt: 0, cat: {}},10:{amt: 0, cat: {}},11:{amt: 0, cat: {}},12:{amt: 0, cat: {}},13:{amt: 0, cat: {}},14:{amt: 0, cat: {}},15:{amt: 0, cat: {}},16:{amt: 0, cat: {}},17:{amt: 0, cat: {}},18:{amt: 0, cat: {}},19:{amt: 0, cat: {}},20:{amt: 0, cat: {}},21:{amt: 0, cat: {}},22:{amt: 0, cat: {}},23:{amt: 0, cat: {}},24:{amt: 0, cat: {}},25:{amt: 0, cat: {}},26:{amt: 0, cat: {}},27:{amt: 0, cat: {}},28:{amt: 0, cat: {}},29:{amt: 0, cat: {}},30:{amt: 0, cat: {}},31:{amt: 0, cat: {}}}
+            });
+
+            this.remainingBudget = (docSnap3.data().total / 30).toFixed(2)
+            }
+
+
 
 
         },

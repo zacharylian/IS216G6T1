@@ -79,23 +79,32 @@ import { getAuth, signOut } from '@firebase/auth';
 
                 if (docSnap.exists()) {
                     console.log("Document data:", docSnap.data())
+                    let day = this.date
+                    let num = day.getDate()
                     this.last_spending = docSnap.data().lastSpending
-                    this.total = docSnap.data().total/30
                     this.daily = docSnap.data().daily
+                    this.total = (docSnap.data().total/30 - this.daily[num].amt).toFixed(2)
 
 
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
-                    setDoc(docRef, {total: 1000, lastSpending: 0, daily: {1:{amt: 0},2:{amt: 0},3:{amt: 0},4:{amt: 0},5:{amt: 0},6:{amt: 0},7:{amt: 0},8:{amt: 0},9:{amt: 0},10:{amt: 0},11:{amt: 0},12:{amt: 0},13:{amt: 0},14:{amt: 0},15:{amt: 0},16:{amt: 0},17:{amt: 0},18:{amt: 0},19:{amt: 0},20:{amt: 0},21:{amt: 0},22:{amt: 0},23:{amt: 0},24:{amt: 0},25:{amt: 0},26:{amt: 0},27:{amt: 0},28:{amt: 0},29:{amt: 0},30:{amt: 0},31:{amt: 0}} } );
+                    setDoc(docRef, {total: 1000, lastSpending: 0, daily: {1:{amt: 0, cat: {}},2:{amt: 0, cat: {}},3:{amt: 0, cat: {}},4:{amt: 0, cat: {}},5:{amt: 0, cat: {}},6:{amt: 0, cat: {}},7:{amt: 0, cat: {}},8:{amt: 0, cat: {}},9:{amt: 0, cat: {}},10:{amt: 0, cat: {}},11:{amt: 0, cat: {}},12:{amt: 0, cat: {}},13:{amt: 0, cat: {}},14:{amt: 0, cat: {}},15:{amt: 0, cat: {}},16:{amt: 0, cat: {}},17:{amt: 0, cat: {}},18:{amt: 0, cat: {}},19:{amt: 0, cat: {}},20:{amt: 0, cat: {}},21:{amt: 0, cat: {}},22:{amt: 0, cat: {}},23:{amt: 0, cat: {}},24:{amt: 0, cat: {}},25:{amt: 0, cat: {}},26:{amt: 0, cat: {}},27:{amt: 0, cat: {}},28:{amt: 0, cat: {}},29:{amt: 0, cat: {}},30:{amt: 0, cat: {}},31:{amt: 0, cat: {}}} } );
                 }
             },
 
             async updatedb(){
                 const docRef = doc(db, "spendings", this.uid);
-                let day = this.date.getDate()
-                this.daily[day] += this.last_spending
-                await updateDoc(docRef, { total: this.total, lastSpending: this.last_spending })
+                let day = this.date
+                let num = day.getDate()
+                this.daily[num].amt += this.last_spending
+                console.log("dailydaily:" + this.daily[num].amt)
+                if (this.daily[num].cat[this.category] == undefined){
+                    this.daily[num].cat[this.category] = this.last_spending
+                }else{
+                    this.daily[num].cat[this.category] += this.last_spending
+                }
+                await updateDoc(docRef, { lastSpending: this.last_spending, daily: this.daily})
             },
 
             deduct() {
