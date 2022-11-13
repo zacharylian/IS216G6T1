@@ -299,9 +299,9 @@ methods : {
             // Retrieving treeview
             let treeinfo = docSnap.data().treeviewData.dataSource
             console.log("input treeinfo")
-            this.treeviewFields.dataSource[0] = docSnap.data().treeviewData.dataSource
-            this.treeviewFields.id = docSnap.data().treeviewData.id
-            this.treeviewFields.text = docSnap.data().treeviewData.text
+            this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
+            this.treeviewFields.id = docSnap.data().id
+            this.treeviewFields.text = docSnap.data().text
             for (let info of treeinfo){
                 var treeGridObj = document.getElementById("treeview").ej2_instances[0]
                 treeGridObj.addNodes([info])
@@ -311,17 +311,17 @@ methods : {
             this.curr_id = docSnap.data().currId
 
         } else{
-            setDoc(docRef, {appointmentData: [], treeviewData: { dataSource: [], id: 'Id', text: 'Name' }, currId: 0})
+            setDoc(docRef, {appointmentData: [], treeviewData: [], currId: 0, id: 'Id', text: 'Name'})
         }
     },
     async updatedbevent(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { currId: this.curr_id, appointmentData: this.appointmentData.dataSource,treeviewData: this.treeviewFields })
+        await updateDoc(docRef, { currId: this.curr_id, appointmentData: this.appointmentData.dataSource })
     },
 
     async updatedbtree(){
         const docRef = doc(db, "calendar", this.uid);
-        await updateDoc(docRef, { treeviewData: this.treeviewFields })
+        await updateDoc(docRef, { treeviewData: this.treeviewFields.dataSource, id: this.treeviewFields.id, text: this.treeviewFields.text })
     },
 
 
