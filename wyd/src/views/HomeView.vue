@@ -27,20 +27,12 @@
             <!--UPCOMING EVENTS-->
             <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
             <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
-              <div class="card mx-2" style="width: 18vw;">
+              <div class="card mx-2" style="width: 18vw;" v-for="event in apptdata">
                 <div class="card-body">
-                  <h5 class="card-title">Event name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Date & Time</h6>
-                  <p class="card-text">Does it repeat</p>
-                  <p class="card-text">Are you a funky fresh chicken</p>
-                </div>
-              </div>
-              <div class="card mx-2" style="width: 18vw;">
-                <div class="card-body">
-                  <h5 class="card-title">Event name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Date & Time</h6>
-                  <p class="card-text">Does it repeat</p>
-                  <p class="card-text">Are you a funky fresh chicken</p>
+                  <h5 class="card-title">{{event.Subject}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{event.StartTime}}</h6>
+                  <!-- <p class="card-text">Does it repeat</p>
+                  <p class="card-text">Are you a funky fresh chicken</p> -->
                 </div>
               </div>
               <!-- <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
@@ -208,9 +200,22 @@ export default {
             console.log("Document data:", docSnap2.data());
             this.apptdata = []
             for (var info of docSnap2.data().appointmentData){
+              let today = new Date
               info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
-              info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
-              this.apptdata.push(info)
+              if (info.StartTime > today){
+                console.log("starttime:" + info.StartTime)
+                let year = info.StartTime.getFullYear()
+                let month = info.StartTime.getMonth() + 1
+                let day = info.StartTime.getDate()
+                let time = info.StartTime.toLocaleTimeString('en-US')
+                info.StartTime = day + "/" + month + "/" + year + " " + time
+                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                year = info.EndTime.getFullYear()
+                month = info.EndTime.getMonth()
+                day = info.EndTime.getDate()
+                info.EndTime = day + "/" + month + "/" + year
+                this.apptdata.push(info)
+              }
             }
             console.log(this.apptdata)
           } else {

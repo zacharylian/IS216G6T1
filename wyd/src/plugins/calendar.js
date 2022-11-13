@@ -1,4 +1,4 @@
-import d3 from "d3";
+import * as d3 from "d3";
 
 export default () => {
   console.log("HELLO!!!");
@@ -159,25 +159,25 @@ export default () => {
       var x = d3.scaleLinear().domain([dayStart, dayEnd]).range([0, width]);
 
       // Set the y axis to months
-      var y = d3.scaleLinear().domain([1, 6]).range([0, height]);
+      var y = d3.scaleLinear().domain([0, 6]).range([0, height]);
 
       // Set the z axis to colors
       // var z = d3.scale.quantile().domain([0, 501]).range(colors);
 
       // Tooltips
-      var tip = d3
-        .tip()
-        .attr("class", "d3-tip")
-        .offset([-10, 0])
-        .html(function (d) {
-          return (
-            weeks[d.week - 1] +
-            " " +
-            d.date +
-            "<br/>Spendings: " +
-            d.amt
-          );
-        });
+      // var tip = d3
+      //   .tip()
+      //   .attr("class", "d3-tip")
+      //   .offset([-10, 0])
+      //   .html(function (d) {
+      //     return (
+      //       weeks[d.week - 1] +
+      //       " " +
+      //       d.date +
+      //       "<br/>Spendings: " +
+      //       d.amt
+      //     );
+      //   });
 
       
       // Set up the chart space
@@ -185,63 +185,84 @@ export default () => {
         .select(".chart")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        // .append("g")
-        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .style("background-color", "blue");
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        // .style("background-color", "blue");
       
       
-
+      console.log(sudoData.oct)
       // Draw data rectangles
-      var rect = svg
-        .selectAll(".rect")
-        // .data(gotData)
-        .data(sudoData.oct.amt) //
-        .enter()
-        .append("rect")
-        .attr("fill", function (d) {
-          // return z(d.variance);
-          // for (let [month, details] of Object.entries(d)) {
-          //   for (let item of details) {
-          //     console.log(item)
-          //     return z(item.amt)
-          //   }
-          // }
-          return colorAssignment(d);
-        })
-        .attr("x", function (d) {
-          // return x(d.year);
-          // return x(d.amt)
-          // for (let [month, details] of Object.entries(d)) {
-          //   for (let item of details) {
-          //     return x(item.date)
-          //   }
-          // }
-          for (let i in days) {
-            let edited = days[i].slice(0, 3).toLowerCase()
-            if (d.day == edited) {
-              return x(i+1)
-            }
-          }
-          // return x(d.day);
-        })
-        .attr("y", function (d) {
-          // return y(d.month);
-          // return y(d.category)
-          // for (let [month, details] of Object.entries(d)) {
-          //   for (let item of details) {
-          //     return y(item.week)
-          //   }
-          // }
+      const octo = sudoData.oct
+      var flatMat = octo.map(i => {
+        return i.amt
+      })
+      console.log(flatMat)
+      var count = 0
+      octo.forEach((day, i) => {
+        // console.log(day)
+        svg.append('rect')
+          .selectAll(".rect")
+          .data(flatMat)
+          // .join("rect")
+          // .attr("x", (d) => x(d.date) + margin.left)
+          .attr("x", x(i % 7) + margin.left)
+          // .attr("y", (d) => y(d.week) * (barHeight) + margin.top)
+          .attr("y", y(Math.floor(i / 7)) * (barHeight) + margin.top)
+          .attr("width", barWidth)
+          .attr("height", barHeight)
+          .attr("fill", (d) => colorAssignment(d))
+        console.log(count++)
+      })
+      // var rect = svg
+      //   .selectAll(".rect")
+      //   // .data(gotData)
+      //   .data(sudoData.oct.amt) //
+      //   .enter()
+      //   .append("rect")
+      //   .attr("fill", function (d) {
+      //     // return z(d.variance);
+      //     // for (let [month, details] of Object.entries(d)) {
+      //     //   for (let item of details) {
+      //     //     console.log(item)
+      //     //     return z(item.amt)
+      //     //   }
+      //     // }
+      //     return colorAssignment(d);
+      //   })
+      //   .attr("x", function (d) {
+      //     // return x(d.year);
+      //     // return x(d.amt)
+      //     // for (let [month, details] of Object.entries(d)) {
+      //     //   for (let item of details) {
+      //     //     return x(item.date)
+      //     //   }
+      //     // }
+      //     for (let i in days) {
+      //       let edited = days[i].slice(0, 3).toLowerCase()
+      //       if (d.day == edited) {
+      //         return x(i+1)
+      //       }
+      //     }
+      //     // return x(d.day);
+      //   })
+      //   .attr("y", function (d) {
+      //     // return y(d.month);
+      //     // return y(d.category)
+      //     // for (let [month, details] of Object.entries(d)) {
+      //     //   for (let item of details) {
+      //     //     return y(item.week)
+      //     //   }
+      //     // }
           
-          return y(d.week);
-        })
-        .attr("width", barWidth)
-        .attr("height", barHeight)
-        .on("mouseover", tip.show)
-        .on("mouseout", tip.hide);
+      //     return y(d.week);
+      //   })
+      //   .attr("width", barWidth)
+      //   .attr("height", barHeight);
+      // //   .on("mouseover", tip.show)
+      // //   .on("mouseout", tip.hide);
 
       
-      svg.call(tip);
+      // svg.call(tip);
 
       // // xAxis SVG function
       // var xAxis = d3.svg
@@ -249,9 +270,9 @@ export default () => {
       // .scale(x)
       // .orient("bottom")
       // .tickFormat((d, i) => days[i])
-      // .ticks((dayEnd - dayStart) / 10)
-      // // .tickValues([0, 0.17, 0.33, 0.5, 0.67, 0.83, 1]);
-      // // .ticks(7)
+      // .ticks((dayEnd - dayStart) / 7)
+      // .tickValues([0, 0.17, 0.33, 0.5, 0.67, 0.83, 1]);
+      // .ticks(7)
 
       // // Draw axis
       // var xAxisGroup = svg
@@ -262,9 +283,12 @@ export default () => {
 
       var xAxisGroup = svg
         .append("g")
+        .selectAll("text")
         .data(days)
         .join("text")
-        .text((d) => d)
+        .text(function (d) {
+          return d.slice(0, 3);
+        })
         .attr("x", (d, i) => x(i) + margin.left)
         .attr("y", height - margin.bottom)
 
@@ -279,10 +303,11 @@ export default () => {
         })
         .attr("x", 0)
         .attr("y", function (d, i) {
-          return i * (height / 12);
+          return i * (height / 7);
         })
         .style("text-anchor", "end")
-        .attr("transform", "translate(-35,15)") //update yaxis here
+        // .attr("transform", "translate(0 ,15)") //update yaxis here
+        .attr("transform", "translate(" + 0 + "," + height/4 + ")")
         .attr("class", "month-label");
 
       // // Draw legend
@@ -324,7 +349,7 @@ export default () => {
 
       svg
         .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + (height + 40) + ")")
+        .attr("transform", "translate(" + width / 2 + "," + (height) + ")")
         .append("text")
         .attr("text-anchor", "middle")
         .attr("class", "axis-label")
