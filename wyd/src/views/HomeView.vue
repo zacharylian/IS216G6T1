@@ -58,30 +58,7 @@
                 <h3>
               <div :style='highlighter'>
               <span style="font-size:2.5vw">
-              ${{  this.spent.toFixed(2)  }}/${{  this.remainingBudget.toFixed(2)  }}</span></div></h3>
-              <!-- <div>
-                <div class="skill">
-                  <div class="outer bgbox">
-                      <div class="inner">
-                          <div id="number">
-                             ${{  this.spent.toFixed(2)  }}/${{  this.remainingBudget.toFixed(2)  }}
-                          </div>
-                      </div>
-                  </div>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px" class="mysvg">
-                      <defs>
-                          <linearGradient id="GradientColor">
-                            <stop offset="0%" stop-color="#5E6EE6" />
-                            <stop offset="100%" stop-color="#2A3166" />
-                          </linearGradient>
-                      </defs>
-                      <div>
-                      <circle cx="80" cy="80" r="70" stroke-linecap="round" :style='cssVary'/></div>
-                  </svg>
-                </div>
-
-              </div> -->
+              ${{  this.spent }}/${{  this.remainingBudget   }}</span></div></h3>
 
               </div>
 
@@ -182,11 +159,7 @@ export default {
         '--numbers': 472 - (472 * this.percentagedone/100)
       }
     },
-    cssVary() {
-      return {
-        '--fruits': 472 - (472 * (this.spent / this.remainingBudget) )
-      }
-    },
+
     adjustible() {
       console.log(this.windowWidth)
       if (this.windowWidth < 768 ){
@@ -533,19 +506,7 @@ circle {
     stroke-dashoffset: 472;
     animation: anim 1s linear forwards;
 }
-div > circle {
-    fill:none;
-    stroke:url(#GradientColor);
-    stroke-width: 20px;
-    stroke-dasharray: 472; /* for some reason the complete circle is 472 LOL */
-    stroke-dashoffset: 472;
-    animation: animy 1s linear forwards;
-}
-@keyframes animy{
-    100%{
-        stroke-dashoffset: var(--fruits) /*this is what actually controls the % so later when taking in data, modify this*/
-    }
-}
+
 main > div {
   margin-left: var(--marg-left)
 }
