@@ -224,7 +224,7 @@ export default {
             // doc.data() will be undefined in this case
             console.log("No such document!");
             console.log("=====creating calendar document=====")
-            setDoc(docRef2, { treeviewData: [], appointmentData: [{
+            setDoc(docRef2, { treeviewData: { dataSource: [], id: 'Id', text: 'Name' }, appointmentData: [{
                 Id : 1,
                 Subject : 'Learn Thai',
                 StartTime: new Date(2022, 10, 5, 8, 0, 0),
