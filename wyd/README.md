@@ -5,6 +5,13 @@
 npm install
 ```
 
+## Login details
+
+```
+username: concord.defaultuser@gmail.com
+password: ConcordDefault1
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
