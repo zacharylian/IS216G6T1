@@ -52,15 +52,6 @@
                             idField="prioId"
                             colorField="color"> 
                             </e-resource>
-                            <!-- <e-resource 
-                            :dataSource="modDatasource" 
-                            field="modId"
-                            title="Mod Details"
-                            name="Modules"
-                            textField="modName"
-                            idField="modId"
-                            colorField="color"
-                            allowMultiple="true"></e-resource> -->
                         </e-resources>
                         <template v-slot:schedulerEditorTemplate="{}">
                             <table>
@@ -70,7 +61,7 @@
                                             Summary
                                         </td>
                                         <td colspan=20>
-                                            <input class="e-field e-input" type="text" id="Subject" name="Subject" />
+                                            <input class="e-field e-input" type="text" id="Subject" name="Subject" ref="Subject" />
                                             <!-- e-field and name need to be same -->
                                         </td>
                                     </tr>
@@ -80,7 +71,7 @@
                                         </td>
                                         <td colspan=20>
                                             <ejs-dropdownlist class="e-field" placeholder="Choose Priority"
-                                            :dataSource="prioHardCodedDataSource" id="PriorityId" name="PriorityId">
+                                            :dataSource="prioHardCodedDataSource" id="PriorityId" name="PriorityId" ref="PriorityId">
 
                                             </ejs-dropdownlist>
                                         </td>
@@ -90,7 +81,7 @@
                                             From
                                         </td>
                                         <td colspan=20>
-                                            <ejs-datetimepicker format="dd/MM/yyyy HH:mm" class="e-field" id="StartTime" name="StartTime" >
+                                            <ejs-datetimepicker format="dd/MM/yyyy HH:mm" class="e-field" id="StartTime" name="StartTime" ref="Start_Time">
 
                                             </ejs-datetimepicker>
                                         </td>
@@ -100,19 +91,19 @@
                                             To
                                         </td>
                                         <td colspan=20>
-                                            <ejs-datetimepicker format="dd/MM/yyyy HH:mm"  class="e-field" id="EndTime" name="EndTime">
+                                            <ejs-datetimepicker format="dd/MM/yyyy HH:mm"  class="e-field" id="EndTime" name="EndTime" ref="End_Time">
 
                                             </ejs-datetimepicker>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td colspan=4 class="e-textlabel">
                                             Description
                                         </td>
                                         <td colspan=20>
-                                            <input class="e-field e-input" type="text" id="Description" name="Description" />
+                                            <input class="e-field e-input" type="text" id="Description" name="Description" ref="Description"/>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <td>
 
@@ -173,14 +164,6 @@ L10n.load({
 })
 
 
-
-// for remote data binding
-// var remoteData = new DataManager({
-//     url: "https://ej2services.syncfusion.com/production/web-services/api/Schedule",
-//     adaptor: new WebApiAdaptor,
-//     crossDomain: true
-// })
-
 //EXPORTS
 export default {
 
@@ -224,16 +207,7 @@ export default {
             {prioName: 'Mid-Priority', prioId: 2, color: '#EFB700'},
             {prioName: 'Low-Priority', prioId: 3, color: '#008450'}
         ],
-        // modDatasource:[
-        //     {modName: 'WAD', modId:1, color: 'blue', taskPrioId:1 },
-        //     {modName: 'IDP', modId:2, color: 'purple', taskPrioId:2},
-        //     {modName: 'BPAS', modId:3, color: 'orange', taskPrioId:2}
-        // ],
-        // groupResource : {
-        //     byDate: true,
-        //     byGroupID: false,
-        //     resources : ["Priority"]
-        // },
+
         treeviewFields: { 
             dataSource: 
             [
@@ -309,16 +283,16 @@ methods : {
             this.appointmentData.dataSource = apptinfo
 
             // Retrieving treeview
-            let treeinfo = docSnap.data().treeviewData
-            console.log("input treeinfo")
-            this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
-            this.treeviewFields.id = docSnap.data().id
-            this.treeviewFields.text = docSnap.data().text
-            console.log(treeinfo)
-            for (let info of treeinfo){
-                var treeGridObj = document.getElementById("treeview").ej2_instances[0]
-                treeGridObj.addNodes([info])
-            }
+            // let treeinfo = docSnap.data().treeviewData
+            // console.log("input treeinfo")
+            // this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
+            // this.treeviewFields.id = docSnap.data().id
+            // this.treeviewFields.text = docSnap.data().text
+            // console.log(treeinfo)
+            // for (let info of treeinfo){
+            //     var treeGridObj = document.getElementById("treeview").ej2_instances[0]
+            //     treeGridObj.addNodes([info])
+            // }
 
             // Retrieving Curr_Id
             this.curr_id = docSnap.data().currId
@@ -366,10 +340,14 @@ methods : {
         // console.log(this.appointmentData.dataSource)
         console.log(curr_id)
         let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
-        let subject = document.getElementById("Subject")
+        // let subject = document.getElementById("Subject")
         let priority = document.getElementById("PriorityId")
         let input_StartTime = document.getElementById("StartTime").value
         let input_EndTime = document.getElementById("EndTime").value
+        let subject = this.$refs.Subject
+        // let input_StartTime = this.$refs.Start_Timee
+        // let input_EndTime = this.$refs.End_Time
+        console.log(subject.value)
         // format start time and date
         let str_length = input_StartTime.length
         let start_date = input_StartTime.slice(0,10)
@@ -411,9 +389,12 @@ methods : {
             }
             let id = max + 1
             console.log(id)
-            let priority = document.getElementById("PriorityId")
+            // let priority = this.$refs.PriorityId
+            console.log(priority)
             console.log(priority.value)
             console.log(subject.value)
+            console.log(input_StartTime)
+            console.log(input_EndTime)
             if (priority.value == 'High-Priority') {
                 let priorityId = 1
                 let data = {

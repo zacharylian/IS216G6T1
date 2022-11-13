@@ -33,17 +33,10 @@
                   <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
                 </div>    
               </div>
-              <!-- <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
-                  <e-columns>
-                      <e-column field="Subject" headerText="Name" width="300" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                      <e-column field="StartTime" headerText="Start" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                      <e-column field="EndTime" headerText="End" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
-                  </e-columns>
-              </ejs-treegrid> -->
             </div>
             <div class="d-flex justify-content-center align-items-center" style="margin:auto;z-index:-1">
-              <div class="card m-2" style="width: 500px;height:110px;border-radius:5px;border:none;" v-for="event in apptdata2">
-                <div class="card-body bgbog" style="box-shadow:none;border-radius:5px">
+              <div class="card m-2" style="width: 500px;height:110px;border-radius:20px;border:none;" v-for="event in apptdata2">
+                <div class="card-body bgbog" style="box-shadow:none;border-radius:20px">
                   <h5 class="card-title" style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
                   <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
                 </div>    
