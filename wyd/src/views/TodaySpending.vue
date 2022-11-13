@@ -106,17 +106,30 @@ import { getAuth, signOut } from '@firebase/auth';
                 }
                 await updateDoc(docRef, { lastSpending: this.last_spending, daily: this.daily})
             },
-
             deduct() {
                 if (this.last_spending > this.total) {
                     alert("You are out of budget!")
+                    this.$swal({
+                        title:"You're out of money!",
+                        text: 'Have you been spending too much?', 
+                        animation: false,
+                        customClass: {
+                            icon: 'no-border',
+                            },
+                        showConfirmButton: true,
+                        background: 'rgba( 230, 232, 255, 0.8 )',
+                        backdrop: `blur( 9px )`,
+                        confirmButtonColor: '#5E6EE6',
+                        color: '#4955b3'
+                        }
+                        )
                 } else {
                     this.total -= this.last_spending.toFixed(2)
                     console.log(this.total)
                     this.updatedb()
                     return this.total
                 }
-            }
+  }
         }
         
     }   
