@@ -16,8 +16,18 @@
 
 <script>
 import { CalendarHeatmap } from 'vue3-calendar-heatmap'
-
+import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+import { db } from '../main';
+import { getAuth, signOut } from '@firebase/auth';
 export default {
+    created(){
+      console.log("=====getting UID=====")
+      this.uid = getAuth().currentUser.uid
+      console.log(this.uid)
+
+      console.log("=====extracting data from db=====")
+      this.checkdb()
+    },
     components: {
         CalendarHeatmap
     },
@@ -26,7 +36,44 @@ export default {
     },
     data() {
       return {
+        valuesbyjames: [],
+        uid: "",
         
+      }
+    },
+
+    methods: {
+      async checkdb(){
+        const docRef = doc(db, "spendings", this.uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+              console.log("Document data:", docSnap.data())
+              let daily = docSnap.data().daily
+              let date = new Date
+              let month = date.getMonth()
+              let year = date.getFullYear()
+              
+              for (let items in daily){
+                if (daily[items].amt != 0){
+                  if (month + 1 < 10){
+                    month = "0" + month
+                  }else{
+                    month = month + 1
+                  }
+                  console.log("month is:" + month)
+
+                  let thisdate = year + "-" + (month) + "-" + items
+                  console.log("this date is:" + thisdate)
+                  let pushobj = {}
+                  pushobj.date = thisdate
+                  pushobj.count = daily[items].amt
+                  this.valuesbyjames.push(pushobj)
+                }
+              }
+              console.log("jamesvals:" + this.valuesbyjames[0])
+            
+          } 
       }
     }
     
