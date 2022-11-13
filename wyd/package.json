@@ -16,6 +16,7 @@
     "@syncfusion/ej2-vue-schedule": "^20.3.52",
     "@syncfusion/ej2-vue-treegrid": "^20.3.56",
     "bootstrap": "^5.2.2",
+    "bootstrap-vue": "^2.23.1",
     "chart.js": "^3.9.1",
     "core-js": "^3.8.3",
     "d3": "^7.6.1",

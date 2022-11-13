@@ -1,8 +1,26 @@
 <template>
 
+<!-- <div>
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand>NavBar</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item href="#introduction">Log In</b-nav-item>
+        <b-nav-item href="#toDo">To Do</b-nav-item>
+        <b-nav-item href="#calendar">Calendar</b-nav-item>
+        <b-nav-item href="#expenditure">Expenditure</b-nav-item>
+        <b-nav-item href="#focusTimer">Timer</b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</div> -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" style="color:#5E6EE6;font-weight:bold;font-size:2vw;font-style:italic;">CONCORD</a>
+    <a class="navbar-brand" style="color:#5E6EE6;font-weight:bold;font-size:30px;font-style:italic;">CONCORD</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
