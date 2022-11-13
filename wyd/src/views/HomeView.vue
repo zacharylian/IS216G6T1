@@ -31,8 +31,8 @@
                 <div class="card-body">
                   <h5 class="card-title">{{event.Subject}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{event.StartTime}}</h6>
-                  <p class="card-text">Does it repeat</p>
-                  <p class="card-text">Are you a funky fresh chicken</p>
+                  <!-- <p class="card-text">Does it repeat</p>
+                  <p class="card-text">Are you a funky fresh chicken</p> -->
                 </div>
               </div>
               <!-- <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">

@@ -55,10 +55,11 @@ import { getAuth, signOut } from '@firebase/auth';
         },
         data() {
             return {
-                date: getDate(new Date),
+                date: new Date,
                 uid: "",
                 last_spending: 0,
                 total: 100,
+                daily: {},
                 category: 'Food',
                 categories: [
                     { text: 'Food', value: 'food' },
@@ -79,7 +80,8 @@ import { getAuth, signOut } from '@firebase/auth';
                 if (docSnap.exists()) {
                     console.log("Document data:", docSnap.data())
                     this.last_spending = docSnap.data().lastSpending
-                    this.total = docSnap.data().total/30 - docSnap.data().daily[this.date].amt
+                    this.total = docSnap.data().total/30
+                    this.daily = docSnap.data().daily
 
 
                 } else {
@@ -91,6 +93,8 @@ import { getAuth, signOut } from '@firebase/auth';
 
             async updatedb(){
                 const docRef = doc(db, "spendings", this.uid);
+                let day = this.date.getDate()
+                this.daily[day] += this.last_spending
                 await updateDoc(docRef, { total: this.total, lastSpending: this.last_spending })
             },
 
