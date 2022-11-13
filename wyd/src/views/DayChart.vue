@@ -18,6 +18,9 @@
 <script>
     import { Bar } from 'vue-chartjs'
     import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+    import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+    import { db } from '../main';
+    import { getAuth, signOut } from '@firebase/auth';
 
     ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
     
@@ -25,6 +28,15 @@
     const backgroundColor = ["#FF0D0D", "#C82538", "#B25F4A", "#45731E", "#3BCA6D"] 
 
     export default {
+        created(){
+            console.log("=====getting UID=====")
+            this.uid = getAuth().currentUser.uid
+            console.log(this.uid)
+
+            console.log("=====extracting data from db=====")
+            this.checkdb()
+        },
+
         name: 'BarChart',
         components: { Bar },
         props: {
@@ -78,7 +90,11 @@
                 legend: {
                     position: "right"
                 }
-            }
+            },
+
+            uid: "",
+
+            jamesmadethis: {allowance: 1000, cat:{transport: 0, food: 0, entertainment: 0, finance: 0, others: 0}},
         }),
         async mounted () {
             this.loaded = false
@@ -139,7 +155,37 @@
                 console.error(err)
             }
         },
+
         methods: {
+            async checkdb(){
+                const docRef = doc(db, "spendings", this.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    console.log("Document data:", docSnap.data())
+                    this.jamesmadethis.allowance = docSnap.data().total
+                    let daily = docSnap.data().daily
+                    for (var day in daily){
+                        if (Object.keys(daily[day].cat).length !== 0){
+                            console.log("day is:" + day)
+                            for (var oneCat in daily[day].cat){
+                                this.jamesmadethis.cat[oneCat] += daily[day].cat[oneCat]
+                            }
+                        }
+                    }
+                    console.log(this.jamesmadethis)
+
+
+                } 
+                // else {
+                //     // doc.data() will be undefined in this case
+                //     console.log("No such document!");
+                //     setDoc(docRef, {total: 1000, lastSpending: 0, daily: {1:{amt: 0, cat: {}},2:{amt: 0, cat: {}},3:{amt: 0, cat: {}},4:{amt: 0, cat: {}},5:{amt: 0, cat: {}},6:{amt: 0, cat: {}},7:{amt: 0, cat: {}},8:{amt: 0, cat: {}},9:{amt: 0, cat: {}},10:{amt: 0, cat: {}},11:{amt: 0, cat: {}},12:{amt: 0, cat: {}},13:{amt: 0, cat: {}},14:{amt: 0, cat: {}},15:{amt: 0, cat: {}},16:{amt: 0, cat: {}},17:{amt: 0, cat: {}},18:{amt: 0, cat: {}},19:{amt: 0, cat: {}},20:{amt: 0, cat: {}},21:{amt: 0, cat: {}},22:{amt: 0, cat: {}},23:{amt: 0, cat: {}},24:{amt: 0, cat: {}},25:{amt: 0, cat: {}},26:{amt: 0, cat: {}},27:{amt: 0, cat: {}},28:{amt: 0, cat: {}},29:{amt: 0, cat: {}},30:{amt: 0, cat: {}},31:{amt: 0, cat: {}}} } );
+                // }
+            },
+
+
+
             getLabels(a) {
                 var keys = a.map(i => {
                     Object.keys(i)
