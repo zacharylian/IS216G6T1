@@ -27,7 +27,7 @@
       </div>
       
       <div class="row">
-        <div class="col bgbox text-center" style="border-radius:20px; width:400px">
+        <div class="col bgbox text-center" style="border-radius:20px; width:400px; margin-right: 50px; margin-left: 50px;">
             <br>
             <h2><b><u>Monthly Spendings</u></b></h2>
             <br>
