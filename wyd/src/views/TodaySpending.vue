@@ -25,7 +25,7 @@
 
                 <div class="remainingBudget">
                     <label><p><b>Remaining Budget: </b></p></label>
-                    {{total}}
+                    ${{total}}
                 </div>
 
                 <br>
@@ -108,10 +108,14 @@ import { getAuth, signOut } from '@firebase/auth';
             },
 
             deduct() {
-                this.total -= this.last_spending
-                console.log(this.total)
-                this.updatedb()
-                return this.total
+                if (this.last_spending > this.total) {
+                    alert("You are out of budget!")
+                } else {
+                    this.total -= this.last_spending.toFixed(2)
+                    console.log(this.total)
+                    this.updatedb()
+                    return this.total
+                }
             }
         }
         
