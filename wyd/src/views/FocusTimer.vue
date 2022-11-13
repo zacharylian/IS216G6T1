@@ -1,6 +1,6 @@
 <template>
 
-<navbar></navbar>
+<navbar style="z-index:5"></navbar>
 <body>
   <div>
     <div class="wave"></div>
