@@ -7,8 +7,9 @@
       { date: '2022-06-23', count: 250},
       { date: '2022-06-24', count: 500 }]"
     end-date="2023-01-01"
+    :round="2"
     :range-color="['#90EF90', '#77945C', '#ebedf0', '#B13433', '#ED2938']"
-    :no-data-text="'<b>You did not spend for today!</b>'"
+    :no-data-text="'<b>You did not spend today!</b>'"
     :tooltip-unit="'SGD Total'"
   ></calendar-heatmap>
 </template>
