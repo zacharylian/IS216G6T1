@@ -90,8 +90,8 @@ export default {
   methods: {
     showAlert() {
       this.$swal({
-                  title:'Timer Stopped',
-                  text: 'Taking a break? No problem!', 
+                  title:'Focus session completed!',
+                  text: 'Take a break - treat yourself!', 
                   imageUrl: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
                   imageWidth: 300,
                   imageHeight: 200,
@@ -100,7 +100,35 @@ export default {
                   customClass: {
                     icon: 'no-border'
                     },
-                  showConfirmButton: true
+                  showConfirmButton: true,
+                  background: 'rgba( 230, 232, 255, 0.8 )',
+                  backdrop: `blur( 9px )`,
+                  confirmButtonColor: '#5E6EE6',
+                  color: '#4955b3'
+                  }
+                )
+  },
+  stopAlert() {
+      this.$swal({
+                  title:'Timer stopped!',
+                  text: 'Taking a break? No problem :)', 
+                  imageUrl: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                  imageWidth: 300,
+                  imageHeight: 200,
+                  imageAlt: 'Kitkat break!',
+                  animation: false,
+                  customClass: {
+                    icon: 'no-border',
+                    },
+                  showConfirmButton: true,
+                  background: 'rgba( 230, 232, 255, 0.8 )',
+                  backdrop: `blur( 9px )`,
+                  confirmButtonColor: '#5E6EE6',
+                  color: '#4955b3'
+                  // border: '1px solid rgba( 255, 255, 255, 0.18 )',
+                  // box-shadow: '0 8px 32px 0 rgba(131, 131, 131, 0.37)',
+                  // backdrop-filter: 'blur( 9px )',
+                  // -webkit-backdrop-filter: 'blur( 9px )',
                   }
                 )
   },
@@ -183,18 +211,12 @@ timer() {
                         console.log('completed');
                         clearInterval(myCounter);
                         time.innerHTML='00:00'
-                        // let date=new Date();
                         let duration=mins;
-                        // let end_date=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
-                        // let end_time=date.getHours()+':'+date.getMinutes()+':';+date.getSeconds();
-                        //here i would ideally send the information to the database!
                         this.totalduration += Number(duration)
                         console.log('success')
                         this.updatedb()
                         console.log('showAlert')
                         this.showAlert()
-                        //i j added the brackets here... if sth breaks then remove that i guess
-                        //maybe can play a jingle when time ends?
 
                       } else {
                         let minutess=Math.floor(i/60);
@@ -223,7 +245,7 @@ pause() {
 stoppie() {
   let time = document.getElementById('time');
   if (time.innerHTML != '00:00' && (this.interval)) {
-    this.showAlert()
+    this.stopAlert()
   }
   clearInterval(this.interval);
   console.log(this.interval);
