@@ -554,6 +554,7 @@ h3 > div {
   border-radius: 8px;
   padding:5px 0px;
   margin:0px 10px;
+  color: #484C66;
 }
 
 .mysvg {

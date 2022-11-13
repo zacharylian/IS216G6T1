@@ -28,9 +28,9 @@
                     </div>
                 </div>
             </div> -->
-            <div class="col-12" style="margin-left:40px;margin-right:-40px">
+            <div class="col-12" style="margin-left:40px;margin-right:-40px;padding-bottom:80px;padding-top:20px">
                 <div class=" col-11 d-flex justify-content-center align-items-center mx-auto" >
-                    <ejs-schedule height="800px" width="100%" currentView="Month"
+                    <ejs-schedule height="640px" width="100%" currentView="Month"
                     id='Schedule' 
                     :popupOpen='onPopupOpen'
                     :eventSettings="appointmentData"
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <div>Events: {{this.appointmentData.dataSource}}</div>
+        <!-- <div>Events: {{this.appointmentData.dataSource}}</div> -->
 
         
     </div>
