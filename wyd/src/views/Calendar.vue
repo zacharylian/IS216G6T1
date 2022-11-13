@@ -30,7 +30,7 @@
             </div> -->
             <div class="col-12" style="margin-left:40px;margin-right:-40px;padding-bottom:80px;padding-top:20px">
                 <div class=" col-11 d-flex justify-content-center align-items-center mx-auto" >
-                    <ejs-schedule height="640px" width="100%" currentView="Month"
+                    <ejs-schedule height="560px" width="100%" currentView="Month"
                     id='Schedule' 
                     :popupOpen='onPopupOpen'
                     :eventSettings="appointmentData"
@@ -129,6 +129,12 @@
                             </table>
                         </template>
                     </ejs-schedule>
+                </div>
+                <div class=" col-11 d-flex justify-content-center align-items-center mx-auto bgbox" style="padding:25px 0px">
+                    Legend:&nbsp;&nbsp;
+                    <div style="background-color: RGBA(184,29,19,0.81);color:white;">&nbsp;High Priority&nbsp;</div>&nbsp;&nbsp;
+                    <div style="background-color: RGBA(239,183,0,0.81);color:white;">&nbsp;Mid Priority&nbsp;</div>&nbsp;&nbsp;
+                    <div style="background-color: RGBA(0,132,80,0.81);color:white;">&nbsp;Low Priority&nbsp;</div>
                 </div>
             </div>
         </div>
