@@ -254,6 +254,18 @@
 <style>
     @import "../../main.scss";
 
+    div::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    div::-webkit-scrollbar-track {
+        background: #e6E8ff;
+    }
+
+    div::-webkit-scrollbar-thumb {
+        background: #969ac7;
+    }
+
     .fix {
         position: fixed;
         margin-left: -325px;

@@ -26,14 +26,12 @@
             <div class="col wanbottom bgbox pb-4" style="height:340px;overflow:auto;">
             <!--UPCOMING EVENTS-->
             <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
-            <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
-              <div class="card mx-2 " style="width: 300px;height:260px;border-radius:20px;border:none;" v-for="event in apptdata">
-                <div class="card-body bgbog" style="box-shadow:none;border-radius:20px">
-                  <h5 class="card-title" style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
+            <div class="d-flex justify-content-center align-items-center " style="margin:auto;z-index:-1">
+              <div class="card m-2 " style="width: 500px;height:110px;border-radius:20px;border:none;" v-for="event in apptdata1">
+                <div class="card-body bgbog " style="box-shadow:none;border-radius:20px">
+                  <h5 class="card-title  " style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
                   <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
-                  <!-- <p class="card-text">Does it repeat</p>
-                  <p class="card-text">Are you a funky fresh chicken</p> -->
-                </div>
+                </div>    
               </div>
               <!-- <ejs-treegrid :dataSource="data" :treeColumnIndex="3" width="600">
                   <e-columns>
@@ -42,6 +40,14 @@
                       <e-column field="EndTime" headerText="End" width="100" format="yMd" textAlign="center" :customAttributes="{class: 'customcss'}"></e-column>
                   </e-columns>
               </ejs-treegrid> -->
+            </div>
+            <div class="d-flex justify-content-center align-items-center" style="margin:auto;z-index:-1">
+              <div class="card m-2" style="width: 500px;height:110px;border-radius:20px;border:none;" v-for="event in apptdata2">
+                <div class="card-body bgbog" style="box-shadow:none;border-radius:20px">
+                  <h5 class="card-title" style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
+                  <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
+                </div>    
+              </div>
             </div>
           </div>
           </div>
@@ -151,7 +157,8 @@ export default {
   },
 
   data() {return {
-    apptdata: [],
+    apptdata1: [],
+    apptdata2: [],
     username: getAuth().currentUser.displayName,
     date: new Date(),
     percentagedone: 0,
@@ -229,7 +236,6 @@ export default {
             let upcoming = new Date(2100, 12)
             console.log(upcoming)
             let earliest_event = ""
-            // this.apptdata = []
             for (var info of docSnap2.data().appointmentData){
               let today = new Date
               info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
@@ -255,11 +261,14 @@ export default {
                 day = info.EndTime.getDate()
                 info.EndTime = day + "/" + month + "/" + year
                 earliest_event = info   
-                this.apptdata.push(earliest_event)     
+                if (this.apptdata1.length<2) {
+                  this.apptdata1.push(earliest_event) 
+                } else {
+                  this.apptdata2.push(earliest_event)
+                }
               }
             }    
             
-            if (this.apptdata.length < 2) {
             let second_event = ""
             let upcoming2 = new Date(2100, 12)
             for (var info of docSnap2.data().appointmentData){
@@ -286,10 +295,87 @@ export default {
                 day = info.EndTime.getDate()
                 info.EndTime = day + "/" + month + "/" + year
                 second_event = info        
-                this.apptdata.push(second_event) 
+                if (this.apptdata1.length<2) {
+                  this.apptdata1.push(second_event) 
+                } else {
+                  this.apptdata2.push(second_event)
+                }
               }
             } 
-          }   
+
+            if (this.apptdata1.length < 2 || this.apptdata2.length < 2) {
+            let third_event = ""
+            let upcoming3 = new Date(2100, 12)
+            for (var info of docSnap2.data().appointmentData){
+              let today = new Date
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              if (info.StartTime > today && info.StartTime<=upcoming3 && info.StartTime.toDateString()!=upcoming.toDateString() && info.StartTime.toDateString()!=upcoming2.toDateString()){
+                console.log("starttime:" + info.StartTime)
+                upcoming3 = info.StartTime 
+              }
+            }
+            console.log("updated upcoming3", upcoming3)
+            for (var info of docSnap2.data().appointmentData){
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              if (info.StartTime.toDateString() === upcoming3.toDateString()){
+                console.log("starttime:" + info.StartTime)
+                let year = info.StartTime.getFullYear()
+                let month = info.StartTime.getMonth() + 1
+                let day = info.StartTime.getDate()
+                let time = info.StartTime.toLocaleTimeString('en-US')
+                info.StartTime = day + "/" + month + "/" + year + " " + time
+                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                year = info.EndTime.getFullYear()
+                month = info.EndTime.getMonth()
+                day = info.EndTime.getDate()
+                info.EndTime = day + "/" + month + "/" + year
+                third_event = info        
+                if (this.apptdata1.length<2) {
+                  this.apptdata1.push(third_event) 
+                } else {
+                  this.apptdata2.push(third_event)
+                }
+              }
+            }
+            } 
+
+            if (tthis.apptdata1.length < 2 || this.apptdata2.length < 2) {
+            let fourth_event = ""
+            let upcoming4 = new Date(2100, 12)
+            for (var info of docSnap2.data().appointmentData){
+              let today = new Date
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              if (info.StartTime > today && info.StartTime<=upcoming4 && info.StartTime.toDateString()!=upcoming.toDateString() && info.StartTime.toDateString()!=upcoming2.toDateString() && info.StartTime.toDateString()!=upcoming3.toDateString()){
+                console.log("starttime:" + info.StartTime)
+                upcoming4 = info.StartTime 
+              }
+            }
+            console.log("updated upcoming4", upcoming4)
+            for (var info of docSnap2.data().appointmentData){
+              info.StartTime = new Date(info.StartTime.seconds*1000 + info.StartTime.nanoseconds/1000000)
+              if (info.StartTime.toDateString() === upcoming4.toDateString()){
+                console.log("starttime:" + info.StartTime)
+                let year = info.StartTime.getFullYear()
+                let month = info.StartTime.getMonth() + 1
+                let day = info.StartTime.getDate()
+                let time = info.StartTime.toLocaleTimeString('en-US')
+                info.StartTime = day + "/" + month + "/" + year + " " + time
+                info.EndTime = new Date(info.EndTime.seconds*1000 + info.EndTime.nanoseconds/1000000)
+                year = info.EndTime.getFullYear()
+                month = info.EndTime.getMonth()
+                day = info.EndTime.getDate()
+                info.EndTime = day + "/" + month + "/" + year
+                fourth_event = info        
+                if (this.apptdata1.length<2) {
+                  this.apptdata1.push(fourth_event) 
+                } else {
+                  this.apptdata2.push(fourth_event)
+                }
+              }
+            }
+            } 
+          
+            
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
