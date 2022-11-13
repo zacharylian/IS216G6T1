@@ -12,7 +12,7 @@
       <div class="row border border-primary h-50">
         <div class="col-lg-12 col-md-6 border border-danger w-50 text-center">
             <br>
-            <h2><u>Overall Spendings</u></h2>
+            <h2><b><u>Overall Spendings</u></b></h2>
             <br>
             <h4>{{ this.days[this.date.getUTCDate()] }}</h4>
             <br>
@@ -21,23 +21,23 @@
         </div>
         <div class="col-lg-12 col-md-6 border border-success w-50 text-center">
             <br>
-            <h2><u>Today's Spendings</u></h2>
+            <h2><b><u>Today's Spendings</u></b></h2>
             <br>
             <TodaySpending />
             <br>
         </div>
       </div>
       
-      <!-- <div class="row border border-warning h-50">
+      <div class="row border border-warning h-50">
         <div class="col border border-primary text-center">
             <br>
-            <h2><u>Monthly Spendings</u></h2>
-            <br> -->
+            <h2><b><u>Monthly Spendings</u></b></h2>
+            <br>
             <CalendarHeatmap />
-        <!-- </div>
+        </div>
         
       </div>
-       -->
+      
     </div>
   <!-- </div> -->
 </template>
@@ -47,7 +47,7 @@
 import navbar from '@/components/layouts/new_navbar.vue';
 import { getAuth, signOut } from '@firebase/auth';
 import DayChart from "./DayChart.vue";
-import CalendarHeatmap from "./ActualCalendarHeatmap.vue";
+import calendarHeatmap from "./ActualCalendarHeatmap.vue";
 import "../plugins/calendar";
 import TodaySpending from "./TodaySpending.vue";
 
@@ -58,7 +58,7 @@ export default {
   components: {
     navbar: navbar,
     DayChart: DayChart,
-    CalendarHeatmap: CalendarHeatmap,
+    CalendarHeatmap: calendarHeatmap,
     TodaySpending: TodaySpending,
   },
   data() {

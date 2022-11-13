@@ -230,7 +230,7 @@ export default {
                 StartTime: new Date(2022, 10, 5, 8, 0, 0),
                 EndTime: new Date(2022, 10, 6, 9, 0, 0),
                 PriorityId : 1,
-            },], currId: 0 });
+            },], currId: 0, id: 'Id', text: 'Name'});
             }
 
             const docRef3 = doc(db, "spendings", this.uid);

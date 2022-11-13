@@ -1,35 +1,102 @@
 <template>
-  <svg class="chart"></svg>
+  <!-- <svg class="chart"></svg> -->
+  <calendar-heatmap
+    style="font-size:10px; width:90%;"
+    :values="[
+      { date: '2022-06-22', count: 78 }, 
+      { date: '2022-06-23', count: 250},
+      { date: '2022-06-24', count: 500 }]"
+    end-date="2023-01-01"
+    :round="2"
+    :range-color="['#90EF90', '#77945C', '#ebedf0', '#B13433', '#ED2938']"
+    :no-data-text="'<b>You did not spend today!</b>'"
+    :tooltip-unit="'SGD Total'"
+  ></calendar-heatmap>
 </template>
 
 <script>
-import CalendarJs from  "../plugins/calendar"
-
+import { CalendarHeatmap } from 'vue3-calendar-heatmap'
+import {addDocs, collection, getDoc, doc, firestoreAction, setDoc, updateDoc} from 'firebase/firestore';
+import { db } from '../main';
+import { getAuth, signOut } from '@firebase/auth';
 export default {
-  name: "CalendarHeatmap",
-  mounted() {
-    const d3Script = document.createElement("script");
-    d3Script.setAttribute("src", "https://d3js.org/d3.v7.min.js");
-    d3Script.setAttribute("charset", "utf-8")
-    document.head.appendChild(d3Script);
+    created(){
+      console.log("=====getting UID=====")
+      this.uid = getAuth().currentUser.uid
+      console.log(this.uid)
 
-    // const d3Script = document.createElement("script");
-    // d3Script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js");
-    // d3Script.setAttribute("charset", "utf-8")
-    // document.head.appendChild(d3Script);
+      console.log("=====extracting data from db=====")
+      this.checkdb()
+    },
+    components: {
+        CalendarHeatmap
+    },
+    props: {
+      values: []
+    },
+    data() {
+      return {
+        valuesbyjames: [],
+        uid: "",
+        
+      }
+    },
 
-    // const labratScript = document.createElement("script")
-    // labratScript.setAttribute("src", "http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
-    // document.head.appendChild(labratScript);
+    methods: {
+      async checkdb(){
+        const docRef = doc(db, "spendings", this.uid);
+          const docSnap = await getDoc(docRef);
 
-    // const d3fix = document.createElement("script");
-    // d3fix.setAttribute("src", "http://d3js.org/d3.v3.min.js");
-    // d3fix.setAttribute("charset", "utf-8")
-    // document.head.appendChild(d3fix);
+          if (docSnap.exists()) {
+              console.log("Document data:", docSnap.data())
+              let daily = docSnap.data().daily
+              let date = new Date
+              let month = date.getMonth()
+              let year = date.getFullYear()
+              
+              for (let items in daily){
+                if (daily[items].amt != 0){
+                  if (month + 1 < 10){
+                    month = "0" + month
+                  }else{
+                    month = month + 1
+                  }
+                  console.log("month is:" + month)
 
-    CalendarJs()
-  },
-};
+                  let thisdate = year + "-" + (month) + "-" + items
+                  console.log("this date is:" + thisdate)
+                  let pushobj = {}
+                  pushobj.date = thisdate
+                  pushobj.count = daily[items].amt
+                  this.valuesbyjames.push(pushobj)
+                }
+              }
+              console.log("jamesvals:" + this.valuesbyjames[0])
+            
+          } 
+      }
+    }
+    
+}
+
+// export default {
+//   name: "calendarHeatmap",
+//   components: {
+//     "calendarHeatmap": CalendarHeatmap
+//   },
+//   mounted() {
+
+//     const d3Script = document.createElement("script");
+//     d3Script.setAttribute("src", "https://d3js.org/d3.v7.min.js");
+//     d3Script.setAttribute("charset", "utf-8")
+//     document.head.appendChild(d3Script);
+
+    
+
+//     CalendarJs()
+    
+//     },
+//   };
 </script>
 
 <style>
