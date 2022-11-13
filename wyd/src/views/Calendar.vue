@@ -645,14 +645,14 @@ methods : {
 
 .e-work-cells, .e-header-cells, .e-work-hours, .e-child-node, .e-parent-node,  .e-all-day-cells  {
 
-    background-color: #B19CD9 !important;
-    filter: grayscale(30%)
+    background-color: #e6E8ff !important;
+    /* filter: grayscale(30%) */
 
 }
 
 .e-timeline-view .e-work-hours {
-    background-color: #B19CD9 !important;
-    filter: grayscale(30%)
+    background-color: #e6E8ff !important;
+    /* filter: grayscale(30%) */
 }
 
 @import '../../node_modules/@syncfusion/ej2-base/styles/material.css';
