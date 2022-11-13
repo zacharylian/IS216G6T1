@@ -159,6 +159,7 @@ L10n.load({
         'schedule' : {
             'saveButton': '',
             'cancelButton': '',
+            'deleteButton': '',
             'newEvent': 'Add Event'
         }
     }
@@ -329,16 +330,21 @@ methods : {
         if (curr_id != 0) {
             let scheduleObj = document.getElementById('Schedule').ej2_instances[0];
             let apptdata = this.appointmentData.dataSource;
+            console.log(curr_id)
             console.log(apptdata)
             for (let eventdata in apptdata) {
-                console.log(eventdata)
-                console.log(apptdata[eventdata].Id)
+                // console.log(eventdata)
                 if (apptdata[eventdata].Id == curr_id) {
+                    console.log(eventdata)
+                    console.log(apptdata[eventdata].Id)
+                    console.log(apptdata[eventdata])
+                    scheduleObj.deleteEvent(apptdata[eventdata])
                     apptdata.splice(eventdata,1)
                 }
             }
             this.curr_id = 0
             scheduleObj.closeEditor();
+            this.updatedbevent()
         }
     },  
 
@@ -383,76 +389,129 @@ methods : {
 
         let end = new Date(year2, month2, day2, hour2, min2, 0)
 
-        if (curr_id == 0) {
+    if (curr_id == 0) {
             // get id
             let apptdata = this.appointmentData.dataSource;
-            let id = apptdata.length + 1
-        if (priority.value == 'High-Priority') {
-            let priorityId = 1
-            let data = {
-                Id : id,
-                Subject: subject.value,
-                StartTime: start,
-                EndTime: end,
-                PriorityId: priorityId,
-            };
-            console.log(data)
-            apptdata.push(data);
-            scheduleObj.addEvent(data)
+            let max = 0
+            for (let info of apptdata) {
+                if (info.Id > max) {
+                    max = info.Id
+                }
+            }
+            let id = max + 1
+            console.log(id)
+            if (priority.value == 'High-Priority') {
+                let priorityId = 1
+                let data = {
+                    Id : id,
+                    Subject: subject.value,
+                    StartTime: start,
+                    EndTime: end,
+                    PriorityId: priorityId,
+                };
+                console.log(data)
+                apptdata.push(data);
+                scheduleObj.addEvent(data)
+                this.updatedbevent()
+            } else if (priority.value == 'Mid-Priority') {
+                let priorityId = 2
+                let data = {
+                    Id : id,
+                    Subject: subject.value,
+                    StartTime: start,
+                    EndTime: end,
+                    PriorityId: priorityId,
+                };
+                console.log(data)
+                apptdata.push(data);
+                scheduleObj.addEvent(data)
+            } else if (priority.value == 'Low-Priority') {
+                let priorityId = 3
+                let data = {
+                    Id : id,
+                    Subject: subject.value,
+                    StartTime: start,
+                    EndTime: end,
+                    PriorityId: priorityId,
+                };
+                console.log(data)
+                apptdata.push(data)
+                scheduleObj.addEvent(data)
+            }
+            scheduleObj.closeEditor();
             this.updatedbevent()
-        } else if (priority.value == 'Mid-Priority') {
-            let priorityId = 2
-            let data = {
-                Id : id,
-                Subject: subject.value,
-                StartTime: start,
-                EndTime: end,
-                PriorityId: priorityId,
-            };
-            console.log(data)
-            apptdata.push(data);
-            scheduleObj.addEvent(data)
-        } else if (priority.value == 'Low-Priority') {
-            let priorityId = 3
-            let data = {
-                Id : id,
-                Subject: subject.value,
-                StartTime: start,
-                EndTime: end,
-                PriorityId: priorityId,
-            };
-            console.log(data)
-            apptdata.push(data)
-            scheduleObj.addEvent(data)
-        }
-        scheduleObj.closeEditor();
-        this.updatedbevent()
     } else {
         console.log(curr_id)
         let apptdata = this.appointmentData.dataSource;
-        console.log(apptdata)
+        let priority = document.getElementById("PriorityId")
         for (let eventdata of apptdata) {
-                console.log(eventdata.Id)
                 if (eventdata.Id == curr_id) {
-                    console.log(eventdata.Subject)
-                    console.log(eventdata.StartTime)
-                    console.log(eventdata.EndTime)
+                    console.log(eventdata.Id)
+                    console.log(eventdata)
                     console.log(subject.value)
-                    eventdata.Subject = subject.value;
-                    eventdata.StartTime = start;
-                    eventdata.EndTime = end;
-                    console.log(eventdata.Subject)
-                    console.log(eventdata.StartTime)
-                    console.log(eventdata.EndTime)
+                    console.log(priority.value)
+                    // eventdata.Subject = subject.value;
+                    // eventdata.StartTime = start;
+                    // eventdata.EndTime = end;
+                    // console.log(eventdata.Subject)
+                    // console.log(eventdata.StartTime)
+                    // console.log(eventdata.EndTime)
                     if (priority.value == 'High-Priority') {
                         let priorityId = 1
-                        eventdata.PriorityId = priorityId;
+                        let data = {
+                                Id : curr_id,
+                                Subject: subject.value,
+                                StartTime: start,
+                                EndTime: end,
+                                PriorityId: priorityId,
+                        };
+                        scheduleObj.deleteEvent(eventdata)
+                        for (let curr_info in apptdata) {
+                            if (apptdata[curr_info].Id == curr_id) {
+                                apptdata.splice(curr_info,1)
+                            }
+                        }
+                        apptdata.push(data)
+                        scheduleObj.addEvent(data)
+                        this.updatedbevent()
                     } else if (priority.value == 'Mid-Priority') {
                         let priorityId = 2
-                        eventdata.PriorityId = priorityId;
+                        scheduleObj.deleteEvent(eventdata)
+                        apptdata.splice(eventdata.Id-1,1)
+                        let data = {
+                                Id : curr_id,
+                                Subject: subject.value,
+                                StartTime: start,
+                                EndTime: end,
+                                PriorityId: priorityId,
+                        };
+                        scheduleObj.deleteEvent(eventdata)
+                        for (let curr_info in apptdata) {
+                            if (apptdata[curr_info].Id == curr_id) {
+                                apptdata.splice(curr_info,1)
+                            }
+                        }
+                        apptdata.push(data)
+                        scheduleObj.addEvent(data)
+                        this.updatedbevent()
                     } else if (priority.value == 'Low-Priority') {
                         let priorityId = 3
-                        eventdata.PriorityId = priorityId;
+                        let data = {
+                                Id : curr_id,
+                                Subject: subject.value,
+                                StartTime: start,
+                                EndTime: end,
+                                PriorityId: priorityId,
+                        };
+                        scheduleObj.deleteEvent(eventdata)
+                        for (let curr_info in apptdata) {
+                            if (apptdata[curr_info].Id == curr_id) {
+                                apptdata.splice(curr_info,1)
+                            }
+                        }
+                        apptdata.push(data)
+                        scheduleObj.addEvent(data)
+                        this.updatedbevent()
                     }
                 }
             }
