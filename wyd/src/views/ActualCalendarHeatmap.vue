@@ -1,35 +1,54 @@
 <template>
-  <svg class="chart"></svg>
+  <!-- <svg class="chart"></svg> -->
+  <calendar-heatmap
+    style="font-size:10px; width:90%;"
+    :values="[
+      { date: '2022-06-22', count: 78 }, 
+      { date: '2022-06-23', count: 250},
+      { date: '2022-06-24', count: 500 }]"
+    end-date="2023-01-01"
+    :range-color="['#90EF90', '#77945C', '#ebedf0', '#B13433', '#ED2938']"
+    :no-data-text="'<b>You did not spend for today!</b>'"
+    :tooltip-unit="'SGD Total'"
+  ></calendar-heatmap>
 </template>
 
 <script>
-import CalendarJs from  "../plugins/calendar"
+import { CalendarHeatmap } from 'vue3-calendar-heatmap'
 
 export default {
-  name: "CalendarHeatmap",
-  mounted() {
-    const d3Script = document.createElement("script");
-    d3Script.setAttribute("src", "https://d3js.org/d3.v7.min.js");
-    d3Script.setAttribute("charset", "utf-8")
-    document.head.appendChild(d3Script);
+    components: {
+        CalendarHeatmap
+    },
+    props: {
+      values: []
+    },
+    data() {
+      return {
+        
+      }
+    }
+    
+}
 
-    // const d3Script = document.createElement("script");
-    // d3Script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js");
-    // d3Script.setAttribute("charset", "utf-8")
-    // document.head.appendChild(d3Script);
+// export default {
+//   name: "calendarHeatmap",
+//   components: {
+//     "calendarHeatmap": CalendarHeatmap
+//   },
+//   mounted() {
 
-    // const labratScript = document.createElement("script")
-    // labratScript.setAttribute("src", "http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
-    // document.head.appendChild(labratScript);
+//     const d3Script = document.createElement("script");
+//     d3Script.setAttribute("src", "https://d3js.org/d3.v7.min.js");
+//     d3Script.setAttribute("charset", "utf-8")
+//     document.head.appendChild(d3Script);
 
-    // const d3fix = document.createElement("script");
-    // d3fix.setAttribute("src", "http://d3js.org/d3.v3.min.js");
-    // d3fix.setAttribute("charset", "utf-8")
-    // document.head.appendChild(d3fix);
+    
 
-    CalendarJs()
-  },
-};
+//     CalendarJs()
+    
+//     },
+//   };
 </script>
 
 <style>
