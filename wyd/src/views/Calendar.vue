@@ -339,6 +339,7 @@ methods : {
             }
             this.curr_id = 0
             scheduleObj.closeEditor();
+            this.updatedbevent()
         }
     },  
 
