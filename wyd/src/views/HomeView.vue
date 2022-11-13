@@ -42,8 +42,8 @@
               </ejs-treegrid> -->
             </div>
             <div class="d-flex justify-content-center align-items-center" style="margin:auto;z-index:-1">
-              <div class="card m-2" style="width: 500px;height:110px;border-radius:20px;border:none;" v-for="event in apptdata2">
-                <div class="card-body bgbog" style="box-shadow:none;border-radius:20px">
+              <div class="card m-2" style="width: 500px;height:110px;border-radius:5px;border:none;" v-for="event in apptdata2">
+                <div class="card-body bgbog" style="box-shadow:none;border-radius:5px">
                   <h5 class="card-title" style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
                   <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
                 </div>    
@@ -54,29 +54,34 @@
           <div class="row wanbottom">
             <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--EXPENSES-->
-              <h3 style="font-style:normal">expenses</h3>
-              <div>
+              <h3 style="font-style:normal">expenses</h3><br><br>
+                <h3>
+              <div :style='highlighter'>
+              <span style="font-size:2.5vw">
+              ${{  this.spent.toFixed(2)  }}/${{  this.remainingBudget.toFixed(2)  }}</span></div></h3>
+              <!-- <div>
                 <div class="skill">
                   <div class="outer bgbox">
                       <div class="inner">
                           <div id="number">
-                             ${{  this.spent  }}/${{  this.remainingBudget  }}
+                             ${{  this.spent.toFixed(2)  }}/${{  this.remainingBudget.toFixed(2)  }}
                           </div>
                       </div>
                   </div>
 
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px" class="mysvg">
                       <defs>
-                          <linearGradient id="GradientColory">
-                            <stop offset="0%" stop-color="#2A3166" />
-                            <stop offset="100%" stop-color="#5E6EE6" />
+                          <linearGradient id="GradientColor">
+                            <stop offset="0%" stop-color="#5E6EE6" />
+                            <stop offset="100%" stop-color="#2A3166" />
                           </linearGradient>
                       </defs>
-                      <circle cx="80" cy="80" r="70" stroke-linecap="round" :style='cssVary'/>
+                      <div>
+                      <circle cx="80" cy="80" r="70" stroke-linecap="round" :style='cssVary'/></div>
                   </svg>
                 </div>
 
-              </div>
+              </div> -->
 
               </div>
 
@@ -88,7 +93,7 @@
                   <div class="outer bgbox">
                       <div class="inner">
                           <div id="number">
-                              {{this.percentagedone}}%
+                              {{this.percentagedone.toFixed(2)}}%
                           </div>
                       </div>
                   </div>
@@ -179,7 +184,7 @@ export default {
     },
     cssVary() {
       return {
-        '--fruits': 472 - (472 * (this.spent/this.remainingBudget))
+        '--fruits': 472 - (472 * (this.spent / this.remainingBudget) )
       }
     },
     adjustible() {
@@ -194,6 +199,19 @@ export default {
         return {
           '--marg-left': '6rem'
         }
+      }
+    },
+    highlighter(){
+      let valuee=this.spent/this.remainingBudget;
+      if (valuee>1) {
+        return {
+        '--background-color' : 'RGBA(255,143,150,0.24)'
+      }
+      }
+      else {
+        return {
+        '--background-color' : 'RGBA(61,255,150,0.24)'
+      }
       }
     }
   }
@@ -515,9 +533,9 @@ circle {
     stroke-dashoffset: 472;
     animation: anim 1s linear forwards;
 }
-circley {
+div > circle {
     fill:none;
-    stroke:url(#GradientColory);
+    stroke:url(#GradientColor);
     stroke-width: 20px;
     stroke-dasharray: 472; /* for some reason the complete circle is 472 LOL */
     stroke-dashoffset: 472;
@@ -531,6 +549,13 @@ circley {
 main > div {
   margin-left: var(--marg-left)
 }
+h3 > div {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  padding:5px 0px;
+  margin:0px 10px;
+}
+
 .mysvg {
     position:absolute;
     top:0;
