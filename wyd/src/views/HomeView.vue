@@ -27,10 +27,10 @@
             <!--UPCOMING EVENTS-->
             <h3 class="py-2" style="font-style:normal;">upcoming events</h3>
             <div class="d-flex justify-content-center align-items-center" style="overflow:auto;margin:auto;z-index:-1">
-              <div class="card mx-2" style="width: 18vw;" v-for="event in apptdata">
-                <div class="card-body">
-                  <h5 class="card-title">{{event.Subject}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{event.StartTime}}</h6>
+              <div class="card mx-2 " style="width: 300px;height:260px;border-radius:20px;border:none;" v-for="event in apptdata">
+                <div class="card-body bgbog" style="box-shadow:none;border-radius:20px">
+                  <h5 class="card-title" style="font-weight:bold;color:#E6E8FF">{{event.Subject}}</h5>
+                  <h6 class="card-subtitle m-auto d-flex justify-content-center align-items-center" style="color:#E6E8FF">{{event.StartTime}}</h6>
                   <!-- <p class="card-text">Does it repeat</p>
                   <p class="card-text">Are you a funky fresh chicken</p> -->
                 </div>
@@ -48,16 +48,35 @@
           <div class="row wanbottom">
             <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--EXPENSES-->
-              <h3 style="font-style:normal">expenses<br><br></h3>
-              <div class="mx-3" style="margin:auto;">
-              <!-- cld potentially use the same code for progress circle as focus time today.
-                can modify colours & variables no problemo -->
-              <br><h4>${{  this.spent  }}/${{  this.remainingBudget  }}</h4></div>
-              <br>
+              <h3 style="font-style:normal">expenses</h3>
+              <div>
+                <div class="skill">
+                  <div class="outer bgbox">
+                      <div class="inner">
+                          <div id="number">
+                             ${{  this.spent  }}/${{  this.remainingBudget  }}
+                          </div>
+                      </div>
+                  </div>
+
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px" class="mysvg">
+                      <defs>
+                          <linearGradient id="GradientColory">
+                            <stop offset="0%" stop-color="#2A3166" />
+                            <stop offset="100%" stop-color="#5E6EE6" />
+                          </linearGradient>
+                      </defs>
+                      <circle cx="80" cy="80" r="70" stroke-linecap="round" :style='cssVary'/>
+                  </svg>
+                </div>
+
               </div>
+
+              </div>
+
               <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--FOCUS TIME TODAY-->
-              <h3 style="font-style:normal">your focus today:</h3>
+              <h3 style="font-style:normal">your focus today</h3>
               <div>
                 <div class="skill">
                   <div class="outer bgbox">
@@ -149,6 +168,11 @@ export default {
     cssVars() {
       return {
         '--numbers': 472 - (472 * this.percentagedone/100)
+      }
+    },
+    cssVary() {
+      return {
+        '--fruits': 472 - (472 * (this.spent/this.remainingBudget))
       }
     },
     adjustible() {
@@ -405,6 +429,19 @@ circle {
     stroke-dasharray: 472; /* for some reason the complete circle is 472 LOL */
     stroke-dashoffset: 472;
     animation: anim 1s linear forwards;
+}
+circley {
+    fill:none;
+    stroke:url(#GradientColory);
+    stroke-width: 20px;
+    stroke-dasharray: 472; /* for some reason the complete circle is 472 LOL */
+    stroke-dashoffset: 472;
+    animation: animy 1s linear forwards;
+}
+@keyframes animy{
+    100%{
+        stroke-dashoffset: var(--fruits) /*this is what actually controls the % so later when taking in data, modify this*/
+    }
 }
 main > div {
   margin-left: var(--marg-left)
