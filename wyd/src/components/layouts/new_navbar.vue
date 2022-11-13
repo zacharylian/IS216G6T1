@@ -71,9 +71,7 @@
               title:'Logout successful',
                   text: 'Remember to drink up!', 
                   animation: false,
-                  customClass: {
-                    icon: 'no-border'
-                    },
+                  icon: 'tick',
                   showConfirmButton: true,
                   background: 'rgba( 230, 232, 255, 0.8 )',
                   backdrop: `blur( 9px )`,

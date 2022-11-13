@@ -1,5 +1,5 @@
 <template>
-  <navbar></navbar>
+<navbar style="z-index:5"></navbar>
   <body>
     <div>
       <div class="wave"></div>
@@ -7,19 +7,17 @@
       <div class="wave"></div>
     </div>
   </body>
-  <div style="margin-left:6rem">
+  <div style="margin-left:6rem; overflow:hidden">
     <!-- <div class="border border-info" style="height: 95%"> -->
-      <div class="row border border-primary h-50">
-        <div class="col-lg-12 col-md-6 border border-danger w-50 text-center">
+      <div class="row p-4 mx-auto">
+        <div class="col-lg-12 col-md-6 text-center bgbox mx-auto" style="width:40%;border-radius:20px">
             <br>
             <h2><b><u>Overall Spendings</u></b></h2>
-            <br>
             <h4>{{ this.days[this.date.getUTCDate()] }}</h4>
             <br>
             <DayChart></DayChart>
-            <br>
         </div>
-        <div class="col-lg-12 col-md-6 border border-success w-50 text-center">
+        <div class="col-lg-12 col-md-6 text-center bgbox mx-auto" style="margin-left:20px;margin-right:-20px; width:40%;border-radius:20px">
             <br>
             <h2><b><u>Today's Spendings</u></b></h2>
             <br>
@@ -28,15 +26,15 @@
         </div>
       </div>
       
-      <div class="row border border-warning h-50">
-        <div class="col border border-primary text-center">
+      <div class="row border border-primary">
+        <div class="col bgbox text-center border border-warning" style="border-radius:20px; width:400px">
             <br>
             <h2><b><u>Monthly Spendings</u></b></h2>
             <br>
             <CalendarHeatmap />
-        </div>
-        
+        </div> 
       </div>
+      <br>
       
     </div>
   <!-- </div> -->
