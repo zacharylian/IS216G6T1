@@ -1,7 +1,7 @@
 <template>
   <!-- <svg class="chart"></svg> -->
   <calendar-heatmap
-    style="font-size:10px; width:90%;"
+    style="font-size:8px; width:90%;"
     :values="[
       { date: '2022-06-22', count: 78 }, 
       { date: '2022-06-23', count: 250},
@@ -44,59 +44,46 @@ export default {
 
     methods: {
       async checkdb(){
+        console.log("calendar here")
         const docRef = doc(db, "spendings", this.uid);
-          const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
               console.log("Document data:", docSnap.data())
               let daily = docSnap.data().daily
               let date = new Date
-              let month = date.getMonth()
+              // let month = date.getMonth()
               let year = date.getFullYear()
               
               for (let items in daily){
                 if (daily[items].amt != 0){
+                  let month = date.getMonth()
+                  // console.log(typeof month)
                   if (month + 1 < 10){
-                    month = "0" + month
+                    var strMonth = "0" + String(month)
                   }else{
-                    month = month + 1
+                    var strMonth = String(month + 1)
                   }
-                  console.log("month is:" + month)
+                  console.log("month is:" + strMonth)
 
-                  let thisdate = year + "-" + (month) + "-" + items
+                  let thisdate = String(year) + "-" + (strMonth) + "-" + String(items)
                   console.log("this date is:" + thisdate)
                   let pushobj = {}
                   pushobj.date = thisdate
+                  console.log(thisdate)
                   pushobj.count = daily[items].amt
+                  console.log(daily[items].amt)
                   this.valuesbyjames.push(pushobj)
                 }
               }
+              console.log(this.valuesbyjames)
               console.log("jamesvals:" + this.valuesbyjames[0])
             
           } 
       }
     }
     
-}
-
-// export default {
-//   name: "calendarHeatmap",
-//   components: {
-//     "calendarHeatmap": CalendarHeatmap
-//   },
-//   mounted() {
-
-//     const d3Script = document.createElement("script");
-//     d3Script.setAttribute("src", "https://d3js.org/d3.v7.min.js");
-//     d3Script.setAttribute("charset", "utf-8")
-//     document.head.appendChild(d3Script);
-
-    
-
-//     CalendarJs()
-    
-//     },
-//   };
+};
 </script>
 
 <style>

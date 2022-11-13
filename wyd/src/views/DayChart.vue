@@ -158,8 +158,10 @@
 
         methods: {
             async checkdb(){
+                console.log("daychart here")
                 const docRef = doc(db, "spendings", this.uid);
                 const docSnap = await getDoc(docRef);
+                var newArr = []
 
                 if (docSnap.exists()) {
                     console.log("Document data:", docSnap.data())
@@ -173,7 +175,12 @@
                             }
                         }
                     }
-                    console.log(this.jamesmadethis)
+                    for (let [k, v] of this.jamesmadethis.cat) {
+                        console.log(v)
+                        newArr.push(v)
+                    }
+                    console.log(newArr)
+                    console.log("daychart" + this.jamesmadethis)
 
 
                 } 
