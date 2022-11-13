@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700;800&display=swap');
 
 $bg-theme-light: #F6F8FB;
 $color-theme-light: #2C2F33;
@@ -8,6 +10,7 @@ $color-theme-dark: #F6F8FB;
 
 * {
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 html {
     height: 100%;

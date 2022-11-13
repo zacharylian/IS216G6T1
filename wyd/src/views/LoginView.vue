@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" style="color:#5E6EE6;font-weight:bold;">Wad Are You 2 Doing</a>
+    <a class="navbar-brand" style="color:#5E6EE6;font-weight:bold;font-size:2vw;font-style:italic;">CONCORD</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -15,10 +15,10 @@
           <a class="nav-link" href="#toDo">To-Do</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#expenditure">Expenditure</a>
+          <a class="nav-link" href="#calendar">Calendar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#calendar">Calendar</a>
+          <a class="nav-link" href="#expenditure">Expenditure</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#focusTimer">Timer</a>
@@ -44,7 +44,7 @@
       </span>
     </div>
   </div>
-  <p>To-Do Planning . Expenditure . Calendar . Focus Timer</p>
+  <p>To-Do Planning . Calendar . Expenditure . Focus Timer</p>
   
   <button @click="googleSignIn();" class="btn-flip" data-front="Sign in with Google" data-back="Productive Time!" style="font-family: 'Poppins', sans-serif;background-color:white">
 

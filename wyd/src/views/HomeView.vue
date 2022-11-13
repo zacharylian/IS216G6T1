@@ -48,7 +48,7 @@
           <div class="row wanbottom">
             <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--EXPENSES-->
-              <h3>expenses<br><br></h3>
+              <h3 style="font-style:normal">expenses<br><br></h3>
               <div class="mx-3" style="margin:auto;">
               <!-- cld potentially use the same code for progress circle as focus time today.
                 can modify colours & variables no problemo -->
@@ -57,7 +57,7 @@
               </div>
               <div class="col py-2 bgbox wanright wanbottom" style="height:230px">
               <!--FOCUS TIME TODAY-->
-              <h3 style="font-style:normal">focus time today:</h3>
+              <h3 style="font-style:normal">your focus today:</h3>
               <div>
                 <div class="skill">
                   <div class="outer bgbox">
@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="col col-xxl-5 col-xl-5 col-lg-12 col-md-12 bgbox px-5" style="overflow:auto;border-radius:20px;height:650px;width:500px;margin:auto;">
-          <h3 class="p-2"><i>to-do list</i></h3>
+          <h3 class="p-2" style="font-style:normal">to-do list</h3>
           <todo></todo>          
         </div>
       </div>
