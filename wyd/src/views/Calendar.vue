@@ -297,7 +297,7 @@ methods : {
             this.appointmentData.dataSource = apptinfo
 
             // Retrieving treeview
-            let treeinfo = docSnap.data().treeviewData.dataSource
+            let treeinfo = docSnap.data().treeviewData
             console.log("input treeinfo")
             this.treeviewFields.dataSource[0] = docSnap.data().treeviewData
             this.treeviewFields.id = docSnap.data().id
